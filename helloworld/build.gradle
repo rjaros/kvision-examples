@@ -1,6 +1,6 @@
 buildscript {
     ext.kotlin_version = '1.2.21'
-    ext.kvision_version = '0.0.1'
+    ext.kvision_version = '0.0.2'
     ext.production = (findProperty('prod') ?: 'false') == 'true'
     ext.npmdeps = new File("npm.dependencies").getText()
 
@@ -18,6 +18,9 @@ buildscript {
 }
 
 apply plugin: 'kotlin2js'
+if (production) {
+    apply plugin: 'kotlin-dce-js'
+}
 apply plugin: 'org.jetbrains.kotlin.frontend'
 apply plugin: "io.gitlab.arturbosch.detekt"
 
@@ -79,8 +82,18 @@ task copyResources(type: Copy) {
     into file(buildDir.path + "/js")
 }
 
+task copyResourcesForDce(type: Copy) {
+    from "src/main/resources"
+    from("${buildDir.path}/node_modules_imported/kvision") {
+        include "css/**"
+        include "img/**"
+        include "js/**"
+    }
+    into file(buildDir.path + "/kotlin-js-min/main")
+}
+
 afterEvaluate {
-    tasks.getByName("webpack-bundle") { dependsOn(copyResources) }
+    tasks.getByName("webpack-bundle") { dependsOn(copyResources, copyResourcesForDce) }
     tasks.getByName("webpack-run") { dependsOn(copyResources) }
     tasks.getByName("karma-start") { dependsOn(copyResources) }
 }
