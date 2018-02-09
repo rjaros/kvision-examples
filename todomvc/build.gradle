@@ -1,8 +1,9 @@
 buildscript {
     ext.kotlin_version = '1.2.21'
+    ext.kvision_version = '0.0.1'
     ext.serialization_version = '0.4'
     ext.production = (findProperty('prod') ?: 'false') == 'true'
-    ext.npmdeps = new URL("file:///home/rjaros/git/kvision/npm.dependencies").getText()
+    ext.npmdeps = new File("npm.dependencies").getText()
 
     repositories {
         jcenter()
@@ -29,16 +30,13 @@ repositories {
     maven { url 'https://kotlin.bintray.com/kotlinx' }
     maven { url 'https://dl.bintray.com/gbaldeck/kotlin' }
     maven { url 'https://dl.bintray.com/rjaros/kotlin' }
-    maven {
-	url "file:///home/rjaros/kotlin/mvn/"
-    }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
     compile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version" // for now only compile configuration is supported
-    compile "pl.treksoft:kvision:0.0.1"
+    compile "pl.treksoft:kvision:$kvision_version"
 }
 
 kotlinFrontend {
