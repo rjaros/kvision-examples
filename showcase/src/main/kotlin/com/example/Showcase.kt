@@ -21,15 +21,15 @@ class Showcase : ApplicationBase() {
             marginRight = auto()
             padding = 20.px()
             border = Border(2.px(), BORDERSTYLE.SOLID, COLOR.SILVER)
+            addTab("Basic formatting", BasicTab(), "fa-bars", route = "/basic")
+            addTab("Forms", FormTab(), "fa-edit", route = "/forms")
+            addTab("Buttons", ButtonsTab(), "fa-check-square-o", route = "/buttons")
+            addTab("Dropdowns", DropDownTab(), "fa-arrow-down", route = "/dropdowns")
+            addTab("Containers", ContainersTab(), "fa-database", route = "/containers")
+            addTab("Layouts", LayoutsTab(), "fa-th-list", route = "/layouts")
+            addTab("Modals", ModalsTab(), "fa-window-maximize", route = "/modals")
+            addTab("Data binding", DataTab(), "fa-retweet", route = "/data")
         }
-        tabPanel.addTab("Basic formatting", BasicTab(), "fa-bars", route = "/basic")
-        tabPanel.addTab("Forms", FormTab(), "fa-edit", route = "/forms")
-        tabPanel.addTab("Buttons", ButtonsTab(), "fa-check-square-o", route = "/buttons")
-        tabPanel.addTab("Dropdowns", DropDownTab(), "fa-arrow-down", route = "/dropdowns")
-        tabPanel.addTab("Containers", ContainersTab(), "fa-database", route = "/containers")
-        tabPanel.addTab("Layouts", LayoutsTab(), "fa-th-list", route = "/layouts")
-        tabPanel.addTab("Modals", ModalsTab(), "fa-window-maximize", route = "/modals")
-        tabPanel.addTab("Data binding", DataTab(), "fa-retweet", route = "/data")
         root.add(tabPanel)
     }
 

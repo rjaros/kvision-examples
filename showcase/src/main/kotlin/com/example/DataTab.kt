@@ -52,23 +52,23 @@ class DataTab : SimplePanel() {
         }, child = HPanel(spacing = 10, wrap = FLEXWRAP.WRAP))
         panel.add(dataContainer)
 
-        val butPanel = HPanel(spacing = 10, wrap = FLEXWRAP.WRAP)
-        butPanel.add(Button("Add December", style = BUTTONSTYLE.SUCCESS).onClick {
-            list.add(DataModel(true, "December"))
+        panel.add(HPanel(spacing = 10, wrap = FLEXWRAP.WRAP).apply {
+            add(Button("Add December", style = BUTTONSTYLE.SUCCESS).onClick {
+                list.add(DataModel(true, "December"))
+            })
+            add(Button("Check all", style = BUTTONSTYLE.INFO).onClick {
+                list.forEach { it.checked = true }
+            })
+            add(Button("Uncheck all", style = BUTTONSTYLE.INFO).onClick {
+                list.forEach { it.checked = false }
+            })
+            add(Button("Reverse list", style = BUTTONSTYLE.DANGER).onClick {
+                list.reverse()
+            })
+            add(Button("Remove checked", style = BUTTONSTYLE.DANGER).onClick {
+                list.filter { it.checked }.forEach { list.remove(it) }
+            })
         })
-        butPanel.add(Button("Check all", style = BUTTONSTYLE.INFO).onClick {
-            list.forEach { it.checked = true }
-        })
-        butPanel.add(Button("Uncheck all", style = BUTTONSTYLE.INFO).onClick {
-            list.forEach { it.checked = false }
-        })
-        butPanel.add(Button("Reverse list", style = BUTTONSTYLE.DANGER).onClick {
-            list.reverse()
-        })
-        butPanel.add(Button("Remove checked", style = BUTTONSTYLE.DANGER).onClick {
-            list.filter { it.checked }.forEach { list.remove(it) }
-        })
-        panel.add(butPanel)
         this.add(panel)
     }
 }

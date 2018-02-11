@@ -117,21 +117,18 @@ class FormTab : SimplePanel() {
             validatorMessage = { "The passwords are not the same." }
         }
         this.add(formPanel)
-        val buttonsPanel = HPanel(spacing = 10)
-        val validButton = Button("Validate", "fa-check", BUTTONSTYLE.INFO).onClick {
-            formPanel.validate()
-        }
-        buttonsPanel.add(validButton)
-        val dataButton = Button("Show data", "fa-info", BUTTONSTYLE.SUCCESS).onClick {
-            Alert.show("Form data in plain JSON", JSON.stringify(formPanel.getDataJson(), space = 1))
-        }
-        buttonsPanel.add(dataButton)
-        val clearButton = Button("Clear data", "fa-times", BUTTONSTYLE.DANGER).onClick {
-            Confirm.show("Are you sure?", "Do you want to clear your data?") {
-                formPanel.clearData()
-            }
-        }
-        buttonsPanel.add(clearButton)
-        formPanel.add(buttonsPanel)
+        formPanel.add(HPanel(spacing = 10).apply {
+            add(Button("Validate", "fa-check", BUTTONSTYLE.INFO).onClick {
+                formPanel.validate()
+            })
+            add(Button("Show data", "fa-info", BUTTONSTYLE.SUCCESS).onClick {
+                Alert.show("Form data in plain JSON", JSON.stringify(formPanel.getDataJson(), space = 1))
+            })
+            add(Button("Clear data", "fa-times", BUTTONSTYLE.DANGER).onClick {
+                Confirm.show("Are you sure?", "Do you want to clear your data?") {
+                    formPanel.clearData()
+                }
+            })
+        })
     }
 }

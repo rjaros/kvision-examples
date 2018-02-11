@@ -30,9 +30,9 @@ class DropDownTab : SimplePanel() {
 
         val idd = DropDown("Dropdown with custom list", icon = "fa-picture-o", style = BUTTONSTYLE.WARNING).apply {
             width = 250.px()
+            add(Image(require("./img/cat.jpg")).apply { margin = 10.px(); title = "Cat" })
+            add(Image(require("./img/dog.jpg")).apply { margin = 10.px(); title = "Dog" })
         }
-        idd.add(Image(require("./img/cat.jpg")).apply { margin = 10.px(); title = "Cat" })
-        idd.add(Image(require("./img/dog.jpg")).apply { margin = 10.px(); title = "Dog" })
         panel.add(idd)
 
         val hpanel = HPanel(spacing = 5)

@@ -16,22 +16,22 @@ class BasicTab : SimplePanel() {
     init {
         this.marginTop = 10.px()
         this.minHeight = 400.px()
-        val panel = VPanel(spacing = 3)
-        panel.add(Label("A simple label"))
-        panel.add(Label("A list:"))
-        panel.add(ListTag(LISTTYPE.UL, listOf("First list element", "Second list element", "Third list element")))
-        panel.add(Label("An image:"))
-        panel.add(Image(require("./img/dog.jpg"), shape = IMAGESHAPE.CIRCLE))
-        panel.add(Tag(TAG.CODE, "Some text written in <code></code> HTML tag."))
-        panel.add(
-            Tag(
-                TAG.DIV,
-                "Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; font-size: 14pt\">" +
-                        "any <strong>forma</strong>tting</span>.",
-                rich = true
+        this.add(VPanel(spacing = 3).apply {
+            add(Label("A simple label"))
+            add(Label("A list:"))
+            add(ListTag(LISTTYPE.UL, listOf("First list element", "Second list element", "Third list element")))
+            add(Label("An image:"))
+            add(Image(require("./img/dog.jpg"), shape = IMAGESHAPE.CIRCLE))
+            add(Tag(TAG.CODE, "Some text written in <code></code> HTML tag."))
+            add(
+                Tag(
+                    TAG.DIV,
+                    "Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; font-size: 14pt\">" +
+                            "any <strong>forma</strong>tting</span>.",
+                    rich = true
+                )
             )
-        )
-        panel.add(Link("A link to Google", "http://www.google.com"))
-        this.add(panel)
+            add(Link("A link to Google", "http://www.google.com"))
+        })
     }
 }
