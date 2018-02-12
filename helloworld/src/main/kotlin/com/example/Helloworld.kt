@@ -2,24 +2,23 @@ package com.example
 
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.TAG
-import pl.treksoft.kvision.html.Tag
+import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.panel.FLEXDIR
 import pl.treksoft.kvision.panel.FLEXJUSTIFY
-import pl.treksoft.kvision.panel.FlexPanel
+import pl.treksoft.kvision.panel.FlexPanel.Companion.flexPanel
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.utils.px
 
 class Helloworld : ApplicationBase() {
 
     override fun start(state: Map<String, Any>) {
-        val root = Root("helloworld")
-        val panel = FlexPanel(FLEXDIR.ROW, justify = FLEXJUSTIFY.CENTER)
-        val hello = Tag(TAG.DIV, "Hello world!", classes = setOf("helloworld")).apply {
-            marginTop = 50.px()
-
+        Root("helloworld") {
+            flexPanel(FLEXDIR.ROW, justify = FLEXJUSTIFY.CENTER) {
+                tag(TAG.DIV, "Hello world!", classes = setOf("helloworld")) {
+                    marginTop = 50.px()
+                }
+            }
         }
-        panel.add(hello)
-        root.add(panel)
     }
 
     override fun dispose(): Map<String, Any> {

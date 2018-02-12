@@ -1,6 +1,6 @@
 package com.example
 
-import pl.treksoft.kvision.form.FormPanel
+import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.check.Radio
 import pl.treksoft.kvision.form.check.RadioGroup
@@ -13,7 +13,7 @@ import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextArea
 import pl.treksoft.kvision.form.time.DateTime
 import pl.treksoft.kvision.html.BUTTONSTYLE
-import pl.treksoft.kvision.html.Button
+import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.panel.HPanel
@@ -41,7 +41,7 @@ class Form(val map: Map<String, Any?>) {
 class FormTab : SimplePanel() {
     init {
         this.marginTop = 10.px()
-        val formPanel = FormPanel {
+        val formPanel = formPanel {
             Form(it)
         }.apply {
             add(
@@ -116,19 +116,18 @@ class FormTab : SimplePanel() {
             }
             validatorMessage = { "The passwords are not the same." }
         }
-        this.add(formPanel)
-        formPanel.add(HPanel(spacing = 10).apply {
-            add(Button("Validate", "fa-check", BUTTONSTYLE.INFO).onClick {
+        formPanel.add(HPanel(spacing = 10) {
+            button("Validate", "fa-check", BUTTONSTYLE.INFO).onClick {
                 formPanel.validate()
-            })
-            add(Button("Show data", "fa-info", BUTTONSTYLE.SUCCESS).onClick {
+            }
+            button("Show data", "fa-info", BUTTONSTYLE.SUCCESS).onClick {
                 Alert.show("Form data in plain JSON", JSON.stringify(formPanel.getDataJson(), space = 1))
-            })
-            add(Button("Clear data", "fa-times", BUTTONSTYLE.DANGER).onClick {
+            }
+            button("Clear data", "fa-times", BUTTONSTYLE.DANGER).onClick {
                 Confirm.show("Are you sure?", "Do you want to clear your data?") {
                     formPanel.clearData()
                 }
-            })
+            }
         })
     }
 }

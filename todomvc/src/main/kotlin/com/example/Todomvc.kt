@@ -7,18 +7,22 @@ import kotlinx.serialization.list
 import org.w3c.dom.get
 import org.w3c.dom.set
 import pl.treksoft.kvision.data.BaseDataComponent
-import pl.treksoft.kvision.data.DataContainer
+import pl.treksoft.kvision.data.DataContainer.Companion.dataContainer
 import pl.treksoft.kvision.form.FieldLabel
 import pl.treksoft.kvision.form.check.CHECKINPUTTYPE
 import pl.treksoft.kvision.form.check.CheckInput
+import pl.treksoft.kvision.form.check.CheckInput.Companion.checkInput
 import pl.treksoft.kvision.form.text.TextInput
+import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.Button
+import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.LISTTYPE
 import pl.treksoft.kvision.html.Link
-import pl.treksoft.kvision.html.ListTag
+import pl.treksoft.kvision.html.ListTag.Companion.listTag
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag
+import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.routing.routing
 import kotlin.browser.localStorage
@@ -72,12 +76,13 @@ class Todomvc : ApplicationBase() {
     private val footer = genFooter()
 
     override fun start(state: Map<String, Any>) {
-        val root = Root("todomvc")
-        val section = Tag(TAG.SECTION, classes = setOf("todoapp"))
-        section.add(this.header)
-        section.add(this.main)
-        section.add(this.footer)
-        root.add(section)
+        Root("todomvc") {
+            tag(TAG.SECTION, classes = setOf("todoapp")) {
+                add(this@Todomvc.header)
+                add(this@Todomvc.main)
+                add(this@Todomvc.footer)
+            }
+        }
         loadModel()
         checkModel()
         routing.on("/", { _ -> all() })
@@ -137,9 +142,9 @@ class Todomvc : ApplicationBase() {
     }
 
     private fun genHeader(): Tag {
-        return Tag(TAG.HEADER, classes = setOf("header")).apply {
-            add(Tag(TAG.H1, "todos"))
-            add(TextInput(classes = setOf("new-todo")).apply {
+        return Tag(TAG.HEADER, classes = setOf("header")) {
+            tag(TAG.H1, "todos")
+            textInput(classes = setOf("new-todo")) {
                 placeholder = "What needs to be done?"
                 autofocus = true
                 setEventListener<TextInput> {
@@ -150,7 +155,7 @@ class Todomvc : ApplicationBase() {
                         }
                     }
                 }
-            })
+            }
         }
     }
 
@@ -171,24 +176,24 @@ class Todomvc : ApplicationBase() {
     }
 
     private fun genMain(): Tag {
-        return Tag(TAG.SECTION, classes = setOf("main")).apply {
+        return Tag(TAG.SECTION, classes = setOf("main")) {
             add(checkAllInput)
             add(FieldLabel("toggle-all", "Mark all as complete"))
-            add(DataContainer(model, { index ->
+            dataContainer(model, { index ->
                 val li = Tag(TAG.LI)
                 li.apply {
                     if (model[index].completed) addCssClass("completed")
                     if (model[index].hidden) addCssClass("hidden")
                     val edit = TextInput(classes = setOf("edit"))
-                    val view = Tag(TAG.DIV, classes = setOf("view")).apply {
-                        add(CheckInput(
+                    val view = Tag(TAG.DIV, classes = setOf("view")) {
+                        checkInput(
                             CHECKINPUTTYPE.CHECKBOX, model[index].completed, classes = setOf("toggle")
                         ).onClick {
                             model[index].completed = this.value
                             model[index].hidden =
                                     mode == TODOMODE.ACTIVE && this.value || mode == TODOMODE.COMPLETED && !this.value
-                        })
-                        add(Tag(TAG.LABEL, model[index].title).apply {
+                        }
+                        tag(TAG.LABEL, model[index].title) {
                             setEventListener<Tag> {
                                 dblclick = {
                                     li.getElementJQuery()?.addClass("editing")
@@ -196,10 +201,10 @@ class Todomvc : ApplicationBase() {
                                     edit.getElementJQuery()?.focus()
                                 }
                             }
-                        })
-                        add(Button("", classes = setOf("destroy")).onClick {
+                        }
+                        button("", classes = setOf("destroy")).onClick {
                             model.removeAt(index)
-                        })
+                        }
                     }
                     edit.setEventListener<TextInput> {
                         blur = {
@@ -223,18 +228,18 @@ class Todomvc : ApplicationBase() {
                 }
             }, Tag(TAG.UL, classes = setOf("todo-list"))).onUpdate {
                 checkModel()
-            })
+            }
         }
     }
 
     private fun genFooter(): Tag {
-        return Tag(TAG.FOOTER, classes = setOf("footer")).apply {
+        return Tag(TAG.FOOTER, classes = setOf("footer")) {
             add(itemsLeftTag)
-            add(ListTag(LISTTYPE.UL, classes = setOf("filters")).apply {
+            listTag(LISTTYPE.UL, classes = setOf("filters")) {
                 add(allLink)
                 add(activeLink)
                 add(completedLink)
-            })
+            }
             add(clearCompletedButton)
         }
     }

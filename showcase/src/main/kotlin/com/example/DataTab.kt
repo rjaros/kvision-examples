@@ -6,11 +6,11 @@ import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.form.check.CHECKBOXSTYLE
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.html.BUTTONSTYLE
-import pl.treksoft.kvision.html.Button
+import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.panel.FLEXWRAP
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.VPanel
+import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.utils.px
 
 class DataTab : SimplePanel() {
@@ -18,7 +18,7 @@ class DataTab : SimplePanel() {
         this.marginTop = 10.px()
         this.minHeight = 400.px()
 
-        val panel = VPanel(spacing = 5)
+        val panel = vPanel(spacing = 5)
 
         class DataModel(checked: Boolean, text: String) : BaseDataComponent() {
             var checked: Boolean by obs(checked)
@@ -52,23 +52,22 @@ class DataTab : SimplePanel() {
         }, child = HPanel(spacing = 10, wrap = FLEXWRAP.WRAP))
         panel.add(dataContainer)
 
-        panel.add(HPanel(spacing = 10, wrap = FLEXWRAP.WRAP).apply {
-            add(Button("Add December", style = BUTTONSTYLE.SUCCESS).onClick {
+        panel.add(HPanel(spacing = 10, wrap = FLEXWRAP.WRAP) {
+            button("Add December", style = BUTTONSTYLE.SUCCESS).onClick {
                 list.add(DataModel(true, "December"))
-            })
-            add(Button("Check all", style = BUTTONSTYLE.INFO).onClick {
+            }
+            button("Check all", style = BUTTONSTYLE.INFO).onClick {
                 list.forEach { it.checked = true }
-            })
-            add(Button("Uncheck all", style = BUTTONSTYLE.INFO).onClick {
+            }
+            button("Uncheck all", style = BUTTONSTYLE.INFO).onClick {
                 list.forEach { it.checked = false }
-            })
-            add(Button("Reverse list", style = BUTTONSTYLE.DANGER).onClick {
+            }
+            button("Reverse list", style = BUTTONSTYLE.DANGER).onClick {
                 list.reverse()
-            })
-            add(Button("Remove checked", style = BUTTONSTYLE.DANGER).onClick {
+            }
+            button("Remove checked", style = BUTTONSTYLE.DANGER).onClick {
                 list.filter { it.checked }.forEach { list.remove(it) }
-            })
+            }
         })
-        this.add(panel)
     }
 }
