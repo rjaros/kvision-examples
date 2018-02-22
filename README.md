@@ -2,10 +2,16 @@
 
 A set of examples for [KVision](https://github.com/rjaros/kvision) framework.
 
+## Template
+
+An application template. It does nothing, but includes all dependencies to develop KVision applications with all
+supported components (including unit tests). A perfect starting point for a new application.
+
+[See live demo](https://rjaros.github.io/kvision-examples/template/)
+
 ## Hello World
 
-A very simple application template. It does nothing, but includes support for everything what is needed 
-to develop KVision applications (including unit tests).
+A very simple application with no optional modules.
 
 [See live demo](https://rjaros.github.io/kvision-examples/helloworld/)
 
@@ -17,7 +23,6 @@ A simple application presenting all main features of KVision framework.
 
 ## TodoMVC
 
-A complete implementation of [TodoMVC](http://todomvc.com/) demo application. It shows how to develop applications without
-standard Bootstrap CSS styling.
+A complete implementation of [TodoMVC](http://todomvc.com/) demo application.
 
 [See live demo](https://rjaros.github.io/kvision-examples/todomvc/)

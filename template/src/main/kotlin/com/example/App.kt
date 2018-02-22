@@ -9,15 +9,11 @@ import pl.treksoft.kvision.panel.FlexPanel.Companion.flexPanel
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.utils.px
 
-class Helloworld : ApplicationBase {
+class App : ApplicationBase {
 
     override fun start(state: Map<String, Any>) {
-        Root("helloworld") {
-            flexPanel(FLEXDIR.ROW, justify = FLEXJUSTIFY.CENTER) {
-                tag(TAG.DIV, "Hello world!", classes = setOf("helloworld")) {
-                    marginTop = 50.px()
-                }
-            }
+        Root("kvapp") {
+        // TODO
         }
     }
 
@@ -26,6 +22,6 @@ class Helloworld : ApplicationBase {
     }
 
     companion object {
-        val css = require("./css/helloworld.css")
+        val css = require("./css/kvapp.css")
     }
 }

@@ -47,7 +47,7 @@ enum class TODOMODE {
     COMPLETED
 }
 
-class Todomvc : ApplicationBase() {
+class Todomvc : ApplicationBase {
 
     private val model = observableListOf<Todo>()
 

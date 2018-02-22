@@ -10,7 +10,7 @@ import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
-class Showcase : ApplicationBase() {
+class Showcase : ApplicationBase {
 
     override fun start(state: Map<String, Any>) {
         Root("showcase") {

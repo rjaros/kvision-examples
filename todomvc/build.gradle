@@ -1,6 +1,6 @@
 buildscript {
     ext.kotlin_version = '1.2.21'
-    ext.kvision_version = '0.0.3'
+    ext.kvision_version = '0.0.4'
     ext.serialization_version = '0.4'
     ext.production = (findProperty('prod') ?: 'false') == 'true'
     ext.npmdeps = new File("npm.dependencies").getText()
@@ -44,12 +44,24 @@ dependencies {
 
 kotlinFrontend {
     npm {
+        dependency("css-loader")
+        dependency("style-loader")
+        dependency("less")
+        dependency("less-loader")
+        dependency("imports-loader")
+        dependency("uglifyjs-webpack-plugin")
+        dependency("file-loader")
+        dependency("url-loader")
+        dependency("jquery", "3.3.1")
+        dependency("fecha", "2.3.2")
+        dependency("snabbdom", "0.6.9")
+        dependency("snabbdom-virtualize", "0.7.0")
+        dependency("navigo", "7.0.0")
+        dependency("jquery-resizable-dom", "0.26.0")
         npmdeps.eachLine { line ->
             def (name, version) = line.tokenize(" ")
             dependency(name, version)
         }
-        dependency("todomvc-app-css", "^2.0.0")
-        dependency("todomvc-common", "^1.0.0")
         devDependency("karma")
     }
 
@@ -98,6 +110,16 @@ task copyResourcesForDce(type: Copy) {
         include "js/**"
     }
     into file(buildDir.path + "/kotlin-js-min/main")
+}
+
+task dist(type: Copy, dependsOn: 'bundle') {
+    from "src/main/web"
+    from "${buildDir.path}/bundle"
+    into file(buildDir.path + "/distributions/" + project.name)
+}
+
+task distZip(type: Zip, dependsOn: 'dist') {
+    from (buildDir.path + "/distributions/" + project.name)
 }
 
 afterEvaluate {
