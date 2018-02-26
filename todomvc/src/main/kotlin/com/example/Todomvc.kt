@@ -9,17 +9,17 @@ import org.w3c.dom.set
 import pl.treksoft.kvision.data.BaseDataComponent
 import pl.treksoft.kvision.data.DataContainer.Companion.dataContainer
 import pl.treksoft.kvision.form.FieldLabel
-import pl.treksoft.kvision.form.check.CHECKINPUTTYPE
 import pl.treksoft.kvision.form.check.CheckInput
 import pl.treksoft.kvision.form.check.CheckInput.Companion.checkInput
+import pl.treksoft.kvision.form.check.CheckInputType
 import pl.treksoft.kvision.form.text.TextInput
 import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.Button.Companion.button
-import pl.treksoft.kvision.html.LISTTYPE
 import pl.treksoft.kvision.html.Link
 import pl.treksoft.kvision.html.ListTag.Companion.listTag
+import pl.treksoft.kvision.html.ListType
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.Tag.Companion.tag
@@ -41,7 +41,7 @@ class Todo(completed: Boolean, title: String, hidden: Boolean) : BaseTodo(comple
     var hidden: Boolean by obs(hidden)
 }
 
-enum class TODOMODE {
+enum class TodoMode {
     ALL,
     ACTIVE,
     COMPLETED
@@ -69,7 +69,7 @@ class Todomvc : ApplicationBase {
     private val itemsLeftTag = Tag(TAG.SPAN, " items left", classes = setOf("todo-count")).apply {
         add(countTag)
     }
-    private var mode: TODOMODE = TODOMODE.ALL
+    private var mode: TodoMode = TodoMode.ALL
 
     private val header = genHeader()
     private val main = genMain()
@@ -118,7 +118,7 @@ class Todomvc : ApplicationBase {
     }
 
     private fun all() {
-        this.mode = TODOMODE.ALL
+        this.mode = TodoMode.ALL
         this.allLink.addCssClass("selected")
         this.activeLink.removeCssClass("selected")
         this.completedLink.removeCssClass("selected")
@@ -126,7 +126,7 @@ class Todomvc : ApplicationBase {
     }
 
     private fun active() {
-        this.mode = TODOMODE.ACTIVE
+        this.mode = TodoMode.ACTIVE
         this.allLink.removeCssClass("selected")
         this.activeLink.addCssClass("selected")
         this.completedLink.removeCssClass("selected")
@@ -134,7 +134,7 @@ class Todomvc : ApplicationBase {
     }
 
     private fun completed() {
-        this.mode = TODOMODE.COMPLETED
+        this.mode = TodoMode.COMPLETED
         this.allLink.removeCssClass("selected")
         this.activeLink.removeCssClass("selected")
         this.completedLink.addCssClass("selected")
@@ -162,7 +162,7 @@ class Todomvc : ApplicationBase {
     private fun addTodo(value: String?) {
         val v = value?.trim() ?: ""
         if (v.isNotEmpty()) {
-            model.add(Todo(false, v, mode == TODOMODE.COMPLETED))
+            model.add(Todo(false, v, mode == TodoMode.COMPLETED))
         }
     }
 
@@ -187,11 +187,11 @@ class Todomvc : ApplicationBase {
                     val edit = TextInput(classes = setOf("edit"))
                     val view = Tag(TAG.DIV, classes = setOf("view")) {
                         checkInput(
-                            CHECKINPUTTYPE.CHECKBOX, model[index].completed, classes = setOf("toggle")
+                            CheckInputType.CHECKBOX, model[index].completed, classes = setOf("toggle")
                         ).onClick {
                             model[index].completed = this.value
                             model[index].hidden =
-                                    mode == TODOMODE.ACTIVE && this.value || mode == TODOMODE.COMPLETED && !this.value
+                                    mode == TodoMode.ACTIVE && this.value || mode == TodoMode.COMPLETED && !this.value
                         }
                         tag(TAG.LABEL, model[index].title) {
                             setEventListener<Tag> {
@@ -235,7 +235,7 @@ class Todomvc : ApplicationBase {
     private fun genFooter(): Tag {
         return Tag(TAG.FOOTER, classes = setOf("footer")) {
             add(itemsLeftTag)
-            listTag(LISTTYPE.UL, classes = setOf("filters")) {
+            listTag(ListType.UL, classes = setOf("filters")) {
                 add(allLink)
                 add(activeLink)
                 add(completedLink)

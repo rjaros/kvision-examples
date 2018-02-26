@@ -1,9 +1,9 @@
 package com.example
 
-import pl.treksoft.kvision.html.ALIGN
-import pl.treksoft.kvision.html.BUTTONSTYLE
+import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.Button.Companion.button
+import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Image
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag
@@ -16,16 +16,16 @@ import pl.treksoft.kvision.utils.px
 
 class ModalsTab : SimplePanel() {
     init {
-        this.marginTop = 10.px()
-        this.minHeight = 400.px()
+        this.marginTop = 10.px
+        this.minHeight = 400.px
         vPanel(spacing = 30) {
-            button("Alert dialog", style = BUTTONSTYLE.DANGER).onClick {
+            button("Alert dialog", style = ButtonStyle.DANGER).onClick {
                 Alert.show(
                     "Alert dialog",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor."
                 )
             }
-            button("Confirm dialog", style = BUTTONSTYLE.WARNING).onClick {
+            button("Confirm dialog", style = ButtonStyle.WARNING).onClick {
                 Confirm.show(
                     "Confirm dialog",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor.",
@@ -35,11 +35,11 @@ class ModalsTab : SimplePanel() {
                     Alert.show("Result", "You pressed YES button.")
                 }
             }
-            button("Cancelable confirm dialog", style = BUTTONSTYLE.INFO).onClick {
+            button("Cancelable confirm dialog", style = ButtonStyle.INFO).onClick {
                 Confirm.show(
                     "Cancelable confirm dialog",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor.",
-                    align = ALIGN.CENTER,
+                    align = Align.CENTER,
                     cancelVisible = true,
                     noCallback = {
                         Alert.show("Result", "You pressed NO button.")
@@ -58,10 +58,10 @@ class ModalsTab : SimplePanel() {
             modal.addButton(Button("Close").onClick {
                 modal.hide()
             })
-            button("Custom modal dialog", style = BUTTONSTYLE.SUCCESS).onClick {
+            button("Custom modal dialog", style = ButtonStyle.SUCCESS).onClick {
                 modal.show()
             }
-            button("Alert dialog without animation", style = BUTTONSTYLE.PRIMARY).onClick {
+            button("Alert dialog without animation", style = ButtonStyle.PRIMARY).onClick {
                 Alert.show(
                     "Alert dialog without animation",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor.",

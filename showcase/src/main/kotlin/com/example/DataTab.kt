@@ -3,11 +3,11 @@ package com.example
 import com.lightningkite.kotlin.observable.list.observableListOf
 import pl.treksoft.kvision.data.BaseDataComponent
 import pl.treksoft.kvision.data.DataContainer
-import pl.treksoft.kvision.form.check.CHECKBOXSTYLE
 import pl.treksoft.kvision.form.check.CheckBox
-import pl.treksoft.kvision.html.BUTTONSTYLE
+import pl.treksoft.kvision.form.check.CheckBoxStyle
 import pl.treksoft.kvision.html.Button.Companion.button
-import pl.treksoft.kvision.panel.FLEXWRAP
+import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
@@ -15,8 +15,8 @@ import pl.treksoft.kvision.utils.px
 
 class DataTab : SimplePanel() {
     init {
-        this.marginTop = 10.px()
-        this.minHeight = 400.px()
+        this.marginTop = 10.px
+        this.minHeight = 400.px
 
         val panel = vPanel(spacing = 5)
 
@@ -44,28 +44,28 @@ class DataTab : SimplePanel() {
                 label = if (list[index].checked) "<b>${list[index].text}</b>" else "${list[index].text}"
             ).apply {
                 rich = true
-                style = CHECKBOXSTYLE.PRIMARY
+                style = CheckBoxStyle.PRIMARY
                 onClick {
                     list[index].checked = this.value
                 }
             }
-        }, child = HPanel(spacing = 10, wrap = FLEXWRAP.WRAP))
+        }, child = HPanel(spacing = 10, wrap = FlexWrap.WRAP))
         panel.add(dataContainer)
 
-        panel.add(HPanel(spacing = 10, wrap = FLEXWRAP.WRAP) {
-            button("Add December", style = BUTTONSTYLE.SUCCESS).onClick {
+        panel.add(HPanel(spacing = 10, wrap = FlexWrap.WRAP) {
+            button("Add December", style = ButtonStyle.SUCCESS).onClick {
                 list.add(DataModel(true, "December"))
             }
-            button("Check all", style = BUTTONSTYLE.INFO).onClick {
+            button("Check all", style = ButtonStyle.INFO).onClick {
                 list.forEach { it.checked = true }
             }
-            button("Uncheck all", style = BUTTONSTYLE.INFO).onClick {
+            button("Uncheck all", style = ButtonStyle.INFO).onClick {
                 list.forEach { it.checked = false }
             }
-            button("Reverse list", style = BUTTONSTYLE.DANGER).onClick {
+            button("Reverse list", style = ButtonStyle.DANGER).onClick {
                 list.reverse()
             }
-            button("Remove checked", style = BUTTONSTYLE.DANGER).onClick {
+            button("Remove checked", style = ButtonStyle.DANGER).onClick {
                 list.filter { it.checked }.forEach { list.remove(it) }
             }
         })

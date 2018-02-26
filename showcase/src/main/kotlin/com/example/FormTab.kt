@@ -12,8 +12,8 @@ import pl.treksoft.kvision.form.text.RichText
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextArea
 import pl.treksoft.kvision.form.time.DateTime
-import pl.treksoft.kvision.html.BUTTONSTYLE
 import pl.treksoft.kvision.html.Button.Companion.button
+import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.panel.HPanel
@@ -40,7 +40,7 @@ class Form(val map: Map<String, Any?>) {
 
 class FormTab : SimplePanel() {
     init {
-        this.marginTop = 10.px()
+        this.marginTop = 10.px
         val formPanel = formPanel {
             Form(it)
         }.apply {
@@ -117,13 +117,13 @@ class FormTab : SimplePanel() {
             validatorMessage = { "The passwords are not the same." }
         }
         formPanel.add(HPanel(spacing = 10) {
-            button("Validate", "fa-check", BUTTONSTYLE.INFO).onClick {
+            button("Validate", "fa-check", ButtonStyle.INFO).onClick {
                 formPanel.validate()
             }
-            button("Show data", "fa-info", BUTTONSTYLE.SUCCESS).onClick {
+            button("Show data", "fa-info", ButtonStyle.SUCCESS).onClick {
                 Alert.show("Form data in plain JSON", JSON.stringify(formPanel.getDataJson(), space = 1))
             }
-            button("Clear data", "fa-times", BUTTONSTYLE.DANGER).onClick {
+            button("Clear data", "fa-times", ButtonStyle.DANGER).onClick {
                 Confirm.show("Are you sure?", "Do you want to clear your data?") {
                     formPanel.clearData()
                 }

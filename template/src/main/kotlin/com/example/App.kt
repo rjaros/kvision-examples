@@ -1,13 +1,7 @@
 package com.example
 
 import pl.treksoft.kvision.hmr.ApplicationBase
-import pl.treksoft.kvision.html.TAG
-import pl.treksoft.kvision.html.Tag.Companion.tag
-import pl.treksoft.kvision.panel.FLEXDIR
-import pl.treksoft.kvision.panel.FLEXJUSTIFY
-import pl.treksoft.kvision.panel.FlexPanel.Companion.flexPanel
 import pl.treksoft.kvision.panel.Root
-import pl.treksoft.kvision.utils.px
 
 class App : ApplicationBase {
 

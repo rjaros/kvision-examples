@@ -1,8 +1,8 @@
 package com.example
 
-import pl.treksoft.kvision.core.BORDERSTYLE
 import pl.treksoft.kvision.core.Border
-import pl.treksoft.kvision.core.COLOR
+import pl.treksoft.kvision.core.BorderStyle
+import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.panel.TabPanel.Companion.tabPanel
@@ -15,12 +15,12 @@ class Showcase : ApplicationBase {
     override fun start(state: Map<String, Any>) {
         Root("showcase") {
             tabPanel {
-                width = 80.perc()
-                margin = 20.px()
-                marginLeft = auto()
-                marginRight = auto()
-                padding = 20.px()
-                border = Border(2.px(), BORDERSTYLE.SOLID, COLOR.SILVER)
+                width = 80.perc
+                margin = 20.px
+                marginLeft = auto
+                marginRight = auto
+                padding = 20.px
+                border = Border(2.px, BorderStyle.SOLID, Col.SILVER)
                 addTab("Basic formatting", BasicTab(), "fa-bars", route = "/basic")
                 addTab("Forms", FormTab(), "fa-edit", route = "/forms")
                 addTab("Buttons", ButtonsTab(), "fa-check-square-o", route = "/buttons")
