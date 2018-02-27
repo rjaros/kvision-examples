@@ -29,6 +29,8 @@ class Showcase : ApplicationBase {
                 addTab("Layouts", LayoutsTab(), "fa-th-list", route = "/layouts")
                 addTab("Modals", ModalsTab(), "fa-window-maximize", route = "/modals")
                 addTab("Data binding", DataTab(), "fa-retweet", route = "/data")
+                addTab("Windows", WindowsTab(), "fa-window-restore", route = "/windows")
+                addTab("Drag & Drop", DragDropTab(), "fa-arrows-alt", route = "/dragdrop")
             }
         }
     }

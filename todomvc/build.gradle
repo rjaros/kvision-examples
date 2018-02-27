@@ -1,6 +1,6 @@
 buildscript {
     ext.kotlin_version = '1.2.21'
-    ext.kvision_version = '0.0.6'
+    ext.kvision_version = '0.0.7'
     ext.serialization_version = '0.4'
     ext.production = (findProperty('prod') ?: 'false') == 'true'
     ext.npmdeps = new File("npm.dependencies").getText()
