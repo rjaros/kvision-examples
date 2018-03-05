@@ -10,6 +10,10 @@ import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.table.Cell.Companion.cell
+import pl.treksoft.kvision.table.Row.Companion.row
+import pl.treksoft.kvision.table.Table.Companion.table
+import pl.treksoft.kvision.table.TableType
 import pl.treksoft.kvision.utils.px
 
 class BasicTab : SimplePanel() {
@@ -30,6 +34,22 @@ class BasicTab : SimplePanel() {
                 rich = true
             )
             link("A link to Google", "http://www.google.com")
+            label("A responsive table:")
+            table(
+                listOf("Column 1", "Column 2", "Column 3"),
+                setOf(TableType.BORDERED, TableType.CONDENSED, TableType.STRIPED, TableType.HOVER), responsive = true
+            ) {
+                row {
+                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                }
+                row {
+                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                }
+            }
         }
     }
 }

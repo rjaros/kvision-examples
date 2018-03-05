@@ -2,7 +2,8 @@ package com.example
 
 import pl.treksoft.kvision.form.check.CheckBox.Companion.checkBox
 import pl.treksoft.kvision.form.text.Text
-import pl.treksoft.kvision.form.text.Text.Companion.text
+import pl.treksoft.kvision.form.text.TextInput
+import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
 import pl.treksoft.kvision.form.text.TextInputType
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
@@ -31,14 +32,14 @@ class WindowsTab : SimplePanel() {
 class ShowcaseWindow(caption: String?, init: (ShowcaseWindow.() -> Unit)? = null) :
     Window(caption, 600.px, 300.px, closeButton = true) {
 
-    lateinit var captionInput: Text
+    lateinit var captionInput: TextInput
 
     init {
         init?.invoke(this)
         vPanel {
             margin = 10.px
-            captionInput = text(TextInputType.TEXT, caption, label = "Window caption:") {
-                setEventListener<Text> {
+            captionInput = textInput(TextInputType.TEXT, caption) {
+                setEventListener<TextInput> {
                     change = {
                         this@ShowcaseWindow.caption = self.value
                     }

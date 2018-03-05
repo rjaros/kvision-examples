@@ -7,6 +7,7 @@ import kotlinx.serialization.list
 import org.w3c.dom.get
 import org.w3c.dom.set
 import pl.treksoft.kvision.data.BaseDataComponent
+import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.data.DataContainer.Companion.dataContainer
 import pl.treksoft.kvision.form.FieldLabel
 import pl.treksoft.kvision.form.check.CheckInput
@@ -33,15 +34,14 @@ const val ESCAPE_KEY = 27
 @Serializable
 open class BaseTodo(open var completed: Boolean, open var title: String) : BaseDataComponent()
 
-class Todo(completed: Boolean, title: String, hidden: Boolean) : BaseTodo(completed, title) {
-    constructor(base: BaseTodo) : this(base.completed, base.title, false)
+class Todo(completed: Boolean, title: String) : BaseTodo(completed, title) {
+    constructor(base: BaseTodo) : this(base.completed, base.title)
 
     override var completed: Boolean by obs(completed)
     override var title: String by obs(title)
-    var hidden: Boolean by obs(hidden)
 }
 
-enum class TodoMode {
+enum class TODOMODE {
     ALL,
     ACTIVE,
     COMPLETED
@@ -69,7 +69,9 @@ class Todomvc : ApplicationBase {
     private val itemsLeftTag = Tag(TAG.SPAN, " items left", classes = setOf("todo-count")).apply {
         add(countTag)
     }
-    private var mode: TodoMode = TodoMode.ALL
+    private var mode: TODOMODE = TODOMODE.ALL
+
+    private var container: DataContainer<Todo, Tag>? = null
 
     private val header = genHeader()
     private val main = genMain()
@@ -118,27 +120,27 @@ class Todomvc : ApplicationBase {
     }
 
     private fun all() {
-        this.mode = TodoMode.ALL
+        this.mode = TODOMODE.ALL
         this.allLink.addCssClass("selected")
         this.activeLink.removeCssClass("selected")
         this.completedLink.removeCssClass("selected")
-        this.model.forEach { it.hidden = false }
+        this.container?.update()
     }
 
     private fun active() {
-        this.mode = TodoMode.ACTIVE
+        this.mode = TODOMODE.ACTIVE
         this.allLink.removeCssClass("selected")
         this.activeLink.addCssClass("selected")
         this.completedLink.removeCssClass("selected")
-        this.model.forEach { it.hidden = it.completed }
+        this.container?.update()
     }
 
     private fun completed() {
-        this.mode = TodoMode.COMPLETED
+        this.mode = TODOMODE.COMPLETED
         this.allLink.removeCssClass("selected")
         this.activeLink.removeCssClass("selected")
         this.completedLink.addCssClass("selected")
-        this.model.forEach { it.hidden = !it.completed }
+        this.container?.update()
     }
 
     private fun genHeader(): Tag {
@@ -162,7 +164,7 @@ class Todomvc : ApplicationBase {
     private fun addTodo(value: String?) {
         val v = value?.trim() ?: ""
         if (v.isNotEmpty()) {
-            model.add(Todo(false, v, mode == TodoMode.COMPLETED))
+            model.add(Todo(false, v))
         }
     }
 
@@ -179,19 +181,16 @@ class Todomvc : ApplicationBase {
         return Tag(TAG.SECTION, classes = setOf("main")) {
             add(checkAllInput)
             add(FieldLabel("toggle-all", "Mark all as complete"))
-            dataContainer(model, { index ->
+            container = dataContainer(model, { index ->
                 val li = Tag(TAG.LI)
                 li.apply {
                     if (model[index].completed) addCssClass("completed")
-                    if (model[index].hidden) addCssClass("hidden")
                     val edit = TextInput(classes = setOf("edit"))
                     val view = Tag(TAG.DIV, classes = setOf("view")) {
                         checkInput(
                             CheckInputType.CHECKBOX, model[index].completed, classes = setOf("toggle")
                         ).onClick {
                             model[index].completed = this.value
-                            model[index].hidden =
-                                    mode == TodoMode.ACTIVE && this.value || mode == TodoMode.COMPLETED && !this.value
                         }
                         tag(TAG.LABEL, model[index].title) {
                             setEventListener<Tag> {
@@ -225,6 +224,12 @@ class Todomvc : ApplicationBase {
                     }
                     add(view)
                     add(edit)
+                }
+            }, { index ->
+                when (mode) {
+                    TODOMODE.ALL -> true
+                    TODOMODE.ACTIVE -> !model[index].completed
+                    TODOMODE.COMPLETED -> model[index].completed
                 }
             }, Tag(TAG.UL, classes = setOf("todo-list"))).onUpdate {
                 checkModel()

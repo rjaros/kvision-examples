@@ -5,6 +5,9 @@ import pl.treksoft.kvision.data.BaseDataComponent
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.check.CheckBoxStyle
+import pl.treksoft.kvision.form.text.TextInput
+import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
+import pl.treksoft.kvision.form.text.TextInputType
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.panel.FlexWrap
@@ -38,6 +41,9 @@ class DataTab : SimplePanel() {
             DataModel(false, "October"),
             DataModel(false, "November")
         )
+
+        var searchFilter: String? = null
+
         val dataContainer = DataContainer(list, { index ->
             CheckBox(
                 value = list[index].checked,
@@ -49,10 +55,23 @@ class DataTab : SimplePanel() {
                     list[index].checked = this.value
                 }
             }
+        }, filter = { index ->
+            searchFilter?.let {
+                list[index].text.contains(it, ignoreCase = true)
+            } ?: true
         }, child = HPanel(spacing = 10, wrap = FlexWrap.WRAP))
         panel.add(dataContainer)
 
         panel.add(HPanel(spacing = 10, wrap = FlexWrap.WRAP) {
+            textInput(type = TextInputType.SEARCH) {
+                placeholder = "Search ..."
+                setEventListener<TextInput> {
+                    input = {
+                        searchFilter = self.value
+                        dataContainer.update()
+                    }
+                }
+            }
             button("Add December", style = ButtonStyle.SUCCESS).onClick {
                 list.add(DataModel(true, "December"))
             }

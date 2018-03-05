@@ -46,13 +46,13 @@ class DragDropTab : SimplePanel() {
             Div(listGreen[index].text, align = Align.CENTER) {
                 padding = 3.px
                 border = Border(1.px, BorderStyle.DASHED)
-                setDragDropData("green", "$index")
+                setDragDropData("text/plain", "$index")
             }
         }, child = VPanel(spacing = 10) {
             width = 200.px
             padding = 10.px
             border = Border(2.px, BorderStyle.SOLID, Col.GREEN)
-            setDropTargetData("blue") { data ->
+            setDropTargetData("text/xml") { data ->
                 if (data != null) {
                     val element = listBlue[data.toInt()].text
                     listBlue.removeAt(data.toInt())
@@ -65,13 +65,13 @@ class DragDropTab : SimplePanel() {
             Div(listBlue[index].text, align = Align.CENTER) {
                 padding = 3.px
                 border = Border(1.px, BorderStyle.DASHED)
-                setDragDropData("blue", "$index")
+                setDragDropData("text/xml", "$index")
             }
         }, child = VPanel(spacing = 10) {
             width = 200.px
             padding = 10.px
             border = Border(2.px, BorderStyle.SOLID, Col.BLUE)
-            setDropTargetData("green") { data ->
+            setDropTargetData("text/plain") { data ->
                 if (data != null) {
                     val element = listGreen[data.toInt()].text
                     listGreen.removeAt(data.toInt())
