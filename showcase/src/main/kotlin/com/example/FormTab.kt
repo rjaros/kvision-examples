@@ -33,6 +33,7 @@ class Form(val map: Map<String, Any?>) {
     val checkbox: Boolean by map
     val radio: Boolean by map
     val select: String? by map
+    val ajaxselect: String? by map
     val spinner: Double? by map
     val radiogroup: String? by map
 }
@@ -45,7 +46,7 @@ class FormTab : SimplePanel() {
             Form(it)
         }.apply {
             add(
-                "text",
+                Form::text,
                 Text(label = "Required text field with regexp [0-9] validator").apply {
                     placeholder = "Enter your age"
                 },
@@ -53,37 +54,37 @@ class FormTab : SimplePanel() {
                 validatorMessage = { "Only numbers are allowed" }) {
                 it.getValue()?.matches("^[0-9]+$")
             }
-            add("password", Password(label = "Password field with minimum length validator"),
+            add(Form::password, Password(label = "Password field with minimum length validator"),
                 validatorMessage = { "Password too short" }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
-            add("password2", Password(label = "Password confirmation"),
+            add(Form::password2, Password(label = "Password confirmation"),
                 validatorMessage = { "Password too short" }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
-            add("textarea", TextArea(label = "Text area field"))
+            add(Form::textarea, TextArea(label = "Text area field"))
             add(
-                "richtext",
+                Form::richtext,
                 RichText(label = "Rich text field with a placeholder").apply { placeholder = "Add some info" })
             add(
-                "date",
+                Form::date,
                 DateTime(format = "YYYY-MM-DD", label = "Date field with a placeholder").apply {
                     placeholder = "Enter date"
                 })
             add(
-                "time",
+                Form::time,
                 DateTime(format = "HH:mm", label = "Time field")
             )
-            add("checkbox", CheckBox(label = "Required checkbox")) { it.getValue() }
-            add("radio", Radio(label = "Radio button"))
+            add(Form::checkbox, CheckBox(label = "Required checkbox")) { it.getValue() }
+            add(Form::radio, Radio(label = "Radio button"))
             add(
-                "select", Select(
+                Form::select, Select(
                     options = listOf("first" to "First option", "second" to "Second option"),
                     label = "Simple select"
                 )
             )
 
-            add("ajaxselect", Select(label = "Select with remote data source").apply {
+            add(Form::ajaxselect, Select(label = "Select with remote data source").apply {
                 emptyOption = true
                 ajaxOptions = AjaxOptions("https://api.github.com/search/repositories", preprocessData = {
                     it.items.map { item ->
@@ -99,18 +100,18 @@ class FormTab : SimplePanel() {
                     q = "{{{q}}}"
                 }, minLength = 3, requestDelay = 1000)
             })
-            add("spinner", Spinner(label = "Spinner field 10 - 20", min = 10, max = 20))
+            add(Form::spinner, Spinner(label = "Spinner field 10 - 20", min = 10, max = 20))
             add(
-                "radiogroup", RadioGroup(
+                Form::radiogroup, RadioGroup(
                     listOf("option1" to "First option", "option2" to "Second option"),
                     inline = true, label = "Radio button group"
                 )
             )
             validator = {
-                val result = it["password"] == it["password2"]
+                val result = it[Form::password] == it[Form::password2]
                 if (!result) {
-                    it.getControl("password")?.validatorError = "Passwords are not the same"
-                    it.getControl("password2")?.validatorError = "Passwords are not the same"
+                    it.getControl(Form::password)?.validatorError = "Passwords are not the same"
+                    it.getControl(Form::password2)?.validatorError = "Passwords are not the same"
                 }
                 result
             }

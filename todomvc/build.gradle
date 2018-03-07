@@ -1,7 +1,9 @@
 buildscript {
     ext.kotlin_version = '1.2.30'
-    ext.kvision_version = '0.0.8'
+    ext.kvision_version = '0.0.9'
     ext.serialization_version = '0.4'
+    ext.frontend_plugin_version = '0.0.29'
+    ext.detekt_version = '1.0.0.RC6-3'
     ext.production = (findProperty('prod') ?: 'false') == 'true'
     ext.npmdeps = new File("npm.dependencies").getText()
 
@@ -14,8 +16,8 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.27"
-        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0.RC6-2"
+        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:${frontend_plugin_version}"
+        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${detekt_version}"
         classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
     }
 }
@@ -30,9 +32,9 @@ apply plugin: "io.gitlab.arturbosch.detekt"
 
 repositories {
     jcenter()
-    maven { url 'https://kotlin.bintray.com/kotlinx' }
-    maven { url 'https://dl.bintray.com/gbaldeck/kotlin' }
-    maven { url 'https://dl.bintray.com/rjaros/kotlin' }
+    maven { url = 'https://kotlin.bintray.com/kotlinx' }
+    maven { url = 'https://dl.bintray.com/gbaldeck/kotlin' }
+    maven { url = 'https://dl.bintray.com/rjaros/kotlin' }
 }
 
 dependencies {
@@ -78,7 +80,7 @@ kotlinFrontend {
 }
 
 detekt {
-    version = "1.0.0.RC6-2"
+    version = "${detekt_version}"
     profile("main") {
         input = "$projectDir/src/main/kotlin"
         config = "$projectDir/detekt.yml"

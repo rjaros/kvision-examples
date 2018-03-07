@@ -44,22 +44,22 @@ class DataTab : SimplePanel() {
 
         var searchFilter: String? = null
 
-        val dataContainer = DataContainer(list, { index ->
+        val dataContainer = DataContainer(list, { _, model ->
             CheckBox(
-                value = list[index].checked,
-                label = if (list[index].checked) "<b>${list[index].text}</b>" else "${list[index].text}"
+                value = model.checked,
+                label = if (model.checked) "<b>${model.text}</b>" else "${model.text}"
             ).apply {
                 rich = true
                 style = CheckBoxStyle.PRIMARY
                 onClick {
-                    list[index].checked = this.value
+                    model.checked = this.value
                 }
             }
-        }, filter = { index ->
+        }, filter = { _, model ->
             searchFilter?.let {
-                list[index].text.contains(it, ignoreCase = true)
+                model.text.contains(it, ignoreCase = true)
             } ?: true
-        }, child = HPanel(spacing = 10, wrap = FlexWrap.WRAP))
+        }, container = HPanel(spacing = 10, wrap = FlexWrap.WRAP))
         panel.add(dataContainer)
 
         panel.add(HPanel(spacing = 10, wrap = FlexWrap.WRAP) {

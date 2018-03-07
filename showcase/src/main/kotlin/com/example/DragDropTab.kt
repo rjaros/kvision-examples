@@ -42,13 +42,13 @@ class DragDropTab : SimplePanel() {
             DataModel("December")
         )
 
-        val dataContainer1 = DataContainer(listGreen, { index ->
+        val dataContainer1 = DataContainer(listGreen, { index, _ ->
             Div(listGreen[index].text, align = Align.CENTER) {
                 padding = 3.px
                 border = Border(1.px, BorderStyle.DASHED)
                 setDragDropData("text/plain", "$index")
             }
-        }, child = VPanel(spacing = 10) {
+        }, container = VPanel(spacing = 10) {
             width = 200.px
             padding = 10.px
             border = Border(2.px, BorderStyle.SOLID, Col.GREEN)
@@ -61,13 +61,13 @@ class DragDropTab : SimplePanel() {
             }
         })
 
-        val dataContainer2 = DataContainer(listBlue, { index ->
+        val dataContainer2 = DataContainer(listBlue, { index, _ ->
             Div(listBlue[index].text, align = Align.CENTER) {
                 padding = 3.px
                 border = Border(1.px, BorderStyle.DASHED)
                 setDragDropData("text/xml", "$index")
             }
-        }, child = VPanel(spacing = 10) {
+        }, container = VPanel(spacing = 10) {
             width = 200.px
             padding = 10.px
             border = Border(2.px, BorderStyle.SOLID, Col.BLUE)

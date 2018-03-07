@@ -1,6 +1,8 @@
 buildscript {
     ext.kotlin_version = '1.2.30'
-    ext.kvision_version = '0.0.8'
+    ext.kvision_version = '0.0.9'
+    ext.frontend_plugin_version = '0.0.29'
+    ext.detekt_version = '1.0.0.RC6-3'
     ext.production = (findProperty('prod') ?: 'false') == 'true'
     ext.npmdeps = new File("npm.dependencies").getText()
 
@@ -12,8 +14,8 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.27"
-        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0.RC6-2"
+        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:${frontend_plugin_version}"
+        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${detekt_version}"
     }
 }
 
@@ -46,7 +48,7 @@ kotlinFrontend {
         dependency("uglifyjs-webpack-plugin")
         dependency("file-loader")
         dependency("url-loader")
-        dependency("jquery", "3.3.1")
+        dependency("jquery", "3.2.1")
         dependency("fecha", "2.3.2")
         dependency("snabbdom", "0.7.1")
         dependency("snabbdom-virtualize", "0.7.0")
@@ -72,7 +74,7 @@ kotlinFrontend {
 }
 
 detekt {
-    version = "1.0.0.RC6-2"
+    version = "${detekt_version}"
     profile("main") {
         input = "$projectDir/src/main/kotlin"
         config = "$projectDir/detekt.yml"

@@ -181,22 +181,22 @@ class Todomvc : ApplicationBase {
         return Tag(TAG.SECTION, classes = setOf("main")) {
             add(checkAllInput)
             add(FieldLabel("toggle-all", "Mark all as complete"))
-            container = dataContainer(model, { index ->
+            container = dataContainer(model, { index, todo ->
                 val li = Tag(TAG.LI)
                 li.apply {
-                    if (model[index].completed) addCssClass("completed")
+                    if (todo.completed) addCssClass("completed")
                     val edit = TextInput(classes = setOf("edit"))
                     val view = Tag(TAG.DIV, classes = setOf("view")) {
                         checkInput(
-                            CheckInputType.CHECKBOX, model[index].completed, classes = setOf("toggle")
+                            CheckInputType.CHECKBOX, todo.completed, classes = setOf("toggle")
                         ).onClick {
-                            model[index].completed = this.value
+                            todo.completed = this.value
                         }
-                        tag(TAG.LABEL, model[index].title) {
+                        tag(TAG.LABEL, todo.title) {
                             setEventListener<Tag> {
                                 dblclick = {
                                     li.getElementJQuery()?.addClass("editing")
-                                    edit.value = model[index].title
+                                    edit.value = todo.title
                                     edit.getElementJQuery()?.focus()
                                 }
                             }
@@ -225,13 +225,13 @@ class Todomvc : ApplicationBase {
                     add(view)
                     add(edit)
                 }
-            }, { index ->
+            }, { _, todo ->
                 when (mode) {
                     TODOMODE.ALL -> true
-                    TODOMODE.ACTIVE -> !model[index].completed
-                    TODOMODE.COMPLETED -> model[index].completed
+                    TODOMODE.ACTIVE -> !todo.completed
+                    TODOMODE.COMPLETED -> todo.completed
                 }
-            }, Tag(TAG.UL, classes = setOf("todo-list"))).onUpdate {
+            }, container = Tag(TAG.UL, classes = setOf("todo-list"))).onUpdate {
                 checkModel()
             }
         }
