@@ -1,0 +1,128 @@
+buildscript {
+    ext.kotlin_version = '1.2.30'
+    ext.kvision_version = '0.0.10'
+    ext.frontend_plugin_version = '0.0.29'
+    ext.detekt_version = '1.0.0.RC6-3'
+    ext.production = (findProperty('prod') ?: 'false') == 'true'
+    ext.npmdeps = new File("npm.dependencies").getText()
+
+    repositories {
+        jcenter()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:${frontend_plugin_version}"
+        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${detekt_version}"
+    }
+}
+
+apply plugin: 'kotlin2js'
+if (production) {
+    apply plugin: 'kotlin-dce-js'
+}
+apply plugin: 'org.jetbrains.kotlin.frontend'
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+repositories {
+    jcenter()
+    maven { url = 'https://dl.bintray.com/gbaldeck/kotlin' }
+    maven { url = 'https://dl.bintray.com/rjaros/kotlin' }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version" // for now only compile configuration is supported
+    compile "pl.treksoft:kvision:$kvision_version"
+}
+
+kotlinFrontend {
+    npm {
+        dependency("css-loader")
+        dependency("style-loader")
+        dependency("less")
+        dependency("less-loader")
+        dependency("imports-loader")
+        dependency("uglifyjs-webpack-plugin")
+        dependency("file-loader")
+        dependency("url-loader")
+        dependency("jquery", "3.2.1")
+        dependency("fecha", "2.3.2")
+        dependency("snabbdom", "0.7.1")
+        dependency("snabbdom-virtualize", "0.7.0")
+        dependency("navigo", "7.0.0")
+        dependency("jquery-resizable-dom", "0.28.0")
+        npmdeps.eachLine { line ->
+            def (name, version) = line.tokenize(" ")
+            dependency(name, version)
+        }
+        devDependency("karma")
+        devDependency("karma-webpack", "2.0.9")
+        devDependency("webpack", "3.11.0")
+        devDependency("webpack-dev-server", "2.11.0")
+    }
+
+    webpackBundle {
+        bundleName = "main"
+        contentPath = file('src/main/web')
+    }
+
+    define "PRODUCTION", production
+
+}
+
+detekt {
+    version = "${detekt_version}"
+    profile("main") {
+        input = "$projectDir/src/main/kotlin"
+        config = "$projectDir/detekt.yml"
+        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+    }
+}
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.outputFile = "$project.buildDir.path/js/${project.name}.js"
+    kotlinOptions.sourceMap = !production
+    kotlinOptions.moduleKind = 'commonjs'
+}
+
+compileTestKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.outputFile = "$project.buildDir.path/js-tests/${project.name}-tests.js"
+    kotlinOptions.sourceMap = !production
+    kotlinOptions.moduleKind = 'commonjs'
+}
+
+task copyResources(type: Copy) {
+    from "src/main/resources"
+    into file(buildDir.path + "/js")
+}
+
+task copyResourcesForDce(type: Copy) {
+    from "src/main/resources"
+    from("${buildDir.path}/node_modules_imported/kvision") {
+        include "css/**"
+        include "img/**"
+        include "js/**"
+    }
+    into file(buildDir.path + "/kotlin-js-min/main")
+}
+
+task dist(type: Copy, dependsOn: 'bundle') {
+    from "src/main/web"
+    from "${buildDir.path}/bundle"
+    into file(buildDir.path + "/distributions/" + project.name)
+}
+
+task distZip(type: Zip, dependsOn: 'dist') {
+    from (buildDir.path + "/distributions/" + project.name)
+}
+
+afterEvaluate {
+    tasks.getByName("webpack-bundle") { dependsOn(copyResources, copyResourcesForDce) }
+    tasks.getByName("webpack-run") { dependsOn(copyResources) }
+    tasks.getByName("karma-start") { dependsOn(copyResources) }
+}
