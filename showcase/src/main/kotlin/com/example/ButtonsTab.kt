@@ -6,10 +6,13 @@ import pl.treksoft.kvision.form.check.Radio.Companion.radio
 import pl.treksoft.kvision.form.check.RadioStyle
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.html.Label.Companion.label
 import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.toolbar.ButtonGroup.Companion.buttonGroup
+import pl.treksoft.kvision.toolbar.Toolbar.Companion.toolbar
 import pl.treksoft.kvision.utils.px
 
 class ButtonsTab : SimplePanel() {
@@ -42,6 +45,25 @@ class ButtonsTab : SimplePanel() {
                 radio(name = "radio", label = "Warning radiobutton") { style = RadioStyle.WARNING }
                 radio(name = "radio", label = "Danger radiobutton") { style = RadioStyle.DANGER }
                 radio(name = "radio", label = "Squared radiobutton") { squared = true }
+            }
+        }
+        toolbar {
+            buttonGroup {
+                button("<<")
+            }
+            buttonGroup {
+                button("1", disabled = true)
+                button("2")
+                button("3")
+            }
+            buttonGroup {
+                label("...")
+            }
+            buttonGroup {
+                button("10")
+            }
+            buttonGroup {
+                button(">>")
             }
         }
     }

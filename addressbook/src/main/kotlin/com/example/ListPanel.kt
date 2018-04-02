@@ -78,7 +78,7 @@ object ListPanel : SimplePanel() {
             search = textInput(TextInputType.SEARCH) {
                 placeholder = "Search ..."
             }
-            types = radioGroup(listOf("all" to "All", "fav" to "Favourites"), "all", true) {
+            types = radioGroup(listOf("all" to "All", "fav" to "Favourites"), "all", inline = true) {
                 marginBottom = 0.px
             }
         }

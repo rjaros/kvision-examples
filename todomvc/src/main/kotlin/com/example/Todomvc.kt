@@ -109,8 +109,8 @@ class Todomvc : ApplicationBase {
         val countCompleted = model.filter { it.completed }.size
         this.main.visible = model.isNotEmpty()
         this.footer.visible = model.isNotEmpty()
-        this.countTag.text = countActive.toString()
-        this.itemsLeftTag.text = when (countActive) {
+        this.countTag.content = countActive.toString()
+        this.itemsLeftTag.content = when (countActive) {
             1 -> " item left"
             else -> " items left"
         }

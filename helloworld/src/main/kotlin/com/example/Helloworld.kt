@@ -7,6 +7,7 @@ import pl.treksoft.kvision.panel.FlexDir
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.FlexPanel.Companion.flexPanel
 import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.require
 import pl.treksoft.kvision.utils.px
 
 class Helloworld : ApplicationBase {
@@ -16,6 +17,7 @@ class Helloworld : ApplicationBase {
             flexPanel(FlexDir.ROW, justify = FlexJustify.CENTER) {
                 tag(TAG.DIV, "Hello world!", classes = setOf("helloworld")) {
                     marginTop = 50.px
+                    fontSize = 50.px
                 }
             }
         }

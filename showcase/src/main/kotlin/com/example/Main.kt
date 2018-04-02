@@ -5,8 +5,6 @@ import pl.treksoft.kvision.hmr.module
 import pl.treksoft.kvision.routing.Routing
 import kotlin.browser.document
 
-external fun require(name: String): String
-
 fun main(args: Array<String>) {
     var application: ApplicationBase? = null
 

@@ -45,13 +45,13 @@ class ShowcaseWindow(caption: String?, init: (ShowcaseWindow.() -> Unit)? = null
                     }
                 }
             }
-            checkBox(true, "Draggable").onClick {
+            checkBox(true, label = "Draggable").onClick {
                 this@ShowcaseWindow.isDraggable = this.value
             }
-            checkBox(true, "Resizable").onClick {
+            checkBox(true, label = "Resizable").onClick {
                 this@ShowcaseWindow.isResizable = this.value
             }
-            checkBox(true, "Close button").onClick {
+            checkBox(true, label = "Close button").onClick {
                 this@ShowcaseWindow.closeButton = this.value
             }
         }

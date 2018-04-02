@@ -6,6 +6,7 @@ import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.panel.TabPanel.Companion.tabPanel
+import pl.treksoft.kvision.require
 import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
@@ -24,7 +25,7 @@ class Showcase : ApplicationBase {
                 addTab("Basic formatting", BasicTab(), "fa-bars", route = "/basic")
                 addTab("Forms", FormTab(), "fa-edit", route = "/forms")
                 addTab("Buttons", ButtonsTab(), "fa-check-square-o", route = "/buttons")
-                addTab("Dropdowns", DropDownTab(), "fa-arrow-down", route = "/dropdowns")
+                addTab("Dropdowns & Menus", DropDownTab(), "fa-arrow-down", route = "/dropdowns")
                 addTab("Containers", ContainersTab(), "fa-database", route = "/containers")
                 addTab("Layouts", LayoutsTab(), "fa-th-list", route = "/layouts")
                 addTab("Modals", ModalsTab(), "fa-window-maximize", route = "/modals")

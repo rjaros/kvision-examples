@@ -4,8 +4,6 @@ import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.hmr.module
 import kotlin.browser.document
 
-external fun require(name: String): dynamic
-
 fun main(args: Array<String>) {
     var application: ApplicationBase? = null
 

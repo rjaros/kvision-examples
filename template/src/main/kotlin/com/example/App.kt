@@ -2,6 +2,7 @@ package com.example
 
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.require
 
 class App : ApplicationBase {
 

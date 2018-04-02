@@ -12,6 +12,7 @@ import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.modal.Modal
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.require
 import pl.treksoft.kvision.utils.px
 
 class ModalsTab : SimplePanel() {

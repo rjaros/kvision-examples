@@ -1,9 +1,9 @@
 buildscript {
-    ext.kotlin_version = '1.2.30'
-    ext.kvision_version = '0.0.10'
-    ext.serialization_version = '0.4'
+    ext.kotlin_version = '1.2.31'
+    ext.kvision_version = '0.0.11'
+    ext.serialization_version = '0.4.2'
     ext.frontend_plugin_version = '0.0.29'
-    ext.detekt_version = '1.0.0.RC6-3'
+    ext.detekt_version = '1.0.0.RC6-4'
     ext.production = (findProperty('prod') ?: 'false') == 'true'
     ext.npmdeps = new File("npm.dependencies").getText()
 
@@ -59,12 +59,14 @@ kotlinFrontend {
         dependency("snabbdom", "0.7.1")
         dependency("snabbdom-virtualize", "0.7.0")
         dependency("navigo", "7.0.0")
-        dependency("jquery-resizable-dom", "0.28.0")
         npmdeps.eachLine { line ->
             def (name, version) = line.tokenize(" ")
             dependency(name, version)
         }
         devDependency("karma")
+        devDependency("karma-qunit", "1.2.1")
+        devDependency("karma-chrome-launcher")
+        devDependency("karma-firefox-launcher")
         devDependency("karma-webpack", "2.0.9")
         devDependency("webpack", "3.11.0")
         devDependency("webpack-dev-server", "2.11.0")
@@ -73,6 +75,11 @@ kotlinFrontend {
     webpackBundle {
         bundleName = "main"
         contentPath = file('src/main/web')
+    }
+
+    karma {
+        plugins = [ "karma-chrome-launcher", "karma-firefox-launcher" ]
+//        browsers = [ "Chrome", "Firefox" ]
     }
 
     define "PRODUCTION", production
@@ -113,6 +120,7 @@ task copyResourcesForDce(type: Copy) {
         include "css/**"
         include "img/**"
         include "js/**"
+        include "hbs/**"
     }
     into file(buildDir.path + "/kotlin-js-min/main")
 }

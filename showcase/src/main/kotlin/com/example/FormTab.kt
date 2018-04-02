@@ -1,5 +1,8 @@
 package com.example
 
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
+import org.w3c.files.File
 import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.check.Radio
@@ -12,12 +15,16 @@ import pl.treksoft.kvision.form.text.RichText
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextArea
 import pl.treksoft.kvision.form.time.DateTime
+import pl.treksoft.kvision.form.upload.Upload
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
+import pl.treksoft.kvision.panel.FlexAlignItems
+import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
+import pl.treksoft.kvision.progress.ProgressBar
 import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px
 import kotlin.js.Date
@@ -36,6 +43,7 @@ class Form(val map: Map<String, Any?>) {
     val ajaxselect: String? by map
     val spinner: Double? by map
     val radiogroup: String? by map
+    val upload: List<File>? by map
 }
 
 
@@ -107,6 +115,11 @@ class FormTab : SimplePanel() {
                     inline = true, label = "Radio button group"
                 )
             )
+            add(Form::upload, Upload("/", multiple = true, label = "Upload files (images only)").apply {
+                explorerTheme = true
+                dropZoneEnabled = false
+                allowedFileTypes = setOf("image")
+            })
             validator = {
                 val result = it[Form::password] == it[Form::password2]
                 if (!result) {
@@ -117,18 +130,29 @@ class FormTab : SimplePanel() {
             }
             validatorMessage = { "The passwords are not the same." }
         }
-        formPanel.add(HPanel(spacing = 10) {
-            button("Validate", "fa-check", ButtonStyle.INFO).onClick {
-                formPanel.validate()
+        formPanel.add(HPanel(spacing = 10, alignItems = FlexAlignItems.CENTER, wrap = FlexWrap.WRAP) {
+            val p = ProgressBar(0, striped = true) {
+                marginBottom = 0.px
+                width = 300.px
             }
             button("Show data", "fa-info", ButtonStyle.SUCCESS).onClick {
+                console.log(formPanel.getDataJson())
                 Alert.show("Form data in plain JSON", JSON.stringify(formPanel.getDataJson(), space = 1))
             }
             button("Clear data", "fa-times", ButtonStyle.DANGER).onClick {
                 Confirm.show("Are you sure?", "Do you want to clear your data?") {
                     formPanel.clearData()
+                    p.progress = 0
                 }
             }
+            button("Validate", "fa-check", ButtonStyle.INFO).onClick {
+                launch {
+                    p.progress = 100
+                    delay(500)
+                    formPanel.validate()
+                }
+            }
+            add(p)
         })
     }
 }
