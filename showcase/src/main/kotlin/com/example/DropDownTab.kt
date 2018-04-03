@@ -12,12 +12,11 @@ import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Image
 import pl.treksoft.kvision.html.Label.Companion.label
 import pl.treksoft.kvision.html.Link.Companion.link
-import pl.treksoft.kvision.html.Link.Companion.linkDisabled
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.navbar.Nav.Companion.nav
 import pl.treksoft.kvision.navbar.NavForm.Companion.navForm
-import pl.treksoft.kvision.navbar.Navbar.Companion.navbarPanel
+import pl.treksoft.kvision.navbar.Navbar.Companion.navbar
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
@@ -29,7 +28,7 @@ class DropDownTab : SimplePanel() {
         this.marginTop = 10.px
         this.minHeight = 400.px
         vPanel(spacing = 30) {
-            navbarPanel("NavBar") {
+            navbar("NavBar") {
                 nav {
                     tag(TAG.LI) {
                         link("File", icon = "fa-file")
