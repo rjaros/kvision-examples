@@ -30,7 +30,7 @@ with Material-like CSS template from [Bootswatch](https://bootswatch.com/3/paper
 
 ## Desktop
 
-A very simple desktop with three mini applications - a calculator, a text editor and a web browser.
+A very simple desktop with four mini applications - a calculator, a text editor, a paint program and a web browser.
 
 [See live demo](https://rjaros.github.io/kvision-examples/desktop/)
 
