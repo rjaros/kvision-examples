@@ -39,3 +39,17 @@ A very simple desktop with three mini applications - a calculator, a text editor
 A complete implementation of [TodoMVC](http://todomvc.com/) demo application.
 
 [See live demo](https://rjaros.github.io/kvision-examples/todomvc/)
+
+## Address book - fullstack
+
+A complete, multiplatform address book application. It presents an innovative way to build fullstack applications with KVision and 
+[Jooby][https://jooby.org] micro web framework. KVision closely integrates the client and the server side of the project with a 
+shared data model and fully type-safe connectivity between both sides (based on automatically generated routings and JSON-RPC 
+endpoints). The example project utilizes:
+
+- H2 SQL database (configured for "in memory" database)
+- [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity
+- [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management
+
+The architecture of the project is heavily based on Kotlin coroutines, wrapping asynchronous client-server calls into 
+easy-to-read synchronous-like code.

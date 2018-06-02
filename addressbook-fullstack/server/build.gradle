@@ -1,0 +1,46 @@
+apply plugin: 'kotlin-platform-jvm'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'application'
+apply plugin: 'jooby'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "com.github.johnrengelman.shadow"
+
+mainClassName = 'com.example.MainKt'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.jooby:jooby-bom:${joobyVersion}"
+    }
+}
+
+dependencies {
+    expectedBy project(':common')
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+    compile "pl.treksoft:kvision-server:${kvisionVersion}"
+    compile "org.jooby:jooby-netty:${joobyVersion}"
+    compile "org.jooby:jooby-jdbc:${joobyVersion}"
+    compile "org.jooby:jooby-pac4j2:${joobyVersion}"
+    compile "org.pac4j:pac4j-sql:${pac4jVersion}"
+    compile "org.springframework.security:spring-security-crypto:${springSecurityCryptoVersion}"
+    compile "commons-logging:commons-logging:${commonsLoggingVersion}"
+    compile "com.h2database:h2:${h2Version}"
+    compile "com.github.andrewoma.kwery:core:${kweryVersion}"
+    compile "com.github.andrewoma.kwery:mapper:${kweryVersion}"
+}
+
+sourceSets.main.resources {
+    srcDirs = ["conf", "public", "../client/build/distributions/client"]
+}
+
+sourceSets.main.java {
+    srcDirs "../common/src/main/kotlin"
+}
+
+compileKotlin {
+    targetCompatibility = javaVersion
+    sourceCompatibility = javaVersion
+    kotlinOptions {
+        jvmTarget = javaVersion
+    }
+}
