@@ -37,6 +37,9 @@ class App : ApplicationBase {
                         link("Text Editor", icon = "fa-edit").onClick {
                             TextEditor.run(this@Root)
                         }
+                        link("Paint", icon = "fa-paint-brush").onClick {
+                            Paint.run(this@Root)
+                        }
                         link("Web Browser", icon = "fa-firefox").onClick {
                             WebBrowser.run(this@Root)
                         }
@@ -63,6 +66,11 @@ class App : ApplicationBase {
                 add(DesktopIcon("fa-edit", "Text Editor").setEventListener<DesktopIcon> {
                     dblclick = {
                         TextEditor.run(this@Root)
+                    }
+                })
+                add(DesktopIcon("fa-paint-brush", "Paint").setEventListener<DesktopIcon> {
+                    dblclick = {
+                        Paint.run(this@Root)
                     }
                 })
                 add(DesktopIcon("fa-firefox", "Web Browser").setEventListener<DesktopIcon> {

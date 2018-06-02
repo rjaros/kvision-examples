@@ -2,7 +2,7 @@ package com.example
 
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
-import org.w3c.files.File
+import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.check.Radio
@@ -25,34 +25,33 @@ import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.progress.ProgressBar
+import pl.treksoft.kvision.types.KDate
+import pl.treksoft.kvision.types.KFile
 import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px
-import kotlin.js.Date
 
-class Form(val map: Map<String, Any?>) {
-    val text: String? by map
-    val password: String? by map
-    val password2: String? by map
-    val textarea: String? by map
-    val richtext: String? by map
-    val date: Date? by map
-    val time: Date? by map
-    val checkbox: Boolean by map
-    val radio: Boolean by map
-    val select: String? by map
-    val ajaxselect: String? by map
-    val spinner: Double? by map
-    val radiogroup: String? by map
-    val upload: List<File>? by map
-}
-
+@Serializable
+data class Form(
+    val text: String? = null,
+    val password: String? = null,
+    val password2: String? = null,
+    val textarea: String? = null,
+    val richtext: String? = null,
+    val date: KDate? = null,
+    val time: KDate? = null,
+    val checkbox: Boolean = false,
+    val radio: Boolean = false,
+    val select: String? = null,
+    val ajaxselect: String? = null,
+    val spinner: Double? = null,
+    val radiogroup: String? = null,
+    val upload: List<KFile>? = null
+)
 
 class FormTab : SimplePanel() {
     init {
         this.marginTop = 10.px
-        val formPanel = formPanel {
-            Form(it)
-        }.apply {
+        val formPanel = formPanel<Form> {
             add(
                 Form::text,
                 Text(label = "Required text field with regexp [0-9] validator").apply {

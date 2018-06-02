@@ -20,6 +20,7 @@ import pl.treksoft.kvision.panel.ResponsiveGridPanel.Companion.responsiveGridPan
 import pl.treksoft.kvision.panel.Side
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.px
 
 class LayoutsTab : SimplePanel() {
@@ -150,14 +151,13 @@ class LayoutsTab : SimplePanel() {
         tag(TAG.H4, "Dock layout")
         dockPanel {
             background = Background(Col.YELLOW)
-            add(getDiv("CENTER", 150), Side.CENTER)
+            add(getDiv("CENTER", 150).apply { margin = auto }, Side.CENTER)
             add(getDiv("LEFT", 150), Side.LEFT)
             add(getDiv("RIGHT", 150), Side.RIGHT)
-            add(getDiv("UP", 150).apply { marginBottom = 10.px }, Side.UP)
-            add(getDiv("DOWN", 150).apply { marginTop = 10.px }, Side.DOWN)
+            add(getDiv("UP", 150).apply { margin = auto; marginBottom = 10.px }, Side.UP)
+            add(getDiv("DOWN", 150).apply { margin = auto; marginTop = 10.px }, Side.DOWN)
         }
     }
-
 
     private fun getDiv(value: String, size: Int): Tag {
         return Tag(TAG.DIV, value).apply {

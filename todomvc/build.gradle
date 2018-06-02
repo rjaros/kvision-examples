@@ -1,24 +1,18 @@
 buildscript {
-    ext.kotlin_version = '1.2.31'
-    ext.kvision_version = '0.0.12'
-    ext.serialization_version = '0.4.2'
-    ext.frontend_plugin_version = '0.0.29'
-    ext.detekt_version = '1.0.0.RC6-4'
     ext.production = (findProperty('prod') ?: 'false') == 'true'
     ext.npmdeps = new File("npm.dependencies").getText()
 
     repositories {
         jcenter()
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
-        maven { url "https://plugins.gradle.org/m2/" }
-        maven { url "https://kotlin.bintray.com/kotlinx" }
+        maven { url = 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url = 'https://plugins.gradle.org/m2/' }
+        maven { url = 'https://kotlin.bintray.com/kotlinx' }
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:${frontend_plugin_version}"
-        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${detekt_version}"
-        classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:${frontendPluginVersion}"
+        classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:${serializationVersion}"
     }
 }
 
@@ -26,9 +20,8 @@ apply plugin: 'kotlin2js'
 if (production) {
     apply plugin: 'kotlin-dce-js'
 }
-apply plugin: 'kotlinx-serialization'
 apply plugin: 'org.jetbrains.kotlin.frontend'
-apply plugin: "io.gitlab.arturbosch.detekt"
+apply plugin: 'kotlinx-serialization'
 
 repositories {
     jcenter()
@@ -38,10 +31,9 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
-    compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
-    compile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version" // for now only compile configuration is supported
-    compile "pl.treksoft:kvision:$kvision_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:${kotlinVersion}"
+    compile "pl.treksoft:kvision:${kvisionVersion}"
+    compile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
 }
 
 kotlinFrontend {
@@ -64,49 +56,31 @@ kotlinFrontend {
             dependency(name, version)
         }
         devDependency("karma")
-        devDependency("karma-qunit", "1.2.1")
-        devDependency("karma-chrome-launcher")
-        devDependency("karma-firefox-launcher")
-        devDependency("karma-webpack", "2.0.9")
-        devDependency("webpack", "3.11.0")
-        devDependency("webpack-dev-server", "2.11.0")
+        devDependency("qunit")
     }
 
     webpackBundle {
         bundleName = "main"
         contentPath = file('src/main/web')
-    }
-
-    karma {
-        plugins = [ "karma-chrome-launcher", "karma-firefox-launcher" ]
-//        browsers = [ "Chrome", "Firefox" ]
+        mode = production ? "production" : "development"
     }
 
     define "PRODUCTION", production
 
 }
 
-detekt {
-    version = "${detekt_version}"
-    profile("main") {
-        input = "$projectDir/src/main/kotlin"
-        config = "$projectDir/detekt.yml"
-        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
-    }
-}
-
 compileKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.outputFile = "$project.buildDir.path/js/${project.name}.js"
     kotlinOptions.sourceMap = !production
-    kotlinOptions.moduleKind = 'commonjs'
+    kotlinOptions.moduleKind = 'umd'
 }
 
 compileTestKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.outputFile = "$project.buildDir.path/js-tests/${project.name}-tests.js"
     kotlinOptions.sourceMap = !production
-    kotlinOptions.moduleKind = 'commonjs'
+    kotlinOptions.moduleKind = 'umd'
 }
 
 task copyResources(type: Copy) {

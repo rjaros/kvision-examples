@@ -2,19 +2,21 @@ package com.example
 
 import com.lightningkite.kotlin.observable.list.ObservableList
 import com.lightningkite.kotlin.observable.list.observableListOf
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
+import kotlinx.serialization.serializer
 import org.w3c.dom.get
 import org.w3c.dom.set
-import pl.treksoft.kvision.form.asJson
-import pl.treksoft.kvision.form.asMap
 import kotlin.browser.localStorage
-import kotlin.js.Json
 
-data class Address(val map: Map<String, Any?>) {
-    val firstName: String? by map
-    val lastName: String? by map
-    val email: String? by map
-    val favourite: Boolean? by map
-}
+@Serializable
+data class Address(
+    val firstName: String? = null,
+    val lastName: String? = null,
+    val email: String? = null,
+    val favourite: Boolean? = false
+)
 
 fun Address.match(search: String?): Boolean {
     return search?.let {
@@ -27,44 +29,21 @@ fun Address.match(search: String?): Boolean {
 object Model {
 
     val addresses: ObservableList<Address> = observableListOf(
-        Address(
-            mapOf(
-                "firstName" to "John",
-                "lastName" to "Smith",
-                "email" to "john.smith@mail.com",
-                "favourite" to true
-            )
-        ),
-        Address(
-            mapOf(
-                "firstName" to "Karen",
-                "lastName" to "Kowalsky",
-                "email" to "kkowalsky@mail.com",
-                "favourite" to true
-            )
-        ),
-        Address(
-            mapOf(
-                "firstName" to "William",
-                "lastName" to "Gordon",
-                "email" to "w.gordon@mail.com",
-                "favourite" to false
-            )
-        )
+        Address("John", "Smith", "john.smith@mail.com", true),
+        Address("Karen", "Kowalsky", "kkowalsky@mail.com", true),
+        Address("William", "Gordon", "w.gordon@mail.com", false)
     )
 
     fun storeAddresses() {
-        val jsonString = addresses.map {
-            JSON.stringify(it.map.asJson())
-        }.toString()
+        val jsonString = JSON.stringify(Address::class.serializer().list, addresses)
         localStorage["addresses"] = jsonString
     }
 
     fun loadAddresses() {
         localStorage["addresses"]?.let {
             addresses.clear()
-            JSON.parse<Array<Json>>(it).forEach {
-                addresses.add(Address(it.asMap()))
+            JSON.parse(Address::class.serializer().list, it).forEach {
+                addresses.add(it)
             }
         }
     }

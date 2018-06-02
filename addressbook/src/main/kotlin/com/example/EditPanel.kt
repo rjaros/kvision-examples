@@ -24,8 +24,6 @@ object EditPanel : StackPanel() {
         padding = 10.px
 
         formPanel = formPanel {
-            Address(it)
-        }.apply {
             add(Address::firstName, Text(label = "First name:"))
             add(Address::lastName, Text(label = "Last name:"))
             add(Address::email, Text(TextInputType.EMAIL, label = "E-mail:"))
