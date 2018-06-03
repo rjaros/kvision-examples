@@ -53,3 +53,5 @@ endpoints). The example project utilizes:
 
 The architecture of the project is heavily based on Kotlin coroutines, wrapping asynchronous client-server calls into 
 easy-to-read synchronous-like code.
+
+[See live demo on Heroku](https://kvision-address-book.herokuapp.com/)
