@@ -1,1 +1,1 @@
-web: java -jar server/build/libs/server-all.jar
+web: java -Dapplication.port=$PORT -jar server/build/libs/server-all.jar
