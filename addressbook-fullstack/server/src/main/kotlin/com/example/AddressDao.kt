@@ -7,26 +7,10 @@ package com.example
 import com.github.andrewoma.kwery.core.Session
 import com.github.andrewoma.kwery.core.builder.query
 import com.github.andrewoma.kwery.mapper.AbstractDao
-import com.github.andrewoma.kwery.mapper.SimpleConverter
 import com.github.andrewoma.kwery.mapper.Table
-import com.github.andrewoma.kwery.mapper.TableConfiguration
 import com.github.andrewoma.kwery.mapper.Value
 import com.github.andrewoma.kwery.mapper.prefixed
-import com.github.andrewoma.kwery.mapper.reifiedConverter
-import com.github.andrewoma.kwery.mapper.standardConverters
-import com.github.andrewoma.kwery.mapper.util.camelToLowerUnderscore
-import pl.treksoft.kvision.types.KDate
-import java.sql.Timestamp
-
-object KDateConverter : SimpleConverter<KDate>(
-    { row, c -> KDate(row.timestamp(c).time) },
-    { Timestamp(it.time) }
-)
-
-val kvTableConfig = TableConfiguration(
-    converters = standardConverters + reifiedConverter(KDateConverter),
-    namingConvention = camelToLowerUnderscore
-)
+import pl.treksoft.kvision.types.kvTableConfig
 
 object AddressTable : Table<Address, Int>("address", kvTableConfig) {
     val Id by col(Address::id, id = true)
