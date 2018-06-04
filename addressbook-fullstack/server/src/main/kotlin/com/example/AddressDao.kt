@@ -16,11 +16,11 @@ import com.github.andrewoma.kwery.mapper.reifiedConverter
 import com.github.andrewoma.kwery.mapper.standardConverters
 import com.github.andrewoma.kwery.mapper.util.camelToLowerUnderscore
 import pl.treksoft.kvision.types.KDate
-import java.sql.Date
+import java.sql.Timestamp
 
 object KDateConverter : SimpleConverter<KDate>(
     { row, c -> KDate(row.date(c).time) },
-    { Date(it.time) }
+    { Timestamp(it.time) }
 )
 
 val kvTableConfig = TableConfiguration(
