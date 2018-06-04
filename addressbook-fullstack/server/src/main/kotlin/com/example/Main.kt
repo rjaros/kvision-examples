@@ -32,8 +32,12 @@ class App : JoobyServer({
     onStart {
         val db = require("db", DataSource::class)
         val session = ThreadLocalSession(db, HsqlDialect(), LoggingInterceptor())
-        val schema = this.javaClass.getResource("/schema.sql").readText()
-        session.update(schema)
+        try {
+            AddressDao(session).findById(1)
+        } catch (e: Exception) {
+            val schema = this.javaClass.getResource("/schema.sql").readText()
+            session.update(schema)
+        }
     }
 })
 
