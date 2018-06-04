@@ -55,3 +55,7 @@ The architecture of the project is heavily based on Kotlin coroutines, wrapping 
 easy-to-read synchronous-like code.
 
 [See live demo on Heroku](https://kvision-address-book.herokuapp.com/)
+
+## Template - fullstack
+
+A fullstack application template. A starting point for a new application.
