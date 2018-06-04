@@ -1,0 +1,7 @@
+apply plugin: 'kotlin-platform-common'
+apply plugin: 'kotlinx-serialization'
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-common:${kotlinVersion}"
+    compile "pl.treksoft:kvision-common:${kvisionVersion}"
+}
