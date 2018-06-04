@@ -19,7 +19,7 @@ import pl.treksoft.kvision.types.KDate
 import java.sql.Timestamp
 
 object KDateConverter : SimpleConverter<KDate>(
-    { row, c -> KDate(row.date(c).time) },
+    { row, c -> KDate(row.timestamp(c).time) },
     { Timestamp(it.time) }
 )
 
