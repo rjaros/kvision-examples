@@ -1,8 +1,8 @@
 package com.example
 
 import com.github.andrewoma.kwery.core.ThreadLocalSession
-import com.github.andrewoma.kwery.core.dialect.HsqlDialect
 import com.github.andrewoma.kwery.core.interceptor.LoggingInterceptor
+import com.typesafe.config.Config
 import org.jooby.Jooby.run
 import org.jooby.jdbc.Jdbc
 import org.jooby.pac4j.Pac4j
@@ -31,7 +31,7 @@ class App : JoobyServer({
     ProfileServiceManager.applyRoutes(this)
     onStart {
         val db = require("db", DataSource::class)
-        val session = ThreadLocalSession(db, HsqlDialect(), LoggingInterceptor())
+        val session = ThreadLocalSession(db, getDbDialect(require(Config::class)), LoggingInterceptor())
         try {
             AddressDao(session).findById(1)
         } catch (e: Exception) {

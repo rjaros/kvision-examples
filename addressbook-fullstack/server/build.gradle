@@ -25,6 +25,7 @@ dependencies {
     compile "org.springframework.security:spring-security-crypto:${springSecurityCryptoVersion}"
     compile "commons-logging:commons-logging:${commonsLoggingVersion}"
     compile "com.h2database:h2:${h2Version}"
+    compile "org.postgresql:postgresql:${pgsqlVersion}"
     compile "com.github.andrewoma.kwery:core:${kweryVersion}"
     compile "com.github.andrewoma.kwery:mapper:${kweryVersion}"
 }

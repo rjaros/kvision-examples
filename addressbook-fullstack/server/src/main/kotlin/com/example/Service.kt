@@ -1,8 +1,8 @@
 package com.example
 
 import com.github.andrewoma.kwery.core.ThreadLocalSession
-import com.github.andrewoma.kwery.core.dialect.HsqlDialect
 import com.github.andrewoma.kwery.core.interceptor.LoggingInterceptor
+import com.typesafe.config.Config
 import kotlinx.coroutines.experimental.Deferred
 import org.jooby.require
 import org.pac4j.sql.profile.DbProfile
@@ -16,7 +16,7 @@ actual class AddressService actual constructor() {
 
     private fun getAddressDao(req: Request): AddressDao {
         val db = req.require("db", DataSource::class)
-        val session = ThreadLocalSession(db, HsqlDialect(), LoggingInterceptor())
+        val session = ThreadLocalSession(db, getDbDialect(req.require(Config::class)), LoggingInterceptor())
         return AddressDao(session)
     }
 
