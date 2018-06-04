@@ -15,7 +15,7 @@ CREATE TABLE address (
     phone varchar(255),
     postal_address varchar(255),
     favourite boolean NOT NULL DEFAULT false,
-    created_at timestamp,
+    created_at time,
     user_id varchar(255),
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE
