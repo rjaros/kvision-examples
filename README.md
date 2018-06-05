@@ -56,6 +56,10 @@ easy-to-read synchronous-like code.
 
 [See live demo on Heroku](https://kvision-address-book.herokuapp.com/)
 
+## Number converter - fullstack
+
+A simple application to convert integer numbers to words by using JVM [Tradukisto](https://github.com/allegro/tradukisto) library 
+
 ## Template - fullstack
 
 A fullstack application template. A starting point for a new application.
