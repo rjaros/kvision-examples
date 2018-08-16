@@ -4,8 +4,8 @@
 
 package com.example
 
-import com.example.App.Companion.addTask
-import com.example.App.Companion.removeTask
+import com.example.App.addTask
+import com.example.App.removeTask
 import pl.treksoft.kvision.core.Component
 import pl.treksoft.kvision.core.CssSize
 import pl.treksoft.kvision.core.UNIT

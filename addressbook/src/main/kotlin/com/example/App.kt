@@ -6,11 +6,12 @@ import pl.treksoft.kvision.panel.SplitPanel.Companion.splitPanel
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.utils.vh
 
-class App : ApplicationBase {
+object App : ApplicationBase {
+
+    private lateinit var root: Root
 
     override fun start(state: Map<String, Any>) {
-        Model.loadAddresses()
-        Root("kvapp") {
+        root = Root("kvapp") {
             splitPanel {
                 height = 100.vh
                 add(ListPanel)
@@ -20,10 +21,9 @@ class App : ApplicationBase {
     }
 
     override fun dispose(): Map<String, Any> {
+        root.dispose()
         return mapOf()
     }
 
-    companion object {
-        val css = require("./css/kvapp.css")
-    }
+    val css = require("./css/kvapp.css")
 }

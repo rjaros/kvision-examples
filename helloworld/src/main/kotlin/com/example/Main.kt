@@ -28,9 +28,8 @@ fun main(args: Array<String>) {
 
 fun start(state: dynamic): ApplicationBase? {
     if (document.getElementById("helloworld") == null) return null
-    val application = Helloworld()
     @Suppress("UnsafeCastFromDynamic")
-    application.start(state?.appState ?: emptyMap())
-    return application
+    Helloworld.start(state?.appState ?: emptyMap())
+    return Helloworld
 }
 

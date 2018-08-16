@@ -10,10 +10,12 @@ import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.utils.px
 
-class Helloworld : ApplicationBase {
+object Helloworld : ApplicationBase {
+
+    private lateinit var root: Root
 
     override fun start(state: Map<String, Any>) {
-        Root("helloworld") {
+        root = Root("helloworld") {
             flexPanel(FlexDir.ROW, justify = FlexJustify.CENTER) {
                 tag(TAG.DIV, "Hello world!", classes = setOf("helloworld")) {
                     marginTop = 50.px
@@ -24,10 +26,9 @@ class Helloworld : ApplicationBase {
     }
 
     override fun dispose(): Map<String, Any> {
+        root.dispose()
         return mapOf()
     }
 
-    companion object {
-        val css = require("./css/helloworld.css")
-    }
+    val css = require("./css/helloworld.css")
 }

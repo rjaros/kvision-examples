@@ -11,10 +11,12 @@ import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
-class Showcase : ApplicationBase {
+object Showcase : ApplicationBase {
+
+    private lateinit var root: Root
 
     override fun start(state: Map<String, Any>) {
-        Root("showcase") {
+        root = Root("showcase") {
             tabPanel {
                 width = 80.perc
                 margin = 20.px
@@ -37,10 +39,9 @@ class Showcase : ApplicationBase {
     }
 
     override fun dispose(): Map<String, Any> {
+        root.dispose()
         return mapOf()
     }
 
-    companion object {
-        val css = require("./css/showcase.css")
-    }
+    val css = require("./css/showcase.css")
 }

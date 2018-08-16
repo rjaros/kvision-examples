@@ -47,7 +47,9 @@ enum class TODOMODE {
     COMPLETED
 }
 
-class Todomvc : ApplicationBase {
+object Todomvc : ApplicationBase {
+
+    private lateinit var root: Root
 
     private val model = observableListOf<Todo>()
 
@@ -78,7 +80,7 @@ class Todomvc : ApplicationBase {
     private val footer = genFooter()
 
     override fun start(state: Map<String, Any>) {
-        Root("todomvc") {
+        root = Root("todomvc") {
             tag(TAG.SECTION, classes = setOf("todoapp")) {
                 add(this@Todomvc.header)
                 add(this@Todomvc.main)
@@ -249,7 +251,9 @@ class Todomvc : ApplicationBase {
         }
     }
 
+
     override fun dispose(): Map<String, Any> {
+        root.dispose()
         return mapOf()
     }
 }

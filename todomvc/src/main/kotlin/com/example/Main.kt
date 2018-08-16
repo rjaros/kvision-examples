@@ -31,9 +31,8 @@ fun main(args: Array<String>) {
 
 fun start(state: dynamic): ApplicationBase? {
     if (document.getElementById("todomvc") == null) return null
-    val application = Todomvc()
     @Suppress("UnsafeCastFromDynamic")
-    application.start(state?.appState ?: emptyMap())
-    return application
+    Todomvc.start(state?.appState ?: emptyMap())
+    return Todomvc
 }
 

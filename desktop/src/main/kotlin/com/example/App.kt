@@ -24,10 +24,12 @@ import pl.treksoft.kvision.utils.vh
 import pl.treksoft.kvision.window.Window
 import kotlin.browser.document
 
-class App : ApplicationBase {
+object App : ApplicationBase {
+
+    private lateinit var root: Root
 
     override fun start(state: Map<String, Any>) {
-        Root("kvapp") {
+        root = Root("kvapp") {
             navbar(type = NavbarType.FIXEDTOP) {
                 nav {
                     dropDown("Menu", icon = "fa-windows", forNavbar = true, withCaret = false) {
@@ -83,33 +85,32 @@ class App : ApplicationBase {
     }
 
     override fun dispose(): Map<String, Any> {
+        root.dispose()
         return mapOf()
     }
 
-    companion object {
-        val css = require("./css/kvapp.css")
+    val css = require("./css/kvapp.css")
 
-        lateinit var taskBar: Nav
+    lateinit var taskBar: Nav
 
-        fun addTask(label: String, window: Window): Component {
-            val task = Tag(TAG.LI) {
-                link(label) {
-                    paddingTop = 12.px
-                    paddingBottom = 12.px
-                    margin = 2.px
-                    border = Border(1.px, BorderStyle.SOLID)
-                }.onClick {
-                    window.toFront()
-                    window.focus()
-                }
+    fun addTask(label: String, window: Window): Component {
+        val task = Tag(TAG.LI) {
+            link(label) {
+                paddingTop = 12.px
+                paddingBottom = 12.px
+                margin = 2.px
+                border = Border(1.px, BorderStyle.SOLID)
+            }.onClick {
+                window.toFront()
+                window.focus()
             }
-            taskBar.add(task)
-            return task
         }
+        taskBar.add(task)
+        return task
+    }
 
-        fun removeTask(task: Component) {
-            taskBar.remove(task)
-            task.dispose()
-        }
+    fun removeTask(task: Component) {
+        taskBar.remove(task)
+        task.dispose()
     }
 }

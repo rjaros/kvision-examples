@@ -28,9 +28,7 @@ fun main(args: Array<String>) {
 
 fun start(state: dynamic): ApplicationBase? {
     if (document.getElementById("kvapp") == null) return null
-    val application = App()
     @Suppress("UnsafeCastFromDynamic")
-    application.start(state?.appState ?: emptyMap())
-    return application
+    App.start(state?.appState ?: emptyMap())
+    return App
 }
-

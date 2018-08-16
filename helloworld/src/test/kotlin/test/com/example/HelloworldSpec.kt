@@ -10,7 +10,7 @@ class HelloworldSpec : DomSpec {
     @Test
     fun render() {
         run {
-            Helloworld().start(mapOf())
+            Helloworld.start(mapOf())
             val element = document.getElementById("helloworld")
             assertTrue(
                 element?.innerHTML?.contains("Hello world!") ?: false,

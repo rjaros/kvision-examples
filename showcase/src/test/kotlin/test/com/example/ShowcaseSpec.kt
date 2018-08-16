@@ -10,7 +10,7 @@ class ShowcaseSpec : DomSpec {
     @Test
     fun render() {
         run {
-            Showcase().start(mapOf())
+            Showcase.start(mapOf())
             val element = document.getElementById("showcase")
             assertTrue(true, "True"
             )

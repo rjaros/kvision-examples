@@ -30,9 +30,8 @@ fun main(args: Array<String>) {
 
 fun start(state: dynamic): ApplicationBase? {
     if (document.getElementById("showcase") == null) return null
-    val application = Showcase()
     @Suppress("UnsafeCastFromDynamic")
-    application.start(state?.appState ?: emptyMap())
-    return application
+    Showcase.start(state?.appState ?: emptyMap())
+    return Showcase
 }
 
