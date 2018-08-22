@@ -8,6 +8,7 @@ import pl.treksoft.kvision.data.BaseDataComponent
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.Div
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
@@ -25,21 +26,21 @@ class DragDropTab : SimplePanel() {
         }
 
         val listGreen = observableListOf(
-            DataModel("January"),
-            DataModel("February"),
-            DataModel("March"),
-            DataModel("April"),
-            DataModel("May"),
-            DataModel("June"),
-            DataModel("July"),
-            DataModel("August"),
-            DataModel("September"),
-            DataModel("October"),
-            DataModel("November")
+            DataModel(tr("January")),
+            DataModel(tr("February")),
+            DataModel(tr("March")),
+            DataModel(tr("April")),
+            DataModel(tr("May")),
+            DataModel(tr("June")),
+            DataModel(tr("July")),
+            DataModel(tr("August")),
+            DataModel(tr("September")),
+            DataModel(tr("October")),
+            DataModel(tr("November"))
         )
 
         val listBlue = observableListOf(
-            DataModel("December")
+            DataModel(tr("December"))
         )
 
         val dataContainer1 = DataContainer(listGreen, { index, _ ->

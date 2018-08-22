@@ -16,7 +16,12 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.moowork.grunt" version "1.2.0"
+}
+
 apply plugin: 'kotlin2js'
+
 if (production) {
     apply plugin: 'kotlin-dce-js'
 }
@@ -61,7 +66,7 @@ kotlinFrontend {
 
     webpackBundle {
         bundleName = "main"
-        contentPath = file('src/main/web')
+        contentPath = file('build/web')
         mode = production ? "production" : "development"
     }
 
@@ -83,6 +88,24 @@ compileTestKotlin2Js {
     kotlinOptions.moduleKind = 'umd'
 }
 
+task pot(type: GruntTask) {
+  args = ["pot"]
+}
+
+task po2json(type: GruntTask) {
+  args = ["po2json"]
+}
+
+pot.dependsOn 'installGrunt'
+pot.dependsOn 'npmInstall'
+po2json.dependsOn 'installGrunt'
+po2json.dependsOn 'npmInstall'
+
+task copyWeb(type: Copy) {
+    from "src/main/web"
+    into file(buildDir.path + "/web")
+}
+
 task copyResources(type: Copy) {
     from "src/main/resources"
     into file(buildDir.path + "/js")
@@ -100,17 +123,17 @@ task copyResourcesForDce(type: Copy) {
 }
 
 task dist(type: Copy, dependsOn: 'bundle') {
-    from "src/main/web"
+    from "${buildDir.path}/web"
     from "${buildDir.path}/bundle"
     into file(buildDir.path + "/distributions/" + project.name)
 }
 
 task distZip(type: Zip, dependsOn: 'dist') {
-    from (buildDir.path + "/distributions/" + project.name)
+    from(buildDir.path + "/distributions/" + project.name)
 }
 
 afterEvaluate {
-    tasks.getByName("webpack-bundle") { dependsOn(copyResources, copyResourcesForDce) }
-    tasks.getByName("webpack-run") { dependsOn(copyResources) }
-    tasks.getByName("karma-start") { dependsOn(copyResources) }
+    tasks.getByName("webpack-bundle") { dependsOn(copyWeb, po2json, copyResources, copyResourcesForDce) }
+    tasks.getByName("webpack-run") { dependsOn(copyWeb, po2json, copyResources) }
+    tasks.getByName("karma-start") { dependsOn(copyWeb, po2json, copyResources) }
 }

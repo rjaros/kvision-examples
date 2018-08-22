@@ -7,6 +7,7 @@ import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Image
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.modal.Modal
@@ -20,35 +21,41 @@ class ModalsTab : SimplePanel() {
         this.marginTop = 10.px
         this.minHeight = 400.px
         vPanel(spacing = 30) {
-            button("Alert dialog", style = ButtonStyle.DANGER).onClick {
+            button(tr("Alert dialog"), style = ButtonStyle.DANGER).onClick {
                 Alert.show(
-                    "Alert dialog",
+                    tr("Alert dialog"),
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor."
                 )
             }
-            button("Confirm dialog", style = ButtonStyle.WARNING).onClick {
+            button(tr("Confirm dialog"), style = ButtonStyle.WARNING).onClick {
                 Confirm.show(
-                    "Confirm dialog",
+                    tr("Confirm dialog"),
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor.",
+                    yesTitle = tr("Yes"),
+                    noTitle = tr("No"),
+                    cancelTitle = tr("Cancel"),
                     noCallback = {
-                        Alert.show("Result", "You pressed NO button.")
+                        Alert.show(tr("Result"), tr("You pressed NO button."))
                     }) {
-                    Alert.show("Result", "You pressed YES button.")
+                    Alert.show(tr("Result"), tr("You pressed YES button."))
                 }
             }
-            button("Cancelable confirm dialog", style = ButtonStyle.INFO).onClick {
+            button(tr("Cancelable confirm dialog"), style = ButtonStyle.INFO).onClick {
                 Confirm.show(
-                    "Cancelable confirm dialog",
+                    tr("Cancelable confirm dialog"),
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor.",
                     align = Align.CENTER,
                     cancelVisible = true,
+                    yesTitle = tr("Yes"),
+                    noTitle = tr("No"),
+                    cancelTitle = tr("Cancel"),
                     noCallback = {
-                        Alert.show("Result", "You pressed NO button.")
+                        Alert.show(tr("Result"), tr("You pressed NO button."))
                     }) {
-                    Alert.show("Result", "You pressed YES button.")
+                    Alert.show(tr("Result"), tr("You pressed YES button."))
                 }
             }
-            val modal = Modal("Custom modal dialog")
+            val modal = Modal(tr("Custom modal dialog"))
             modal.add(
                 Tag(
                     TAG.H4,
@@ -56,15 +63,15 @@ class ModalsTab : SimplePanel() {
                 )
             )
             modal.add(Image(require("./img/dog.jpg")))
-            modal.addButton(Button("Close").onClick {
+            modal.addButton(Button(tr("Close")).onClick {
                 modal.hide()
             })
-            button("Custom modal dialog", style = ButtonStyle.SUCCESS).onClick {
+            button(tr("Custom modal dialog"), style = ButtonStyle.SUCCESS).onClick {
                 modal.show()
             }
-            button("Alert dialog without animation", style = ButtonStyle.PRIMARY).onClick {
+            button(tr("Alert dialog without animation"), style = ButtonStyle.PRIMARY).onClick {
                 Alert.show(
-                    "Alert dialog without animation",
+                    tr("Alert dialog without animation"),
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor.",
                     animation = false
                 )

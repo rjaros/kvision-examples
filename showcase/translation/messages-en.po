@@ -1,0 +1,668 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the KVision package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: KVision\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-08-22 12:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: src/main/kotlin/com/example/BasicTab.kt:36
+msgid "A simple label"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:37
+msgid "A label with custom CSS styling"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:45
+msgid "A list:"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:46
+msgid "First list element"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:46
+msgid "Second list element"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:46
+msgid "Third list element"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:47
+msgid "An image:"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:49
+msgid "Some text written in <code></code> HTML tag."
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:53
+msgid ""
+"Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; "
+"font-size: 14pt\">"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:58
+msgid "A link to Google"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:59
+msgid "A responsive table:"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:61
+msgid "Column 1"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:61
+msgid "Column 2"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:61
+msgid "Column 3"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:75
+msgid "A Handlebars.js template:"
+msgstr ""
+
+#: src/main/kotlin/com/example/BasicTab.kt:94
+msgid "An iframe:"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:24
+msgid "Default button"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:25
+msgid "Primary button"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:26
+msgid "Success button"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:27
+msgid "Info button"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:28
+msgid "Warning button"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:29
+msgid "Danger button"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:30
+msgid "Link button"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:33
+msgid "Default checkbox"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:34
+msgid "Primary checkbox"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:35
+msgid "Success checkbox"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:36
+msgid "Info checkbox"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:37
+msgid "Warning checkbox"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:38
+msgid "Danger checkbox"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:39
+msgid "Circled checkbox"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:42
+msgid "Default radiobutton"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:43
+msgid "Primary radiobutton"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:44
+msgid "Success radiobutton"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:45
+msgid "Info radiobutton"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:46
+msgid "Warning radiobutton"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:47
+msgid "Danger radiobutton"
+msgstr ""
+
+#: src/main/kotlin/com/example/ButtonsTab.kt:48
+msgid "Squared radiobutton"
+msgstr ""
+
+#: src/main/kotlin/com/example/ContainersTab.kt:31
+msgid "Stack panel"
+msgstr ""
+
+#: src/main/kotlin/com/example/ContainersTab.kt:43
+msgid "Activate panel from the stack"
+msgstr ""
+
+#: src/main/kotlin/com/example/ContainersTab.kt:44
+#: src/main/kotlin/com/example/ContainersTab.kt:53
+msgid "Blue panel"
+msgstr ""
+
+#: src/main/kotlin/com/example/ContainersTab.kt:45
+#: src/main/kotlin/com/example/ContainersTab.kt:57
+msgid "Green panel"
+msgstr ""
+
+#: src/main/kotlin/com/example/ContainersTab.kt:51
+msgid "Tab panel"
+msgstr ""
+
+#: src/main/kotlin/com/example/ContainersTab.kt:65
+msgid "Vertical split panel"
+msgstr ""
+
+#: src/main/kotlin/com/example/ContainersTab.kt:79
+msgid "Horizontal split panel"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:35
+#: src/main/kotlin/com/example/DragDropTab.kt:29
+msgid "January"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:36
+#: src/main/kotlin/com/example/DragDropTab.kt:30
+msgid "February"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:37
+#: src/main/kotlin/com/example/DragDropTab.kt:31
+msgid "March"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:38
+#: src/main/kotlin/com/example/DragDropTab.kt:32
+msgid "April"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:39
+#: src/main/kotlin/com/example/DragDropTab.kt:33
+msgid "May"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:40
+#: src/main/kotlin/com/example/DragDropTab.kt:34
+msgid "June"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:41
+#: src/main/kotlin/com/example/DragDropTab.kt:35
+msgid "July"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:42
+#: src/main/kotlin/com/example/DragDropTab.kt:36
+msgid "August"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:43
+#: src/main/kotlin/com/example/DragDropTab.kt:37
+msgid "September"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:44
+#: src/main/kotlin/com/example/DragDropTab.kt:38
+msgid "October"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:45
+#: src/main/kotlin/com/example/DragDropTab.kt:39
+msgid "November"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:70
+msgid "Search ..."
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:78
+msgid "Add December"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:79
+#: src/main/kotlin/com/example/DragDropTab.kt:43
+msgid "December"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:81
+msgid "Check all"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:84
+msgid "Uncheck all"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:87
+msgid "Reverse list"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:90
+msgid "Remove checked"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:35
+msgid "File"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:38
+msgid "Edit"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:41
+msgid "Favourites"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:42
+#: src/main/kotlin/com/example/DropDownTab.kt:59
+#: src/main/kotlin/com/example/DropDownTab.kt:77
+#: src/main/kotlin/com/example/DropDownTab.kt:97
+#: src/main/kotlin/com/example/Showcase.kt:31
+msgid "Basic formatting"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:42
+#: src/main/kotlin/com/example/DropDownTab.kt:60
+#: src/main/kotlin/com/example/DropDownTab.kt:78
+#: src/main/kotlin/com/example/DropDownTab.kt:98
+#: src/main/kotlin/com/example/Showcase.kt:32
+msgid "Forms"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:48
+msgid "Search:"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:53
+msgid "System"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:58
+msgid "Dropdown with navigation menu"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:61
+#: src/main/kotlin/com/example/DropDownTab.kt:79
+#: src/main/kotlin/com/example/DropDownTab.kt:99
+#: src/main/kotlin/com/example/Showcase.kt:33
+msgid "Buttons"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:62
+#: src/main/kotlin/com/example/Showcase.kt:34
+msgid "Dropdowns & Menus"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:63
+#: src/main/kotlin/com/example/DropDownTab.kt:83
+#: src/main/kotlin/com/example/DropDownTab.kt:103
+#: src/main/kotlin/com/example/Showcase.kt:35
+msgid "Containers"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:68
+msgid "Dropdown with custom list"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:75
+msgid "Dropdown with special options"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:76
+msgid "Header"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:80
+#: src/main/kotlin/com/example/DropDownTab.kt:82
+msgid "Separator"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:81
+msgid "Dropdowns (disabled)"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:89
+msgid "Toggle dropdown"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:94
+msgid "Open the context menu with right mouse click."
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:96
+msgid "Menu header"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:100
+msgid "Dropdown & Menus"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:102
+msgid "Dropdown"
+msgstr ""
+
+#: src/main/kotlin/com/example/DropDownTab.kt:104
+msgid "Layout"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:58
+msgid "Required text field with regexp [0-9] validator"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:59
+msgid "Enter your age"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:62
+#: src/main/kotlin/com/example/FormTab.kt:90
+msgid "Value is required"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:63
+msgid "Only numbers are allowed"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:66
+msgid "Password field with minimum length validator"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:67
+#: src/main/kotlin/com/example/FormTab.kt:71
+msgid "Password too short"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:70
+msgid "Password confirmation"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:74
+msgid "Text area field"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:77
+msgid "Rich text field with a placeholder"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:77
+msgid "Add some info"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:80
+msgid "Date field with a placeholder"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:81
+msgid "Enter date"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:85
+msgid "Time field"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:89
+msgid "Required checkbox"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:92
+msgid "Radio button"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:95
+#: src/main/kotlin/com/example/FormTab.kt:119
+msgid "First option"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:95
+#: src/main/kotlin/com/example/FormTab.kt:119
+msgid "Second option"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:96
+msgid "Simple select"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:100
+msgid "Select with remote data source"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:116
+msgid "Spinner field 10 - 20"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:120
+msgid "Radio button group"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:123
+msgid "Upload files (images only)"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:131
+#: src/main/kotlin/com/example/FormTab.kt:132
+msgid "Passwords are not the same"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:136
+msgid "The passwords are not the same."
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:143
+msgid "Show data"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:145
+msgid "Form data in plain JSON"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:147
+msgid "Clear data"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:149
+msgid "Are you sure?"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:150
+msgid "Do you want to clear your data?"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:151
+#: src/main/kotlin/com/example/ModalsTab.kt:34
+#: src/main/kotlin/com/example/ModalsTab.kt:49
+msgid "Yes"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:152
+#: src/main/kotlin/com/example/ModalsTab.kt:35
+#: src/main/kotlin/com/example/ModalsTab.kt:50
+msgid "No"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:153
+#: src/main/kotlin/com/example/ModalsTab.kt:36
+#: src/main/kotlin/com/example/ModalsTab.kt:51
+msgid "Cancel"
+msgstr ""
+
+#: src/main/kotlin/com/example/FormTab.kt:159
+msgid "Validate"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:47
+msgid "Horizontal layout"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:56
+msgid "Vertical layout"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:65
+msgid "CSS flexbox layouts"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:121
+msgid "CSS grid layouts"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:141
+msgid "Responsive grid layout"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:152
+msgid "Dock layout"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:155
+msgid "CENTER"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:156
+msgid "LEFT"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:157
+msgid "RIGHT"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:158
+msgid "UP"
+msgstr ""
+
+#: src/main/kotlin/com/example/LayoutsTab.kt:159
+msgid "DOWN"
+msgstr ""
+
+#: src/main/kotlin/com/example/ModalsTab.kt:24
+#: src/main/kotlin/com/example/ModalsTab.kt:26
+msgid "Alert dialog"
+msgstr ""
+
+#: src/main/kotlin/com/example/ModalsTab.kt:30
+#: src/main/kotlin/com/example/ModalsTab.kt:32
+msgid "Confirm dialog"
+msgstr ""
+
+#: src/main/kotlin/com/example/ModalsTab.kt:38
+#: src/main/kotlin/com/example/ModalsTab.kt:40
+#: src/main/kotlin/com/example/ModalsTab.kt:53
+#: src/main/kotlin/com/example/ModalsTab.kt:55
+msgid "Result"
+msgstr ""
+
+#: src/main/kotlin/com/example/ModalsTab.kt:38
+#: src/main/kotlin/com/example/ModalsTab.kt:53
+msgid "You pressed NO button."
+msgstr ""
+
+#: src/main/kotlin/com/example/ModalsTab.kt:40
+#: src/main/kotlin/com/example/ModalsTab.kt:55
+msgid "You pressed YES button."
+msgstr ""
+
+#: src/main/kotlin/com/example/ModalsTab.kt:43
+#: src/main/kotlin/com/example/ModalsTab.kt:45
+msgid "Cancelable confirm dialog"
+msgstr ""
+
+#: src/main/kotlin/com/example/ModalsTab.kt:58
+#: src/main/kotlin/com/example/ModalsTab.kt:69
+msgid "Custom modal dialog"
+msgstr ""
+
+#: src/main/kotlin/com/example/ModalsTab.kt:66
+msgid "Close"
+msgstr ""
+
+#: src/main/kotlin/com/example/ModalsTab.kt:72
+#: src/main/kotlin/com/example/ModalsTab.kt:74
+msgid "Alert dialog without animation"
+msgstr ""
+
+#: src/main/kotlin/com/example/Showcase.kt:36
+msgid "Layouts"
+msgstr ""
+
+#: src/main/kotlin/com/example/Showcase.kt:37
+msgid "Modals"
+msgstr ""
+
+#: src/main/kotlin/com/example/Showcase.kt:38
+msgid "Data binding"
+msgstr ""
+
+#: src/main/kotlin/com/example/Showcase.kt:39
+msgid "Windows"
+msgstr ""
+
+#: src/main/kotlin/com/example/Showcase.kt:40
+msgid "Drag & Drop"
+msgstr ""
+
+#: src/main/kotlin/com/example/Showcase.kt:42
+msgid "English"
+msgstr ""
+
+#: src/main/kotlin/com/example/Showcase.kt:42
+msgid "Polish"
+msgstr ""
+
+#: src/main/kotlin/com/example/WindowsTab.kt:22
+msgid "Open new window"
+msgstr ""
+
+#: src/main/kotlin/com/example/WindowsTab.kt:23
+msgid "Window"
+msgstr ""
+
+#: src/main/kotlin/com/example/WindowsTab.kt:49
+msgid "Draggable"
+msgstr ""
+
+#: src/main/kotlin/com/example/WindowsTab.kt:52
+msgid "Resizable"
+msgstr ""
+
+#: src/main/kotlin/com/example/WindowsTab.kt:55
+msgid "Close button"
+msgstr ""

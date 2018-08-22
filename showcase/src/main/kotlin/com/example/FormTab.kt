@@ -18,6 +18,7 @@ import pl.treksoft.kvision.form.time.DateTime
 import pl.treksoft.kvision.form.upload.Upload
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.panel.FlexAlignItems
@@ -54,44 +55,49 @@ class FormTab : SimplePanel() {
         val formPanel = formPanel<Form> {
             add(
                 Form::text,
-                Text(label = "Required text field with regexp [0-9] validator").apply {
-                    placeholder = "Enter your age"
+                Text(label = tr("Required text field with regexp [0-9] validator")).apply {
+                    placeholder = tr("Enter your age")
                 },
                 required = true,
-                validatorMessage = { "Only numbers are allowed" }) {
+                requiredMessage = tr("Value is required"),
+                validatorMessage = { tr("Only numbers are allowed") }) {
                 it.getValue()?.matches("^[0-9]+$")
             }
-            add(Form::password, Password(label = "Password field with minimum length validator"),
-                validatorMessage = { "Password too short" }) {
+            add(Form::password, Password(label = tr("Password field with minimum length validator")),
+                validatorMessage = { tr("Password too short") }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
-            add(Form::password2, Password(label = "Password confirmation"),
-                validatorMessage = { "Password too short" }) {
+            add(Form::password2, Password(label = tr("Password confirmation")),
+                validatorMessage = { tr("Password too short") }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
-            add(Form::textarea, TextArea(label = "Text area field"))
+            add(Form::textarea, TextArea(label = tr("Text area field")))
             add(
                 Form::richtext,
-                RichText(label = "Rich text field with a placeholder").apply { placeholder = "Add some info" })
+                RichText(label = tr("Rich text field with a placeholder")).apply { placeholder = tr("Add some info") })
             add(
                 Form::date,
-                DateTime(format = "YYYY-MM-DD", label = "Date field with a placeholder").apply {
-                    placeholder = "Enter date"
+                DateTime(format = "YYYY-MM-DD", label = tr("Date field with a placeholder")).apply {
+                    placeholder = tr("Enter date")
                 })
             add(
                 Form::time,
-                DateTime(format = "HH:mm", label = "Time field")
+                DateTime(format = "HH:mm", label = tr("Time field"))
             )
-            add(Form::checkbox, CheckBox(label = "Required checkbox")) { it.getValue() }
-            add(Form::radio, Radio(label = "Radio button"))
+            add(
+                Form::checkbox,
+                CheckBox(label = tr("Required checkbox")),
+                validatorMessage = { tr("Value is required") }
+            ) { it.getValue() }
+            add(Form::radio, Radio(label = tr("Radio button")))
             add(
                 Form::select, Select(
-                    options = listOf("first" to "First option", "second" to "Second option"),
-                    label = "Simple select"
+                    options = listOf("first" to tr("First option"), "second" to tr("Second option")),
+                    label = tr("Simple select")
                 )
             )
 
-            add(Form::ajaxselect, Select(label = "Select with remote data source").apply {
+            add(Form::ajaxselect, Select(label = tr("Select with remote data source")).apply {
                 emptyOption = true
                 ajaxOptions = AjaxOptions("https://api.github.com/search/repositories", preprocessData = {
                     it.items.map { item ->
@@ -107,14 +113,14 @@ class FormTab : SimplePanel() {
                     q = "{{{q}}}"
                 }, minLength = 3, requestDelay = 1000)
             })
-            add(Form::spinner, Spinner(label = "Spinner field 10 - 20", min = 10, max = 20))
+            add(Form::spinner, Spinner(label = tr("Spinner field 10 - 20"), min = 10, max = 20))
             add(
                 Form::radiogroup, RadioGroup(
-                    listOf("option1" to "First option", "option2" to "Second option"),
-                    inline = true, label = "Radio button group"
+                    listOf("option1" to tr("First option"), "option2" to tr("Second option")),
+                    inline = true, label = tr("Radio button group")
                 )
             )
-            add(Form::upload, Upload("/", multiple = true, label = "Upload files (images only)").apply {
+            add(Form::upload, Upload("/", multiple = true, label = tr("Upload files (images only)")).apply {
                 explorerTheme = true
                 dropZoneEnabled = false
                 allowedFileTypes = setOf("image")
@@ -122,29 +128,35 @@ class FormTab : SimplePanel() {
             validator = {
                 val result = it[Form::password] == it[Form::password2]
                 if (!result) {
-                    it.getControl(Form::password)?.validatorError = "Passwords are not the same"
-                    it.getControl(Form::password2)?.validatorError = "Passwords are not the same"
+                    it.getControl(Form::password)?.validatorError = tr("Passwords are not the same")
+                    it.getControl(Form::password2)?.validatorError = tr("Passwords are not the same")
                 }
                 result
             }
-            validatorMessage = { "The passwords are not the same." }
+            validatorMessage = { tr("The passwords are not the same.") }
         }
         formPanel.add(HPanel(spacing = 10, alignItems = FlexAlignItems.CENTER, wrap = FlexWrap.WRAP) {
             val p = ProgressBar(0, striped = true) {
                 marginBottom = 0.px
                 width = 300.px
             }
-            button("Show data", "fa-info", ButtonStyle.SUCCESS).onClick {
+            button(tr("Show data"), "fa-info", ButtonStyle.SUCCESS).onClick {
                 console.log(formPanel.getDataJson())
-                Alert.show("Form data in plain JSON", JSON.stringify(formPanel.getDataJson(), space = 1))
+                Alert.show(tr("Form data in plain JSON"), JSON.stringify(formPanel.getDataJson(), space = 1))
             }
-            button("Clear data", "fa-times", ButtonStyle.DANGER).onClick {
-                Confirm.show("Are you sure?", "Do you want to clear your data?") {
+            button(tr("Clear data"), "fa-times", ButtonStyle.DANGER).onClick {
+                Confirm.show(
+                    tr("Are you sure?"),
+                    tr("Do you want to clear your data?"),
+                    yesTitle = tr("Yes"),
+                    noTitle = tr("No"),
+                    cancelTitle = tr("Cancel")
+                ) {
                     formPanel.clearData()
                     p.progress = 0
                 }
             }
-            button("Validate", "fa-check", ButtonStyle.INFO).onClick {
+            button(tr("Validate"), "fa-check", ButtonStyle.INFO).onClick {
                 launch {
                     p.progress = 100
                     delay(500)

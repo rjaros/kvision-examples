@@ -17,6 +17,7 @@ import pl.treksoft.kvision.html.ListTag.Companion.listTag
 import pl.treksoft.kvision.html.ListType
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag.Companion.tag
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.require
@@ -32,8 +33,8 @@ class BasicTab : SimplePanel() {
         this.marginTop = 10.px
         this.minHeight = 400.px
         vPanel(spacing = 3) {
-            label("A simple label")
-            label("A label with custom CSS styling") {
+            label(tr("A simple label"))
+            label(tr("A label with custom CSS styling")) {
                 fontFamily = "Times New Roman"
                 fontSize = 32.px
                 fontStyle = FontStyle.OBLIQUE
@@ -41,21 +42,23 @@ class BasicTab : SimplePanel() {
                 fontVariant = FontVariant.SMALLCAPS
                 textDecoration = TextDecoration(TextDecorationLine.UNDERLINE, TextDecorationStyle.DOTTED, Col.RED)
             }
-            label("A list:")
-            listTag(ListType.UL, listOf("First list element", "Second list element", "Third list element"))
-            label("An image:")
+            label(tr("A list:"))
+            listTag(ListType.UL, listOf(tr("First list element"), tr("Second list element"), tr("Third list element")))
+            label(tr("An image:"))
             image(require("./img/dog.jpg"), shape = ImageShape.CIRCLE)
-            tag(TAG.CODE, "Some text written in <code></code> HTML tag.")
+            tag(TAG.CODE, tr("Some text written in <code></code> HTML tag."))
             tag(
                 TAG.DIV,
-                "Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; font-size: 14pt\">" +
-                        "any <strong>forma</strong>tting</span>.",
+                tr(
+                    "Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; font-size: 14pt\">" +
+                            "any <strong>forma</strong>tting</span>."
+                ),
                 rich = true
             )
-            link("A link to Google", "http://www.google.com")
-            label("A responsive table:")
+            link(tr("A link to Google"), "http://www.google.com")
+            label(tr("A responsive table:"))
             table(
-                listOf("Column 1", "Column 2", "Column 3"),
+                listOf(tr("Column 1"), tr("Column 2"), tr("Column 3")),
                 setOf(TableType.BORDERED, TableType.CONDENSED, TableType.STRIPED, TableType.HOVER), responsive = true
             ) {
                 row {
@@ -69,7 +72,7 @@ class BasicTab : SimplePanel() {
                     cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
                 }
             }
-            label("A Handlebars.js template:")
+            label(tr("A Handlebars.js template:"))
 
             val data = obj {
                 name = "Alan"
@@ -79,16 +82,19 @@ class BasicTab : SimplePanel() {
                     age = "12"
                 }, obj {
                     name = "Sally"
-                    age = "4"
+                    age = "5"
                 })
             }
 
             div {
-                template = require("./hbs/template1.hbs")
+                templates = mapOf(
+                    "en" to require("hbs/template1.en.hbs"),
+                    "pl" to require("hbs/template1.pl.hbs")
+                )
                 templateData = data
             }
 
-            label("An iframe:")
+            label(tr("An iframe:"))
 
             iframe(src = "https://rjaros.github.io/kvision/") {
                 iframeWidth = 600

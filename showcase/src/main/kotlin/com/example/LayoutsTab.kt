@@ -7,6 +7,7 @@ import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.Tag.Companion.tag
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.DockPanel.Companion.dockPanel
 import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.FlexDir
@@ -43,7 +44,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addHPanel() {
-        tag(TAG.H4, "Horizontal layout")
+        tag(TAG.H4, tr("Horizontal layout"))
         hPanel(spacing = 5) {
             add(getDiv("1", 100))
             add(getDiv("2", 150))
@@ -52,7 +53,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addVPanel() {
-        tag(TAG.H4, "Vertical layout")
+        tag(TAG.H4, tr("Vertical layout"))
         vPanel(spacing = 5) {
             add(getDiv("1", 100))
             add(getDiv("2", 150))
@@ -61,7 +62,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addFlexPanel1() {
-        tag(TAG.H4, "CSS flexbox layouts")
+        tag(TAG.H4, tr("CSS flexbox layouts"))
         flexPanel(
             FlexDir.ROW, FlexWrap.WRAP, FlexJustify.FLEXEND, FlexAlignItems.CENTER,
             spacing = 5
@@ -117,7 +118,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addGridPanel1() {
-        tag(TAG.H4, "CSS grid layouts")
+        tag(TAG.H4, tr("CSS grid layouts"))
         gridPanel(columnGap = 5, rowGap = 5, justifyItems = GridJustify.CENTER) {
             background = Background(Col.KHAKI)
             add(getDiv("1,1", 100), 1, 1)
@@ -137,7 +138,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addRespGridPanel() {
-        tag(TAG.H4, "Responsive grid layout")
+        tag(TAG.H4, tr("Responsive grid layout"))
         responsiveGridPanel {
             background = Background(Col.SILVER)
             add(getDiv("1,1", 150), 1, 1)
@@ -148,14 +149,14 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addDockPanel() {
-        tag(TAG.H4, "Dock layout")
+        tag(TAG.H4, tr("Dock layout"))
         dockPanel {
             background = Background(Col.YELLOW)
-            add(getDiv("CENTER", 150).apply { margin = auto }, Side.CENTER)
-            add(getDiv("LEFT", 150), Side.LEFT)
-            add(getDiv("RIGHT", 150), Side.RIGHT)
-            add(getDiv("UP", 150).apply { margin = auto; marginBottom = 10.px }, Side.UP)
-            add(getDiv("DOWN", 150).apply { margin = auto; marginTop = 10.px }, Side.DOWN)
+            add(getDiv(tr("CENTER"), 150).apply { margin = auto }, Side.CENTER)
+            add(getDiv(tr("LEFT"), 150), Side.LEFT)
+            add(getDiv(tr("RIGHT"), 150), Side.RIGHT)
+            add(getDiv(tr("UP"), 150).apply { margin = auto; marginBottom = 10.px }, Side.UP)
+            add(getDiv(tr("DOWN"), 150).apply { margin = auto; marginTop = 10.px }, Side.DOWN)
         }
     }
 

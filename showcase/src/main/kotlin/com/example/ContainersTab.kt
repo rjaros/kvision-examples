@@ -7,6 +7,7 @@ import pl.treksoft.kvision.dropdown.DropDown.Companion.dropDown
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.Tag.Companion.tag
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.Direction
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.SplitPanel.Companion.splitPanel
@@ -27,7 +28,7 @@ class ContainersTab : SimplePanel() {
     }
 
     private fun Container.addStackPanel() {
-        tag(TAG.H4, "Stack panel")
+        tag(TAG.H4, tr("Stack panel"))
         stackPanel {
             add(Tag(TAG.DIV, "&nbsp;", rich = true) {
                 background = Background(Col.BLUE)
@@ -39,21 +40,21 @@ class ContainersTab : SimplePanel() {
             }, "/containers/green")
         }
         dropDown(
-            "Activate panel from the stack", listOf(
-                "Blue panel" to "#!/containers/blue",
-                "Green panel" to "#!/containers/green"
+            tr("Activate panel from the stack"), listOf(
+                tr("Blue panel") to "#!/containers/blue",
+                tr("Green panel") to "#!/containers/green"
             )
         )
     }
 
     private fun Container.addTabPanel() {
-        tag(TAG.H4, "Tab panel")
+        tag(TAG.H4, tr("Tab panel"))
         tabPanel {
-            addTab("Blue panel", Tag(TAG.DIV, "&nbsp;", rich = true) {
+            addTab(tr("Blue panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
                 background = Background(Col.BLUE)
                 height = 40.px
             })
-            addTab("Green panel", Tag(TAG.DIV, "&nbsp;", rich = true) {
+            addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
                 background = Background(Col.GREEN)
                 height = 40.px
             })
@@ -61,7 +62,7 @@ class ContainersTab : SimplePanel() {
     }
 
     private fun Container.addVerticalSplitPanel() {
-        tag(TAG.H4, "Vertical split panel")
+        tag(TAG.H4, tr("Vertical split panel"))
         splitPanel {
             tag(TAG.DIV, "&nbsp;", rich = true) {
                 background = Background(Col.BLUE)
@@ -75,7 +76,7 @@ class ContainersTab : SimplePanel() {
     }
 
     private fun Container.addHorizontalSplitPanel() {
-        tag(TAG.H4, "Horizontal split panel")
+        tag(TAG.H4, tr("Horizontal split panel"))
         splitPanel(direction = Direction.HORIZONTAL) {
             height = 220.px
             tag(TAG.DIV, "&nbsp;", rich = true) {
