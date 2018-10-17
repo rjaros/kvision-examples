@@ -6,6 +6,7 @@ import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.form.select.Select.Companion.select
 import pl.treksoft.kvision.form.select.SelectInput
 import pl.treksoft.kvision.hmr.ApplicationBase
+import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.Root
@@ -20,6 +21,10 @@ object Showcase : ApplicationBase {
     private lateinit var root: Root
 
     override fun start(state: Map<String, Any>) {
+
+        I18n.manager =
+                DefaultI18nManager(mapOf("pl" to require("./messages-pl.json"), "en" to require("./messages-en.json")))
+
         root = Root("showcase") {
             tabPanel {
                 width = 80.perc

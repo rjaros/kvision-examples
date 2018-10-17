@@ -12,7 +12,7 @@ import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.utils.px
 import pl.treksoft.kvision.window.Window
-import kotlin.js.Math.random
+import kotlin.random.Random
 
 class WindowsTab : SimplePanel() {
     init {
@@ -21,8 +21,8 @@ class WindowsTab : SimplePanel() {
         var counter = 1
         button(tr("Open new window"), style = ButtonStyle.PRIMARY, icon = "fa-window-maximize").onClick {
             val sw = ShowcaseWindow(gettext("Window") + " " + counter++) {
-                left = ((random() * 800).toInt()).px
-                top = ((random() * 300).toInt()).px
+                left = ((Random.nextDouble() * 800).toInt()).px
+                top = ((Random.nextDouble() * 300).toInt()).px
             }
             add(sw)
             sw.focus()

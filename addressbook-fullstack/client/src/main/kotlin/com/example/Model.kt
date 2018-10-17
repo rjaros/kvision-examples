@@ -2,11 +2,11 @@ package com.example
 
 import com.lightningkite.kotlin.observable.list.ObservableList
 import com.lightningkite.kotlin.observable.list.observableListOf
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.utils.syncWithList
 
-@Suppress("EXPERIMENTAL_FEATURE_WARNING")
 object Model {
 
     private val addressService = AddressService()
@@ -19,21 +19,21 @@ object Model {
     var search: String? = null
         set(value) {
             field = value
-            async {
+            GlobalScope.async {
                 getAddressList()
             }
         }
     var types: String = "all"
         set(value) {
             field = value
-            async {
+            GlobalScope.async {
                 getAddressList()
             }
         }
     var sort = Sort.FN
         set(value) {
             field = value
-            async {
+            GlobalScope.async {
                 getAddressList()
             }
         }

@@ -1,6 +1,7 @@
 package com.example
 
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import pl.treksoft.kvision.form.FormPanel
 import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
@@ -13,7 +14,6 @@ import pl.treksoft.kvision.panel.StackPanel
 import pl.treksoft.kvision.utils.ENTER_KEY
 import pl.treksoft.kvision.utils.px
 
-@Suppress("EXPERIMENTAL_FEATURE_WARNING")
 object EditPanel : StackPanel() {
 
     private var editingId: Int? = null
@@ -65,7 +65,7 @@ object EditPanel : StackPanel() {
     }
 
     private fun save() {
-        launch {
+        GlobalScope.launch {
             if (formPanel.validate()) {
                 val address = formPanel.getData()
                 if (editingId != null) {
@@ -79,7 +79,7 @@ object EditPanel : StackPanel() {
     }
 
     fun delete(index: Int) {
-        launch {
+        GlobalScope.launch {
             close()
             Model.addresses[index].id?.let {
                 Model.deleteAddress(it)

@@ -12,8 +12,7 @@ class ShowcaseSpec : DomSpec {
         run {
             Showcase.start(mapOf())
             val element = document.getElementById("showcase")
-            assertTrue(true, "True"
-            )
+            assertTrue(element != null, "Element exists")
         }
     }
 }

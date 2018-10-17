@@ -12,7 +12,7 @@ import pl.treksoft.kvision.core.UNIT
 import pl.treksoft.kvision.core.Widget
 import pl.treksoft.kvision.utils.px
 import pl.treksoft.kvision.window.Window
-import kotlin.js.Math.random
+import kotlin.random.Random
 
 open class DesktopWindow(caption: String, width: Int, height: Int) :
     Window(caption, width.px, height.px, closeButton = true) {
@@ -27,8 +27,8 @@ open class DesktopWindow(caption: String, width: Int, height: Int) :
     val task: Component
 
     init {
-        left = ((random() * 800).toInt()).px
-        top = (51 + (random() * 100).toInt()).px
+        left = ((Random.nextDouble() * 800).toInt()).px
+        top = (51 + (Random.nextDouble() * 100).toInt()).px
         task = addTask(caption, this)
     }
 

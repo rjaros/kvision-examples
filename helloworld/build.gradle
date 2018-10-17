@@ -1,6 +1,5 @@
 buildscript {
     ext.production = (findProperty('prod') ?: 'false') == 'true'
-    ext.npmdeps = new File("npm.dependencies").getText()
 
     repositories {
         jcenter()
@@ -11,12 +10,17 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:${kotlinVersion}"
         classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:${frontendPluginVersion}"
-        classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:${serializationVersion}"
     }
 }
 
+plugins {
+    id "com.moowork.grunt" version "1.2.0"
+}
+
 apply plugin: 'kotlin2js'
+
 if (production) {
     apply plugin: 'kotlin-dce-js'
 }
@@ -25,39 +29,21 @@ apply plugin: 'kotlinx-serialization'
 
 repositories {
     jcenter()
+    maven { url = 'https://dl.bintray.com/kotlin/kotlin-eap' }
     maven { url = 'https://kotlin.bintray.com/kotlinx' }
     maven { url = 'https://dl.bintray.com/gbaldeck/kotlin' }
     maven { url = 'https://dl.bintray.com/rjaros/kotlin' }
+    mavenLocal()
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:${kotlinVersion}"
     compile "pl.treksoft:kvision:${kvisionVersion}"
+    compile "pl.treksoft:kvision-i18n:${kvisionVersion}"
     compile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
 }
 
 kotlinFrontend {
-    npm {
-        dependency("css-loader")
-        dependency("style-loader")
-        dependency("less")
-        dependency("less-loader")
-        dependency("imports-loader")
-        dependency("uglifyjs-webpack-plugin")
-        dependency("file-loader")
-        dependency("url-loader")
-        dependency("jquery", "3.2.1")
-        dependency("fecha", "2.3.2")
-        dependency("snabbdom", "0.7.1")
-        dependency("snabbdom-virtualize", "0.7.0")
-        dependency("navigo", "7.0.0")
-        npmdeps.eachLine { line ->
-            def (name, version) = line.tokenize(" ")
-            dependency(name, version)
-        }
-        devDependency("karma")
-        devDependency("qunit")
-    }
 
     webpackBundle {
         bundleName = "main"
@@ -83,20 +69,44 @@ compileTestKotlin2Js {
     kotlinOptions.moduleKind = 'umd'
 }
 
+task pot(type: GruntTask) {
+    args = ["pot"]
+}
+
+task po2json(type: GruntTask) {
+    args = ["default"]
+    inputs.dir(file('translation'))
+    outputs.dir(file('build/js'))
+    outputs.dir(file('build/kotlin-js-min/main'))
+}
+
+pot.dependsOn 'installGrunt'
+pot.dependsOn 'npmInstall'
+po2json.dependsOn 'installGrunt'
+po2json.dependsOn 'npmInstall'
+
 task copyResources(type: Copy) {
     from "src/main/resources"
     into file(buildDir.path + "/js")
 }
 
-task copyResourcesForDce(type: Copy) {
-    from "src/main/resources"
-    from("${buildDir.path}/node_modules_imported/kvision") {
-        include "css/**"
-        include "img/**"
-        include "js/**"
-        include "hbs/**"
+task copyResourcesForDce() {
+    doLast {
+        copy {
+            from "src/main/resources"
+            ext.modulesDir = new File("${buildDir.path}/node_modules_imported/")
+            modulesDir.eachDir {
+                if (it.name.startsWith("kvision")) {
+                    from(it) {
+                        include "css/**"
+                        include "img/**"
+                        include "js/**"
+                    }
+                }
+            }
+            into file(buildDir.path + "/kotlin-js-min/main")
+        }
     }
-    into file(buildDir.path + "/kotlin-js-min/main")
 }
 
 task dist(type: Copy, dependsOn: 'bundle') {
@@ -106,11 +116,16 @@ task dist(type: Copy, dependsOn: 'bundle') {
 }
 
 task distZip(type: Zip, dependsOn: 'dist') {
-    from (buildDir.path + "/distributions/" + project.name)
+    from(buildDir.path + "/distributions/" + project.name)
 }
 
 afterEvaluate {
-    tasks.getByName("webpack-bundle") { dependsOn(copyResources, copyResourcesForDce) }
-    tasks.getByName("webpack-run") { dependsOn(copyResources) }
-    tasks.getByName("karma-start") { dependsOn(copyResources) }
+    if (production) {
+        tasks.getByName("copyResourcesForDce") { dependsOn(runDceKotlinJs) }
+    }
+    tasks.getByName("webpack-bundle") {
+        dependsOn(po2json, copyResources, copyResourcesForDce)
+    }
+    tasks.getByName("webpack-run") { dependsOn(po2json, copyResources) }
+    tasks.getByName("karma-start") { dependsOn(po2json, copyResources) }
 }

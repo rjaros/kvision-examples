@@ -2,34 +2,30 @@ package com.example
 
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.hmr.module
-import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.routing.Routing
 import kotlin.browser.document
 
 fun main(args: Array<String>) {
 
-    I18n.init("en", "pl") {
+    var application: ApplicationBase? = null
 
-        var application: ApplicationBase? = null
+    val state: dynamic = module.hot?.let { hot ->
+        hot.accept()
 
-        val state: dynamic = module.hot?.let { hot ->
-            hot.accept()
-
-            hot.dispose { data ->
-                data.appState = application?.dispose()
-                application = null
-            }
-
-            hot.data
-        }
-
-        if (document.body != null) {
-            Routing.start()
-            application = start(state)
-        } else {
+        hot.dispose { data ->
+            data.appState = application?.dispose()
             application = null
-            document.addEventListener("DOMContentLoaded", { application = start(state) })
         }
+
+        hot.data
+    }
+
+    if (document.body != null) {
+        Routing.start()
+        application = start(state)
+    } else {
+        application = null
+        document.addEventListener("DOMContentLoaded", { application = start(state) })
     }
 }
 

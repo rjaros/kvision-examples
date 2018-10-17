@@ -3,13 +3,13 @@ package com.example
 import com.github.andrewoma.kwery.core.ThreadLocalSession
 import com.github.andrewoma.kwery.core.interceptor.LoggingInterceptor
 import com.typesafe.config.Config
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import org.jooby.require
 import org.pac4j.sql.profile.DbProfile
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.Request
 import pl.treksoft.kvision.remote.async
-import pl.treksoft.kvision.types.KDate
+import java.util.*
 import javax.sql.DataSource
 
 actual class AddressService actual constructor() {
@@ -26,7 +26,7 @@ actual class AddressService actual constructor() {
         }
 
     actual fun addAddress(address: Address, req: Request?): Deferred<Address> = req.async { request, _, profile ->
-        getAddressDao(request).insert(address.copy(userId = profile.id, createdAt = KDate()))
+        getAddressDao(request).insert(address.copy(userId = profile.id, createdAt = Date()))
     }
 
     actual fun updateAddress(address: Address, req: Request?): Deferred<Address> = req.async { request, _, profile ->
@@ -40,6 +40,7 @@ actual class AddressService actual constructor() {
     actual fun deleteAddress(id: Int, req: Request?): Deferred<Boolean> = req.async { request ->
         getAddressDao(request).delete(id) > 0
     }
+
 }
 
 actual class ProfileService actual constructor() {

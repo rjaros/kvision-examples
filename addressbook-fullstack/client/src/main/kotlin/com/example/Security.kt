@@ -1,6 +1,7 @@
 package com.example
 
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.form.FormPanel
 import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
@@ -116,7 +117,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
     private fun processRegister() {
         if (registerPanel.validate()) {
             val userData = registerPanel.getData()
-            async {
+            GlobalScope.async {
                 if (Model.registerProfile(
                         Profile(
                             userData.username
@@ -138,7 +139,6 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
     }
 }
 
-@Suppress("EXPERIMENTAL_FEATURE_WARNING")
 object Security : SecurityMgr() {
 
     private val loginService = LoginService()

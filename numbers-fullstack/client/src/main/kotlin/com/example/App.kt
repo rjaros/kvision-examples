@@ -1,6 +1,7 @@
 package com.example
 
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import pl.treksoft.kvision.form.select.SelectInput.Companion.selectInput
 import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
 import pl.treksoft.kvision.hmr.ApplicationBase
@@ -42,7 +43,7 @@ object App : ApplicationBase {
                     )
                     val languageSelect = selectInput(languages, "${Language.ENGLISH}")
                     button("Convert", style = ButtonStyle.PRIMARY).onClick {
-                        launch {
+                        GlobalScope.launch {
                             val result = text.value?.toIntOrNull()?.let { number ->
                                 languageSelect.value?.let { lang ->
                                     numberService.numberToWords(number, Language.valueOf(lang)).await()

@@ -1,6 +1,6 @@
 package com.example
 
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.Request
 import pl.treksoft.kvision.remote.ServiceManager

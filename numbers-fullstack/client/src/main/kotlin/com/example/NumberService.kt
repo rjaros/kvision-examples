@@ -1,6 +1,6 @@
 package com.example
 
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import pl.treksoft.kvision.remote.RemoteAgent
 import pl.treksoft.kvision.remote.Request
 

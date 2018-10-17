@@ -69,7 +69,7 @@ class PaintCanvas(width: Int, height: Int) : Canvas(width, height) {
             mousemove = { e ->
                 currentFig?.let { handleMouseMove(e.offsetX.toInt(), e.offsetY.toInt(), it) }
             }
-            mouseup = { e ->
+            mouseup = { _ ->
                 currentFig?.let { handleMouseUp(it) }
             }
         }

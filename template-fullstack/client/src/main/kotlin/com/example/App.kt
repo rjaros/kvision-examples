@@ -1,6 +1,7 @@
 package com.example
 
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.Label
 import pl.treksoft.kvision.panel.Root
@@ -13,7 +14,7 @@ object App : ApplicationBase {
     override fun start(state: Map<String, Any>) {
         root = Root("kvapp") {
         }
-        launch {
+        GlobalScope.launch {
             val pingResult = Model.ping("Hello world from client!")
             root.add(Label(pingResult))
         }

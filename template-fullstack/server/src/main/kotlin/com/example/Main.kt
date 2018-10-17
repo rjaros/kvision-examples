@@ -1,9 +1,9 @@
 package com.example
 
 import org.jooby.Jooby.run
-import pl.treksoft.kvision.remote.JoobyServer
+import pl.treksoft.kvision.remote.KVServer
 
-class App : JoobyServer({
+class App : KVServer({
     PingServiceManager.applyRoutes(this)
     onStart {
         // Initialization

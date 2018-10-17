@@ -1,7 +1,7 @@
 package com.example
 
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.types.KDate
+import pl.treksoft.kvision.types.Date
 
 @Serializable
 data class Address(
@@ -12,6 +12,6 @@ data class Address(
     val phone: String? = null,
     val postalAddress: String? = null,
     val favourite: Boolean? = false,
-    val createdAt: KDate? = null,
+    val createdAt: Date? = null,
     val userId: String? = null
 )

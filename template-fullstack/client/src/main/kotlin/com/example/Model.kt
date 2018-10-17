@@ -1,6 +1,5 @@
 package com.example
 
-@Suppress("EXPERIMENTAL_FEATURE_WARNING")
 object Model {
 
     private val pingService = PingService()

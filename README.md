@@ -9,23 +9,11 @@ supported components (including unit tests). A perfect starting point for a new 
 
 [See live demo](https://rjaros.github.io/kvision-examples/template/)
 
-## Template - i18n
-
-An application template with i18n support.
-
-[See live demo](https://rjaros.github.io/kvision-examples/template-i18n/)
-
 ## Hello World
 
-A very simple application with no optional modules.
+A very simple application with almost no optional modules.
 
 [See live demo](https://rjaros.github.io/kvision-examples/helloworld/)
-
-## Hello World - i18n
-
-A Hello World application with i18n support.
-
-[See live demo](https://rjaros.github.io/kvision-examples/helloworld-i18n/)
 
 ## Showcase
 
@@ -59,7 +47,7 @@ A complete, multiplatform address book application. It presents an innovative wa
 shared data model and fully type-safe connectivity between both sides (based on automatically generated routings and JSON-RPC 
 endpoints). The example project utilizes:
 
-- H2 SQL database (configured for "filesystem" database)
+- H2 SQL database (configured for "filesystem" database) or PostgreSQL database (configured on Heroku)
 - [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity
 - [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management
 

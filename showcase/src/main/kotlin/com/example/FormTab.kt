@@ -1,7 +1,8 @@
 package com.example
 
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
@@ -26,10 +27,10 @@ import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.progress.ProgressBar
-import pl.treksoft.kvision.types.KDate
 import pl.treksoft.kvision.types.KFile
 import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px
+import kotlin.js.Date
 
 @Serializable
 data class Form(
@@ -38,8 +39,8 @@ data class Form(
     val password2: String? = null,
     val textarea: String? = null,
     val richtext: String? = null,
-    val date: KDate? = null,
-    val time: KDate? = null,
+    val date: Date? = null,
+    val time: Date? = null,
     val checkbox: Boolean = false,
     val radio: Boolean = false,
     val select: String? = null,
@@ -51,6 +52,7 @@ data class Form(
 
 class FormTab : SimplePanel() {
     init {
+
         this.marginTop = 10.px
         val formPanel = formPanel<Form> {
             add(
@@ -157,7 +159,7 @@ class FormTab : SimplePanel() {
                 }
             }
             button(tr("Validate"), "fa-check", ButtonStyle.INFO).onClick {
-                launch {
+                GlobalScope.launch {
                     p.progress = 100
                     delay(500)
                     formPanel.validate()
