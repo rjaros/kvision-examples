@@ -9,8 +9,11 @@ import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Container
+import pl.treksoft.kvision.html.Button
+import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.Canvas
 import pl.treksoft.kvision.panel.DockPanel.Companion.dockPanel
+import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.Side
 import pl.treksoft.kvision.panel.VPanel
@@ -21,12 +24,58 @@ import kotlin.math.abs
 
 class Paint : DesktopWindow("Paint", 600, 400) {
 
+    lateinit var buttonPoint: Button
+    lateinit var buttonPencil: Button
+    lateinit var buttonLine: Button
+    lateinit var buttonRectangle: Button
+    lateinit var buttonCircle: Button
+
     init {
         dockPanel {
             height = 100.perc
-            val buttons = VPanel {
+            val canvas = PaintCanvas(510, 320)
+            add(canvas, Side.CENTER)
+            val buttons = VPanel(spacing = 5) {
                 width = 80.px
                 height = 100.perc
+                alignItems = FlexAlignItems.CENTER
+                paddingTop = 5.px
+                buttonPoint = button("", "fa-circle") {
+                    title = "Point"
+                    onClick {
+                        canvas.selectedTool = Tool.POINT
+                        selectTool(this)
+                    }
+                }
+                buttonPencil = button("", "fa-pencil") {
+                    title = "Pencil"
+                    onClick {
+                        canvas.selectedTool = Tool.PENCIL
+                        selectTool(this)
+                    }
+                    this.border = Border(1.px, BorderStyle.SOLID, Col.BLUE)
+                }
+                buttonLine = button("", "fa-minus") {
+                    title = "Line"
+                    onClick {
+                        canvas.selectedTool = Tool.LINE
+                        selectTool(this)
+                    }
+                }
+                buttonRectangle = button("", "fa-square-o") {
+                    title = "Rectangle"
+                    onClick {
+                        canvas.selectedTool = Tool.RECTANGLE
+                        selectTool(this)
+                    }
+                }
+                buttonCircle = button("", "fa-circle-thin") {
+                    title = "Circle"
+                    onClick {
+                        canvas.selectedTool = Tool.CIRCLE
+                        selectTool(this)
+                    }
+                }
             }
             add(buttons, Side.LEFT)
             val colors = HPanel {
@@ -34,8 +83,6 @@ class Paint : DesktopWindow("Paint", 600, 400) {
                 width = 100.perc
             }
             add(colors, Side.DOWN)
-            val canvas = PaintCanvas(510, 320)
-            add(canvas, Side.CENTER)
             this@Paint.setEventListener<Paint> {
                 resizeWindow = { e ->
                     canvas.canvasWidth = e.detail.width - 90
@@ -44,6 +91,15 @@ class Paint : DesktopWindow("Paint", 600, 400) {
                 }
             }
         }
+    }
+
+    fun selectTool(button: Button) {
+        buttonPoint.border = null
+        buttonPencil.border = null
+        buttonLine.border = null
+        buttonRectangle.border = null
+        buttonCircle.border = null
+        button.border = Border(1.px, BorderStyle.SOLID, Col.BLUE)
     }
 
     companion object {
@@ -55,7 +111,7 @@ class Paint : DesktopWindow("Paint", 600, 400) {
 
 class PaintCanvas(width: Int, height: Int) : Canvas(width, height) {
 
-    private var selectedTool = Tool.PENCIL
+    var selectedTool = Tool.PENCIL
     private var drawing = mutableListOf<Fig>()
     private var currentFig: Fig? = null
 

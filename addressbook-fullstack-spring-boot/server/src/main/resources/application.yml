@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:/tmp/example
+
+pac4j:
+  logout:
+    defaultUrl: /
