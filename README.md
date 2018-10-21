@@ -43,7 +43,7 @@ A complete implementation of [TodoMVC](http://todomvc.com/) demo application.
 ## Address book - fullstack
 
 A complete, multiplatform address book application. It presents an innovative way to build fullstack applications with KVision and 
-[Jooby](https://jooby.org) micro web framework. KVision closely integrates the client and the server side of the project with a 
+[Jooby](https://jooby.org) micro web framework or [Spring Boot](https://spring.io/projects/spring-boot) framework. KVision closely integrates the client and the server side of the project with a 
 shared data model and fully type-safe connectivity between both sides (based on automatically generated routings and JSON-RPC 
 endpoints). The example project utilizes:
 
