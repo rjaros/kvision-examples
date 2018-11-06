@@ -14,6 +14,7 @@ import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.Canvas
 import pl.treksoft.kvision.html.Icon.Companion.icon
+import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.panel.DockPanel.Companion.dockPanel
 import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
@@ -87,6 +88,13 @@ class Paint : DesktopWindow("Paint", 600, 400) {
                     marginTop = 20.px
                     onClick {
                         canvas.undo()
+                    }
+                }
+
+                button("", "fa-ban") {
+                    title = "Clear"
+                    onClick {
+                        canvas.clearAll()
                     }
                 }
             }
@@ -214,6 +222,15 @@ class PaintCanvas(width: Int, height: Int) : Canvas(width, height) {
         if (drawing.size > 0) {
             drawing.removeAt(drawing.size - 1)
             redraw()
+        }
+    }
+
+    fun clearAll() {
+        Confirm.show("Are you sure?", "Do you really want to clear your drawing?") {
+            if (drawing.size > 0) {
+                drawing.clear()
+                redraw()
+            }
         }
     }
 
