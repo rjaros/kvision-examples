@@ -1,3 +1,7 @@
 body {
     overflow: hidden;
 }
+
+.stripes {
+    background-image: repeating-linear-gradient(145deg, #ccc, #ccc 5px, #dbdbdb 5px, #dbdbdb 10px) !important;
+}
