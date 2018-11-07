@@ -25,7 +25,7 @@ import pl.treksoft.kvision.utils.px
 import kotlin.math.PI
 import kotlin.math.abs
 
-val colors = arrayOf(Col.WHITE, Col.BLACK, Col.RED, Col.GREEN, Col.BLUE, Col.YELLOW)
+val colorTable = arrayOf(Col.WHITE, Col.BLACK, Col.RED, Col.GREEN, Col.BLUE, Col.YELLOW)
 
 class Paint : DesktopWindow("Paint", 600, 400) {
 
@@ -109,7 +109,7 @@ class Paint : DesktopWindow("Paint", 600, 400) {
                         title = "Line color"
                         marginRight = 4.px
                     }
-                    colors.forEach { color ->
+                    colorTable.forEach { color ->
                         val b = button("") {
                             width = 32.px
                             height = 22.px
@@ -128,7 +128,7 @@ class Paint : DesktopWindow("Paint", 600, 400) {
                         title = "Fill color"
                         marginRight = 4.px
                     }
-                    colors.forEach { color ->
+                    colorTable.forEach { color ->
                         val b = button("") {
                             width = 32.px
                             height = 22.px
