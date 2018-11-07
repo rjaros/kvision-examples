@@ -5,7 +5,6 @@ import com.lightningkite.kotlin.observable.list.observableListOf
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import kotlinx.serialization.serializer
 import org.w3c.dom.get
 import org.w3c.dom.set
 import kotlin.browser.localStorage
@@ -35,14 +34,14 @@ object Model {
     )
 
     fun storeAddresses() {
-        val jsonString = JSON.stringify(Address::class.serializer().list, addresses)
+        val jsonString = JSON.stringify(Address.serializer().list, addresses)
         localStorage["addresses"] = jsonString
     }
 
     fun loadAddresses() {
         localStorage["addresses"]?.let {
             addresses.clear()
-            JSON.parse(Address::class.serializer().list, it).forEach {
+            JSON.parse(Address.serializer().list, it).forEach {
                 addresses.add(it)
             }
         }
