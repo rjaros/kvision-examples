@@ -34,7 +34,7 @@ class WebBrowser : DesktopWindow("Web Browser", 800, 400) {
         minWidth = 400.px
         minHeight = 150.px
         padding = 2.px
-        iframe = Iframe("https://rjaros.github.io/kvision/").apply {
+        iframe = Iframe("https://rjaros.github.io/kvision/api/").apply {
             width = 100.perc
             height = 340.px
         }
