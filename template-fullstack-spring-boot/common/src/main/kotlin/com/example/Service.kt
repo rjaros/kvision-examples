@@ -3,12 +3,14 @@ package com.example
 import kotlinx.coroutines.Deferred
 import pl.treksoft.kvision.remote.SpringServiceManager
 
-expect class PingService() {
+interface IPingService {
     fun ping(message: String): Deferred<String>
 }
 
+expect class PingService : IPingService
+
 object PingServiceManager : SpringServiceManager<PingService>(PingService::class) {
     init {
-        bind(PingService::ping)
+        bind(IPingService::ping)
     }
 }

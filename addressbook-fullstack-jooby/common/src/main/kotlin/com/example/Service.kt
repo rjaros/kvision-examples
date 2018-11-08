@@ -9,20 +9,24 @@ enum class Sort {
     FN, LN, E, F
 }
 
-expect class AddressService() {
+interface IAddressService {
     fun getAddressList(search: String?, types: String, sort: Sort, req: Request? = null): Deferred<List<Address>>
     fun addAddress(address: Address, req: Request? = null): Deferred<Address>
     fun updateAddress(address: Address, req: Request? = null): Deferred<Address>
     fun deleteAddress(id: Int, req: Request? = null): Deferred<Boolean>
 }
 
-expect class ProfileService() {
+interface IProfileService {
     fun getProfile(req: Request? = null): Deferred<Profile>
 }
 
-expect class RegisterProfileService() {
+interface IRegisterProfileService {
     fun registerProfile(profile: Profile, password: String, req: Request? = null): Deferred<Boolean>
 }
+
+expect class AddressService() : IAddressService
+expect class ProfileService() : IProfileService
+expect class RegisterProfileService() : IRegisterProfileService
 
 object AddressServiceManager : JoobyServiceManager<AddressService>(AddressService()) {
     init {

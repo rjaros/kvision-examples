@@ -1,6 +1,5 @@
 package com.example
 
-import kotlinx.coroutines.Deferred
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.SpringRemoteAgent
 
@@ -10,26 +9,22 @@ object ProfileAgent : SpringRemoteAgent<ProfileService>(ProfileServiceManager)
 
 object RegisterProfileAgent : SpringRemoteAgent<RegisterProfileService>(RegisterProfileServiceManager)
 
-actual class AddressService actual constructor() {
-    actual fun getAddressList(search: String?, types: String, sort: Sort): Deferred<List<Address>> =
-        AddressAgent.call(AddressService::getAddressList, search, types, sort)
+actual class AddressService : IAddressService {
+    override fun getAddressList(search: String?, types: String, sort: Sort) =
+        AddressAgent.call(IAddressService::getAddressList, search, types, sort)
 
-    actual fun addAddress(address: Address): Deferred<Address> =
-        AddressAgent.call(AddressService::addAddress, address)
+    override fun addAddress(address: Address) = AddressAgent.call(IAddressService::addAddress, address)
 
-    actual fun updateAddress(address: Address): Deferred<Address> =
-        AddressAgent.call(AddressService::updateAddress, address)
+    override fun updateAddress(address: Address) = AddressAgent.call(IAddressService::updateAddress, address)
 
-    actual fun deleteAddress(id: Int): Deferred<Boolean> =
-        AddressAgent.call(AddressService::deleteAddress, id)
+    override fun deleteAddress(id: Int) = AddressAgent.call(IAddressService::deleteAddress, id)
 }
 
-actual class ProfileService actual constructor() {
-    actual fun getProfile(): Deferred<Profile> =
-        ProfileAgent.call(ProfileService::getProfile)
+actual class ProfileService : IProfileService {
+    override fun getProfile() = ProfileAgent.call(IProfileService::getProfile)
 }
 
-actual class RegisterProfileService actual constructor() {
-    actual fun registerProfile(profile: Profile, password: String): Deferred<Boolean> =
-        RegisterProfileAgent.call(RegisterProfileService::registerProfile, profile, password)
+actual class RegisterProfileService : IRegisterProfileService {
+    override fun registerProfile(profile: Profile, password: String) =
+        RegisterProfileAgent.call(IRegisterProfileService::registerProfile, profile, password)
 }

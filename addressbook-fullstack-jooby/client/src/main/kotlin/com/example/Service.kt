@@ -1,6 +1,5 @@
 package com.example
 
-import kotlinx.coroutines.Deferred
 import pl.treksoft.kvision.remote.JoobyRemoteAgent
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.Request
@@ -11,26 +10,23 @@ object ProfileAgent : JoobyRemoteAgent<ProfileService>(ProfileServiceManager)
 
 object RegisterProfileAgent : JoobyRemoteAgent<RegisterProfileService>(RegisterProfileServiceManager)
 
-actual class AddressService actual constructor() {
-    actual fun getAddressList(search: String?, types: String, sort: Sort, req: Request?): Deferred<List<Address>> =
-        AddressAgent.call(AddressService::getAddressList, search, types, sort)
+actual class AddressService : IAddressService {
+    override fun getAddressList(search: String?, types: String, sort: Sort, req: Request?) =
+        AddressAgent.call(IAddressService::getAddressList, search, types, sort)
 
-    actual fun addAddress(address: Address, req: Request?): Deferred<Address> =
-        AddressAgent.call(AddressService::addAddress, address)
+    override fun addAddress(address: Address, req: Request?) = AddressAgent.call(IAddressService::addAddress, address)
 
-    actual fun updateAddress(address: Address, req: Request?): Deferred<Address> =
-        AddressAgent.call(AddressService::updateAddress, address)
+    override fun updateAddress(address: Address, req: Request?) =
+        AddressAgent.call(IAddressService::updateAddress, address)
 
-    actual fun deleteAddress(id: Int, req: Request?): Deferred<Boolean> =
-        AddressAgent.call(AddressService::deleteAddress, id)
+    override fun deleteAddress(id: Int, req: Request?) = AddressAgent.call(IAddressService::deleteAddress, id)
 }
 
-actual class ProfileService actual constructor() {
-    actual fun getProfile(req: Request?): Deferred<Profile> =
-        ProfileAgent.call(ProfileService::getProfile)
+actual class ProfileService : IProfileService {
+    override fun getProfile(req: Request?) = ProfileAgent.call(IProfileService::getProfile)
 }
 
-actual class RegisterProfileService actual constructor() {
-    actual fun registerProfile(profile: Profile, password: String, req: Request?): Deferred<Boolean> =
-        RegisterProfileAgent.call(RegisterProfileService::registerProfile, profile, password)
+actual class RegisterProfileService : IRegisterProfileService {
+    override fun registerProfile(profile: Profile, password: String, req: Request?) =
+        RegisterProfileAgent.call(IRegisterProfileService::registerProfile, profile, password)
 }

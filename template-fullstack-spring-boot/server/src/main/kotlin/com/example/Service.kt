@@ -1,13 +1,12 @@
 package com.example
 
-import kotlinx.coroutines.Deferred
 import org.springframework.stereotype.Service
 import pl.treksoft.kvision.remote.async
 
 @Service
-actual class PingService actual constructor() {
+actual class PingService : IPingService {
 
-    actual fun ping(message: String): Deferred<String> = async {
+    override fun ping(message: String) = async {
         println(message)
         "Hello world from server!"
     }
