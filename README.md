@@ -60,6 +60,10 @@ easy-to-read synchronous-like code.
 
 A simple application to convert integer numbers to words by using JVM [Tradukisto](https://github.com/allegro/tradukisto) library 
 
+## Tweets - fullstack
+
+A simple, multiplatform, message board application.
+
 ## Template - fullstack
 
 A fullstack application template. A starting point for a new application.
