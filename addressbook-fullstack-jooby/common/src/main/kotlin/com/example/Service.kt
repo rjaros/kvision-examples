@@ -1,6 +1,8 @@
 package com.example
 
-import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import pl.treksoft.kvision.remote.JoobyServiceManager
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.Request
@@ -10,18 +12,18 @@ enum class Sort {
 }
 
 interface IAddressService {
-    fun getAddressList(search: String?, types: String, sort: Sort, req: Request? = null): Deferred<List<Address>>
-    fun addAddress(address: Address, req: Request? = null): Deferred<Address>
-    fun updateAddress(address: Address, req: Request? = null): Deferred<Address>
-    fun deleteAddress(id: Int, req: Request? = null): Deferred<Boolean>
+    suspend fun getAddressList(search: String?, types: String, sort: Sort, req: Request? = null): List<Address>
+    suspend fun addAddress(address: Address, req: Request? = null): Address
+    suspend fun updateAddress(address: Address, req: Request? = null): Address
+    suspend fun deleteAddress(id: Int, req: Request? = null): Boolean
 }
 
 interface IProfileService {
-    fun getProfile(req: Request? = null): Deferred<Profile>
+    suspend fun getProfile(req: Request? = null): Profile
 }
 
 interface IRegisterProfileService {
-    fun registerProfile(profile: Profile, password: String, req: Request? = null): Deferred<Boolean>
+    suspend fun registerProfile(profile: Profile, password: String, req: Request? = null): Boolean
 }
 
 expect class AddressService() : IAddressService
@@ -30,21 +32,27 @@ expect class RegisterProfileService() : IRegisterProfileService
 
 object AddressServiceManager : JoobyServiceManager<AddressService>(AddressService()) {
     init {
-        bind(AddressService::getAddressList)
-        bind(AddressService::addAddress)
-        bind(AddressService::updateAddress)
-        bind(AddressService::deleteAddress)
+        GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
+            bind(IAddressService::getAddressList)
+            bind(IAddressService::addAddress)
+            bind(IAddressService::updateAddress)
+            bind(IAddressService::deleteAddress)
+        }
     }
 }
 
 object ProfileServiceManager : JoobyServiceManager<ProfileService>(ProfileService()) {
     init {
-        bind(ProfileService::getProfile)
+        GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
+            bind(IProfileService::getProfile)
+        }
     }
 }
 
 object RegisterProfileServiceManager : JoobyServiceManager<RegisterProfileService>(RegisterProfileService()) {
     init {
-        bind(RegisterProfileService::registerProfile)
+        GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
+            bind(IRegisterProfileService::registerProfile)
+        }
     }
 }

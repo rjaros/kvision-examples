@@ -45,7 +45,7 @@ object App : ApplicationBase {
                         GlobalScope.launch {
                             val result = text.value?.toIntOrNull()?.let { number ->
                                 languageSelect.value?.let { lang ->
-                                    numberService.numberToWords(number, Language.valueOf(lang)).await()
+                                    numberService.numberToWords(number, Language.valueOf(lang))
                                 }
                             }
                             outputDiv.content = result ?: "Not a valid number!"

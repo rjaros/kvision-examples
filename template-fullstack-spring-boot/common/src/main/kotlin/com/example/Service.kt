@@ -1,16 +1,20 @@
 package com.example
 
-import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import pl.treksoft.kvision.remote.SpringServiceManager
 
 interface IPingService {
-    fun ping(message: String): Deferred<String>
+    suspend fun ping(message: String): String
 }
 
 expect class PingService : IPingService
 
 object PingServiceManager : SpringServiceManager<PingService>(PingService::class) {
     init {
-        bind(IPingService::ping)
+        GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
+            bind(IPingService::ping)
+        }
     }
 }

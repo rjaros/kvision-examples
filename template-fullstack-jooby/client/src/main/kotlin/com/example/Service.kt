@@ -6,5 +6,5 @@ import pl.treksoft.kvision.remote.Request
 object PingAgent : JoobyRemoteAgent<PingService>(PingServiceManager)
 
 actual class PingService : IPingService {
-    override fun ping(message: String, req: Request?) = PingAgent.call(IPingService::ping, message)
+    override suspend fun ping(message: String, req: Request?) = PingAgent.call(IPingService::ping, message)
 }

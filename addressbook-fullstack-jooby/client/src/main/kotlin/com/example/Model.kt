@@ -3,7 +3,7 @@ package com.example
 import com.lightningkite.kotlin.observable.list.ObservableList
 import com.lightningkite.kotlin.observable.list.observableListOf
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.utils.syncWithList
 
@@ -19,49 +19,49 @@ object Model {
     var search: String? = null
         set(value) {
             field = value
-            GlobalScope.async {
+            GlobalScope.launch {
                 getAddressList()
             }
         }
     var types: String = "all"
         set(value) {
             field = value
-            GlobalScope.async {
+            GlobalScope.launch {
                 getAddressList()
             }
         }
     var sort = Sort.FN
         set(value) {
             field = value
-            GlobalScope.async {
+            GlobalScope.launch {
                 getAddressList()
             }
         }
 
     suspend fun getAddressList() {
         Security.withAuth {
-            val newAddresses = addressService.getAddressList(search, types, sort).await()
+            val newAddresses = addressService.getAddressList(search, types, sort)
             addresses.syncWithList(newAddresses)
         }
     }
 
     suspend fun addAddress(address: Address) {
         Security.withAuth {
-            addressService.addAddress(address).await()
+            addressService.addAddress(address)
             getAddressList()
         }
     }
 
     suspend fun updateAddress(address: Address) {
         Security.withAuth {
-            addressService.updateAddress(address).await()
+            addressService.updateAddress(address)
             getAddressList()
         }
     }
 
     suspend fun deleteAddress(id: Int): Boolean {
         return Security.withAuth {
-            val result = addressService.deleteAddress(id).await()
+            val result = addressService.deleteAddress(id)
             getAddressList()
             result
         }
@@ -69,13 +69,13 @@ object Model {
 
     suspend fun readProfile() {
         Security.withAuth {
-            profile[0] = profileService.getProfile().await()
+            profile[0] = profileService.getProfile()
         }
     }
 
     suspend fun registerProfile(profile: Profile, password: String): Boolean {
         return try {
-            registerProfileService.registerProfile(profile, password).await()
+            registerProfileService.registerProfile(profile, password)
         } catch (e: Exception) {
             console.log(e)
             false

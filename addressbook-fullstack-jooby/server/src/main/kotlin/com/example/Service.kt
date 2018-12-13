@@ -7,8 +7,7 @@ import org.jooby.require
 import org.pac4j.sql.profile.DbProfile
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.Request
-import pl.treksoft.kvision.remote.async
-import pl.treksoft.kvision.remote.asyncAuth
+import pl.treksoft.kvision.remote.withProfile
 import java.util.*
 import javax.sql.DataSource
 
@@ -20,16 +19,16 @@ actual class AddressService : IAddressService {
         return AddressDao(session)
     }
 
-    override fun getAddressList(search: String?, types: String, sort: Sort, req: Request?) =
-        req.asyncAuth { request, _, profile ->
+    override suspend fun getAddressList(search: String?, types: String, sort: Sort, req: Request?) =
+        req.withProfile { request, _, profile ->
             getAddressDao(request).findByCriteria(profile.id, search, types, sort)
         }
 
-    override fun addAddress(address: Address, req: Request?) = req.asyncAuth { request, _, profile ->
+    override suspend fun addAddress(address: Address, req: Request?) = req.withProfile { request, _, profile ->
         getAddressDao(request).insert(address.copy(userId = profile.id, createdAt = Date()))
     }
 
-    override fun updateAddress(address: Address, req: Request?) = req.asyncAuth { request, _, profile ->
+    override suspend fun updateAddress(address: Address, req: Request?) = req.withProfile { request, _, profile ->
         val dao = getAddressDao(request)
         address.id?.let {
             val oldAddress = dao.findByIdForUpdate(it)
@@ -37,15 +36,15 @@ actual class AddressService : IAddressService {
         } ?: throw IllegalArgumentException("The ID of the address not set")
     }
 
-    override fun deleteAddress(id: Int, req: Request?) = req.async { request ->
-        getAddressDao(request).delete(id) > 0
+    override suspend fun deleteAddress(id: Int, req: Request?): Boolean {
+        return getAddressDao(req!!).delete(id) > 0
     }
 
 }
 
 actual class ProfileService : IProfileService {
 
-    override fun getProfile(req: Request?) = req.asyncAuth { _, _, profile ->
+    override suspend fun getProfile(req: Request?) = req.withProfile { _, _, profile ->
         profile
     }
 
@@ -53,12 +52,12 @@ actual class ProfileService : IProfileService {
 
 actual class RegisterProfileService : IRegisterProfileService {
 
-    override fun registerProfile(profile: Profile, password: String, req: Request?) = req.async { request ->
-        val profileService = request.require(MyDbProfileService::class)
+    override suspend fun registerProfile(profile: Profile, password: String, req: Request?): Boolean {
+        val profileService = req!!.require(MyDbProfileService::class)
         val dbProfile = DbProfile()
         dbProfile.build(profile.id, profile.attributes)
         profileService.create(dbProfile, password)
-        true
+        return true
     }
 
 }

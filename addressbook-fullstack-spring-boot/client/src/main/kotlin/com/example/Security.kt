@@ -1,7 +1,7 @@
 package com.example
 
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.form.FormPanel
 import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
@@ -117,7 +117,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
     private fun processRegister() {
         if (registerPanel.validate()) {
             val userData = registerPanel.getData()
-            GlobalScope.async {
+            GlobalScope.launch {
                 if (Model.registerProfile(
                         Profile(
                             userData.username
@@ -145,7 +145,7 @@ object Security : SecurityMgr() {
     private val loginWindow = LoginWindow()
 
     override suspend fun login(): Boolean {
-        return loginService.login(loginWindow.getResult()).await()
+        return loginService.login(loginWindow.getResult())
     }
 
     override suspend fun afterLogin() {

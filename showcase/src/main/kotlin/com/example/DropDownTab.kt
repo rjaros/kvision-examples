@@ -9,7 +9,7 @@ import pl.treksoft.kvision.form.check.CheckBox.Companion.checkBox
 import pl.treksoft.kvision.form.text.Text.Companion.text
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.html.Image
+import pl.treksoft.kvision.html.Image.Companion.image
 import pl.treksoft.kvision.html.Label.Companion.label
 import pl.treksoft.kvision.html.Link.Companion.link
 import pl.treksoft.kvision.html.TAG
@@ -65,10 +65,11 @@ class DropDownTab : SimplePanel() {
             ).apply {
                 minWidth = 250.px
             }
-            dropDown(tr("Dropdown with custom list"), icon = "fa-picture-o", style = ButtonStyle.WARNING).apply {
+            dropDown(tr("Dropdown with custom list"), icon = "fa-picture-o", style = ButtonStyle.WARNING) {
                 minWidth = 250.px
-                add(Image(require("./img/cat.jpg")).apply { margin = 10.px; title = "Cat" })
-                add(Image(require("./img/dog.jpg")).apply { margin = 10.px; title = "Dog" })
+                image(require("./img/cat.jpg")) { margin = 10.px; title = "Cat" }
+                separator()
+                image(require("./img/dog.jpg")) { margin = 10.px; title = "Dog" }
             }
             hPanel(spacing = 5) {
                 val fdd = dropDown(
@@ -82,7 +83,7 @@ class DropDownTab : SimplePanel() {
                         tr("Separator") to DD.SEPARATOR.option,
                         tr("Containers") to "#!/containers"
                     ), "fa-asterisk", style = ButtonStyle.PRIMARY
-                ).apply {
+                ) {
                     dropup = true
                     minWidth = 250.px
                 }

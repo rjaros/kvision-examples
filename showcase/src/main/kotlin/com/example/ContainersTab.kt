@@ -9,10 +9,12 @@ import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.Direction
+import pl.treksoft.kvision.panel.SideTabSize
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.SplitPanel.Companion.splitPanel
 import pl.treksoft.kvision.panel.StackPanel.Companion.stackPanel
 import pl.treksoft.kvision.panel.TabPanel.Companion.tabPanel
+import pl.treksoft.kvision.panel.TabPosition
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.utils.px
 
@@ -22,6 +24,8 @@ class ContainersTab : SimplePanel() {
         vPanel(spacing = 5) {
             addStackPanel()
             addTabPanel()
+            addTabPanelLeft()
+            addTabPanelRight()
             addVerticalSplitPanel()
             addHorizontalSplitPanel()
         }
@@ -57,6 +61,34 @@ class ContainersTab : SimplePanel() {
             addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
                 background = Background(Col.GREEN)
                 height = 40.px
+            })
+        }
+    }
+
+    private fun Container.addTabPanelLeft() {
+        tag(TAG.H4, tr("Tab panel with tabs on the left"))
+        tabPanel(TabPosition.LEFT, SideTabSize.SIZE_1) {
+            addTab(tr("Blue panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
+                background = Background(Col.BLUE)
+                height = 140.px
+            })
+            addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
+                background = Background(Col.GREEN)
+                height = 140.px
+            })
+        }
+    }
+
+    private fun Container.addTabPanelRight() {
+        tag(TAG.H4, tr("Tab panel with tabs on the right"))
+        tabPanel(TabPosition.RIGHT, SideTabSize.SIZE_1) {
+            addTab(tr("Blue panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
+                background = Background(Col.BLUE)
+                height = 140.px
+            })
+            addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
+                background = Background(Col.GREEN)
+                height = 140.px
             })
         }
     }

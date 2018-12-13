@@ -96,7 +96,7 @@ class BasicTab : SimplePanel() {
 
             label(tr("An iframe:"))
 
-            iframe(src = "https://rjaros.github.io/kvision/") {
+            iframe(src = "https://rjaros.github.io/kvision/api/") {
                 iframeWidth = 600
                 iframeHeight = 300
             }

@@ -194,6 +194,14 @@ msgstr "Zielony panel"
 msgid "Tab panel"
 msgstr "Panel zakładek"
 
+#: src/main/kotlin/com/example/ContainersTab.kt:68
+msgid "Tab panel with tabs on the left"
+msgstr "Panel zakładek z lewej strony"
+
+#: src/main/kotlin/com/example/ContainersTab.kt:82
+msgid "Tab panel with tabs on the right"
+msgstr "Panel zakładek z prawej strony"
+
 #: src/main/kotlin/com/example/ContainersTab.kt:65
 msgid "Vertical split panel"
 msgstr "Panel podziału pionowego"

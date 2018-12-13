@@ -1,6 +1,8 @@
 package com.example
 
-import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.SpringServiceManager
 
@@ -9,18 +11,18 @@ enum class Sort {
 }
 
 interface IAddressService {
-    fun getAddressList(search: String?, types: String, sort: Sort): Deferred<List<Address>>
-    fun addAddress(address: Address): Deferred<Address>
-    fun updateAddress(address: Address): Deferred<Address>
-    fun deleteAddress(id: Int): Deferred<Boolean>
+    suspend fun getAddressList(search: String?, types: String, sort: Sort): List<Address>
+    suspend fun addAddress(address: Address): Address
+    suspend fun updateAddress(address: Address): Address
+    suspend fun deleteAddress(id: Int): Boolean
 }
 
 interface IProfileService {
-    fun getProfile(): Deferred<Profile>
+    suspend fun getProfile(): Profile
 }
 
 interface IRegisterProfileService {
-    fun registerProfile(profile: Profile, password: String): Deferred<Boolean>
+    suspend fun registerProfile(profile: Profile, password: String): Boolean
 }
 
 expect class AddressService : IAddressService
@@ -29,21 +31,27 @@ expect class RegisterProfileService : IRegisterProfileService
 
 object AddressServiceManager : SpringServiceManager<AddressService>(AddressService::class) {
     init {
-        bind(IAddressService::getAddressList)
-        bind(IAddressService::addAddress)
-        bind(IAddressService::updateAddress)
-        bind(IAddressService::deleteAddress)
+        GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
+            bind(IAddressService::getAddressList)
+            bind(IAddressService::addAddress)
+            bind(IAddressService::updateAddress)
+            bind(IAddressService::deleteAddress)
+        }
     }
 }
 
 object ProfileServiceManager : SpringServiceManager<ProfileService>(ProfileService::class) {
     init {
-        bind(IProfileService::getProfile)
+        GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
+            bind(IProfileService::getProfile)
+        }
     }
 }
 
 object RegisterProfileServiceManager : SpringServiceManager<RegisterProfileService>(RegisterProfileService::class) {
     init {
-        bind(IRegisterProfileService::registerProfile)
+        GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
+            bind(IRegisterProfileService::registerProfile)
+        }
     }
 }

@@ -2,12 +2,11 @@ package com.example
 
 import org.springframework.stereotype.Service
 import pl.allegro.finance.tradukisto.ValueConverters
-import pl.treksoft.kvision.remote.async
 
 @Service
 actual class NumberService : INumberService {
 
-    override fun numberToWords(number: Int, language: Language) = async {
+    override suspend fun numberToWords(number: Int, language: Language): String {
         val converter = when (language) {
             Language.ENGLISH -> ValueConverters.ENGLISH_INTEGER
             Language.GERMAN -> ValueConverters.GERMAN_INTEGER
@@ -15,7 +14,7 @@ actual class NumberService : INumberService {
             Language.POLISH -> ValueConverters.POLISH_INTEGER
             Language.CZECH -> ValueConverters.CZECH_INTEGER
         }
-        converter.asWords(number)
+        return converter.asWords(number)
     }
 
 }
