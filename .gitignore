@@ -1,3 +1,4 @@
 .idea
-heroku.sh
+heroku-addressbook.sh
+heroku-tweets.sh
 build.sh
