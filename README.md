@@ -58,11 +58,17 @@ easy-to-read synchronous-like code.
 
 ## Number converter - fullstack
 
-A simple application to convert integer numbers to words by using JVM [Tradukisto](https://github.com/allegro/tradukisto) library 
+A simple application to convert integer numbers to words by using JVM [Tradukisto](https://github.com/allegro/tradukisto) library.
+
+[See live demo on Heroku](https://kvision-numbers.herokuapp.com/)
 
 ## Tweets - fullstack
 
-A simple, multiplatform, message board application.
+A simple, multiplatform, message board application. 
+
+[See live demo on Heroku](https://kvision-tweets.herokuapp.com/)
+
+Note: The application uses simple, in memory storage, so all messages are gone after Heroku redeployments.
 
 ## Template - fullstack
 
