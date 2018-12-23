@@ -1,7 +1,6 @@
 package com.example
 
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.w3c.dom.events.KeyboardEvent
@@ -46,7 +45,7 @@ object App : ApplicationBase {
                     }
 
                     fun post() {
-                        GlobalScope.async {
+                        GlobalScope.launch {
                             val tagList = tags.value?.let {
                                 it.split(" ").map { it.replace("#", "").replace(",", "").trim() }
                                     .filter { it.isNotBlank() }

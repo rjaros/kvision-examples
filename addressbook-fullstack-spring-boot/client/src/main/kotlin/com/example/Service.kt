@@ -1,13 +1,13 @@
 package com.example
 
+import pl.treksoft.kvision.remote.KVRemoteAgent
 import pl.treksoft.kvision.remote.Profile
-import pl.treksoft.kvision.remote.SpringRemoteAgent
 
-object AddressAgent : SpringRemoteAgent<AddressService>(AddressServiceManager)
+object AddressAgent : KVRemoteAgent<AddressService>(AddressServiceManager)
 
-object ProfileAgent : SpringRemoteAgent<ProfileService>(ProfileServiceManager)
+object ProfileAgent : KVRemoteAgent<ProfileService>(ProfileServiceManager)
 
-object RegisterProfileAgent : SpringRemoteAgent<RegisterProfileService>(RegisterProfileServiceManager)
+object RegisterProfileAgent : KVRemoteAgent<RegisterProfileService>(RegisterProfileServiceManager)
 
 actual class AddressService : IAddressService {
     override suspend fun getAddressList(search: String?, types: String, sort: Sort) =

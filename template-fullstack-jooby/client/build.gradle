@@ -18,6 +18,7 @@ dependencies {
     compile "pl.treksoft:kvision-upload:${kvisionVersion}"
     compile "pl.treksoft:kvision-handlebars:${kvisionVersion}"
     compile "pl.treksoft:kvision-i18n:${kvisionVersion}"
+    compile "pl.treksoft:kvision-remote:${kvisionVersion}"
  }
 
 kotlinFrontend {

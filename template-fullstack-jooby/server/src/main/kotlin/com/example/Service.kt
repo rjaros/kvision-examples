@@ -1,11 +1,11 @@
 package com.example
 
-import pl.treksoft.kvision.remote.Request
+import com.google.inject.Singleton
 
+@Singleton
 actual class PingService : IPingService {
 
-    override suspend fun ping(message: String, req: Request?): String {
-        println(message)
+    override suspend fun ping(message: String): String {
         return "Hello world from server!"
     }
 }

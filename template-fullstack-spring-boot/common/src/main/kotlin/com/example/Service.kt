@@ -3,7 +3,7 @@ package com.example
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.remote.SpringServiceManager
+import pl.treksoft.kvision.remote.KVServiceManager
 
 interface IPingService {
     suspend fun ping(message: String): String
@@ -11,7 +11,7 @@ interface IPingService {
 
 expect class PingService : IPingService
 
-object PingServiceManager : SpringServiceManager<PingService>(PingService::class) {
+object PingServiceManager : KVServiceManager<PingService>(PingService::class) {
     init {
         GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
             bind(IPingService::ping)

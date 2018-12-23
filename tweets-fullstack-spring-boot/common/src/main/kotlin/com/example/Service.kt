@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.remote.SpringServiceManager
+import pl.treksoft.kvision.remote.KVServiceManager
 import pl.treksoft.kvision.types.Date
 
 @Serializable
@@ -18,7 +18,7 @@ interface ITweetService {
 
 expect class TweetService : ITweetService
 
-object TweetServiceManager : SpringServiceManager<TweetService>(TweetService::class) {
+object TweetServiceManager : KVServiceManager<TweetService>(TweetService::class) {
     init {
         GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
             bind(ITweetService::sendTweet)

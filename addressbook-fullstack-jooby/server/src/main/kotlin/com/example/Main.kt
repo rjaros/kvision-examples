@@ -8,16 +8,9 @@ import org.jooby.jdbc.Jdbc
 import org.jooby.pac4j.Pac4j
 import org.jooby.require
 import org.pac4j.core.credentials.UsernamePasswordCredentials
-import org.pac4j.core.credentials.password.SpringSecurityPasswordEncoder
 import org.pac4j.http.client.indirect.FormClient
-import org.pac4j.sql.profile.service.DbProfileService
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import pl.treksoft.kvision.remote.KVServer
-import javax.inject.Inject
 import javax.sql.DataSource
-
-class MyDbProfileService @Inject constructor(ds: DataSource) :
-    DbProfileService(ds, SpringSecurityPasswordEncoder(BCryptPasswordEncoder()))
 
 class App : KVServer({
     use(Jdbc("db"))

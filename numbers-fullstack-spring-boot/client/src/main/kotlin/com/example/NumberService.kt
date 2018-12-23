@@ -1,8 +1,8 @@
 package com.example
 
-import pl.treksoft.kvision.remote.SpringRemoteAgent
+import pl.treksoft.kvision.remote.KVRemoteAgent
 
-object NumberAgent : SpringRemoteAgent<NumberService>(NumberServiceManager)
+object NumberAgent : KVRemoteAgent<NumberService>(NumberServiceManager)
 
 actual class NumberService : INumberService {
 

@@ -3,8 +3,8 @@ package com.example
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import pl.treksoft.kvision.remote.KVServiceManager
 import pl.treksoft.kvision.remote.Profile
-import pl.treksoft.kvision.remote.SpringServiceManager
 
 enum class Sort {
     FN, LN, E, F
@@ -29,7 +29,7 @@ expect class AddressService : IAddressService
 expect class ProfileService : IProfileService
 expect class RegisterProfileService : IRegisterProfileService
 
-object AddressServiceManager : SpringServiceManager<AddressService>(AddressService::class) {
+object AddressServiceManager : KVServiceManager<AddressService>(AddressService::class) {
     init {
         GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
             bind(IAddressService::getAddressList)
@@ -40,7 +40,7 @@ object AddressServiceManager : SpringServiceManager<AddressService>(AddressServi
     }
 }
 
-object ProfileServiceManager : SpringServiceManager<ProfileService>(ProfileService::class) {
+object ProfileServiceManager : KVServiceManager<ProfileService>(ProfileService::class) {
     init {
         GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
             bind(IProfileService::getProfile)
@@ -48,7 +48,7 @@ object ProfileServiceManager : SpringServiceManager<ProfileService>(ProfileServi
     }
 }
 
-object RegisterProfileServiceManager : SpringServiceManager<RegisterProfileService>(RegisterProfileService::class) {
+object RegisterProfileServiceManager : KVServiceManager<RegisterProfileService>(RegisterProfileService::class) {
     init {
         GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
             bind(IRegisterProfileService::registerProfile)

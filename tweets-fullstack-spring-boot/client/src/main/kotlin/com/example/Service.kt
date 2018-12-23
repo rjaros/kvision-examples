@@ -1,8 +1,8 @@
 package com.example
 
-import pl.treksoft.kvision.remote.SpringRemoteAgent
+import pl.treksoft.kvision.remote.KVRemoteAgent
 
-object TweetAgent : SpringRemoteAgent<TweetService>(TweetServiceManager)
+object TweetAgent : KVRemoteAgent<TweetService>(TweetServiceManager)
 
 actual class TweetService : ITweetService {
     override suspend fun sendTweet(nickname: String, message: String, tags: List<String>) =

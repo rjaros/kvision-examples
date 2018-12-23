@@ -11,6 +11,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:${kotlinVersion}"
     compile "pl.treksoft:kvision:${kvisionVersion}"
     compile "pl.treksoft:kvision-bootstrap:${kvisionVersion}"
+    compile "pl.treksoft:kvision-remote:${kvisionVersion}"
  }
 
 kotlinFrontend {
