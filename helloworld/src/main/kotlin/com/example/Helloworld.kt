@@ -24,12 +24,12 @@ object Helloworld : ApplicationBase {
                     mapOf(
                         "en" to require("./messages-en.json"),
                         "pl" to require("./messages-pl.json"),
-                        "de" to require("./messages-pl.json"),
-                        "es" to require("./messages-pl.json"),
-                        "fr" to require("./messages-pl.json"),
-                        "ru" to require("./messages-pl.json"),
-                        "ja" to require("./messages-pl.json"),
-                        "ko" to require("./messages-pl.json")
+                        "de" to require("./messages-de.json"),
+                        "es" to require("./messages-es.json"),
+                        "fr" to require("./messages-fr.json"),
+                        "ru" to require("./messages-ru.json"),
+                        "ja" to require("./messages-ja.json"),
+                        "ko" to require("./messages-ko.json")
                     )
                 )
 
