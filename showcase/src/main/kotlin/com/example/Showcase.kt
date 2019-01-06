@@ -3,15 +3,14 @@ package com.example
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.form.select.Select
 import pl.treksoft.kvision.form.select.Select.Companion.select
-import pl.treksoft.kvision.form.select.SelectInput
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.panel.TabPanel.Companion.tabPanel
-import pl.treksoft.kvision.panel.TabPosition
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.perc
@@ -49,7 +48,7 @@ object Showcase : ApplicationBase {
                 width = 300.px
                 marginLeft = auto
                 marginRight = auto
-                setEventListener<SelectInput> {
+                setEventListener<Select> {
                     change = {
                         I18n.language = self.value ?: "en"
                     }
