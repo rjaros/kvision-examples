@@ -47,7 +47,7 @@ class DataTab : SimplePanel() {
 
         var searchFilter: String? = null
 
-        val dataContainer = DataContainer(list, { _, model ->
+        val dataContainer = DataContainer(list, { model, _, _ ->
             CheckBox(
                 value = model.checked,
                 label = model.text
@@ -58,7 +58,7 @@ class DataTab : SimplePanel() {
                     model.checked = this.value
                 }
             }
-        }, filter = { _, model ->
+        }, filter = { model ->
             searchFilter?.let {
                 trans(model.text).contains(it, ignoreCase = true)
             } ?: true

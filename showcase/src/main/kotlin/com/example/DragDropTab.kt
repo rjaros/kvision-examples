@@ -43,7 +43,7 @@ class DragDropTab : SimplePanel() {
             DataModel(tr("December"))
         )
 
-        val dataContainer1 = DataContainer(listGreen, { index, _ ->
+        val dataContainer1 = DataContainer(listGreen, { _, index, _ ->
             Div(listGreen[index].text, align = Align.CENTER) {
                 padding = 3.px
                 border = Border(1.px, BorderStyle.DASHED)
@@ -62,7 +62,7 @@ class DragDropTab : SimplePanel() {
             }
         })
 
-        val dataContainer2 = DataContainer(listBlue, { index, _ ->
+        val dataContainer2 = DataContainer(listBlue, { _, index, _ ->
             Div(listBlue[index].text, align = Align.CENTER) {
                 padding = 3.px
                 border = Border(1.px, BorderStyle.DASHED)
@@ -84,5 +84,6 @@ class DragDropTab : SimplePanel() {
         val panel = hPanel(justify = FlexJustify.CENTER, alignItems = FlexAlignItems.FLEXSTART, spacing = 50)
         panel.add(dataContainer1)
         panel.add(dataContainer2)
+
     }
 }

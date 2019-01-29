@@ -2,7 +2,7 @@ package com.example
 
 import com.lightningkite.kotlin.observable.list.observableListOf
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 import org.w3c.dom.get
 import org.w3c.dom.set
@@ -10,9 +10,8 @@ import pl.treksoft.kvision.data.BaseDataComponent
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.data.DataContainer.Companion.dataContainer
 import pl.treksoft.kvision.form.FieldLabel
-import pl.treksoft.kvision.form.check.CheckInput
-import pl.treksoft.kvision.form.check.CheckInput.Companion.checkInput
-import pl.treksoft.kvision.form.check.CheckInputType
+import pl.treksoft.kvision.form.check.CheckBoxInput
+import pl.treksoft.kvision.form.check.CheckBoxInput.Companion.checkBoxInput
 import pl.treksoft.kvision.form.text.TextInput
 import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
 import pl.treksoft.kvision.hmr.ApplicationBase
@@ -53,7 +52,7 @@ object Todomvc : ApplicationBase {
 
     private val model = observableListOf<Todo>()
 
-    private val checkAllInput = CheckInput(classes = setOf("toggle-all")).apply {
+    private val checkAllInput = CheckBoxInput(classes = setOf("toggle-all")).apply {
         id = "toggle-all"
         onClick {
             val value = this.value
@@ -73,7 +72,7 @@ object Todomvc : ApplicationBase {
     }
     private var mode: TODOMODE = TODOMODE.ALL
 
-    private var container: DataContainer<Todo, Tag>? = null
+    private var container: DataContainer<Todo, Tag, Tag>? = null
 
     private val header = genHeader()
     private val main = genMain()
@@ -97,12 +96,12 @@ object Todomvc : ApplicationBase {
 
     private fun loadModel() {
         localStorage.get("todos-kvision")?.let {
-            JSON.parse(BaseTodo.serializer().list, it).map { model.add(Todo(it)) }
+            Json.parse(BaseTodo.serializer().list, it).map { model.add(Todo(it)) }
         }
     }
 
     private fun saveModel() {
-        val jsonString = JSON.indented.stringify(BaseTodo.serializer().list, model.toList())
+        val jsonString = Json.indented.stringify(BaseTodo.serializer().list, model.toList())
         localStorage.set("todos-kvision", jsonString)
     }
 
@@ -183,15 +182,13 @@ object Todomvc : ApplicationBase {
         return Tag(TAG.SECTION, classes = setOf("main")) {
             add(checkAllInput)
             add(FieldLabel("toggle-all", "Mark all as complete"))
-            container = dataContainer(model, { index, todo ->
+            container = dataContainer(model, { todo, index, _ ->
                 val li = Tag(TAG.LI)
                 li.apply {
                     if (todo.completed) addCssClass("completed")
                     val edit = TextInput(classes = setOf("edit"))
                     val view = Tag(TAG.DIV, classes = setOf("view")) {
-                        checkInput(
-                            CheckInputType.CHECKBOX, todo.completed, classes = setOf("toggle")
-                        ).onClick {
+                        checkBoxInput(todo.completed, classes = setOf("toggle")).onClick {
                             todo.completed = this.value
                         }
                         tag(TAG.LABEL, todo.title) {
@@ -227,7 +224,7 @@ object Todomvc : ApplicationBase {
                     add(view)
                     add(edit)
                 }
-            }, { _, todo ->
+            }, filter = { todo ->
                 when (mode) {
                     TODOMODE.ALL -> true
                     TODOMODE.ACTIVE -> !todo.completed

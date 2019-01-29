@@ -6,6 +6,7 @@ import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.FontWeight
 import pl.treksoft.kvision.core.Overflow
 import pl.treksoft.kvision.data.DataContainer
+import pl.treksoft.kvision.data.SorterType
 import pl.treksoft.kvision.html.Label.Companion.label
 import pl.treksoft.kvision.html.Link.Companion.link
 import pl.treksoft.kvision.panel.FlexJustify
@@ -23,10 +24,12 @@ class TweetPanel : SimplePanel() {
         width = 500.px
         height = 402.px
 
-        val dataContainer = DataContainer(Model.tweets, { _, tweet ->
+        val dataContainer = DataContainer(Model.tweets, { tweet, _, _ ->
             Post(tweet)
-        }, mapping = {
-            it.reversed()
+        }, sorter = {
+            it.id
+        }, sorterType = {
+            SorterType.DESC
         }, container = VPanel(spacing = 1).apply {
             height = 400.px
             overflow = Overflow.AUTO

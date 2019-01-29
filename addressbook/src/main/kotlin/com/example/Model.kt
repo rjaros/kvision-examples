@@ -3,7 +3,7 @@ package com.example
 import com.lightningkite.kotlin.observable.list.ObservableList
 import com.lightningkite.kotlin.observable.list.observableListOf
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 import org.w3c.dom.get
 import org.w3c.dom.set
@@ -34,14 +34,14 @@ object Model {
     )
 
     fun storeAddresses() {
-        val jsonString = JSON.stringify(Address.serializer().list, addresses)
+        val jsonString = Json.stringify(Address.serializer().list, addresses)
         localStorage["addresses"] = jsonString
     }
 
     fun loadAddresses() {
         localStorage["addresses"]?.let {
             addresses.clear()
-            JSON.parse(Address.serializer().list, it).forEach {
+            Json.parse(Address.serializer().list, it).forEach {
                 addresses.add(it)
             }
         }

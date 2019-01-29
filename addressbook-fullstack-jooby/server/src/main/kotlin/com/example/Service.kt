@@ -5,10 +5,10 @@ import com.github.andrewoma.kwery.core.interceptor.LoggingInterceptor
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.typesafe.config.Config
+import org.jooby.Request
 import org.jooby.require
 import org.pac4j.sql.profile.DbProfile
 import pl.treksoft.kvision.remote.Profile
-import pl.treksoft.kvision.remote.Request
 import pl.treksoft.kvision.remote.withProfile
 import java.util.*
 import javax.sql.DataSource

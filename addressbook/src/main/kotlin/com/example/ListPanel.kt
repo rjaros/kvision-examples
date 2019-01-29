@@ -1,10 +1,9 @@
 package com.example
 
-import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.FontStyle
-import pl.treksoft.kvision.core.TextShadow
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.data.DataContainer.Companion.dataContainer
+import pl.treksoft.kvision.data.SorterType
 import pl.treksoft.kvision.form.check.RadioGroup
 import pl.treksoft.kvision.form.check.RadioGroup.Companion.radioGroup
 import pl.treksoft.kvision.form.text.TextInput
@@ -30,7 +29,7 @@ enum class Sort {
 
 object ListPanel : SimplePanel() {
 
-    private val container: DataContainer<Address, Row>
+    private val container: DataContainer<Address, Row, Table>
     private lateinit var search: TextInput
     private lateinit var types: RadioGroup
     private var sort = Sort.FN
@@ -84,7 +83,7 @@ object ListPanel : SimplePanel() {
         }
 
         container = dataContainer(
-            Model.addresses, { index, address ->
+            Model.addresses, { address, index, _ ->
                 Row {
                     cell(address.firstName)
                     cell(address.lastName)
@@ -121,16 +120,21 @@ object ListPanel : SimplePanel() {
                         }
                     }
                 }
-            }, { _, address ->
+            }, table, filter = { address ->
                 address.match(search.value) && (types.value == "all" || address.favourite ?: false)
-            }, {
+            }, sorter = {
                 when (sort) {
-                    Sort.FN -> it.sortedBy { it.second.firstName?.toLowerCase() }
-                    Sort.LN -> it.sortedBy { it.second.lastName?.toLowerCase() }
-                    Sort.E -> it.sortedBy { it.second.email?.toLowerCase() }
-                    Sort.F -> it.sortedBy { it.second.favourite }
+                    Sort.FN -> it.firstName?.toLowerCase()
+                    Sort.LN -> it.lastName?.toLowerCase()
+                    Sort.E -> it.email?.toLowerCase()
+                    Sort.F -> it.favourite
                 }
-            }, container = table
+            }, sorterType = {
+                when (sort) {
+                    Sort.F -> SorterType.DESC
+                    else -> SorterType.ASC
+                }
+            }
         )
         search.setEventListener {
             input = {

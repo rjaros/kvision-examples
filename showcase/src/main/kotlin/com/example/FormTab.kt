@@ -3,6 +3,7 @@ package com.example
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
@@ -39,8 +40,8 @@ data class Form(
     val password2: String? = null,
     val textarea: String? = null,
     val richtext: String? = null,
-    val date: Date? = null,
-    val time: Date? = null,
+    @ContextualSerialization val date: Date? = null,
+    @ContextualSerialization val time: Date? = null,
     val checkbox: Boolean = false,
     val radio: Boolean = false,
     val select: String? = null,

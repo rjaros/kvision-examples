@@ -54,7 +54,7 @@ object ListPanel : SimplePanel() {
         }
 
         dataContainer(
-            Model.addresses, { index, address ->
+            Model.addresses, { address, index, _ ->
                 Row {
                     cell(address.firstName)
                     cell(address.lastName)

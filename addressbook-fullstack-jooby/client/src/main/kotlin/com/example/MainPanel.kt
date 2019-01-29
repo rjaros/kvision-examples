@@ -14,7 +14,7 @@ object MainPanel : HPanel(justify = FlexJustify.SPACEBETWEEN) {
         button("Add new address", "fa-plus", style = ButtonStyle.PRIMARY).onClick {
             EditPanel.add()
         }
-        dataContainer(Model.profile, { _, profile ->
+        dataContainer(Model.profile, { profile, _, _ ->
             if (profile.id != null) {
                 Button("Logout: ${profile.displayName}", "fa-sign-out", style = ButtonStyle.WARNING).onClick {
                     document.location?.href = "/logout"

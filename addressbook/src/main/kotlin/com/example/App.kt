@@ -16,6 +16,7 @@ object App : ApplicationBase {
                 height = 100.vh
                 add(ListPanel)
                 add(EditPanel)
+                Model.loadAddresses()
             }
         }
     }
