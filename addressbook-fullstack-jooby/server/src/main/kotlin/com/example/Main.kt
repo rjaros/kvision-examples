@@ -4,24 +4,27 @@ import com.github.andrewoma.kwery.core.ThreadLocalSession
 import com.github.andrewoma.kwery.core.interceptor.LoggingInterceptor
 import com.typesafe.config.Config
 import org.jooby.Jooby.run
+import org.jooby.Kooby
 import org.jooby.jdbc.Jdbc
 import org.jooby.pac4j.Pac4j
 import org.jooby.require
 import org.pac4j.core.credentials.UsernamePasswordCredentials
 import org.pac4j.http.client.indirect.FormClient
-import pl.treksoft.kvision.remote.KVServer
+import pl.treksoft.kvision.remote.applyRoutes
+import pl.treksoft.kvision.remote.kvisionInit
 import javax.sql.DataSource
 
-class App : KVServer({
+class App : Kooby({
+    kvisionInit()
     use(Jdbc("db"))
-    RegisterProfileServiceManager.applyRoutes(this)
+    applyRoutes(RegisterProfileServiceManager)
     use(Pac4j().client { _ ->
         FormClient("/") { credentials, context ->
             require(MyDbProfileService::class).validate(credentials as UsernamePasswordCredentials, context)
         }
     })
-    AddressServiceManager.applyRoutes(this)
-    ProfileServiceManager.applyRoutes(this)
+    applyRoutes(AddressServiceManager)
+    applyRoutes(ProfileServiceManager)
     onStart {
         val db = require("db", DataSource::class)
         val session = ThreadLocalSession(db, getDbDialect(require(Config::class)), LoggingInterceptor())

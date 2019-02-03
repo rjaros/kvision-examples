@@ -1,10 +1,13 @@
 package com.example
 
 import org.jooby.Jooby.run
-import pl.treksoft.kvision.remote.KVServer
+import org.jooby.Kooby
+import pl.treksoft.kvision.remote.applyRoutes
+import pl.treksoft.kvision.remote.kvisionInit
 
-class App : KVServer({
-    NumberServiceManager.applyRoutes(this)
+class App : Kooby({
+    kvisionInit()
+    applyRoutes(NumberServiceManager)
 })
 
 fun main(args: Array<String>) {

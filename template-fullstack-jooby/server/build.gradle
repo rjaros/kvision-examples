@@ -23,7 +23,7 @@ dependencies {
 }
 
 sourceSets.main.resources {
-    srcDirs = ["conf", "public", "../client/build/distributions/client"]
+    srcDirs = ["conf", "public"]
 }
 
 sourceSets.main.java {
@@ -35,5 +35,11 @@ compileKotlin {
     sourceCompatibility = javaVersion
     kotlinOptions {
         jvmTarget = javaVersion
+    }
+}
+
+shadowJar {
+    into('/assets') {
+        from fileTree('../client/build/distributions/client')
     }
 }

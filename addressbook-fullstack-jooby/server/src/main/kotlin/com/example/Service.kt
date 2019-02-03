@@ -42,8 +42,8 @@ actual class AddressService : IAddressService {
         } ?: throw IllegalArgumentException("The ID of the address not set")
     }
 
-    override suspend fun deleteAddress(id: Int): Boolean {
-        return getAddressDao(request).delete(id) > 0
+    override suspend fun deleteAddress(id: Int) = request.withProfile {
+        getAddressDao(request).delete(id) > 0
     }
 
 }

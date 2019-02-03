@@ -43,13 +43,14 @@ A complete implementation of [TodoMVC](http://todomvc.com/) demo application.
 ## Address book - fullstack
 
 A complete, multiplatform address book application. It presents an innovative way to build fullstack applications with KVision and 
-[Jooby](https://jooby.org) micro web framework or [Spring Boot](https://spring.io/projects/spring-boot) framework. KVision closely integrates the client and the server side of the project with a 
+[Ktor](https://ktor.io), [Jooby](https://jooby.org) or [Spring Boot](https://spring.io/projects/spring-boot) frameworks. KVision closely integrates the client and the server side of the project with a 
 shared data model and fully type-safe connectivity between both sides (based on automatically generated routings and JSON-RPC 
 endpoints). The example project utilizes:
 
-- H2 SQL database (configured for "filesystem" database) or PostgreSQL database (configured on Heroku)
-- [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity
-- [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management
+- H2 SQL database (local) or PostgreSQL database (configured on Heroku)
+- [Exposed](https://github.com/JetBrains/Exposed) Kotlin SQL library for database connectivity (used in Ktor version)
+- [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity (used in Jooby and Spring Boot versions)
+- [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management (used in Jooby and Spring Boot versions)
 
 The architecture of the project is heavily based on Kotlin coroutines, wrapping asynchronous client-server calls into 
 easy-to-read synchronous-like code.
@@ -72,4 +73,4 @@ Note: The application uses simple, in memory storage, so all messages are gone a
 
 ## Template - fullstack
 
-A fullstack application template. A starting point for a new application.
+A fullstack application template (versions for all supported frameworks). A starting point for a new application.

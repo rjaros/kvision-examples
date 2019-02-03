@@ -8,14 +8,31 @@ import com.github.andrewoma.kwery.core.dialect.HsqlDialect
 import com.github.andrewoma.kwery.core.dialect.PostgresDialect
 import com.github.andrewoma.kwery.core.interceptor.LoggingInterceptor
 import com.github.andrewoma.kwery.mapper.AbstractDao
+import com.github.andrewoma.kwery.mapper.SimpleConverter
 import com.github.andrewoma.kwery.mapper.Table
+import com.github.andrewoma.kwery.mapper.TableConfiguration
 import com.github.andrewoma.kwery.mapper.Value
 import com.github.andrewoma.kwery.mapper.prefixed
+import com.github.andrewoma.kwery.mapper.reifiedConverter
+import com.github.andrewoma.kwery.mapper.standardConverters
+import com.github.andrewoma.kwery.mapper.util.camelToLowerUnderscore
 import org.springframework.context.annotation.Bean
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Service
 import pl.treksoft.kvision.types.kvTableConfig
+import java.sql.Timestamp
+import java.util.*
 import javax.sql.DataSource
+
+object DateConverter : SimpleConverter<Date>(
+    { row, c -> Date(row.timestamp(c).time) },
+    { Timestamp(it.time) }
+)
+
+val kvTableConfig = TableConfiguration(
+    converters = standardConverters + reifiedConverter(DateConverter),
+    namingConvention = camelToLowerUnderscore
+)
 
 object AddressTable : Table<Address, Int>("address", kvTableConfig) {
     val Id by col(Address::id, id = true)
