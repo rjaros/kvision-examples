@@ -15,7 +15,6 @@ import com.github.andrewoma.kwery.mapper.prefixed
 import com.github.andrewoma.kwery.mapper.reifiedConverter
 import com.github.andrewoma.kwery.mapper.standardConverters
 import com.github.andrewoma.kwery.mapper.util.camelToLowerUnderscore
-import pl.treksoft.kvision.types.kvTableConfig
 import java.sql.Timestamp
 import java.util.*
 

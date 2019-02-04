@@ -19,7 +19,6 @@ import com.github.andrewoma.kwery.mapper.util.camelToLowerUnderscore
 import org.springframework.context.annotation.Bean
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Service
-import pl.treksoft.kvision.types.kvTableConfig
 import java.sql.Timestamp
 import java.util.*
 import javax.sql.DataSource
