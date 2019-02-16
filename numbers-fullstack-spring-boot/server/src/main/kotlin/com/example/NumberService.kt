@@ -1,9 +1,12 @@
 package com.example
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
+import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Service
 import pl.allegro.finance.tradukisto.ValueConverters
 
 @Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 actual class NumberService : INumberService {
 
     override suspend fun numberToWords(number: Int, language: Language): String {

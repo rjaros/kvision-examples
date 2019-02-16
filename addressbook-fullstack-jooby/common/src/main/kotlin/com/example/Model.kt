@@ -1,3 +1,5 @@
+@file:ContextualSerialization(Date::class)
+
 package com.example
 
 import kotlinx.serialization.ContextualSerialization
@@ -13,6 +15,6 @@ data class Address(
     val phone: String? = null,
     val postalAddress: String? = null,
     val favourite: Boolean? = false,
-    @ContextualSerialization val createdAt: Date? = null,
+    val createdAt: Date? = null,
     val userId: String? = null
 )

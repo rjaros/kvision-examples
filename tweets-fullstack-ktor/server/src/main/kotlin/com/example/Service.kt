@@ -1,18 +1,22 @@
 package com.example
 
-import com.google.inject.Singleton
+import com.example.Model.counter
+import com.example.Model.tweets
 import java.util.*
 
-@Singleton
+object Model {
+    val tweets = mutableListOf<Tweet>()
+    var counter = 0
+}
+
 actual class TweetService : ITweetService {
 
-    private val tweets = mutableListOf<Tweet>()
-    private var counter = 0
-
     override suspend fun sendTweet(nickname: String, message: String, tags: List<String>): Int {
-        val tweet = Tweet(counter++, Date(), nickname, message, tags)
-        tweets.add(tweet)
-        return tweet.id
+        synchronized(Model) {
+            val tweet = Tweet(counter++, Date(), nickname, message, tags)
+            tweets.add(tweet)
+            return tweet.id
+        }
     }
 
     override suspend fun getTweet(id: Int): Tweet {

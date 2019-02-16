@@ -1,5 +1,6 @@
 package com.example
 
+import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.FontStyle
 import pl.treksoft.kvision.core.FontVariant
@@ -17,6 +18,7 @@ import pl.treksoft.kvision.html.ListTag.Companion.listTag
 import pl.treksoft.kvision.html.ListType
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag.Companion.tag
+import pl.treksoft.kvision.html.setData
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
@@ -25,8 +27,13 @@ import pl.treksoft.kvision.table.Cell.Companion.cell
 import pl.treksoft.kvision.table.Row.Companion.row
 import pl.treksoft.kvision.table.Table.Companion.table
 import pl.treksoft.kvision.table.TableType
-import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px
+
+@Serializable
+data class HbsKid(val name: String, val age: Int)
+
+@Serializable
+data class HbsPerson(val name: String, val hometown: String, val kids: List<HbsKid>)
 
 class BasicTab : SimplePanel() {
     init {
@@ -74,24 +81,14 @@ class BasicTab : SimplePanel() {
             }
             label(tr("A Handlebars.js template:"))
 
-            val data = obj {
-                name = "Alan"
-                hometown = "Somewhere, TX"
-                kids = arrayOf(obj {
-                    name = "Jimmy"
-                    age = "12"
-                }, obj {
-                    name = "Sally"
-                    age = "5"
-                })
-            }
+            val data = HbsPerson("Alan", "Somewhere, TX", listOf(HbsKid("Jimmy", 12), HbsKid("Sally", 5)))
 
             div {
                 templates = mapOf(
                     "en" to require("hbs/template1.en.hbs"),
                     "pl" to require("hbs/template1.pl.hbs")
                 )
-                templateData = data
+                setData(data)
             }
 
             label(tr("An iframe:"))

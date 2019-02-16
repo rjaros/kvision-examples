@@ -1,13 +1,20 @@
 package com.example
 
+import com.example.Model.counter
+import com.example.Model.tweets
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
+import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Service
 import java.util.*
 
-@Service
-actual class TweetService : ITweetService {
+object Model {
+    val tweets = mutableListOf<Tweet>()
+    var counter = 0
+}
 
-    private val tweets = mutableListOf<Tweet>()
-    private var counter = 0
+@Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+actual class TweetService : ITweetService {
 
     override suspend fun sendTweet(nickname: String, message: String, tags: List<String>): Int {
         val tweet = Tweet(counter++, Date(), nickname, message, tags)

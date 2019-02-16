@@ -4,6 +4,8 @@ import org.pac4j.core.credentials.password.SpringSecurityPasswordEncoder
 import org.pac4j.sql.profile.DbProfile
 import org.pac4j.sql.profile.service.DbProfileService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
+import org.springframework.context.annotation.Scope
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import pl.treksoft.kvision.remote.Profile
@@ -12,6 +14,7 @@ import java.util.*
 import javax.sql.DataSource
 
 @Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 actual class AddressService : IAddressService {
 
     @Autowired
@@ -38,6 +41,7 @@ actual class AddressService : IAddressService {
 }
 
 @Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 actual class ProfileService : IProfileService {
     override suspend fun getProfile() = withProfile { it }
 }
@@ -47,6 +51,7 @@ class MyDbProfileService constructor(ds: DataSource) :
     DbProfileService(ds, SpringSecurityPasswordEncoder(BCryptPasswordEncoder()))
 
 @Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 actual class RegisterProfileService : IRegisterProfileService {
 
     @Autowired

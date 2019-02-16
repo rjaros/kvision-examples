@@ -2,11 +2,9 @@ package com.example
 
 import pl.treksoft.kvision.remote.KVRemoteAgent
 
-object NumberAgent : KVRemoteAgent<NumberService>(NumberServiceManager)
-
-actual class NumberService : INumberService {
+actual class NumberService : INumberService, KVRemoteAgent<NumberService>(NumberServiceManager) {
 
     override suspend fun numberToWords(number: Int, language: Language) =
-        NumberAgent.call(INumberService::numberToWords, number, language)
+        call(INumberService::numberToWords, number, language)
 
 }

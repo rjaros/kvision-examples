@@ -43,6 +43,7 @@ object Showcase : ApplicationBase {
                 addTab(tr("Data binding"), DataTab(), "fa-retweet", route = "/data")
                 addTab(tr("Windows"), WindowsTab(), "fa-window-restore", route = "/windows")
                 addTab(tr("Drag & Drop"), DragDropTab(), "fa-arrows-alt", route = "/dragdrop")
+                addTab(tr("RESTful"), RestTab(), "fa-plug", route = "/restful")
             }
             select(listOf("en" to tr("English"), "pl" to tr("Polish")), I18n.language) {
                 width = 300.px

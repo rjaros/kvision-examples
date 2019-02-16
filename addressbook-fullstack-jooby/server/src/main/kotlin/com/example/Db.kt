@@ -8,9 +8,10 @@ import org.pac4j.core.credentials.password.SpringSecurityPasswordEncoder
 import org.pac4j.sql.profile.service.DbProfileService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.inject.Inject
+import javax.inject.Named
 import javax.sql.DataSource
 
-class MyDbProfileService @Inject constructor(ds: DataSource) :
+class MyDbProfileService @Inject constructor(@Named("db") ds: DataSource) :
     DbProfileService(ds, SpringSecurityPasswordEncoder(BCryptPasswordEncoder()))
 
 fun getDbDialect(config: Config): Dialect {

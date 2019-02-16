@@ -12,7 +12,7 @@ dependencies {
     compile "pl.treksoft:kvision:${kvisionVersion}"
     compile "pl.treksoft:kvision-bootstrap:${kvisionVersion}"
     compile "pl.treksoft:kvision-remote:${kvisionVersion}"
- }
+}
 
 kotlinFrontend {
 
@@ -74,7 +74,7 @@ task dist(type: Copy, dependsOn: 'bundle') {
 }
 
 task distZip(type: Zip, dependsOn: 'dist') {
-    from (buildDir.path + "/distributions/" + project.name)
+    from(buildDir.path + "/distributions/" + project.name)
 }
 
 afterEvaluate {

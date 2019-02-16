@@ -4,7 +4,6 @@ import com.example.Db.dbQuery
 import com.example.Db.queryList
 import com.github.andrewoma.kwery.core.builder.query
 import com.google.inject.Inject
-import com.google.inject.Singleton
 import io.ktor.application.ApplicationCall
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.ResultRow
@@ -18,7 +17,6 @@ import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.withProfile
 import java.sql.ResultSet
 
-@Singleton
 actual class AddressService : IAddressService {
 
     @Inject
@@ -135,7 +133,6 @@ actual class AddressService : IAddressService {
         )
 }
 
-@Singleton
 actual class ProfileService : IProfileService {
 
     @Inject
@@ -145,7 +142,6 @@ actual class ProfileService : IProfileService {
 
 }
 
-@Singleton
 actual class RegisterProfileService : IRegisterProfileService {
 
     override suspend fun registerProfile(profile: Profile, password: String): Boolean {

@@ -1,3 +1,5 @@
+@file:ContextualSerialization(Date::class)
+
 package com.example
 
 import kotlinx.coroutines.CoroutineStart
@@ -11,7 +13,7 @@ import pl.treksoft.kvision.types.Date
 @Serializable
 data class Tweet(
     val id: Int,
-    @ContextualSerialization val date: Date,
+    val date: Date,
     val nickname: String,
     val message: String,
     val tags: List<String>
