@@ -74,3 +74,8 @@ Note: The application uses simple, in memory storage, so all messages are gone a
 ## Template - fullstack
 
 A fullstack application template (versions for all supported frameworks). A starting point for a new application.
+
+## Simple MPP - fullstack
+
+A fullstack MPP application created without KVision, but using kvision-remote module for server-side connectivity. 
+It's based on an official [Ktor MPP example](https://github.com/ktorio/ktor-samples/tree/master/mpp/fullstack-mpp).
