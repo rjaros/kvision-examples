@@ -1,13 +1,5 @@
-spring:
-  datasource:
-    url: jdbc:h2:file:/tmp/example
-
 server:
   compression:
     enabled: true
     mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
     min-response-size: 1024
-
-pac4j:
-  logout:
-    defaultUrl: /

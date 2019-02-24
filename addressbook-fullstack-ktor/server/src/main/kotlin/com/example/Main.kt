@@ -11,6 +11,7 @@ import io.ktor.auth.authenticate
 import io.ktor.auth.form
 import io.ktor.auth.principal
 import io.ktor.features.CallLogging
+import io.ktor.features.Compression
 import io.ktor.features.DefaultHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
@@ -33,6 +34,7 @@ import pl.treksoft.kvision.remote.applyRoutes
 import pl.treksoft.kvision.remote.kvisionInit
 
 fun Application.main() {
+    install(Compression)
     install(DefaultHeaders)
     install(CallLogging)
     install(Sessions) {
