@@ -1,1 +1,1 @@
-web: java -Dapplication.port=$PORT -Ddb.url=$JDBC_DATABASE_URL -Ddb.user=$JDBC_DATABASE_USERNAME -Ddb.password=$JDBC_DATABASE_PASSWORD -Ddbdialect=pgsql -jar server/build/libs/server-all.jar prod
+web: java -Dserver.port=$PORT -Dspring.datasource.url=$JDBC_DATABASE_URL -Dspring.datasource.username=$JDBC_DATABASE_USERNAME -Dspring.datasource.password=$JDBC_DATABASE_PASSWORD -Ddbdialect=pgsql -jar server/build/libs/server.jar
