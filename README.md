@@ -63,6 +63,12 @@ A simple application to convert integer numbers to words by using JVM [Tradukist
 
 [See live demo on Heroku](https://kvision-numbers.herokuapp.com/)
 
+## Encoder - fullstack
+
+A simple application to encode given text, based on the overview chapter from [KVision guide](https://kvision.gitbook.io/kvision-guide/part-3-server-side-interface/overview).
+
+[See live demo on Heroku](https://kvision-encoder.herokuapp.com/)
+
 ## Tweets - fullstack
 
 A simple, multiplatform, message board application. 
