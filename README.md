@@ -86,7 +86,7 @@ A fullstack application template (versions for all supported frameworks). A star
 A fullstack MPP application created without KVision, but using kvision-remote module for server-side connectivity. 
 It's based on an official [Ktor MPP example](https://github.com/ktorio/ktor-samples/tree/master/mpp/fullstack-mpp).
 
-## Electron template
+## Template - Electron
 
 An application template for [Electron](https://electronjs.org/) framework. It shows how to build cross-platform 
 (Windows, Linux, MacOS), desktop applications with KVision and Kotlin. 
