@@ -1,0 +1,8 @@
+appId: template-electron
+electronVersion: 4.0.7
+directories:
+  output: ../../electron
+linux:
+  target: AppImage
+win:
+  target: portable

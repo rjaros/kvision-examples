@@ -1,0 +1,6 @@
+{
+    "name": "template-electron",
+    "version": "0.0.0",
+    "description": "KVision Electron App",
+    "main": "index.js"
+}
