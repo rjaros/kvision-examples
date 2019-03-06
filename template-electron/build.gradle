@@ -182,9 +182,9 @@ task bundleApp(group: 'build', dependsOn: buildApp) {
             workingDir "${buildDir.path}/distributions/${project.name}"
             environment 'PATH', System.getenv('PATH') + File.pathSeparator + nodeDir.absolutePath
             if (isWindows) {
-                commandLine 'cmd', '/c', '"../../../node_modules/.bin/electron-builder" --config -wl'
+                commandLine 'cmd', '/c', '"../../../node_modules/.bin/electron-builder" --config'
             } else {
-                commandLine '../../../node_modules/.bin/electron-builder', '--config', '-wl'
+                commandLine '../../../node_modules/.bin/electron-builder', '--config'
             }
         }
     }
