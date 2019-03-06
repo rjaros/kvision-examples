@@ -88,5 +88,5 @@ It's based on an official [Ktor MPP example](https://github.com/ktorio/ktor-samp
 
 ## Electron template
 
-An application template for [Electron](https://electronjs.org/) target. It shows how to build multiplatform 
+An application template for [Electron](https://electronjs.org/) framework. It shows how to build cross-platform 
 (Windows, Linux, MacOS), desktop applications with KVision and Kotlin. 
