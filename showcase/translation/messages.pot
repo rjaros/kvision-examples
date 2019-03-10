@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KVision\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-13 01:16+0100\n"
+"POT-Creation-Date: 2019-03-09 23:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,69 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main/kotlin/com/example/BasicTab.kt:43
+#: src/main/kotlin/com/example/BasicTab.kt:44
 msgid "A simple label"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:44
+#: src/main/kotlin/com/example/BasicTab.kt:53
 msgid "A label with custom CSS styling"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:52
+#: src/main/kotlin/com/example/BasicTab.kt:56
 msgid "A list:"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:53
+#: src/main/kotlin/com/example/BasicTab.kt:58
 msgid "First list element"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:53
+#: src/main/kotlin/com/example/BasicTab.kt:58
 msgid "Second list element"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:53
+#: src/main/kotlin/com/example/BasicTab.kt:58
 msgid "Third list element"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:54
+#: src/main/kotlin/com/example/BasicTab.kt:60
 msgid "An image:"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:56
+#: src/main/kotlin/com/example/BasicTab.kt:64
 msgid "Some text written in <code></code> HTML tag."
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:60
+#: src/main/kotlin/com/example/BasicTab.kt:68
 msgid ""
 "Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; "
 "font-size: 14pt\">"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:65
+#: src/main/kotlin/com/example/BasicTab.kt:72
 msgid "A link to Google"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:66
+#: src/main/kotlin/com/example/BasicTab.kt:74
 msgid "A responsive table:"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:68
+#: src/main/kotlin/com/example/BasicTab.kt:77
 msgid "Column 1"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:68
+#: src/main/kotlin/com/example/BasicTab.kt:77
 msgid "Column 2"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:68
+#: src/main/kotlin/com/example/BasicTab.kt:77
 msgid "Column 3"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:82
+#: src/main/kotlin/com/example/BasicTab.kt:104
 msgid "A Handlebars.js template:"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:94
+#: src/main/kotlin/com/example/BasicTab.kt:118
 msgid "An iframe:"
 msgstr ""
 
@@ -165,6 +165,36 @@ msgstr ""
 
 #: src/main/kotlin/com/example/ButtonsTab.kt:48
 msgid "Squared radiobutton"
+msgstr ""
+
+#: src/main/kotlin/com/example/ChartTab.kt:57
+#: src/main/kotlin/com/example/ChartTab.kt:86
+#: src/main/kotlin/com/example/ChartTab.kt:109
+msgid "Africa"
+msgstr ""
+
+#: src/main/kotlin/com/example/ChartTab.kt:58
+#: src/main/kotlin/com/example/ChartTab.kt:87
+#: src/main/kotlin/com/example/ChartTab.kt:110
+msgid "Asia"
+msgstr ""
+
+#: src/main/kotlin/com/example/ChartTab.kt:59
+#: src/main/kotlin/com/example/ChartTab.kt:88
+#: src/main/kotlin/com/example/ChartTab.kt:111
+msgid "Europe"
+msgstr ""
+
+#: src/main/kotlin/com/example/ChartTab.kt:60
+#: src/main/kotlin/com/example/ChartTab.kt:89
+#: src/main/kotlin/com/example/ChartTab.kt:112
+msgid "Latin America"
+msgstr ""
+
+#: src/main/kotlin/com/example/ChartTab.kt:61
+#: src/main/kotlin/com/example/ChartTab.kt:90
+#: src/main/kotlin/com/example/ChartTab.kt:113
+msgid "North America"
 msgstr ""
 
 #: src/main/kotlin/com/example/ContainersTab.kt:35
@@ -397,146 +427,146 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:61
+#: src/main/kotlin/com/example/FormTab.kt:63
 msgid "Required text field with regexp [0-9] validator"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:62
+#: src/main/kotlin/com/example/FormTab.kt:64
 msgid "Enter your age"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:65
-#: src/main/kotlin/com/example/FormTab.kt:93
+#: src/main/kotlin/com/example/FormTab.kt:67
+#: src/main/kotlin/com/example/FormTab.kt:95
 msgid "Value is required"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:66
+#: src/main/kotlin/com/example/FormTab.kt:68
 msgid "Only numbers are allowed"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:69
+#: src/main/kotlin/com/example/FormTab.kt:71
 msgid "Password field with minimum length validator"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:70
-#: src/main/kotlin/com/example/FormTab.kt:74
+#: src/main/kotlin/com/example/FormTab.kt:72
+#: src/main/kotlin/com/example/FormTab.kt:76
 msgid "Password too short"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:73
+#: src/main/kotlin/com/example/FormTab.kt:75
 msgid "Password confirmation"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:77
+#: src/main/kotlin/com/example/FormTab.kt:79
 msgid "Text area field"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:80
+#: src/main/kotlin/com/example/FormTab.kt:82
 msgid "Rich text field with a placeholder"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:80
+#: src/main/kotlin/com/example/FormTab.kt:82
 msgid "Add some info"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:83
+#: src/main/kotlin/com/example/FormTab.kt:85
 msgid "Date field with a placeholder"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:84
+#: src/main/kotlin/com/example/FormTab.kt:86
 msgid "Enter date"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:88
+#: src/main/kotlin/com/example/FormTab.kt:90
 msgid "Time field"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:92
+#: src/main/kotlin/com/example/FormTab.kt:94
 msgid "Required checkbox"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:95
+#: src/main/kotlin/com/example/FormTab.kt:97
 msgid "Radio button"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:98
-#: src/main/kotlin/com/example/FormTab.kt:122
+#: src/main/kotlin/com/example/FormTab.kt:100
+#: src/main/kotlin/com/example/FormTab.kt:124
 msgid "First option"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:98
-#: src/main/kotlin/com/example/FormTab.kt:122
+#: src/main/kotlin/com/example/FormTab.kt:100
+#: src/main/kotlin/com/example/FormTab.kt:124
 msgid "Second option"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:99
+#: src/main/kotlin/com/example/FormTab.kt:101
 msgid "Simple select"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:103
+#: src/main/kotlin/com/example/FormTab.kt:105
 msgid "Select with remote data source"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:119
+#: src/main/kotlin/com/example/FormTab.kt:121
 msgid "Spinner field 10 - 20"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:123
+#: src/main/kotlin/com/example/FormTab.kt:125
 msgid "Radio button group"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:126
+#: src/main/kotlin/com/example/FormTab.kt:128
 msgid "Upload files (images only)"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:134
-#: src/main/kotlin/com/example/FormTab.kt:135
+#: src/main/kotlin/com/example/FormTab.kt:136
+#: src/main/kotlin/com/example/FormTab.kt:137
 msgid "Passwords are not the same"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:139
+#: src/main/kotlin/com/example/FormTab.kt:141
 msgid "The passwords are not the same."
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:146
+#: src/main/kotlin/com/example/FormTab.kt:148
 msgid "Show data"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:148
+#: src/main/kotlin/com/example/FormTab.kt:150
 msgid "Form data in plain JSON"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:150
+#: src/main/kotlin/com/example/FormTab.kt:152
 msgid "Clear data"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:152
+#: src/main/kotlin/com/example/FormTab.kt:154
 msgid "Are you sure?"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:153
+#: src/main/kotlin/com/example/FormTab.kt:155
 msgid "Do you want to clear your data?"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:154
+#: src/main/kotlin/com/example/FormTab.kt:156
 #: src/main/kotlin/com/example/ModalsTab.kt:34
 #: src/main/kotlin/com/example/ModalsTab.kt:49
 msgid "Yes"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:155
+#: src/main/kotlin/com/example/FormTab.kt:157
 #: src/main/kotlin/com/example/ModalsTab.kt:35
 #: src/main/kotlin/com/example/ModalsTab.kt:50
 msgid "No"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:156
+#: src/main/kotlin/com/example/FormTab.kt:158
 #: src/main/kotlin/com/example/ModalsTab.kt:36
 #: src/main/kotlin/com/example/ModalsTab.kt:51
 msgid "Cancel"
 msgstr ""
 
-#: src/main/kotlin/com/example/FormTab.kt:162
+#: src/main/kotlin/com/example/FormTab.kt:164
 msgid "Validate"
 msgstr ""
 
@@ -655,14 +685,18 @@ msgid "Drag & Drop"
 msgstr ""
 
 #: src/main/kotlin/com/example/Showcase.kt:46
+msgid "Charts"
+msgstr ""
+
+#: src/main/kotlin/com/example/Showcase.kt:47
 msgid "RESTful"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:48
+#: src/main/kotlin/com/example/Showcase.kt:49
 msgid "English"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:48
+#: src/main/kotlin/com/example/Showcase.kt:49
 msgid "Polish"
 msgstr ""
 

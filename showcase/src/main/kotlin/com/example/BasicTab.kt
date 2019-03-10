@@ -40,46 +40,69 @@ class BasicTab : SimplePanel() {
         this.marginTop = 10.px
         this.minHeight = 400.px
         vPanel(spacing = 3) {
-            label(tr("A simple label"))
-            label(tr("A label with custom CSS styling")) {
+            label {
+                +tr("A simple label")
+            }
+            label {
                 fontFamily = "Times New Roman"
                 fontSize = 32.px
                 fontStyle = FontStyle.OBLIQUE
                 fontWeight = FontWeight.BOLDER
                 fontVariant = FontVariant.SMALLCAPS
                 textDecoration = TextDecoration(TextDecorationLine.UNDERLINE, TextDecorationStyle.DOTTED, Col.RED)
+                +tr("A label with custom CSS styling")
             }
-            label(tr("A list:"))
+            label {
+                +tr("A list:")
+            }
             listTag(ListType.UL, listOf(tr("First list element"), tr("Second list element"), tr("Third list element")))
-            label(tr("An image:"))
+            label {
+                +tr("An image:")
+            }
             image(require("./img/dog.jpg"), shape = ImageShape.CIRCLE)
-            tag(TAG.CODE, tr("Some text written in <code></code> HTML tag."))
-            tag(
-                TAG.DIV,
-                tr(
+            tag(TAG.CODE) {
+                +tr("Some text written in <code></code> HTML tag.")
+            }
+            div(rich = true) {
+                +tr(
                     "Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; font-size: 14pt\">" +
                             "any <strong>forma</strong>tting</span>."
-                ),
-                rich = true
-            )
+                )
+            }
             link(tr("A link to Google"), "http://www.google.com")
-            label(tr("A responsive table:"))
+            label {
+                +tr("A responsive table:")
+            }
             table(
                 listOf(tr("Column 1"), tr("Column 2"), tr("Column 3")),
                 setOf(TableType.BORDERED, TableType.CONDENSED, TableType.STRIPED, TableType.HOVER), responsive = true
             ) {
                 row {
-                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
-                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
-                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                    cell {
+                        +"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis."
+                    }
+                    cell {
+                        +"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis."
+                    }
+                    cell {
+                        +"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis."
+                    }
                 }
                 row {
-                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
-                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
-                    cell("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                    cell {
+                        +"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis."
+                    }
+                    cell {
+                        +"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis."
+                    }
+                    cell {
+                        +"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis."
+                    }
                 }
             }
-            label(tr("A Handlebars.js template:"))
+            label {
+                +tr("A Handlebars.js template:")
+            }
 
             val data = HbsPerson("Alan", "Somewhere, TX", listOf(HbsKid("Jimmy", 12), HbsKid("Sally", 5)))
 
@@ -91,7 +114,9 @@ class BasicTab : SimplePanel() {
                 setData(data)
             }
 
-            label(tr("An iframe:"))
+            label {
+                +tr("An iframe:")
+            }
 
             iframe(src = "https://rjaros.github.io/kvision/api/") {
                 iframeWidth = 600
