@@ -1,253 +1,229 @@
 package com.example
 
-import com.lightningkite.kotlin.observable.list.observableListOf
+import com.example.MODE.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 import org.w3c.dom.get
 import org.w3c.dom.set
-import pl.treksoft.kvision.data.BaseDataComponent
-import pl.treksoft.kvision.data.DataContainer
-import pl.treksoft.kvision.data.DataContainer.Companion.dataContainer
-import pl.treksoft.kvision.form.FieldLabel
-import pl.treksoft.kvision.form.check.CheckBoxInput
+import pl.treksoft.kvision.form.FieldLabel.Companion.fieldLabel
 import pl.treksoft.kvision.form.check.CheckBoxInput.Companion.checkBoxInput
 import pl.treksoft.kvision.form.text.TextInput
 import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
 import pl.treksoft.kvision.hmr.ApplicationBase
-import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.Button.Companion.button
-import pl.treksoft.kvision.html.Link
+import pl.treksoft.kvision.html.Div.Companion.div
+import pl.treksoft.kvision.html.Link.Companion.link
 import pl.treksoft.kvision.html.ListTag.Companion.listTag
 import pl.treksoft.kvision.html.ListType
-import pl.treksoft.kvision.html.TAG
+import pl.treksoft.kvision.html.TAG.*
 import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.redux.StateBinding.Companion.stateBinding
+import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.routing.routing
+import pl.treksoft.kvision.utils.ENTER_KEY
+import pl.treksoft.kvision.utils.ESC_KEY
+import redux.RAction
 import kotlin.browser.localStorage
 
-const val ENTER_KEY = 13
-const val ESCAPE_KEY = 27
-
-@Serializable
-open class BaseTodo(open var completed: Boolean, open var title: String) : BaseDataComponent()
-
-class Todo(completed: Boolean, title: String) : BaseTodo(completed, title) {
-    constructor(base: BaseTodo) : this(base.completed, base.title)
-
-    override var completed: Boolean by obs(completed)
-    override var title: String by obs(title)
-}
-
-enum class TODOMODE {
+enum class MODE {
     ALL,
     ACTIVE,
     COMPLETED
 }
 
+@Serializable
+data class Todo(val completed: Boolean, val title: String)
+
+@Serializable
+data class State(val todos: List<Todo>, val mode: MODE) {
+    fun areAllCompleted() = todos.find { !it.completed } == null
+    fun activeList() = todos.filter { !it.completed }
+    fun completedList() = todos.filter { it.completed }
+    fun allListIndexed() = todos.mapIndexed { index, todo -> index to todo }
+    fun activeListIndexed() = allListIndexed().filter { !it.second.completed }
+    fun completedListIndexed() = allListIndexed().filter { it.second.completed }
+}
+
+sealed class TodoAction : RAction {
+    data class Load(val todos: List<Todo>) : TodoAction()
+    data class Add(val todo: Todo) : TodoAction()
+    data class ChangeTitle(val index: Int, val title: String) : TodoAction()
+    data class ToggleActive(val index: Int) : TodoAction()
+    data class Delete(val index: Int) : TodoAction()
+    object ToggleAll : TodoAction()
+    object ClearCompleted : TodoAction()
+    object ShowAll : TodoAction()
+    object ShowActive : TodoAction()
+    object ShowCompleted : TodoAction()
+}
+
+fun todoReducer(state: State, action: TodoAction): State = when (action) {
+    is TodoAction.Load -> state.copy(todos = action.todos, mode = ALL)
+    is TodoAction.Add -> state.copy(todos = state.todos + action.todo)
+    is TodoAction.ChangeTitle -> state.copy(todos = state.todos.mapIndexed { index, todo ->
+        if (index == action.index) todo.copy(title = action.title) else todo
+    })
+    is TodoAction.ToggleActive -> state.copy(todos = state.todos.mapIndexed { index, todo ->
+        if (index == action.index) todo.copy(completed = !todo.completed) else todo
+    })
+    is TodoAction.ToggleAll -> {
+        val areAllCompleted = state.areAllCompleted()
+        state.copy(todos = state.todos.map { it.copy(completed = !areAllCompleted) })
+    }
+    is TodoAction.Delete -> state.copy(todos = state.todos.filterIndexed { index, _ ->
+        (index != action.index)
+    })
+    is TodoAction.ClearCompleted -> state.copy(todos = state.activeList())
+    is TodoAction.ShowAll -> state.copy(mode = ALL)
+    is TodoAction.ShowActive -> state.copy(mode = ACTIVE)
+    is TodoAction.ShowCompleted -> state.copy(mode = COMPLETED)
+}
+
 object Todomvc : ApplicationBase {
+
+    val todoStore = createReduxStore(::todoReducer, State(mutableListOf(), ALL))
 
     private lateinit var root: Root
 
-    private val model = observableListOf<Todo>()
-
-    private val checkAllInput = CheckBoxInput(classes = setOf("toggle-all")).apply {
-        id = "toggle-all"
-        onClick {
-            val value = this.value
-            model.forEach { it.completed = value }
-        }
-    }
-    private val allLink = Link("All", "#!/", classes = setOf("selected"))
-    private val activeLink = Link("Active", "#!/active")
-    private val completedLink = Link("Completed", "#!/completed")
-    private val clearCompletedButton = Button("Clear completed", classes = setOf("clear-completed")).onClick {
-        model.filter { it.completed }.forEach { model.remove(it) }
-    }
-
-    private val countTag = Tag(TAG.STRONG, "0")
-    private val itemsLeftTag = Tag(TAG.SPAN, " items left", classes = setOf("todo-count")).apply {
-        add(countTag)
-    }
-    private var mode: TODOMODE = TODOMODE.ALL
-
-    private var container: DataContainer<Todo, Tag, Tag>? = null
-
-    private val header = genHeader()
-    private val main = genMain()
-    private val footer = genFooter()
-
     override fun start(state: Map<String, Any>) {
         root = Root("todomvc") {
-            tag(TAG.SECTION, classes = setOf("todoapp")) {
-                add(this@Todomvc.header)
-                add(this@Todomvc.main)
-                add(this@Todomvc.footer)
-            }
-        }
-        loadModel()
-        checkModel()
-        routing.on("/", { _ -> all() })
-            .on("/active", { _ -> active() })
-            .on("/completed", { _ -> completed() })
-            .resolve()
-    }
-
-    private fun loadModel() {
-        localStorage.get("todos-kvision")?.let {
-            Json.parse(BaseTodo.serializer().list, it).map { model.add(Todo(it)) }
-        }
-    }
-
-    private fun saveModel() {
-        val jsonString = Json.indented.stringify(BaseTodo.serializer().list, model.toList())
-        localStorage.set("todos-kvision", jsonString)
-    }
-
-    private fun checkModel() {
-        val countActive = model.filter { !it.completed }.size
-        val countCompleted = model.filter { it.completed }.size
-        this.main.visible = model.isNotEmpty()
-        this.footer.visible = model.isNotEmpty()
-        this.countTag.content = countActive.toString()
-        this.itemsLeftTag.content = when (countActive) {
-            1 -> " item left"
-            else -> " items left"
-        }
-        this.checkAllInput.value = (countActive == 0)
-        this.clearCompletedButton.visible = countCompleted > 0
-        saveModel()
-    }
-
-    private fun all() {
-        this.mode = TODOMODE.ALL
-        this.allLink.addCssClass("selected")
-        this.activeLink.removeCssClass("selected")
-        this.completedLink.removeCssClass("selected")
-        this.container?.update()
-    }
-
-    private fun active() {
-        this.mode = TODOMODE.ACTIVE
-        this.allLink.removeCssClass("selected")
-        this.activeLink.addCssClass("selected")
-        this.completedLink.removeCssClass("selected")
-        this.container?.update()
-    }
-
-    private fun completed() {
-        this.mode = TODOMODE.COMPLETED
-        this.allLink.removeCssClass("selected")
-        this.activeLink.removeCssClass("selected")
-        this.completedLink.addCssClass("selected")
-        this.container?.update()
-    }
-
-    private fun genHeader(): Tag {
-        return Tag(TAG.HEADER, classes = setOf("header")) {
-            tag(TAG.H1, "todos")
-            textInput(classes = setOf("new-todo")) {
-                placeholder = "What needs to be done?"
-                autofocus = true
-                setEventListener<TextInput> {
-                    keydown = { e ->
-                        if (e.keyCode == ENTER_KEY) {
-                            addTodo(self.value)
-                            self.value = null
+            tag(SECTION, classes = setOf("todoapp")).stateBinding(todoStore) { state ->
+                tag(HEADER, classes = setOf("header")) {
+                    tag(H1, "todos")
+                    textInput(classes = setOf("new-todo")) {
+                        placeholder = "What needs to be done?"
+                        autofocus = true
+                        setEventListener<TextInput> {
+                            keydown = { e ->
+                                if (e.keyCode == ENTER_KEY) {
+                                    addTodo(self.value)
+                                    self.value = null
+                                }
+                            }
+                        }
+                    }
+                }
+                tag(SECTION, classes = setOf("main")) {
+                    visible = state.todos.isNotEmpty()
+                    checkBoxInput(state.areAllCompleted(), classes = setOf("toggle-all")) {
+                        id = "toggle-all"
+                        onClick {
+                            todoStore.dispatch(TodoAction.ToggleAll)
+                        }
+                    }
+                    fieldLabel("toggle-all", "Mark all as complete")
+                    tag(UL, classes = setOf("todo-list")) {
+                        when (state.mode) {
+                            ALL -> state.allListIndexed()
+                            ACTIVE -> state.activeListIndexed()
+                            COMPLETED -> state.completedListIndexed()
+                        }.forEach { (index, todo) ->
+                            tag(LI, classes = if (todo.completed) setOf("completed") else setOf()) li@{
+                                lateinit var edit: TextInput
+                                div(classes = setOf("view")) {
+                                    checkBoxInput(todo.completed, classes = setOf("toggle")).onClick {
+                                        todoStore.dispatch(TodoAction.ToggleActive(index))
+                                    }
+                                    tag(LABEL, todo.title) {
+                                        setEventListener<Tag> {
+                                            dblclick = {
+                                                this@li.getElementJQuery()?.addClass("editing")
+                                                edit.value = todo.title
+                                                edit.getElementJQuery()?.focus()
+                                            }
+                                        }
+                                    }
+                                    button("", classes = setOf("destroy")).onClick {
+                                        todoStore.dispatch(TodoAction.Delete(index))
+                                    }
+                                }
+                                edit = textInput(classes = setOf("edit")) {
+                                    setEventListener<TextInput> {
+                                        blur = {
+                                            if (this@li.getElementJQuery()?.hasClass("editing") == true) {
+                                                this@li.getElementJQuery()?.removeClass("editing")
+                                                editTodo(index, self.value)
+                                            }
+                                        }
+                                        keydown = { e ->
+                                            if (e.keyCode == ENTER_KEY) {
+                                                editTodo(index, self.value)
+                                                this@li.getElementJQuery()?.removeClass("editing")
+                                            }
+                                            if (e.keyCode == ESC_KEY) {
+                                                this@li.getElementJQuery()?.removeClass("editing")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                tag(FOOTER, classes = setOf("footer")) {
+                    visible = state.todos.isNotEmpty()
+                    val itemsLeftString = if (state.activeList().size == 1) " item left" else " items left"
+                    tag(SPAN, itemsLeftString, classes = setOf("todo-count")) {
+                        tag(STRONG, "${state.activeList().size}")
+                    }
+                    listTag(ListType.UL, classes = setOf("filters")) {
+                        link("All", "#!/", classes = if (state.mode == ALL) setOf("selected") else setOf())
+                        link(
+                            "Active", "#!/active",
+                            classes = if (state.mode == ACTIVE) setOf("selected") else setOf()
+                        )
+                        link(
+                            "Completed", "#!/completed",
+                            classes = if (state.mode == COMPLETED) setOf("selected") else setOf()
+                        )
+                    }
+                    if (state.completedList().isNotEmpty()) {
+                        button("Clear completed", classes = setOf("clear-completed")).onClick {
+                            todoStore.dispatch(TodoAction.ClearCompleted)
                         }
                     }
                 }
             }
         }
+        loadModel()
+        routing.on("/", { _ -> todoStore.dispatch(TodoAction.ShowAll) })
+            .on("/active", { _ -> todoStore.dispatch(TodoAction.ShowActive) })
+            .on("/completed", { _ -> todoStore.dispatch(TodoAction.ShowCompleted) })
+            .resolve()
+        todoStore.subscribe {
+            saveModel()
+        }
+    }
+
+    private fun loadModel() {
+        localStorage.get("todos-kvision")?.let {
+            todoStore.dispatch(TodoAction.Load(Json.parse(Todo.serializer().list, it)))
+        }
+    }
+
+    private fun saveModel() {
+        val jsonString = Json.indented.stringify(Todo.serializer().list, todoStore.getState().todos)
+        localStorage.set("todos-kvision", jsonString)
     }
 
     private fun addTodo(value: String?) {
         val v = value?.trim() ?: ""
         if (v.isNotEmpty()) {
-            model.add(Todo(false, v))
+            todoStore.dispatch(TodoAction.Add(Todo(false, v)))
         }
     }
 
     private fun editTodo(index: Int, value: String?) {
         val v = value?.trim() ?: ""
         if (v.isNotEmpty()) {
-            model[index].title = v
+            todoStore.dispatch(TodoAction.ChangeTitle(index, v))
         } else {
-            model.removeAt(index)
+            todoStore.dispatch(TodoAction.Delete(index))
         }
     }
-
-    private fun genMain(): Tag {
-        return Tag(TAG.SECTION, classes = setOf("main")) {
-            add(checkAllInput)
-            add(FieldLabel("toggle-all", "Mark all as complete"))
-            container = dataContainer(model, { todo, index, _ ->
-                val li = Tag(TAG.LI)
-                li.apply {
-                    if (todo.completed) addCssClass("completed")
-                    val edit = TextInput(classes = setOf("edit"))
-                    val view = Tag(TAG.DIV, classes = setOf("view")) {
-                        checkBoxInput(todo.completed, classes = setOf("toggle")).onClick {
-                            todo.completed = this.value
-                        }
-                        tag(TAG.LABEL, todo.title) {
-                            setEventListener<Tag> {
-                                dblclick = {
-                                    li.getElementJQuery()?.addClass("editing")
-                                    edit.value = todo.title
-                                    edit.getElementJQuery()?.focus()
-                                }
-                            }
-                        }
-                        button("", classes = setOf("destroy")).onClick {
-                            model.removeAt(index)
-                        }
-                    }
-                    edit.setEventListener<TextInput> {
-                        blur = {
-                            if (li.getElementJQuery()?.hasClass("editing") == true) {
-                                li.getElementJQuery()?.removeClass("editing")
-                                editTodo(index, self.value)
-                            }
-                        }
-                        keydown = { e ->
-                            if (e.keyCode == ENTER_KEY) {
-                                li.getElementJQuery()?.removeClass("editing")
-                                editTodo(index, self.value)
-                            }
-                            if (e.keyCode == ESCAPE_KEY) {
-                                li.getElementJQuery()?.removeClass("editing")
-                            }
-                        }
-                    }
-                    add(view)
-                    add(edit)
-                }
-            }, filter = { todo ->
-                when (mode) {
-                    TODOMODE.ALL -> true
-                    TODOMODE.ACTIVE -> !todo.completed
-                    TODOMODE.COMPLETED -> todo.completed
-                }
-            }, container = Tag(TAG.UL, classes = setOf("todo-list"))).onUpdate {
-                checkModel()
-            }
-        }
-    }
-
-    private fun genFooter(): Tag {
-        return Tag(TAG.FOOTER, classes = setOf("footer")) {
-            add(itemsLeftTag)
-            listTag(ListType.UL, classes = setOf("filters")) {
-                add(allLink)
-                add(activeLink)
-                add(completedLink)
-            }
-            add(clearCompletedButton)
-        }
-    }
-
 
     override fun dispose(): Map<String, Any> {
         root.dispose()

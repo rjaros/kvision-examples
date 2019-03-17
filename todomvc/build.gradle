@@ -31,6 +31,7 @@ repositories {
     jcenter()
     maven { url = 'https://dl.bintray.com/kotlin/kotlin-eap' }
     maven { url = 'https://kotlin.bintray.com/kotlinx' }
+    maven { url = 'https://dl.bintray.com/kotlin/kotlin-js-wrappers' }
     maven { url = 'https://dl.bintray.com/gbaldeck/kotlin' }
     maven { url = 'https://dl.bintray.com/rjaros/kotlin' }
     mavenLocal()
@@ -39,7 +40,8 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:${kotlinVersion}"
     compile "pl.treksoft:kvision:${kvisionVersion}"
-    compile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
+    compile "pl.treksoft:kvision-redux:${kvisionVersion}"
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
 }
 
 kotlinFrontend {

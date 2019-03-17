@@ -41,7 +41,7 @@ dependencies {
     compile "pl.treksoft:kvision:${kvisionVersion}"
     compile "pl.treksoft:kvision-bootstrap:${kvisionVersion}"
     compile "pl.treksoft:kvision-richtext:${kvisionVersion}"
-    compile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
 }
 
 kotlinFrontend {

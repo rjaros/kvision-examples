@@ -40,7 +40,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:${kotlinVersion}"
     compile "pl.treksoft:kvision:${kvisionVersion}"
     compile "pl.treksoft:kvision-bootstrap:${kvisionVersion}"
-    compile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
+    compile "pl.treksoft:kvision-datacontainer:${kvisionVersion}"
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
 }
 
 kotlinFrontend {

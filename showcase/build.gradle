@@ -48,8 +48,9 @@ dependencies {
     compile "pl.treksoft:kvision-handlebars:${kvisionVersion}"
     compile "pl.treksoft:kvision-i18n:${kvisionVersion}"
     compile "pl.treksoft:kvision-chart:${kvisionVersion}"
+    compile "pl.treksoft:kvision-datacontainer:${kvisionVersion}"
     compile "pl.treksoft:kvision-remote:${kvisionVersion}"
-    compile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
 }
 
 kotlinFrontend {
