@@ -36,7 +36,7 @@ A very simple desktop with four mini applications - a calculator, a text editor,
 
 ## Pokedex
 
-The list of Pokémon with live search.
+The list of Pokémon with live search, build with Redux module.
 
 [See live demo](https://rjaros.github.io/kvision-examples/pokedex/)
 
