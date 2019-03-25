@@ -13,8 +13,8 @@ import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
-import pl.treksoft.kvision.remote.CallAgent
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.rest.RestClient
 import pl.treksoft.kvision.utils.px
 
 @Serializable
@@ -25,7 +25,7 @@ data class SearchResult(val total_count: Int, val incomplete_results: Boolean)
 
 class RestTab : SimplePanel() {
 
-    val callAgent = CallAgent()
+    val restClient = RestClient()
 
     init {
         this.marginTop = 10.px
@@ -39,7 +39,7 @@ class RestTab : SimplePanel() {
                 button(tr("Search GitHub")).onClick {
                     GlobalScope.launch {
                         input.value?.let {
-                            val searchResult = callAgent.call<SearchResult, Query>(
+                            val searchResult = restClient.call<SearchResult, Query>(
                                 "https://api.github.com/search/repositories",
                                 Query(it)
                             ).asDeferred().await()
