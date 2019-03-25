@@ -1,0 +1,155 @@
+package com.example
+
+import kotlinx.serialization.list
+import pl.treksoft.kvision.core.Container
+import pl.treksoft.kvision.core.TextAlign
+import pl.treksoft.kvision.form.text.Text
+import pl.treksoft.kvision.form.text.Text.Companion.text
+import pl.treksoft.kvision.hmr.ApplicationBase
+import pl.treksoft.kvision.html.Button.Companion.button
+import pl.treksoft.kvision.html.Div.Companion.div
+import pl.treksoft.kvision.i18n.DefaultI18nManager
+import pl.treksoft.kvision.i18n.I18n
+import pl.treksoft.kvision.i18n.I18n.gettext
+import pl.treksoft.kvision.i18n.I18n.tr
+import pl.treksoft.kvision.panel.FlexAlignItems
+import pl.treksoft.kvision.panel.FlexJustify
+import pl.treksoft.kvision.panel.GridJustify
+import pl.treksoft.kvision.panel.GridPanel.Companion.gridPanel
+import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
+import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.redux.ActionCreator
+import pl.treksoft.kvision.redux.StateBinding.Companion.stateBinding
+import pl.treksoft.kvision.redux.createReduxStore
+import pl.treksoft.kvision.require
+import pl.treksoft.kvision.rest.RestClient
+import pl.treksoft.kvision.toolbar.ButtonGroup.Companion.buttonGroup
+import pl.treksoft.kvision.utils.auto
+import pl.treksoft.kvision.utils.obj
+import pl.treksoft.kvision.utils.px
+import kotlin.browser.document
+
+object App : ApplicationBase {
+
+    private val store = createReduxStore(::pokedexReducer, Pokedex(false, null, listOf(), listOf(), null, 0, 1))
+
+    private lateinit var root: Root
+
+    private val hammerjs = require("hammerjs")
+
+    override fun start(state: Map<String, Any>) {
+        I18n.manager =
+            DefaultI18nManager(mapOf("pl" to require("./messages-pl.json"), "en" to require("./messages-en.json")))
+
+        root = Root("kvapp") {
+            vPanel(alignItems = FlexAlignItems.STRETCH) {
+                searchField()
+                vPanel(alignItems = FlexAlignItems.STRETCH) {
+                    maxWidth = 1200.px
+                    textAlign = TextAlign.CENTER
+                    marginLeft = auto
+                    marginRight = auto
+                }.stateBinding(store) { state ->
+                    informationText(state)
+                    if (!state.downloading && state.errorMessage == null) {
+                        pokemonGrid(state)
+                        pagination(state)
+                    }
+                }
+            }
+        }
+        store.dispatch(downloadPokemons())
+        val hammerjs = hammerjs(document.body)
+        hammerjs.on("swiperight") {
+            store.dispatch(PokeAction.PrevPage)
+        }
+        hammerjs.on("swipeleft") {
+            store.dispatch(PokeAction.NextPage)
+        }
+    }
+
+    private fun Container.searchField() {
+        text {
+            placeholder = tr("Enter pokemon name ...")
+            width = 300.px
+            marginLeft = auto
+            marginRight = auto
+            autofocus = true
+            setEventListener<Text> {
+                input = {
+                    store.dispatch(PokeAction.SetSearchString(self.value))
+                }
+            }
+        }
+    }
+
+    private fun Container.informationText(state: Pokedex) {
+        if (state.downloading) {
+            div(tr("Loading ..."))
+        } else if (state.errorMessage != null) {
+            div(state.errorMessage)
+        }
+    }
+
+    private fun Container.pokemonGrid(state: Pokedex) {
+        gridPanel(
+            templateColumns = "repeat(auto-fill, minmax(250px, 1fr))",
+            justifyItems = GridJustify.CENTER
+        ) {
+            state.visiblePokemons.forEach {
+                add(PokeBox(it))
+            }
+        }
+    }
+
+    private fun Container.pagination(state: Pokedex) {
+        hPanel(justify = FlexJustify.CENTER) {
+            margin = 30.px
+            buttonGroup {
+                button("<<") {
+                    disabled = state.pageNumber == 0
+                    onClick {
+                        store.dispatch(PokeAction.PrevPage)
+                    }
+                }
+                button(" ${state.pageNumber + 1} / ${state.numberOfPages} ", disabled = true)
+                button(">>") {
+                    disabled = state.pageNumber == (state.numberOfPages - 1)
+                    onClick {
+                        store.dispatch(PokeAction.NextPage)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun downloadPokemons(): ActionCreator<dynamic, Pokedex> {
+        return { dispatch, _ ->
+            val restClient = RestClient()
+            dispatch(PokeAction.StartDownload)
+            restClient.remoteCall(
+                "https://pokeapi.co/api/v2/pokemon/", obj { limit = 800 },
+                deserializer = Pokemon.serializer().list
+            ) {
+                it.results
+            }.then { list ->
+                dispatch(PokeAction.DownloadOk)
+                dispatch(PokeAction.SetPokemonList(list))
+                dispatch(PokeAction.SetSearchString(null))
+            }.catch { e ->
+                val info = if (!e.message.isNullOrBlank()) {
+                    " (${e.message})"
+                } else {
+                    ""
+                }
+                dispatch(PokeAction.DownloadError(gettext("Service error!") + info))
+            }
+        }
+    }
+
+    override fun dispose(): Map<String, Any> {
+        root.dispose()
+        return mapOf()
+    }
+}

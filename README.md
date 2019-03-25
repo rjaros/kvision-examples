@@ -34,6 +34,12 @@ A very simple desktop with four mini applications - a calculator, a text editor,
 
 [See live demo](https://rjaros.github.io/kvision-examples/desktop/)
 
+## Pokedex
+
+The list of Pokémon with live search.
+
+[See live demo](https://rjaros.github.io/kvision-examples/pokedex/)
+
 ## TodoMVC
 
 A complete implementation of [TodoMVC](http://todomvc.com/) demo application.
