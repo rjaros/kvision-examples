@@ -49,6 +49,7 @@ dependencies {
 kotlinFrontend {
     npm {
         dependency("hammerjs", "2.0.8")
+        devDependency("workbox-webpack-plugin", "4.1.1")
     }
 
     webpackBundle {
