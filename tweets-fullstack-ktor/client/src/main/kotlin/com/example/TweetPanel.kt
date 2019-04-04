@@ -7,8 +7,8 @@ import pl.treksoft.kvision.core.FontWeight
 import pl.treksoft.kvision.core.Overflow
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.data.SorterType
-import pl.treksoft.kvision.html.Label.Companion.label
 import pl.treksoft.kvision.html.Link.Companion.link
+import pl.treksoft.kvision.html.Span.Companion.span
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
@@ -27,7 +27,7 @@ class TweetPanel : SimplePanel() {
         val dataContainer = DataContainer(Model.tweets, { tweet, _, _ ->
             Post(tweet)
         }, sorter = {
-            it.id
+            it.date?.getTime()
         }, sorterType = {
             SorterType.DESC
         }, container = VPanel(spacing = 1).apply {
@@ -45,14 +45,14 @@ class Post(tweet: Tweet) : VPanel(spacing = 2) {
         padding = 5.px
         borderBottom = Border(1.px, BorderStyle.INSET, Col.SILVER)
         hPanel(justify = FlexJustify.SPACEBETWEEN) {
-            label(tweet.nickname) {
+            span(tweet.nickname) {
                 fontWeight = FontWeight.BOLD
             }
-            label(tweet.date.toStringF()) {
+            span(tweet.date?.toStringF()) {
                 fontSize = 90.perc
             }
         }
-        label(tweet.message)
+        span(tweet.message)
         hPanel(spacing = 3, wrap = FlexWrap.WRAP) {
             tweet.tags.forEach {
                 link("#$it") {

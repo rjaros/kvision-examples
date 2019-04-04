@@ -4,7 +4,7 @@ import pl.treksoft.kvision.data.DataContainer.Companion.dataContainer
 import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.html.Label
+import pl.treksoft.kvision.html.Span
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.HPanel
 import kotlin.browser.document
@@ -20,7 +20,7 @@ object MainPanel : HPanel(justify = FlexJustify.SPACEBETWEEN) {
                     document.location?.href = "/logout"
                 }
             } else {
-                Label("")
+                Span("")
             }
         })
     }

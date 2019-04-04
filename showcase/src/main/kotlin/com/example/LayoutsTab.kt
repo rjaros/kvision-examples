@@ -4,9 +4,9 @@ import pl.treksoft.kvision.core.Background
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.html.Align
-import pl.treksoft.kvision.html.TAG
+import pl.treksoft.kvision.html.Div
+import pl.treksoft.kvision.html.H4.Companion.h4
 import pl.treksoft.kvision.html.Tag
-import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.DockPanel.Companion.dockPanel
 import pl.treksoft.kvision.panel.FlexAlignItems
@@ -44,7 +44,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addHPanel() {
-        tag(TAG.H4, tr("Horizontal layout"))
+        h4(tr("Horizontal layout"))
         hPanel(spacing = 5) {
             add(getDiv("1", 100))
             add(getDiv("2", 150))
@@ -53,7 +53,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addVPanel() {
-        tag(TAG.H4, tr("Vertical layout"))
+        h4(tr("Vertical layout"))
         vPanel(spacing = 5) {
             add(getDiv("1", 100))
             add(getDiv("2", 150))
@@ -62,7 +62,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addFlexPanel1() {
-        tag(TAG.H4, tr("CSS flexbox layouts"))
+        h4(tr("CSS flexbox layouts"))
         flexPanel(
             FlexDir.ROW, FlexWrap.WRAP, FlexJustify.FLEXEND, FlexAlignItems.CENTER,
             spacing = 5
@@ -118,7 +118,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addGridPanel1() {
-        tag(TAG.H4, tr("CSS grid layouts"))
+        h4(tr("CSS grid layouts"))
         gridPanel(columnGap = 5, rowGap = 5, justifyItems = GridJustify.CENTER) {
             background = Background(Col.KHAKI)
             add(getDiv("1,1", 100), 1, 1)
@@ -138,7 +138,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addRespGridPanel() {
-        tag(TAG.H4, tr("Responsive grid layout"))
+        h4(tr("Responsive grid layout"))
         responsiveGridPanel {
             background = Background(Col.SILVER)
             add(getDiv("1,1", 150), 1, 1)
@@ -149,7 +149,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addDockPanel() {
-        tag(TAG.H4, tr("Dock layout"))
+        h4(tr("Dock layout"))
         dockPanel {
             background = Background(Col.YELLOW)
             add(getDiv(tr("CENTER"), 150).apply { margin = auto }, Side.CENTER)
@@ -161,7 +161,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun getDiv(value: String, size: Int): Tag {
-        return Tag(TAG.DIV, value).apply {
+        return Div(value).apply {
             paddingTop = ((size / 2) - 10).px
             align = Align.CENTER
             background = Background(Col.GREEN)

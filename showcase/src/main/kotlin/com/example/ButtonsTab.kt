@@ -6,7 +6,7 @@ import pl.treksoft.kvision.form.check.Radio.Companion.radio
 import pl.treksoft.kvision.form.check.RadioStyle
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.html.Label.Companion.label
+import pl.treksoft.kvision.html.Span.Companion.span
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
@@ -58,7 +58,7 @@ class ButtonsTab : SimplePanel() {
                 button("3")
             }
             buttonGroup {
-                label("...")
+                span("...")
             }
             buttonGroup {
                 button("10")

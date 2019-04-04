@@ -4,3 +4,4 @@ heroku-numbers.sh
 heroku-tweets.sh
 heroku-encoder.sh
 build.sh
+build-fullstack.sh

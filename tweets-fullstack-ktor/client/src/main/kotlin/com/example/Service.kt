@@ -1,12 +1,12 @@
 package com.example
 
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.SendChannel
 import pl.treksoft.kvision.remote.KVRemoteAgent
 
 actual class TweetService : ITweetService, KVRemoteAgent<TweetService>(TweetServiceManager) {
-    override suspend fun sendTweet(nickname: String, message: String, tags: List<String>) =
-        call(ITweetService::sendTweet, nickname, message, tags)
 
-    override suspend fun getTweet(id: Int) = call(ITweetService::getTweet, id)
+    suspend fun socketConnection(handler: suspend (SendChannel<Tweet>, ReceiveChannel<Tweet>) -> Unit) =
+        webSocket(ITweetService::socketConnection, handler)
 
-    override suspend fun getTweets(limit: Int?) = call(ITweetService::getTweets, limit)
 }

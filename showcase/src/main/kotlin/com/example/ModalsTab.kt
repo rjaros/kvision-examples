@@ -4,9 +4,8 @@ import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.html.H4
 import pl.treksoft.kvision.html.Image
-import pl.treksoft.kvision.html.TAG
-import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
@@ -57,8 +56,7 @@ class ModalsTab : SimplePanel() {
             }
             val modal = Modal(tr("Custom modal dialog"))
             modal.add(
-                Tag(
-                    TAG.H4,
+                H4(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor."
                 )
             )

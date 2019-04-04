@@ -5,17 +5,19 @@ import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.FontStyle
 import pl.treksoft.kvision.core.FontVariant
 import pl.treksoft.kvision.core.FontWeight
+import pl.treksoft.kvision.core.PopoverOptions
 import pl.treksoft.kvision.core.TextDecoration
 import pl.treksoft.kvision.core.TextDecorationLine
 import pl.treksoft.kvision.core.TextDecorationStyle
+import pl.treksoft.kvision.core.TooltipOptions
 import pl.treksoft.kvision.html.Div.Companion.div
 import pl.treksoft.kvision.html.Iframe.Companion.iframe
 import pl.treksoft.kvision.html.Image.Companion.image
 import pl.treksoft.kvision.html.ImageShape
-import pl.treksoft.kvision.html.Label.Companion.label
 import pl.treksoft.kvision.html.Link.Companion.link
 import pl.treksoft.kvision.html.ListTag.Companion.listTag
 import pl.treksoft.kvision.html.ListType
+import pl.treksoft.kvision.html.Span.Companion.span
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.html.setData
@@ -40,10 +42,10 @@ class BasicTab : SimplePanel() {
         this.marginTop = 10.px
         this.minHeight = 400.px
         vPanel(spacing = 3) {
-            label {
+            span {
                 +tr("A simple label")
             }
-            label {
+            span {
                 fontFamily = "Times New Roman"
                 fontSize = 32.px
                 fontStyle = FontStyle.OBLIQUE
@@ -52,14 +54,25 @@ class BasicTab : SimplePanel() {
                 textDecoration = TextDecoration(TextDecorationLine.UNDERLINE, TextDecorationStyle.DOTTED, Col.RED)
                 +tr("A label with custom CSS styling")
             }
-            label {
+            span {
                 +tr("A list:")
             }
             listTag(ListType.UL, listOf(tr("First list element"), tr("Second list element"), tr("Third list element")))
-            label {
+            span {
                 +tr("An image:")
             }
-            image(require("./img/dog.jpg"), shape = ImageShape.CIRCLE)
+            span {
+                +tr("(hover to view a tooltip and click to view a popover)")
+            }
+            image(require("./img/dog.jpg"), shape = ImageShape.CIRCLE) {
+                enableTooltip(TooltipOptions(title = tr("This is a tooltip")))
+                enablePopover(
+                    PopoverOptions(
+                        title = tr("This is a popover"),
+                        content = tr("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                    )
+                )
+            }
             tag(TAG.CODE) {
                 +tr("Some text written in <code></code> HTML tag.")
             }
@@ -70,7 +83,7 @@ class BasicTab : SimplePanel() {
                 )
             }
             link(tr("A link to Google"), "http://www.google.com")
-            label {
+            span {
                 +tr("A responsive table:")
             }
             table(
@@ -100,7 +113,7 @@ class BasicTab : SimplePanel() {
                     }
                 }
             }
-            label {
+            span {
                 +tr("A Handlebars.js template:")
             }
 
@@ -114,7 +127,7 @@ class BasicTab : SimplePanel() {
                 setData(data)
             }
 
-            label {
+            span {
                 +tr("An iframe:")
             }
 

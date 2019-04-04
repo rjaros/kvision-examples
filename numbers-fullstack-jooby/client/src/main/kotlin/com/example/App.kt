@@ -9,7 +9,7 @@ import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Div
 import pl.treksoft.kvision.html.Div.Companion.div
-import pl.treksoft.kvision.html.Label.Companion.label
+import pl.treksoft.kvision.html.Span.Companion.span
 import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
@@ -29,7 +29,7 @@ object App : ApplicationBase {
             vPanel(justify = FlexJustify.CENTER, alignItems = FlexAlignItems.CENTER, spacing = 50) {
                 marginTop = 50.px
                 hPanel(justify = FlexJustify.CENTER, alignItems = FlexAlignItems.CENTER, spacing = 20) {
-                    label("Your number:")
+                    span("Your number:")
                     val text = textInput {
                         width = 300.px
                     }

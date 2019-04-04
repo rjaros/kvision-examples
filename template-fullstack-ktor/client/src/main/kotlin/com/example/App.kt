@@ -3,7 +3,7 @@ package com.example
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import pl.treksoft.kvision.hmr.ApplicationBase
-import pl.treksoft.kvision.html.Label
+import pl.treksoft.kvision.html.Span
 import pl.treksoft.kvision.panel.Root
 
 object App : ApplicationBase {
@@ -15,7 +15,7 @@ object App : ApplicationBase {
         }
         GlobalScope.launch {
             val pingResult = Model.ping("Hello world from client!")
-            root.add(Label(pingResult))
+            root.add(Span(pingResult))
         }
     }
 

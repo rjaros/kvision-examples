@@ -10,8 +10,8 @@ import pl.treksoft.kvision.form.text.Text.Companion.text
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Image.Companion.image
-import pl.treksoft.kvision.html.Label.Companion.label
 import pl.treksoft.kvision.html.Link.Companion.link
+import pl.treksoft.kvision.html.Span.Companion.span
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.i18n.I18n.tr
@@ -92,7 +92,7 @@ class DropDownTab : SimplePanel() {
                     e.stopPropagation()
                 }
             }
-            label(tr("Open the context menu with right mouse click."))
+            span(tr("Open the context menu with right mouse click."))
             val contextMenu = ContextMenu {
                 header(tr("Menu header"))
                 link(tr("Basic formatting"), "#!/basic")
