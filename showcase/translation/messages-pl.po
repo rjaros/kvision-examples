@@ -48,7 +48,7 @@ msgid "An image:"
 msgstr "Obraz:"
 
 #: src/main/kotlin/com/example/BasicTab.kt:65
-msgid "(hover to view tooltip and click to view popover)"
+msgid "(hover to view a tooltip and click to view a popover)"
 msgstr "(najedź myszką aby zobaczyć podpowiedź lub kliknij aby zobaczyć wyskakujący opis)"
 
 #: src/main/kotlin/com/example/BasicTab.kt:68
