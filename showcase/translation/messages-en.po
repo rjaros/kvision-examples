@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KVision\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 12:55+0200\n"
+"POT-Creation-Date: 2019-04-04 17:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,47 +58,41 @@ msgstr ""
 msgid "This is a popover"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:72
-msgid ""
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla "
-"turpis."
-msgstr ""
-
 #: src/main/kotlin/com/example/BasicTab.kt:77
 msgid "Some text written in <code></code> HTML tag."
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:81
+#: src/main/kotlin/com/example/BasicTab.kt:80
 msgid ""
 "Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; "
-"font-size: 14pt\">"
+"font-size: 14pt\">any <strong>forma</strong>tting</span>."
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:85
+#: src/main/kotlin/com/example/BasicTab.kt:82
 msgid "A link to Google"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:87
+#: src/main/kotlin/com/example/BasicTab.kt:84
 msgid "A responsive table:"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:90
+#: src/main/kotlin/com/example/BasicTab.kt:87
 msgid "Column 1"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:90
+#: src/main/kotlin/com/example/BasicTab.kt:87
 msgid "Column 2"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:90
+#: src/main/kotlin/com/example/BasicTab.kt:87
 msgid "Column 3"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:117
+#: src/main/kotlin/com/example/BasicTab.kt:114
 msgid "A Handlebars.js template:"
 msgstr ""
 
-#: src/main/kotlin/com/example/BasicTab.kt:131
+#: src/main/kotlin/com/example/BasicTab.kt:128
 msgid "An iframe:"
 msgstr ""
 

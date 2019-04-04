@@ -69,7 +69,7 @@ class BasicTab : SimplePanel() {
                 enablePopover(
                     PopoverOptions(
                         title = tr("This is a popover"),
-                        content = tr("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                        content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis."
                     )
                 )
             }
@@ -77,10 +77,7 @@ class BasicTab : SimplePanel() {
                 +tr("Some text written in <code></code> HTML tag.")
             }
             div(rich = true) {
-                +tr(
-                    "Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; font-size: 14pt\">" +
-                            "any <strong>forma</strong>tting</span>."
-                )
+                +tr("Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; font-size: 14pt\">any <strong>forma</strong>tting</span>.")
             }
             link(tr("A link to Google"), "http://www.google.com")
             span {
