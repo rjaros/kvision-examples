@@ -9,5 +9,8 @@ module.exports = function(config) {
     temp.conf.proxies = {
 	'/tmp/_karma_webpack_/': 'http://localhost:8088/'
     }
+    temp.conf.webpackMiddleware = {
+	watchOptions: { aggregateTimeout: 1000, poll: 500 }
+    }
     config.set(temp.conf);
 };
