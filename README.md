@@ -77,11 +77,9 @@ A simple application to encode the given text, based on the overview chapter fro
 
 ## Tweets - fullstack
 
-A simple, multiplatform, message board application. 
+A simple, multiplatform, message board application based on websocket communication. 
 
 [See live demo on Heroku](https://kvision-tweets.herokuapp.com/)
-
-Note: The application uses simple, in memory storage, so all messages are gone after Heroku redeployments.
 
 ## Template - fullstack
 
