@@ -1,7 +1,8 @@
 package com.example
 
+import com.example.Model.connectToServer
+import com.example.Model.tweetChannel
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.w3c.dom.events.KeyboardEvent
 import pl.treksoft.kvision.form.text.Text
@@ -17,7 +18,6 @@ import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.utils.ENTER_KEY
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
-import pl.treksoft.kvision.utils.syncWithList
 
 object App : ApplicationBase {
 
@@ -52,11 +52,9 @@ object App : ApplicationBase {
                             } ?: listOf()
                             nickname.value?.let { n ->
                                 tweet.value?.let { v ->
-                                    val id = Model.tweetService.sendTweet(n, v, tagList)
+                                    tweetChannel.send(Tweet(null, n, v, tagList))
                                     tweet.value = null
                                     tags.value = null
-                                    val serverTweet = Model.tweetService.getTweet(id)
-                                    if (!Model.tweets.contains(serverTweet)) Model.tweets.add(serverTweet)
                                     tweet.focus()
                                 }
                             }
@@ -86,13 +84,7 @@ object App : ApplicationBase {
                 add(TweetPanel())
             }
         }
-        GlobalScope.launch {
-            while (true) {
-                val tweets = Model.tweetService.getTweets(20)
-                Model.tweets.syncWithList(tweets)
-                delay(5000)
-            }
-        }
+        connectToServer()
     }
 
     override fun dispose(): Map<String, Any> {

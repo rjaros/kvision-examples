@@ -27,7 +27,7 @@ class TweetPanel : SimplePanel() {
         val dataContainer = DataContainer(Model.tweets, { tweet, _, _ ->
             Post(tweet)
         }, sorter = {
-            it.id
+            it.date?.getTime()
         }, sorterType = {
             SorterType.DESC
         }, container = VPanel(spacing = 1).apply {
@@ -48,7 +48,7 @@ class Post(tweet: Tweet) : VPanel(spacing = 2) {
             span(tweet.nickname) {
                 fontWeight = FontWeight.BOLD
             }
-            span(tweet.date.toStringF()) {
+            span(tweet.date?.toStringF()) {
                 fontSize = 90.perc
             }
         }
