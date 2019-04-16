@@ -1,3 +1,7 @@
+plugins {
+    id "com.moowork.grunt" version "1.2.0"
+}
+
 apply plugin: 'kotlin-platform-js'
 if (production) {
     apply plugin: 'kotlin-dce-js'
@@ -18,6 +22,10 @@ dependencies {
     compile "pl.treksoft:kvision-upload:${kvisionVersion}"
     compile "pl.treksoft:kvision-handlebars:${kvisionVersion}"
     compile "pl.treksoft:kvision-i18n:${kvisionVersion}"
+    compile "pl.treksoft:kvision-datacontainer:${kvisionVersion}"
+    compile "pl.treksoft:kvision-dialog:${kvisionVersion}"
+    compile "pl.treksoft:kvision-redux:${kvisionVersion}"
+    compile "pl.treksoft:kvision-chart:${kvisionVersion}"
     compile "pl.treksoft:kvision-remote:${kvisionVersion}"
  }
 
@@ -47,6 +55,24 @@ compileTestKotlin2Js {
     kotlinOptions.sourceMap = !production
     kotlinOptions.moduleKind = 'umd'
 }
+
+task pot(type: GruntTask) {
+    args = ["pot"]
+}
+
+task po2json(type: GruntTask) {
+    args = ["default"]
+    if (file('translation').isDirectory()) {
+        inputs.dir(file('translation'))
+        outputs.dir(file('build/js'))
+        outputs.dir(file('build/kotlin-js-min/main'))
+    }
+}
+
+pot.dependsOn 'installGrunt'
+pot.dependsOn 'npmInstall'
+po2json.dependsOn 'installGrunt'
+po2json.dependsOn 'npmInstall'
 
 task copyResources(type: Copy) {
     from "src/main/resources"
@@ -88,7 +114,7 @@ afterEvaluate {
     if (production) {
         tasks.getByName("copyResourcesForDce") { dependsOn(runDceKotlinJs) }
     }
-    tasks.getByName("webpack-bundle") { dependsOn(copyResources, copyResourcesForDce) }
-    tasks.getByName("webpack-run") { dependsOn(copyResources) }
-    tasks.getByName("karma-start") { dependsOn(copyResources) }
+    tasks.getByName("webpack-bundle") { dependsOn(po2json, copyResources, copyResourcesForDce) }
+    tasks.getByName("webpack-run") { dependsOn(po2json, copyResources) }
+    tasks.getByName("karma-start") { dependsOn(po2json, copyResources) }
 }
