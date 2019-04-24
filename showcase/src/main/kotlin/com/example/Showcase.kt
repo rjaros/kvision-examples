@@ -26,24 +26,24 @@ object Showcase : ApplicationBase {
                 DefaultI18nManager(mapOf("pl" to require("./messages-pl.json"), "en" to require("./messages-en.json")))
 
         root = Root("showcase") {
-            tabPanel {
+            tabPanel(scrollableTabs = true) {
                 width = 80.perc
                 margin = 20.px
                 marginLeft = auto
                 marginRight = auto
                 padding = 20.px
                 border = Border(2.px, BorderStyle.SOLID, Col.SILVER)
-                addTab(tr("Basic formatting"), BasicTab(), "fa-bars", route = "/basic")
+                addTab(tr("HTML"), BasicTab(), "fa-bars", route = "/basic")
                 addTab(tr("Forms"), FormTab(), "fa-edit", route = "/forms")
                 addTab(tr("Buttons"), ButtonsTab(), "fa-check-square-o", route = "/buttons")
-                addTab(tr("Dropdowns & Menus"), DropDownTab(), "fa-arrow-down", route = "/dropdowns")
+                addTab(tr("Dropdowns"), DropDownTab(), "fa-arrow-down", route = "/dropdowns")
                 addTab(tr("Containers"), ContainersTab(), "fa-database", route = "/containers")
                 addTab(tr("Layouts"), LayoutsTab(), "fa-th-list", route = "/layouts")
-                addTab(tr("Modals"), ModalsTab(), "fa-window-maximize", route = "/modals")
+                addTab(tr("Windows"), ModalsTab(), "fa-window-maximize", route = "/windows")
                 addTab(tr("Data binding"), DataTab(), "fa-retweet", route = "/data")
-                addTab(tr("Windows"), WindowsTab(), "fa-window-restore", route = "/windows")
                 addTab(tr("Drag & Drop"), DragDropTab(), "fa-arrows-alt", route = "/dragdrop")
                 addTab(tr("Charts"), ChartTab(), "fa-bar-chart", route = "/charts")
+                addTab(tr("Tables"), TabulatorTab(), "fa-table", route = "/tabulator")
                 addTab(tr("RESTful"), RestTab(), "fa-plug", route = "/restful")
             }
             select(listOf("en" to tr("English"), "pl" to tr("Polish")), I18n.language) {

@@ -52,6 +52,7 @@ dependencies {
     compile "pl.treksoft:kvision-dialog:${kvisionVersion}"
     compile "pl.treksoft:kvision-redux:${kvisionVersion}"
     compile "pl.treksoft:kvision-chart:${kvisionVersion}"
+    compile "pl.treksoft:kvision-tabulator:${kvisionVersion}"
     testCompile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
 }
 

@@ -11,10 +11,10 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.2.0/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.0/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.b456689475b5f2fb039fd56c6f32f0ca.js"
+  "precache-manifest.30bf6561382ea5ef6a83abba1a897d24.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "pokedex"});

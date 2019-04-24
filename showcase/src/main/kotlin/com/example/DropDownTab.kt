@@ -39,7 +39,7 @@ class DropDownTab : SimplePanel() {
                     }
                     dropDown(
                         tr("Favourites"),
-                        listOf(tr("Basic formatting") to "#!/basic", tr("Forms") to "#!/forms"),
+                        listOf(tr("HTML") to "#!/basic", tr("Forms") to "#!/forms"),
                         icon = "fa-star",
                         forNavbar = true
                     )
@@ -56,10 +56,10 @@ class DropDownTab : SimplePanel() {
             }
             dropDown(
                 tr("Dropdown with navigation menu"), listOf(
-                    tr("Basic formatting") to "#!/basic",
+                    tr("HTML") to "#!/basic",
                     tr("Forms") to "#!/forms",
                     tr("Buttons") to "#!/buttons",
-                    tr("Dropdowns & Menus") to "#!/dropdowns",
+                    tr("Dropdowns") to "#!/dropdowns",
                     tr("Containers") to "#!/containers"
                 ), "fa-arrow-right", style = ButtonStyle.SUCCESS
             ).apply {
@@ -75,7 +75,7 @@ class DropDownTab : SimplePanel() {
                 val fdd = dropDown(
                     tr("Dropdown with special options"), listOf(
                         tr("Header") to DD.HEADER.option,
-                        tr("Basic formatting") to "#!/basic",
+                        tr("HTML") to "#!/basic",
                         tr("Forms") to "#!/forms",
                         tr("Buttons") to "#!/buttons",
                         tr("Separator") to DD.SEPARATOR.option,
@@ -95,10 +95,10 @@ class DropDownTab : SimplePanel() {
             span(tr("Open the context menu with right mouse click."))
             val contextMenu = ContextMenu {
                 header(tr("Menu header"))
-                link(tr("Basic formatting"), "#!/basic")
+                link(tr("HTML"), "#!/basic")
                 link(tr("Forms"), "#!/forms")
                 link(tr("Buttons"), "#!/buttons")
-                link(tr("Dropdown & Menus"), "#!/dropdowns")
+                link(tr("Dropdowns"), "#!/dropdowns")
                 separator()
                 dropDown(tr("Dropdown"), forNavbar = true) {
                     link(tr("Containers"), "#!/containers")

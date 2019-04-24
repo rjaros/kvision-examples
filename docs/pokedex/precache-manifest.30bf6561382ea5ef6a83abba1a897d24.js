@@ -3,7 +3,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "89889688147bd7575d6327160d64e760.svg"
   },
   {
-    "revision": "03f9b484f677eaff1f22",
+    "revision": "cebcb3b8fb0c21c8c47c",
     "url": "main.bundle.js"
   },
   {

@@ -28,6 +28,12 @@ with Material-like CSS template from [Bootswatch](https://bootswatch.com/3/paper
 
 [See live demo](https://rjaros.github.io/kvision-examples/addressbook/)
 
+## Address book with Tabulator
+
+An address book application rewritten with a [Tabulator](http://tabulator.info) module.
+
+[See live demo](https://rjaros.github.io/kvision-examples/addressbook-tabulator/)
+
 ## Desktop
 
 A very simple desktop with four mini applications - a calculator, a text editor, a paint program and a web browser.
