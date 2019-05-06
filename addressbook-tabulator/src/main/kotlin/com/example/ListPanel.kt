@@ -14,7 +14,7 @@ import pl.treksoft.kvision.tabulator.Align
 import pl.treksoft.kvision.tabulator.ColumnDefinition
 import pl.treksoft.kvision.tabulator.Formatter
 import pl.treksoft.kvision.tabulator.Layout
-import pl.treksoft.kvision.tabulator.Options
+import pl.treksoft.kvision.tabulator.TabulatorOptions
 import pl.treksoft.kvision.tabulator.Tabulator
 import pl.treksoft.kvision.tabulator.Tabulator.Companion.tabulator
 import pl.treksoft.kvision.utils.obj
@@ -41,7 +41,7 @@ object ListPanel : VPanel() {
             }
         }
         val tabulator = tabulator(
-            Model.addresses, Options(
+            Model.addresses, TabulatorOptions(
                 height = "calc(100vh - 60px)", layout = Layout.FITCOLUMNS, columns = listOf(
                     ColumnDefinition("First name", "firstName"),
                     ColumnDefinition("Last name", "lastName"),

@@ -6,7 +6,7 @@ import pl.treksoft.kvision.chart.ChartType
 import pl.treksoft.kvision.chart.Configuration
 import pl.treksoft.kvision.chart.DataSets
 import pl.treksoft.kvision.chart.LegendOptions
-import pl.treksoft.kvision.chart.Options
+import pl.treksoft.kvision.chart.ChartOptions
 import pl.treksoft.kvision.chart.TitleOptions
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Color
@@ -38,7 +38,7 @@ class ChartTab : SimplePanel() {
                             }
                         )
                     ),
-                    options = Options(legend = LegendOptions(display = false), showLines = true)
+                    options = ChartOptions(legend = LegendOptions(display = false), showLines = true)
                 )
             )
             chart(
@@ -63,7 +63,7 @@ class ChartTab : SimplePanel() {
                         tr("Latin America"),
                         tr("North America")
                     ),
-                    Options(legend = LegendOptions(display = false), scales = ChartScales(yAxes = listOf(obj {
+                    ChartOptions(legend = LegendOptions(display = false), scales = ChartScales(yAxes = listOf(obj {
                         ticks = obj {
                             suggestedMin = 0
                             suggestedMax = 20
