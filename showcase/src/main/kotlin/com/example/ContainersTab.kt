@@ -62,6 +62,10 @@ class ContainersTab : SimplePanel() {
                 background = Background(Col.GREEN)
                 height = 40.px
             })
+            addTab(tr("Red panel (closable)"), Tag(TAG.DIV, "&nbsp;", rich = true) {
+                background = Background(Col.RED)
+                height = 40.px
+            }, closable = true)
         }
     }
 

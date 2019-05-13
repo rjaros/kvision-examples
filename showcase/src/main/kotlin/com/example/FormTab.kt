@@ -13,6 +13,7 @@ import pl.treksoft.kvision.form.check.Radio
 import pl.treksoft.kvision.form.check.RadioGroup
 import pl.treksoft.kvision.form.select.AjaxOptions
 import pl.treksoft.kvision.form.select.Select
+import pl.treksoft.kvision.form.select.SimpleSelect
 import pl.treksoft.kvision.form.spinner.Spinner
 import pl.treksoft.kvision.form.text.Password
 import pl.treksoft.kvision.form.text.RichText
@@ -46,6 +47,7 @@ data class Form(
     val time: Date? = null,
     val checkbox: Boolean = false,
     val radio: Boolean = false,
+    val simpleSelect: String? = null,
     val select: String? = null,
     val ajaxselect: String? = null,
     val spinner: Double? = null,
@@ -96,12 +98,18 @@ class FormTab : SimplePanel() {
             ) { it.getValue() }
             add(Form::radio, Radio(label = tr("Radio button")))
             add(
+                Form::simpleSelect, SimpleSelect(
+                    options = listOf("first" to tr("First option"), "second" to tr("Second option")),
+                    emptyOption = true,
+                    label = tr("Simple select")
+                ), required = true
+            )
+            add(
                 Form::select, Select(
                     options = listOf("first" to tr("First option"), "second" to tr("Second option")),
-                    label = tr("Simple select")
+                    label = tr("Advanced select")
                 )
             )
-
             add(Form::ajaxselect, Select(label = tr("Select with remote data source")).apply {
                 emptyOption = true
                 ajaxOptions = AjaxOptions("https://api.github.com/search/repositories", preprocessData = {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KVision\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-24 18:55+0200\n"
+"POT-Creation-Date: 2019-05-13 23:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -226,15 +226,15 @@ msgstr "Aktywuj panel ze stosu"
 
 #: src/main/kotlin/com/example/ContainersTab.kt:48
 #: src/main/kotlin/com/example/ContainersTab.kt:57
-#: src/main/kotlin/com/example/ContainersTab.kt:71
-#: src/main/kotlin/com/example/ContainersTab.kt:85
+#: src/main/kotlin/com/example/ContainersTab.kt:75
+#: src/main/kotlin/com/example/ContainersTab.kt:89
 msgid "Blue panel"
 msgstr "Niebieski panel"
 
 #: src/main/kotlin/com/example/ContainersTab.kt:49
 #: src/main/kotlin/com/example/ContainersTab.kt:61
-#: src/main/kotlin/com/example/ContainersTab.kt:75
-#: src/main/kotlin/com/example/ContainersTab.kt:89
+#: src/main/kotlin/com/example/ContainersTab.kt:79
+#: src/main/kotlin/com/example/ContainersTab.kt:93
 msgid "Green panel"
 msgstr "Zielony panel"
 
@@ -242,19 +242,23 @@ msgstr "Zielony panel"
 msgid "Tab panel"
 msgstr "Panel zakładek"
 
-#: src/main/kotlin/com/example/ContainersTab.kt:69
+#: src/main/kotlin/com/example/ContainersTab.kt:65
+msgid "Red panel (closable)"
+msgstr "Czerwony panel (zamykalny)"
+
+#: src/main/kotlin/com/example/ContainersTab.kt:73
 msgid "Tab panel with tabs on the left"
 msgstr "Panel zakładek z lewej strony"
 
-#: src/main/kotlin/com/example/ContainersTab.kt:83
+#: src/main/kotlin/com/example/ContainersTab.kt:87
 msgid "Tab panel with tabs on the right"
 msgstr "Panel zakładek z prawej strony"
 
-#: src/main/kotlin/com/example/ContainersTab.kt:97
+#: src/main/kotlin/com/example/ContainersTab.kt:101
 msgid "Vertical split panel"
 msgstr "Panel podziału pionowego"
 
-#: src/main/kotlin/com/example/ContainersTab.kt:111
+#: src/main/kotlin/com/example/ContainersTab.kt:115
 msgid "Horizontal split panel"
 msgstr "Panel podziału poziomego"
 
@@ -443,146 +447,153 @@ msgstr "Lista wyboru"
 msgid "Layout"
 msgstr "Układ"
 
-#: src/main/kotlin/com/example/FormTab.kt:63
+#: src/main/kotlin/com/example/FormTab.kt:65
 msgid "Required text field with regexp [0-9] validator"
 msgstr "Wymagane pole tekstowe walidowane wyrażeniem regularnym [0-9]"
 
-#: src/main/kotlin/com/example/FormTab.kt:64
+#: src/main/kotlin/com/example/FormTab.kt:66
 msgid "Enter your age"
 msgstr "Podaj swój wiek"
 
-#: src/main/kotlin/com/example/FormTab.kt:67
-#: src/main/kotlin/com/example/FormTab.kt:95
+#: src/main/kotlin/com/example/FormTab.kt:69
+#: src/main/kotlin/com/example/FormTab.kt:97
 msgid "Value is required"
 msgstr "Wartość jest wymagana"
 
-#: src/main/kotlin/com/example/FormTab.kt:68
+#: src/main/kotlin/com/example/FormTab.kt:70
 msgid "Only numbers are allowed"
 msgstr "Dozwolone są tylko liczby"
 
-#: src/main/kotlin/com/example/FormTab.kt:71
+#: src/main/kotlin/com/example/FormTab.kt:73
 msgid "Password field with minimum length validator"
 msgstr "Pole hasła walidowane minimalną długością"
 
-#: src/main/kotlin/com/example/FormTab.kt:72
-#: src/main/kotlin/com/example/FormTab.kt:76
+#: src/main/kotlin/com/example/FormTab.kt:74
+#: src/main/kotlin/com/example/FormTab.kt:78
 msgid "Password too short"
 msgstr "Hasło jest zbyt krótkie"
 
-#: src/main/kotlin/com/example/FormTab.kt:75
+#: src/main/kotlin/com/example/FormTab.kt:77
 msgid "Password confirmation"
 msgstr "Potwierdzenie hasła"
 
-#: src/main/kotlin/com/example/FormTab.kt:79
+#: src/main/kotlin/com/example/FormTab.kt:81
 msgid "Text area field"
 msgstr "Obszar tekstowy"
 
-#: src/main/kotlin/com/example/FormTab.kt:82
+#: src/main/kotlin/com/example/FormTab.kt:84
 msgid "Rich text field with a placeholder"
 msgstr "Obszar tekstu formatowanego z wypełnieniem (placeholder)"
 
-#: src/main/kotlin/com/example/FormTab.kt:82
+#: src/main/kotlin/com/example/FormTab.kt:84
 msgid "Add some info"
 msgstr "Dodaj jakieś informacje"
 
-#: src/main/kotlin/com/example/FormTab.kt:85
+#: src/main/kotlin/com/example/FormTab.kt:87
 msgid "Date field with a placeholder"
 msgstr "Pole daty z wypełnieniem (placeholder)"
 
-#: src/main/kotlin/com/example/FormTab.kt:86
+#: src/main/kotlin/com/example/FormTab.kt:88
 msgid "Enter date"
 msgstr "Podaj datę"
 
-#: src/main/kotlin/com/example/FormTab.kt:90
+#: src/main/kotlin/com/example/FormTab.kt:92
 msgid "Time field"
 msgstr "Pole czasu"
 
-#: src/main/kotlin/com/example/FormTab.kt:94
+#: src/main/kotlin/com/example/FormTab.kt:96
 msgid "Required checkbox"
 msgstr "Wymagany checkbox"
 
-#: src/main/kotlin/com/example/FormTab.kt:97
+#: src/main/kotlin/com/example/FormTab.kt:99
 msgid "Radio button"
 msgstr "Przycisk radiowy"
 
-#: src/main/kotlin/com/example/FormTab.kt:100
-#: src/main/kotlin/com/example/FormTab.kt:124
+#: src/main/kotlin/com/example/FormTab.kt:102
+#: src/main/kotlin/com/example/FormTab.kt:109
+#: src/main/kotlin/com/example/FormTab.kt:132
 msgid "First option"
 msgstr "Pierwsza opcja"
 
-#: src/main/kotlin/com/example/FormTab.kt:100
-#: src/main/kotlin/com/example/FormTab.kt:124
+#: src/main/kotlin/com/example/FormTab.kt:102
+#: src/main/kotlin/com/example/FormTab.kt:109
+#: src/main/kotlin/com/example/FormTab.kt:132
 msgid "Second option"
 msgstr "Druga opcja"
 
-#: src/main/kotlin/com/example/FormTab.kt:101
+#: src/main/kotlin/com/example/FormTab.kt:104
 msgid "Simple select"
 msgstr "Prosta lista wyboru"
 
-#: src/main/kotlin/com/example/FormTab.kt:105
+#: src/main/kotlin/com/example/FormTab.kt:110
+msgid "Advanced select"
+msgstr "Zaawansowana lista wyboru"
+
+#: src/main/kotlin/com/example/FormTab.kt:113
 msgid "Select with remote data source"
 msgstr "Lista wyboru ze zdalnym źródłem danych"
 
-#: src/main/kotlin/com/example/FormTab.kt:121
+#: src/main/kotlin/com/example/FormTab.kt:129
 msgid "Spinner field 10 - 20"
 msgstr "Pole spinner 10 - 20"
 
-#: src/main/kotlin/com/example/FormTab.kt:125
+#: src/main/kotlin/com/example/FormTab.kt:133
 msgid "Radio button group"
 msgstr "Grupa przycisków radiowych"
 
-#: src/main/kotlin/com/example/FormTab.kt:128
+#: src/main/kotlin/com/example/FormTab.kt:136
 msgid "Upload files (images only)"
 msgstr "Wyślij pliki (tylko obrazy)"
 
-#: src/main/kotlin/com/example/FormTab.kt:136
-#: src/main/kotlin/com/example/FormTab.kt:137
+#: src/main/kotlin/com/example/FormTab.kt:144
+#: src/main/kotlin/com/example/FormTab.kt:145
 msgid "Passwords are not the same"
 msgstr "Hasła nie są takie same"
 
-#: src/main/kotlin/com/example/FormTab.kt:141
+#: src/main/kotlin/com/example/FormTab.kt:149
 msgid "The passwords are not the same."
 msgstr "Hasła nie są takie same."
 
-#: src/main/kotlin/com/example/FormTab.kt:148
+#: src/main/kotlin/com/example/FormTab.kt:156
 msgid "Show data"
 msgstr "Pokaż dane"
 
-#: src/main/kotlin/com/example/FormTab.kt:150
+#: src/main/kotlin/com/example/FormTab.kt:158
 msgid "Form data in plain JSON"
 msgstr "Dane formularza w formie JSON"
 
-#: src/main/kotlin/com/example/FormTab.kt:152
+#: src/main/kotlin/com/example/FormTab.kt:160
 msgid "Clear data"
 msgstr "Wyczyść dane"
 
-#: src/main/kotlin/com/example/FormTab.kt:154
+#: src/main/kotlin/com/example/FormTab.kt:162
+#: src/main/kotlin/com/example/TabulatorTab.kt:189
 msgid "Are you sure?"
 msgstr "Czy na pewno?"
 
-#: src/main/kotlin/com/example/FormTab.kt:155
+#: src/main/kotlin/com/example/FormTab.kt:163
 msgid "Do you want to clear your data?"
 msgstr "Czy chcesz wyczyścić dane?"
 
-#: src/main/kotlin/com/example/FormTab.kt:156
+#: src/main/kotlin/com/example/FormTab.kt:164
 #: src/main/kotlin/com/example/ModalsTab.kt:40
 #: src/main/kotlin/com/example/ModalsTab.kt:55
 msgid "Yes"
 msgstr "Tak"
 
-#: src/main/kotlin/com/example/FormTab.kt:157
+#: src/main/kotlin/com/example/FormTab.kt:165
 #: src/main/kotlin/com/example/ModalsTab.kt:41
 #: src/main/kotlin/com/example/ModalsTab.kt:56
 msgid "No"
 msgstr "Nie"
 
-#: src/main/kotlin/com/example/FormTab.kt:158
+#: src/main/kotlin/com/example/FormTab.kt:166
 #: src/main/kotlin/com/example/ModalsTab.kt:42
 #: src/main/kotlin/com/example/ModalsTab.kt:57
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/main/kotlin/com/example/FormTab.kt:164
+#: src/main/kotlin/com/example/FormTab.kt:172
 msgid "Validate"
 msgstr "Sprawdź poprawność"
 
@@ -736,22 +747,42 @@ msgstr "Angielski"
 msgid "Polish"
 msgstr "Polski"
 
-#: src/main/kotlin/com/example/TabulatorTab.kt:30
+#: src/main/kotlin/com/example/TabulatorTab.kt:90
 msgid "Name"
 msgstr "Imię i nazwisko"
 
-#: src/main/kotlin/com/example/TabulatorTab.kt:32
+#: src/main/kotlin/com/example/TabulatorTab.kt:103
 msgid "Position"
 msgstr "Stanowisko"
 
-#: src/main/kotlin/com/example/TabulatorTab.kt:33
+#: src/main/kotlin/com/example/TabulatorTab.kt:114
 msgid "Office"
 msgstr "Biuro"
 
-#: src/main/kotlin/com/example/TabulatorTab.kt:34
+#: src/main/kotlin/com/example/TabulatorTab.kt:134
+msgid "Active"
+msgstr "Aktywny"
+
+#: src/main/kotlin/com/example/TabulatorTab.kt:150
 msgid "Start date"
 msgstr "Data zatrudnienia"
 
-#: src/main/kotlin/com/example/TabulatorTab.kt:37
+#: src/main/kotlin/com/example/TabulatorTab.kt:165
 msgid "Salary"
 msgstr "Pensja"
+
+#: src/main/kotlin/com/example/TabulatorTab.kt:189
+msgid "Delete row?"
+msgstr "Usunąć wiersz?"
+
+#: src/main/kotlin/com/example/TabulatorTab.kt:203
+msgid "Add new employee"
+msgstr "Dodaj nowego pracownika"
+
+#: src/main/kotlin/com/example/TabulatorTab.kt:207
+msgid "Show current data model"
+msgstr "Pokaż aktualny model danych"
+
+#: src/main/kotlin/com/example/TabulatorTab.kt:209
+msgid "Current data model"
+msgstr "Aktualny model danych"
