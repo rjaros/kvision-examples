@@ -7,7 +7,7 @@ import pl.treksoft.kvision.tabulator.ColumnDefinition
 import pl.treksoft.kvision.tabulator.Editor
 import pl.treksoft.kvision.tabulator.Formatter
 import pl.treksoft.kvision.tabulator.Layout
-import pl.treksoft.kvision.tabulator.Options
+import pl.treksoft.kvision.tabulator.TabulatorOptions
 import pl.treksoft.kvision.tabulator.PaginationMode
 import pl.treksoft.kvision.tabulator.Tabulator.Companion.tabulator
 import pl.treksoft.kvision.utils.obj
@@ -19,7 +19,7 @@ class TabulatorTab : SimplePanel() {
         this.marginTop = 10.px
 
         tabulator<Any>(
-            options = Options(
+            options = TabulatorOptions(
                 ajaxURL = "data.json",
                 ajaxResponse = { _, _, resp ->
                     resp.data
