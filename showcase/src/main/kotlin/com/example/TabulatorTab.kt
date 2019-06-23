@@ -1,10 +1,6 @@
-@file:ContextualSerialization(Date::class)
-
 package com.example
 
 import com.lightningkite.kotlin.observable.list.observableListOf
-import kotlinx.serialization.ContextualSerialization
-import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.form.InputSize
 import pl.treksoft.kvision.form.check.CheckBoxInput
 import pl.treksoft.kvision.form.check.CheckBoxInput.Companion.checkBoxInput
@@ -35,7 +31,6 @@ import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px
 import kotlin.js.Date
 
-@Serializable
 data class Employee(
     val name: String?,
     val position: String?,
@@ -157,7 +152,7 @@ class TabulatorTab : SimplePanel() {
                                 clearBtn = false
                                 setEventListener<DateTimeInput> {
                                     change = {
-                                        success(self.value?.toStringF())
+                                        success(self.value)
                                     }
                                 }
                             }

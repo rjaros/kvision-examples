@@ -1,6 +1,7 @@
 package com.example
 
 import pl.treksoft.kvision.dropdown.ContextMenu
+import pl.treksoft.kvision.dropdown.ContextMenu.Companion.contextMenu
 import pl.treksoft.kvision.dropdown.DD
 import pl.treksoft.kvision.dropdown.DropDown.Companion.dropDown
 import pl.treksoft.kvision.dropdown.Header.Companion.header
@@ -93,7 +94,7 @@ class DropDownTab : SimplePanel() {
                 }
             }
             span(tr("Open the context menu with right mouse click."))
-            val contextMenu = ContextMenu {
+            contextMenu {
                 header(tr("Menu header"))
                 link(tr("HTML"), "#!/basic")
                 link(tr("Forms"), "#!/forms")
@@ -105,7 +106,6 @@ class DropDownTab : SimplePanel() {
                     link(tr("Layout"), "#!/layout")
                 }
             }
-            setContextMenu(contextMenu)
         }
     }
 }

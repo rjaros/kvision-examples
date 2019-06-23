@@ -51,13 +51,16 @@ dependencies {
     compile "pl.treksoft:kvision-chart:${kvisionVersion}"
     compile "pl.treksoft:kvision-datacontainer:${kvisionVersion}"
     compile "pl.treksoft:kvision-tabulator:${kvisionVersion}"
+    compile "pl.treksoft:kvision-pace:${kvisionVersion}"
     testCompile "org.jetbrains.kotlin:kotlin-test-js:${kotlinVersion}"
 }
 
 kotlinFrontend {
+    sourceMaps = !production
 
     webpackBundle {
         bundleName = "main"
+        sourceMapEnabled = false
         contentPath = file('src/main/web')
         mode = production ? "production" : "development"
     }
@@ -70,6 +73,7 @@ compileKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.outputFile = "$project.buildDir.path/js/${project.name}.js"
     kotlinOptions.sourceMap = !production
+    kotlinOptions.sourceMapEmbedSources = "always"
     kotlinOptions.moduleKind = 'umd'
 }
 
@@ -77,6 +81,7 @@ compileTestKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.outputFile = "$project.buildDir.path/js-tests/${project.name}-tests.js"
     kotlinOptions.sourceMap = !production
+    kotlinOptions.sourceMapEmbedSources = "always"
     kotlinOptions.moduleKind = 'umd'
 }
 
