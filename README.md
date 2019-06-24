@@ -100,3 +100,8 @@ It's based on an official [Ktor MPP example](https://github.com/ktorio/ktor-samp
 
 An application template for [Electron](https://electronjs.org/) framework. It shows how to build cross-platform 
 (Windows, Linux, MacOS), desktop applications with KVision and Kotlin. 
+
+## Template - Apache Cordova
+
+An application template for [Apache Cordova](https://cordova.apache.org/) framework. It shows how to build mobile (Android, iOS),
+hybrid applications with KVision and Kotlin.
