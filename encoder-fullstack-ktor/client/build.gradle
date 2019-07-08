@@ -59,7 +59,8 @@ task po2json(type: GruntTask) {
     args = ["default"]
     if (file('translation').isDirectory()) {
         inputs.dir(file('translation'))
-        outputs.dir(file('build/resources/main'))
+        outputs.dir(file('build/js'))
+        outputs.dir(file('build/kotlin-js-min/main'))
     }
 }
 
@@ -67,6 +68,32 @@ pot.dependsOn 'installGrunt'
 pot.dependsOn 'npmInstall'
 po2json.dependsOn 'installGrunt'
 po2json.dependsOn 'npmInstall'
+
+task copyResources(type: Copy) {
+    from "src/main/resources"
+    into file(buildDir.path + "/js")
+}
+
+task copyResourcesForDce {
+    doLast {
+        copy {
+            from "src/main/resources"
+            ext.modulesDir = new File("${buildDir.path}/node_modules_imported/")
+            if (modulesDir.exists()) {
+                modulesDir.eachDir {
+                    if (it.name.startsWith("kvision")) {
+                        from(it) {
+                            include "css/**"
+                            include "img/**"
+                            include "js/**"
+                        }
+                    }
+                }
+            }
+            into file(buildDir.path + "/kotlin-js-min/main")
+        }
+    }
+}
 
 task dist(type: Copy, dependsOn: 'bundle') {
     from "src/main/web"
@@ -79,7 +106,10 @@ task distZip(type: Zip, dependsOn: 'dist') {
 }
 
 afterEvaluate {
-    tasks.getByName("webpack-bundle") { dependsOn(po2json/*, copyResourcesForDce*/) }
-    tasks.getByName("webpack-run") { dependsOn(po2json) }
-    tasks.getByName("karma-start") { dependsOn(po2json) }
+    if (production) {
+        tasks.getByName("copyResourcesForDce") { dependsOn(runDceKotlinJs) }
+    }
+    tasks.getByName("webpack-bundle") { dependsOn(po2json, copyResources, copyResourcesForDce) }
+    tasks.getByName("webpack-run") { dependsOn(po2json, copyResources) }
+    tasks.getByName("karma-start") { dependsOn(po2json, copyResources) }
 }

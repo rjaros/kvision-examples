@@ -3,8 +3,6 @@ package com.example
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import pl.treksoft.kvision.core.*
-import pl.treksoft.kvision.form.select.Select
-import pl.treksoft.kvision.form.select.Select.Companion.select
 import pl.treksoft.kvision.form.select.SelectInput.Companion.selectInput
 import pl.treksoft.kvision.form.text.TextAreaInput.Companion.textAreaInput
 import pl.treksoft.kvision.hmr.ApplicationBase
@@ -27,20 +25,13 @@ object App : ApplicationBase {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                        "en" to require("messages-en.json"),
-                        "pl" to require("messages-pl.json")
+                        "en" to require("./messages-en.json"),
+                        "pl" to require("./messages-pl.json")
                 )
             )
         root = Root("kvapp") {
             vPanel(spacing = 10) {
                 margin = 30.px
-                select(listOf("en" to "English", "pl" to "Polish"), I18n.language) {
-                    setEventListener<Select> {
-                        change = {
-                            I18n.language = self.value ?: "en"
-                        }
-                    }
-                }
                 val input = textAreaInput {
                     placeholder = tr("Enter some text")
                     height = 300.px
