@@ -1,0 +1,1 @@
+config.resolve.modules.push('/home/mpetuska/IdeaProjects/Personal/kvision-examples/kdsl-mpp-encoder-ktor/build/processedResources/frontend/main');
