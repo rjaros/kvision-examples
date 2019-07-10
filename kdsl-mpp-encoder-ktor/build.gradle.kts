@@ -268,4 +268,3 @@ fun KotlinFrontendExtension.webpackBundle(block: WebPackExtension.() -> Unit) =
         bundle("webpack", delegateClosureOf(block))
 
 fun KotlinFrontendExtension.npm(block: NpmExtension.() -> Unit) = configure(block)
-
