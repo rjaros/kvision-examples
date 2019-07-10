@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 			},
 			all : {
 				src : [ 'translation/*.po' ],
-				dest : 'build/js/'
+                dest: 'build/js/'
 			}
 		},
 

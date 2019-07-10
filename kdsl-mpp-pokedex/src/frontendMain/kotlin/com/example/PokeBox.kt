@@ -1,0 +1,41 @@
+package com.example
+
+import pl.treksoft.kvision.core.*
+import pl.treksoft.kvision.core.Style.Companion.style
+import pl.treksoft.kvision.html.Div
+import pl.treksoft.kvision.html.Image.Companion.image
+import pl.treksoft.kvision.panel.DockPanel
+import pl.treksoft.kvision.panel.Side
+import pl.treksoft.kvision.utils.perc
+import pl.treksoft.kvision.utils.px
+
+val pokeBoxStyle = Style {
+    border = Border(1.px, BorderStyle.SOLID, Col.GRAY)
+    width = 200.px
+    height = 200.px
+    margin = 10.px
+
+    style("img") {
+        marginTop = 30.px
+    }
+
+    style("div.caption") {
+        textAlign = TextAlign.CENTER
+        background = Background(Col.SILVER)
+        width = 100.perc
+    }
+}
+
+class PokeBox(pokemon: Pokemon) : DockPanel() {
+    init {
+        addCssClass(pokeBoxStyle)
+        image(
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.substring(
+                        34,
+                        pokemon.url.length - 1
+                )}.png",
+                centered = true
+        )
+        add(Div(pokemon.name.capitalize(), classes = setOf("caption")), Side.DOWN)
+    }
+}

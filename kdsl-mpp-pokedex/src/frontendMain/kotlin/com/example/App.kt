@@ -39,8 +39,12 @@ object App : ApplicationBase {
     private val hammerjs = require("hammerjs")
 
     override fun start(state: Map<String, Any>) {
-        I18n.manager =
-                DefaultI18nManager(mapOf("pl" to require("./messages-pl.json"), "en" to require("./messages-en.json")))
+        I18n.manager = DefaultI18nManager(
+                mapOf(
+                        "pl" to require("i18n/messages-pl.json"),
+                        "en" to require("i18n/messages-en.json")
+                )
+        )
 
         root = Root("kvapp") {
             vPanel(alignItems = FlexAlignItems.STRETCH) {
