@@ -18,8 +18,8 @@ expect class EncodingService : IEncodingService
 object EncodingServiceManager : KVServiceManager<EncodingService>(EncodingService::class) {
     init {
         GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
-            bind(IEncodingService::encode)
-            bind(IEncodingService::decode)
+            bind(IEncodingService::encode as suspend EncodingService.(String, EncodingType) -> String)
+            bind(IEncodingService::decode as suspend EncodingService.(String, EncodingType) -> String)
         }
     }
 }

@@ -1,9 +1,11 @@
 package com.example
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.hmr.module
 import kotlin.browser.document
 
+@ExperimentalCoroutinesApi
 fun main(args: Array<String>) {
     var application: ApplicationBase? = null
 
@@ -26,6 +28,7 @@ fun main(args: Array<String>) {
     }
 }
 
+@ExperimentalCoroutinesApi
 fun start(state: dynamic): ApplicationBase? {
     if (document.getElementById("kvapp") == null) return null
     @Suppress("UnsafeCastFromDynamic")
