@@ -1,6 +1,8 @@
 import org.jetbrains.kotlin.gradle.frontend.KotlinFrontendExtension
 import org.jetbrains.kotlin.gradle.frontend.npm.NpmExtension
+import org.jetbrains.kotlin.gradle.frontend.util.nodePath
 import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackExtension
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsExec
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.nodeJs
 
 buildscript {
@@ -113,12 +115,21 @@ kotlin {
     }
 }
 
+ktor {
+    port = 8080
+    mainClass = mainClassName
+    jvmOptions = arrayOf()
+    workDir = buildDir
+}
+
 kotlinFrontend {
     downloadNodeJsVersion = "latest"
     sourceMaps = !isProductionBuild
     npm {
-        dependency("hammerjs")
         devDependency("po2json")
+        devDependency("grunt")
+        dependency("grunt-cli")
+        devDependency("grunt-pot")
     }
     webpackBundle {
         bundleName = "main"
@@ -157,6 +168,31 @@ afterEvaluate {
                     }
                 }
             }
+        }
+        create("generateNpmScripts") {
+            doFirst("generatePotScript") {
+                file("$projectDir/package.json.d/grunt.json").run {
+                    parentFile.mkdirs()
+                    writeText("""{"scripts": {"pot": "grunt pot"}}""")
+                }
+            }
+        }
+        getByName("npm-configure").dependsOn("generateNpmScripts")
+        create("pot", NodeJsExec::class) {
+            dependsOn("npm-install", "generateNpmScripts")
+            workingDir = file("$buildDir")
+            doFirst {
+                copy {
+                    from(projectDir) {
+                        include("Gruntfile.js")
+                    }
+                    into(buildDir)
+                }
+            }
+            args(nodePath(project, "npm").first().absolutePath,
+                    "run",
+                    "pot"
+            )
         }
         getByName("webpack-config") {
             dependsOn("frontendMainClasses")
@@ -205,18 +241,23 @@ afterEvaluate {
             dependsOn("webpack-run")
             group = "run"
         }
-        create("backendRun", JavaExec::class) {
-            dependsOn("backendMainClasses")
-            shouldRunAfter("frontendRun", "webpack-run")
+        create("backendRun") {
+            dependsOn("ktor-run")
             group = "run"
-            main = mainClassName
-            classpath += kotlin.targets["backend"].compilations["main"].output.allOutputs +
-                    configurations["backendRuntimeClasspath"]
-            isIgnoreExitValue = true
         }
         getByName("run") {
             dependsOn("frontendRun", "backendRun")
-            finalizedBy("stop")
+        }
+        create("frontendStop") {
+            dependsOn("webpack-stop")
+            group = "run"
+        }
+        create("backendStop") {
+            dependsOn("ktor-stop")
+            group = "run"
+        }
+        getByName("stop") {
+            dependsOn("frontendStop", "backendStop")
         }
     }
 }

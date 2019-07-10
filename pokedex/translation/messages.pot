@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KVision\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-19 15:48+0100\n"
+"POT-Creation-Date: 2019-07-10 11:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main/kotlin/com/example/App.kt:83
+#: src/main/kotlin/com/example/App.kt:74
 msgid "Enter pokemon name ..."
 msgstr ""
 
-#: src/main/kotlin/com/example/App.kt:100
+#: src/main/kotlin/com/example/App.kt:89
 msgid "Loading ..."
 msgstr ""
 
-#: src/main/kotlin/com/example/App.kt:130
+#: src/main/kotlin/com/example/App.kt:146
 msgid "Service error!"
 msgstr ""

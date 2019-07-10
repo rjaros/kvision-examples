@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "pot": "grunt pot"
+  }
+}

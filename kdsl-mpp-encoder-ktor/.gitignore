@@ -1,7 +1,10 @@
-.*/
+.idea/
 build/
 out/
 *.iml
+*.iws
+*.ipr
 /refresh.sh
 package-lock.json
 node_modules/
+/package.json.d/grunt.json
