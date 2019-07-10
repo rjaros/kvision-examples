@@ -1,12 +1,12 @@
 ## Gradle Tasks
-* pot - Generates a `src/frontendMain/reseources/i18n/messages.pot` translation template file.
-* po2json - Processes `src/frontendMain/resources/i18n/*.po` files and converts them to json.
-* backendRun - Starts backend ktor server on port 8080. Logs to `build/logs/ktor-8080.log`
-* frontendRun - Starts frontend webpack server on port 3000. Logs to `build/logs/webpack-dev-server.log`
-* backendStop - Stops backend ktor server.
-* frontendStop - Stops frontend ktor server.
-* run - Starts both, backend and frontend servers.
-* stop - Stops both, backend and frontend servers.
-* backendJar - Packages backend sources.
-* frontendJar - Packages frontend sources.
-* jar - Packages a standalone "fat" jar with all required dependencies.
+Whenever you want to produce a minified "production" version of your code pass in `-Pproduction=true` or `-Pprod=true` to your build command.
+### Resource Processing
+* generatePotFile - Generates a `build/reseources/main/i18n/messages.pot` translation template file.
+### Running
+* webpack-run - Starts webpack server on port 3000. Logs to `build/logs/webpack-dev-server.log`
+* webpack-stop - Stops webpack dev server.
+* run - Starts all dev servers.
+* stop - Stops all dev servers.
+### Packaging
+* webpack-bundle - Creates a webpack bundle at `build/bundle/`.
+* jar - Packages a standalone "web" jar with all required files at `build/libs/`
