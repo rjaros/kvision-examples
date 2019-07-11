@@ -34,19 +34,21 @@ repositories {
 
 // Versions
 val kotlinVersion: String by System.getProperties()
-val joobyVersion: String by project
-val pac4jVersion: String by project
-val springSecurityCryptoVersion: String by project
+val ktorVersion: String by project
+val exposedVersion: String by project
+val hikariVersion: String by project
 val h2Version: String by project
 val pgsqlVersion: String by project
 val kweryVersion: String by project
-val commonsLoggingVersion: String by project
+val logbackVersion: String by project
 val kvisionVersion: String by project
+val commonsCodecVersion: String by project
+val jdbcNamedParametersVersion: String by project
 
 // Custom Properties
 val webDir = file("src/frontendMain/web")
 val isProductionBuild = project.extra.get("production") as Boolean
-val mainClassName = "com.example.MainKt"
+val mainClassName = "io.ktor.server.netty.EngineMain"
 
 kotlin {
     jvm("backend") {
@@ -86,17 +88,17 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
-                implementation("pl.treksoft:kvision-server-jooby:$kvisionVersion")
-                implementation("org.jooby:jooby-netty:$joobyVersion")
-                implementation("org.jooby:jooby-jdbc:$joobyVersion")
-                implementation("org.jooby:jooby-pac4j2:$joobyVersion")
-                implementation("org.pac4j:pac4j-sql:$pac4jVersion")
-                implementation("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
-                implementation("commons-logging:commons-logging:$commonsLoggingVersion")
+                implementation("pl.treksoft:kvision-server-ktor:$kvisionVersion")
+                implementation("io.ktor:ktor-server-netty:$ktorVersion")
+                implementation("io.ktor:ktor-auth:$ktorVersion")
+                implementation("ch.qos.logback:logback-classic:$logbackVersion")
                 implementation("com.h2database:h2:$h2Version")
+                implementation("org.jetbrains.exposed:exposed:$exposedVersion")
                 implementation("org.postgresql:postgresql:$pgsqlVersion")
+                implementation("com.zaxxer:HikariCP:$hikariVersion")
+                implementation("commons-codec:commons-codec:$commonsCodecVersion")
+                implementation("com.axiomalaska:jdbc-named-parameters:$jdbcNamedParametersVersion")
                 implementation("com.github.andrewoma.kwery:core:$kweryVersion")
-                implementation("com.github.andrewoma.kwery:mapper:$kweryVersion")
             }
         }
         getByName("backendTest") {
@@ -126,6 +128,13 @@ kotlin {
     }
 }
 
+ktor {
+    port = 8080
+    mainClass = mainClassName
+    jvmOptions = arrayOf()
+    workDir = buildDir
+}
+
 kotlinFrontend {
     sourceMaps = !isProductionBuild
     npm {
@@ -137,7 +146,7 @@ kotlinFrontend {
         bundleName = "main"
         sourceMapEnabled = false
         port = 3000
-        proxyUrl = "http://localhost:8080"
+        proxyUrl = "http://localhost:${ktor.port}"
         contentPath = webDir
         mode = if (isProductionBuild) "production" else "development"
     }
@@ -312,15 +321,9 @@ afterEvaluate {
             dependsOn("webpack-run")
             group = "run"
         }
-        create("backendRun", JavaExec::class) {
-            dependsOn("compileKotlinBackend")
+        create("backendRun") {
+            dependsOn("ktor-run")
             group = "run"
-            main = mainClassName
-            classpath = configurations["backendRuntimeClasspath"] + project.tasks["compileKotlinBackend"].outputs.files +
-                    project.tasks["backendProcessResources"].outputs.files
-            doFirst {
-                println(project.tasks["backendProcessResources"].outputs.files)
-            }
         }
         getByName("run") {
             dependsOn("frontendRun", "backendRun")
@@ -329,8 +332,12 @@ afterEvaluate {
             dependsOn("webpack-stop")
             group = "run"
         }
+        create("backendStop") {
+            dependsOn("ktor-stop")
+            group = "run"
+        }
         getByName("stop") {
-            dependsOn("frontendStop")
+            dependsOn("frontendStop", "backendStop")
         }
     }
 }
