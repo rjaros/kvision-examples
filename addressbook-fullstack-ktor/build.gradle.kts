@@ -160,14 +160,18 @@ tasks {
             moduleKind = "umd"
             sourceMap = !isProductionBuild
             metaInfo = true
-            if (!isProductionBuild) {
+//            if (!isProductionBuild) {
                 sourceMapEmbedSources = "always"
-            }
+//            }
         }
     }
     withType<KotlinJsDce> {
         dceOptions {
             devMode = !isProductionBuild
+        }
+        inputs.property("production", isProductionBuild)
+        doFirst {
+            destinationDir.deleteRecursively()
         }
         doLast {
             copy {

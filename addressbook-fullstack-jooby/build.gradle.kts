@@ -160,6 +160,10 @@ tasks {
         dceOptions {
             devMode = !isProductionBuild
         }
+        inputs.property("production", isProductionBuild)
+        doFirst {
+            destinationDir.deleteRecursively()
+        }
         doLast {
             copy {
                 file("$buildDir/node_modules_imported/").listFiles()?.forEach {
