@@ -1,1 +1,1 @@
-web: java -Dapplication.port=$PORT -Ddb.url=$JDBC_DATABASE_URL -Ddb.user=$JDBC_DATABASE_USERNAME -Ddb.password=$JDBC_DATABASE_PASSWORD -Ddbdialect=pgsql -jar server/build/libs/server-all.jar prod
+web: java -Dapplication.port=$PORT -Ddb.url=$JDBC_DATABASE_URL -Ddb.user=$JDBC_DATABASE_USERNAME -Ddb.password=$JDBC_DATABASE_PASSWORD -Ddbdialect=pgsql -jar build/libs/addressbook-fullstack-jooby-1.0.0-SNAPSHOT.jar prod

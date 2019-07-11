@@ -1,8 +1,6 @@
 package com.example
 
 import kotlinx.serialization.UnstableDefault
-import pl.treksoft.kvision.form.select.Select
-import pl.treksoft.kvision.form.select.Select.Companion.select
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
@@ -21,20 +19,13 @@ object App : ApplicationBase {
 
     override fun start(state: Map<String, Any>) {
         I18n.manager =
-                DefaultI18nManager(
-                        mapOf(
-                                "en" to require("i18n/messages-en.json"),
-                                "pl" to require("i18n/messages-pl.json")
-                        )
+            DefaultI18nManager(
+                mapOf(
+                    "en" to require("i18n/messages-en.json"),
+                    "pl" to require("i18n/messages-pl.json")
                 )
+            )
         root = Root("kvapp") {
-            select(options = listOf("en" to "English", "pl" to "Polskie"), value = I18n.language, label = I18n.tr("Language")) {
-                setEventListener<Select> {
-                    change = {
-                        self.value?.let { I18n.language = it }
-                    }
-                }
-            }
             splitPanel {
                 height = 100.vh
                 add(ListPanel)

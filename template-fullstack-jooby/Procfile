@@ -1,1 +1,1 @@
-web: java -Dapplication.port=$PORT -jar server/build/libs/server-all.jar
+web: java -Dapplication.port=$PORT -jar build/libs/template-fullstack-jooby-1.0.0-SNAPSHOT.jar
