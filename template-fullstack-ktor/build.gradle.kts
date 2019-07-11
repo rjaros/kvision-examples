@@ -27,6 +27,7 @@ repositories {
     jcenter()
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     maven { url = uri("https://kotlin.bintray.com/kotlinx") }
+    maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
     maven { url = uri("https://dl.bintray.com/gbaldeck/kotlin") }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     mavenLocal()
@@ -114,10 +115,18 @@ kotlin {
                 implementation("pl.treksoft:kvision:$kvisionVersion")
                 implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
                 implementation("pl.treksoft:kvision-select:$kvisionVersion")
+                implementation("pl.treksoft:kvision-datetime:$kvisionVersion")
+                implementation("pl.treksoft:kvision-spinner:$kvisionVersion")
+                implementation("pl.treksoft:kvision-richtext:$kvisionVersion")
+                implementation("pl.treksoft:kvision-upload:$kvisionVersion")
+                implementation("pl.treksoft:kvision-handlebars:$kvisionVersion")
+                implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
                 implementation("pl.treksoft:kvision-datacontainer:$kvisionVersion")
                 implementation("pl.treksoft:kvision-dialog:$kvisionVersion")
+                implementation("pl.treksoft:kvision-redux:$kvisionVersion")
+                implementation("pl.treksoft:kvision-chart:$kvisionVersion")
+                implementation("pl.treksoft:kvision-tabulator:$kvisionVersion")
                 implementation("pl.treksoft:kvision-remote:$kvisionVersion")
-                implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
             }
         }
         getByName("frontendTest") {
