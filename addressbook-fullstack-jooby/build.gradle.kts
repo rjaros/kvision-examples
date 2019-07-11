@@ -213,7 +213,7 @@ tasks {
 afterEvaluate {
     tasks {
         create("generatePotFile", NodeJsExec::class) {
-            dependsOn("npm-install", "generateNpmScripts", "generateGruntfile")
+            dependsOn("npm-install", "generateNpmScripts", "generateGruntfile", "frontendProcessResources")
             workingDir = file("$buildDir")
             args(nodePath(project, "npm").first().absolutePath, "run", "pot")
         }
@@ -314,6 +314,7 @@ afterEvaluate {
         }
         create("backendRun", JavaExec::class) {
             dependsOn("compileKotlinBackend")
+            shouldRunAfter("frontendRun", "webpack-run")
             group = "run"
             main = mainClassName
             classpath = configurations["backendRuntimeClasspath"] + project.tasks["compileKotlinBackend"].outputs.files +

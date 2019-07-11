@@ -136,7 +136,7 @@ tasks {
         }
     }
     create("generatePotFile", NodeJsExec::class) {
-        dependsOn("npm-install", "generateNpmScripts", "generateGruntfile")
+        dependsOn("npm-install", "generateNpmScripts", "generateGruntfile", "processResources")
         workingDir = file("$buildDir")
         args(nodePath(project, "npm").first().absolutePath, "run", "pot")
         inputs.files(sourceSets["main"].allSource)
