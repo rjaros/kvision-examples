@@ -5,3 +5,7 @@ heroku-tweets.sh
 heroku-encoder.sh
 build.sh
 build-fullstack.sh
+*.imp
+*.ipr
+*.iws
+/.idea/

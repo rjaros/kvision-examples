@@ -1,9 +1,11 @@
 package com.example
 
+import kotlinx.serialization.UnstableDefault
 import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.hmr.module
 import kotlin.browser.document
 
+@UnstableDefault
 fun main(args: Array<String>) {
     var application: ApplicationBase? = null
 
@@ -26,9 +28,10 @@ fun main(args: Array<String>) {
     }
 }
 
+@UnstableDefault
 fun start(state: dynamic): ApplicationBase? {
     if (document.getElementById("kvapp") == null) return null
     @Suppress("UnsafeCastFromDynamic")
-    App.start(state?.appState ?: emptyMap())
+    App.start(state?.appState ?: emptyMap<String, Any>())
     return App
 }

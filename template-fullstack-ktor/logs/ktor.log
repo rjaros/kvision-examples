@@ -1,0 +1,6 @@
+[2019-07-11 14:40:15,233]-[main] INFO  Application - No ktor.deployment.watch patterns match classpath entries, automatic reload is not active
+[2019-07-11 14:40:15,649]-[main] INFO  Application - Responding at http://0.0.0.0:8080
+[2019-07-11 14:47:46,679]-[main] INFO  Application - No ktor.deployment.watch patterns match classpath entries, automatic reload is not active
+[2019-07-11 14:47:47,033]-[main] INFO  Application - Responding at http://0.0.0.0:8080
+[2019-07-11 14:50:28,903]-[main] INFO  Application - No ktor.deployment.watch patterns match classpath entries, automatic reload is not active
+[2019-07-11 14:50:29,260]-[main] INFO  Application - Responding at http://0.0.0.0:8080

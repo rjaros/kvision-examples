@@ -3,6 +3,7 @@ package com.example
 import com.lightningkite.kotlin.observable.list.ObservableList
 import com.lightningkite.kotlin.observable.list.observableListOf
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 import org.w3c.dom.get
@@ -26,22 +27,23 @@ fun Address.match(search: String?): Boolean {
 }
 
 object Model {
-
     val addresses: ObservableList<Address> = observableListOf(
         Address("John", "Smith", "john.smith@mail.com", true),
         Address("Karen", "Kowalsky", "kkowalsky@mail.com", true),
         Address("William", "Gordon", "w.gordon@mail.com", false)
     )
 
+    @UnstableDefault
     fun storeAddresses() {
         val jsonString = Json.stringify(Address.serializer().list, addresses)
         localStorage["addresses"] = jsonString
     }
 
+    @UnstableDefault
     fun loadAddresses() {
-        localStorage["addresses"]?.let {
+        localStorage["addresses"]?.let { address ->
             addresses.clear()
-            Json.parse(Address.serializer().list, it).forEach {
+            Json.parse(Address.serializer().list, address).forEach {
                 addresses.add(it)
             }
         }
