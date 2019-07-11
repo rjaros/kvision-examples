@@ -234,7 +234,11 @@ afterEvaluate {
             val dependencies = configurations["backendRuntimeClasspath"].filter { it.name.endsWith(".jar") } +
                     project.tasks["backendJar"].outputs.files +
                     project.tasks["frontendJar"].outputs.files
-            dependencies.forEach { from(zipTree(it)) }
+
+            dependencies.forEach {
+                if (it.isDirectory) from(it) else from(zipTree(it))
+            }
+            exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
         }
         create("frontendRun") {
             dependsOn("webpack-run")
