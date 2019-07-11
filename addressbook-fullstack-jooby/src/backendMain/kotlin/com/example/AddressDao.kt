@@ -6,14 +6,7 @@ package com.example
 
 import com.github.andrewoma.kwery.core.Session
 import com.github.andrewoma.kwery.core.builder.query
-import com.github.andrewoma.kwery.mapper.AbstractDao
-import com.github.andrewoma.kwery.mapper.SimpleConverter
-import com.github.andrewoma.kwery.mapper.Table
-import com.github.andrewoma.kwery.mapper.TableConfiguration
-import com.github.andrewoma.kwery.mapper.Value
-import com.github.andrewoma.kwery.mapper.prefixed
-import com.github.andrewoma.kwery.mapper.reifiedConverter
-import com.github.andrewoma.kwery.mapper.standardConverters
+import com.github.andrewoma.kwery.mapper.*
 import com.github.andrewoma.kwery.mapper.util.camelToLowerUnderscore
 import java.sql.Timestamp
 import java.util.*

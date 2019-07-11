@@ -19,6 +19,9 @@ plugins {
     kotlin("frontend") version System.getProperty("frontendPluginVersion")
 }
 
+version = "1.0.0-SNAPSHOT"
+group = "com.example"
+
 repositories {
     jcenter()
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
@@ -27,9 +30,6 @@ repositories {
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     mavenLocal()
 }
-
-version = "1.0.0-SNAPSHOT"
-group = "com.example"
 
 // Versions
 val kotlinVersion: String by System.getProperties()
@@ -40,7 +40,6 @@ val kvisionVersion: String by project
 // Custom Properties
 val webDir = file("src/main/web")
 val isProductionBuild = project.extra.get("production") as Boolean
-//val mainClassName = "io.ktor.server.netty.EngineMain"
 
 dependencies {
     implementation(kotlin("stdlib-js"))
@@ -63,6 +62,7 @@ kotlinFrontend {
         bundleName = "main"
         sourceMapEnabled = false
         port = 3000
+        proxyUrl = "http://localhost:8080"
         contentPath = webDir
         mode = if (isProductionBuild) "production" else "development"
     }
@@ -86,22 +86,18 @@ tasks {
         dceOptions {
             devMode = !isProductionBuild
         }
-    }
-    getByName("processResources", Copy::class) {
-        doLast("Convert PO to JSON") {
-            destinationDir.walkTopDown().filter {
-                it.isFile && it.extension == "po"
-            }.forEach {
-                exec {
-                    executable = project.nodeJs.root.nodeCommand
-                    args("$buildDir/node_modules/.bin/po2json",
-                            it.absolutePath,
-                            "${it.parent}/${it.nameWithoutExtension}.json",
-                            "-f",
-                            "jed1.x")
-                    println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
+        doLast {
+            copy {
+                file("$buildDir/node_modules_imported/").listFiles()?.forEach {
+                    if (it.isDirectory && it.name.startsWith("kvision")) {
+                        from(it) {
+                            include("css/**")
+                            include("img/**")
+                            include("js/**")
+                        }
+                    }
                 }
-                it.delete()
+                into(file(buildDir.path + "/kotlin-js-min/main"))
             }
         }
     }
@@ -149,16 +145,35 @@ tasks {
 }
 afterEvaluate {
     tasks {
+        getByName("processResources", Copy::class) {
+            dependsOn("npm-install")
+            doLast("Convert PO to JSON") {
+                destinationDir.walkTopDown().filter {
+                    it.isFile && it.extension == "po"
+                }.forEach {
+                    exec {
+                        executable = project.nodeJs.root.nodeCommand
+                        args("$buildDir/node_modules/.bin/po2json",
+                                it.absolutePath,
+                                "${it.parent}/${it.nameWithoutExtension}.json",
+                                "-f",
+                                "jed1.x")
+                        println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
+                    }
+                    it.delete()
+                }
+            }
+        }
         getByName("npm-configure").shouldRunAfter("generateNpmScripts")
         getByName("webpack-run").dependsOn("classes")
         getByName("webpack-bundle").dependsOn("classes", "runDceKotlinJs")
         replace("jar", Jar::class).apply {
             dependsOn("webpack-bundle")
-            from(project.tasks["webpack-bundle"].outputs)
-            from(project.tasks["processResources"].outputs)
-            inputs.files(project.tasks["webpack-bundle"].outputs)
-            inputs.files(project.tasks["processResources"].outputs)
-            outputs.file("$destinationDirectory/$archiveFileName")
+            group = "package"
+            val from = project.tasks["webpack-bundle"].outputs.files + webDir
+            from(from)
+            inputs.files(from)
+            outputs.file(archiveFile)
 
             manifest {
                 attributes(
@@ -173,12 +188,12 @@ afterEvaluate {
         }
         create("zip", Zip::class) {
             dependsOn("webpack-bundle")
-            from(project.tasks["webpack-bundle"].outputs)
-            from(project.tasks["processResources"].outputs)
-            inputs.files(project.tasks["webpack-bundle"].outputs)
-            inputs.files(project.tasks["processResources"].outputs)
+            group = "package"
             destinationDirectory.set(file("$buildDir/libs"))
-            outputs.file("$destinationDirectory/$archiveFileName")
+            val from = project.tasks["webpack-bundle"].outputs.files + webDir
+            from(from)
+            inputs.files(from)
+            outputs.file(archiveFile)
         }
     }
 }

@@ -1,6 +1,7 @@
 ## Gradle Tasks
+Whenever you want to produce a minified "production" version of your code pass in `-Pproduction=true` or `-Pprod=true` to your build command.
 ### Resource Processing
-* pot - Generates a `build/resources/main/i18n/messages.pot` translation template file.
+* generatePotFile - Generates a `build/resources/main/i18n/messages.pot` translation template file.
 ### Running
 * webpack-run - Starts a webpack dev server on port 3000. Logs to `build/logs/webpack-dev-server.log`
 * webpack-stop - Stops a webpack dev server.
