@@ -1,6 +1,5 @@
 package com.example
 
-import com.lightningkite.kotlin.observable.list.observableListOf
 import pl.treksoft.kvision.form.InputSize
 import pl.treksoft.kvision.form.check.CheckBoxInput
 import pl.treksoft.kvision.form.check.CheckBoxInput.Companion.checkBoxInput
@@ -28,6 +27,7 @@ import pl.treksoft.kvision.tabulator.TabulatorOptions
 import pl.treksoft.kvision.types.toDateF
 import pl.treksoft.kvision.types.toStringF
 import pl.treksoft.kvision.utils.obj
+import pl.treksoft.kvision.utils.observableListOf
 import pl.treksoft.kvision.utils.px
 import kotlin.js.Date
 
@@ -38,6 +38,7 @@ data class Employee(
     val active: Boolean = false,
     val startDate: Date?,
     val salary: Int?,
+    @Suppress("ArrayInDataClass") val _children: Array<Employee>? = null,
     val id: Int = counter++
 ) {
     companion object {
@@ -54,7 +55,11 @@ class TabulatorTab : SimplePanel() {
             "Edinburgh",
             false,
             "2011-04-25".toDateF("YYYY-MM-DD"),
-            320800
+            320800,
+            arrayOf(
+                Employee("John Snow", "Programmer", "Edinburgh", true, "2012-04-23".toDateF("YYY-MM-DD"), 100000),
+                Employee("Mark Lee", "Junior programmer", "Edinburgh", true, "2016-06-02".toDateF("YYY-MM-DD"), 80000)
+            )
         ),
         Employee(
             "Garrett Winters",
@@ -92,7 +97,7 @@ class TabulatorTab : SimplePanel() {
                                     }
                                 }
                             }
-                        }
+                        }, editable = { false }, cellDblClick = { _, cell -> cell.edit(true) }
                     ),
                     ColumnDefinition(
                         tr("Position"), "position",
@@ -189,7 +194,7 @@ class TabulatorTab : SimplePanel() {
                                 }
                             }
                         })
-                ), pagination = PaginationMode.LOCAL, paginationSize = 10
+                ), pagination = PaginationMode.LOCAL, paginationSize = 10, dataTree = true
             ), types = setOf(TableType.BORDERED, TableType.STRIPED, TableType.HOVER)
         ) {
             height = 430.px
@@ -200,7 +205,7 @@ class TabulatorTab : SimplePanel() {
             }
 
             button(tr("Show current data model"), "fa-search").onClick {
-                println(data.toList())
+                console.log(data.toList())
                 Alert.show(tr("Current data model"), data.toList().toString())
             }
         }

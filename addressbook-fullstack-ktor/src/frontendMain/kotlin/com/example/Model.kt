@@ -1,10 +1,10 @@
 package com.example
 
-import com.lightningkite.kotlin.observable.list.ObservableList
-import com.lightningkite.kotlin.observable.list.observableListOf
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import pl.treksoft.kvision.remote.Profile
+import pl.treksoft.kvision.utils.ObservableList
+import pl.treksoft.kvision.utils.observableListOf
 import pl.treksoft.kvision.utils.syncWithList
 
 object Model {

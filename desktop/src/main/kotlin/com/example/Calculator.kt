@@ -22,7 +22,7 @@ enum class Operator {
     MULTIPLY
 }
 
-class Calculator : DesktopWindow("Calculator", 280, 270) {
+class Calculator : DesktopWindow("Calculator", "fa-calculator", 280, 270) {
 
     val inputDiv: Div
     var input: String = "0"
@@ -34,6 +34,8 @@ class Calculator : DesktopWindow("Calculator", 280, 270) {
 
     init {
         isResizable = false
+        maximizeButton = false
+        minimizeButton = false
         inputDiv = div("0", align = Align.RIGHT) {
             padding = 5.px
             marginTop = 15.px

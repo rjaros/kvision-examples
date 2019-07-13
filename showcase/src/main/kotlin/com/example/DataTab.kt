@@ -1,6 +1,5 @@
 package com.example
 
-import com.lightningkite.kotlin.observable.list.observableListOf
 import pl.treksoft.kvision.core.FontWeight
 import pl.treksoft.kvision.data.BaseDataComponent
 import pl.treksoft.kvision.data.DataContainer
@@ -17,6 +16,7 @@ import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.utils.observableListOf
 import pl.treksoft.kvision.utils.px
 
 class DataTab : SimplePanel() {

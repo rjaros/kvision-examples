@@ -1,6 +1,7 @@
 package com.example
 
-import com.lightningkite.kotlin.observable.list.observableListOf
+import pl.treksoft.kvision.utils.observableListOf
+
 
 object Model {
 

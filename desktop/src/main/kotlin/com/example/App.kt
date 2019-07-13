@@ -6,6 +6,7 @@ import pl.treksoft.kvision.core.Component
 import pl.treksoft.kvision.dropdown.DropDown.Companion.dropDown
 import pl.treksoft.kvision.dropdown.Separator.Companion.separator
 import pl.treksoft.kvision.hmr.ApplicationBase
+import pl.treksoft.kvision.html.Icon.Companion.icon
 import pl.treksoft.kvision.html.Link.Companion.link
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag
@@ -93,14 +94,15 @@ object App : ApplicationBase {
 
     lateinit var taskBar: Nav
 
-    fun addTask(label: String, window: Window): Component {
+    fun addTask(window: DesktopWindow): Component {
         val task = Tag(TAG.LI) {
-            link(label) {
+            link(window.caption ?: "Window", icon = window.icon) {
                 paddingTop = 12.px
                 paddingBottom = 12.px
                 margin = 2.px
                 border = Border(1.px, BorderStyle.SOLID)
             }.onClick {
+                if (window.minimized) window.toggleMinimize()
                 window.toFront()
                 window.focus()
             }

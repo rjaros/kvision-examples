@@ -1,6 +1,5 @@
 package com.example
 
-import com.lightningkite.kotlin.observable.list.observableListOf
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
@@ -14,6 +13,7 @@ import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel
+import pl.treksoft.kvision.utils.observableListOf
 import pl.treksoft.kvision.utils.px
 
 class DragDropTab : SimplePanel() {

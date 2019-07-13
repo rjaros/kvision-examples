@@ -2,6 +2,10 @@
 
 A set of examples for [KVision](https://github.com/rjaros/kvision) framework.
 
+### Important!
+
+##### We are in the process of transforming the examples to Gradle Kotlin DSL and new MPP. Some examples (in particular the `template` project) has already been ported, but the KVision Guide hasn't been updated yet. Look for the README file inside individual projects for information about new Gradle tasks.
+
 ## Template
 
 An application template. It does nothing, but includes all dependencies to develop KVision applications with all

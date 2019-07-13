@@ -27,7 +27,7 @@ import kotlin.math.abs
 
 val colorTable = arrayOf(Col.WHITE, Col.BLACK, Col.RED, Col.GREEN, Col.BLUE, Col.YELLOW)
 
-class Paint : DesktopWindow("Paint", 600, 400) {
+class Paint : DesktopWindow("Paint", "fa-paint-brush", 600, 400) {
 
     lateinit var buttonPoint: Button
     lateinit var buttonPencil: Button
@@ -165,6 +165,7 @@ class Paint : DesktopWindow("Paint", 600, 400) {
         selectTool(buttonPencil)
         selectLineColor(lineColorButtons[1])
         selectFillColor(fillColorButtons[0])
+        height = 453.px
     }
 
     fun selectTool(button: Button) {

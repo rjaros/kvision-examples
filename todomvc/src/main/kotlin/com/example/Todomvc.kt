@@ -122,7 +122,6 @@ object Todomvc : ApplicationBase {
                             COMPLETED -> state.completedListIndexed()
                         }.forEach { (index, todo) ->
                             tag(LI, classes = if (todo.completed) setOf("completed") else setOf()) li@{
-                                strictDOM = true
                                 lateinit var edit: TextInput
                                 div(classes = setOf("view")) {
                                     checkBoxInput(todo.completed, classes = setOf("toggle")).onClick {

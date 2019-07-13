@@ -10,13 +10,14 @@ import pl.treksoft.kvision.core.UNIT
 import pl.treksoft.kvision.form.text.RichTextInput
 import pl.treksoft.kvision.utils.px
 
-class TextEditor : DesktopWindow("Text Editor", 600, 400) {
+class TextEditor : DesktopWindow("Text Editor", "fa-edit", 600, 400) {
 
-    override var height: CssSize? = null
+    override var height: CssSize?
+        get() = super.height
         set(value) {
             super.height = value
             if (value?.second == UNIT.px) {
-                richText.height = (value.first - 93).px
+                richText.height = (value.first.toInt() - 93).px
             }
         }
 
@@ -28,6 +29,7 @@ class TextEditor : DesktopWindow("Text Editor", 600, 400) {
         padding = 3.px
         richText.height = 370.px
         add(richText)
+        height = 457.px
     }
 
     override fun focus() {

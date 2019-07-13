@@ -16,13 +16,14 @@ import pl.treksoft.kvision.toolbar.ButtonGroup.Companion.buttonGroup
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
-class WebBrowser : DesktopWindow("Web Browser", 800, 400) {
+class WebBrowser : DesktopWindow("Web Browser", "fa-firefox", 800, 400) {
 
-    override var height: CssSize? = null
+    override var height: CssSize?
+        get() = super.height
         set(value) {
             super.height = value
             if (value?.second == UNIT.px) {
-                iframe.height = (value.first - 125).px
+                iframe.height = (value.first.toInt() - 125).px
             }
         }
 
@@ -69,6 +70,7 @@ class WebBrowser : DesktopWindow("Web Browser", 800, 400) {
                 urlInput.value = iframe.location
             }
         }
+        height = 457.px
     }
 
     companion object {

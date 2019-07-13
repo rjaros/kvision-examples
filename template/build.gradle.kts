@@ -34,8 +34,6 @@ repositories {
 
 // Versions
 val kotlinVersion: String by System.getProperties()
-val ktorVersion: String by project
-val logbackVersion: String by project
 val kvisionVersion: String by project
 
 // Custom Properties

@@ -1,13 +1,13 @@
 package com.example
 
-import com.lightningkite.kotlin.observable.list.ObservableList
-import com.lightningkite.kotlin.observable.list.observableListOf
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 import org.w3c.dom.get
 import org.w3c.dom.set
+import pl.treksoft.kvision.utils.ObservableList
+import pl.treksoft.kvision.utils.observableListOf
 import kotlin.browser.localStorage
 
 @Serializable
