@@ -6,6 +6,8 @@ A set of examples for [KVision](https://github.com/rjaros/kvision) framework.
 
 ##### We are in the process of transforming the examples to Gradle Kotlin DSL and new MPP. Some examples (in particular the `template` project) has already been ported, but the KVision Guide hasn't been updated yet. Look for the README file inside individual projects for information about new Gradle tasks.
 
+##### Since [Kotlin 1.3.40](https://blog.jetbrains.com/kotlin/2019/06/kotlin-1-3-40-released/) new type inference has been enabled by default in the IntelliJ IDE. There are some incompatibilities, that can result in errors presented in the IDE for some of the example projects. You may wish to [disable this option](https://www.jetbrains.com/help/idea/compiler-kotlin-compiler.html).   
+
 ## Template
 
 An application template. It does nothing, but includes all dependencies to develop KVision applications with all
