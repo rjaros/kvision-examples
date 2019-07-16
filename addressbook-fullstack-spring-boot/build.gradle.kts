@@ -151,7 +151,7 @@ kotlinFrontend {
         bundleName = "main"
         sourceMapEnabled = false
         port = 3000
-        proxyUrl = "http://localhost:${ktor.port}"
+        proxyUrl = "http://localhost:8080"
         contentPath = webDir
         mode = if (isProductionBuild) "production" else "development"
     }
