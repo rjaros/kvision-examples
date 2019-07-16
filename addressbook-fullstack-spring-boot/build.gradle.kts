@@ -6,16 +6,24 @@ import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackRunTask
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsExec
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.nodeJs
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+import org.springframework.boot.gradle.tasks.run.BootRun
+
 
 buildscript {
     extra.set("production", (findProperty("prod") ?: findProperty("production") ?: "false") == "true")
+    extra.set("kotlin.version", System.getProperty("kotlinVersion"))
 }
 
 plugins {
     val kotlinVersion: String by System.getProperties()
     id("kotlinx-serialization") version kotlinVersion
     id("kotlin-multiplatform") version kotlinVersion
+    id("io.spring.dependency-management") version System.getProperty("dependencyManagementPluginVersion")
+    id("org.springframework.boot") version System.getProperty("springBootVersion")
+    kotlin("plugin.spring") version kotlinVersion
     id("kotlin-dce-js") version kotlinVersion
     kotlin("frontend") version System.getProperty("frontendPluginVersion")
 }
@@ -25,30 +33,30 @@ group = "com.example"
 
 repositories {
     jcenter()
+    mavenCentral()
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     maven { url = uri("https://kotlin.bintray.com/kotlinx") }
     maven { url = uri("https://dl.bintray.com/gbaldeck/kotlin") }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
+    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
     mavenLocal()
 }
 
 // Versions
 val kotlinVersion: String by System.getProperties()
-val ktorVersion: String by project
-val exposedVersion: String by project
-val hikariVersion: String by project
+val kvisionVersion: String by project
+val springMvcPac4jVersion: String by project
+val pac4jVersion: String by project
+val springSecurityCryptoVersion: String by project
+val commonsLoggingVersion: String by project
 val h2Version: String by project
 val pgsqlVersion: String by project
 val kweryVersion: String by project
-val logbackVersion: String by project
-val kvisionVersion: String by project
-val commonsCodecVersion: String by project
-val jdbcNamedParametersVersion: String by project
 
 // Custom Properties
 val webDir = file("src/frontendMain/web")
 val isProductionBuild = project.extra.get("production") as Boolean
-val mainClassName = "io.ktor.server.netty.EngineMain"
+val mainClassName = "com.example.MainKt"
 
 kotlin {
     jvm("backend") {
@@ -88,23 +96,27 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
-                implementation("pl.treksoft:kvision-server-ktor:$kvisionVersion")
-                implementation("io.ktor:ktor-server-netty:$ktorVersion")
-                implementation("io.ktor:ktor-auth:$ktorVersion")
-                implementation("ch.qos.logback:logback-classic:$logbackVersion")
+                implementation("pl.treksoft:kvision-server-spring-boot:$kvisionVersion")
+                implementation("org.springframework.boot:spring-boot-starter")
+                implementation("org.springframework.boot:spring-boot-devtools")
+                implementation("org.springframework.boot:spring-boot-starter-web")
+                implementation("org.springframework.boot:spring-boot-starter-jdbc")
+                implementation("org.pac4j:spring-webmvc-pac4j:$springMvcPac4jVersion")
+                implementation("org.pac4j:pac4j-http:$pac4jVersion")
+                implementation("org.pac4j:pac4j-sql:$pac4jVersion")
+                implementation("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
+                implementation("commons-logging:commons-logging:$commonsLoggingVersion")
                 implementation("com.h2database:h2:$h2Version")
-                implementation("org.jetbrains.exposed:exposed:$exposedVersion")
                 implementation("org.postgresql:postgresql:$pgsqlVersion")
-                implementation("com.zaxxer:HikariCP:$hikariVersion")
-                implementation("commons-codec:commons-codec:$commonsCodecVersion")
-                implementation("com.axiomalaska:jdbc-named-parameters:$jdbcNamedParametersVersion")
                 implementation("com.github.andrewoma.kwery:core:$kweryVersion")
+                implementation("com.github.andrewoma.kwery:mapper:$kweryVersion")
             }
         }
         getByName("backendTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
+                implementation("org.springframework.boot:spring-boot-starter-test")
             }
         }
         getByName("frontendMain") {
@@ -126,13 +138,6 @@ kotlin {
             }
         }
     }
-}
-
-ktor {
-    port = 8080
-    mainClass = mainClassName
-    jvmOptions = arrayOf()
-    workDir = buildDir
 }
 
 kotlinFrontend {
@@ -186,6 +191,12 @@ tasks {
                 }
                 into(file(buildDir.path + "/kotlin-js-min/frontend/main"))
             }
+        }
+    }
+    withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "1.8"
         }
     }
     create("generateNpmScripts") {
@@ -274,7 +285,7 @@ afterEvaluate {
             archiveAppendix.set("frontend")
             val from = project.tasks["webpack-bundle"].outputs.files + webDir
             from(from)
-            into("/assets")
+            into("/public")
             inputs.files(from)
             outputs.file(archiveFile)
 
@@ -299,37 +310,49 @@ afterEvaluate {
             inputs.files(from)
             outputs.file(archiveFile)
         }
-        getByName("backendJar").group = "package"
-        replace("jar", Jar::class).apply {
-            dependsOn("frontendJar", "backendJar")
+        getByName("bootJar", BootJar::class) {
+            dependsOn("backendMainClasses")
+            classpath = files(kotlin.targets["backend"].compilations["main"].output.allOutputs +
+                    project.configurations["backendRuntimeClasspath"])
+        }
+        replace("backendJar", BootJar::class).apply {
+            dependsOn("frontendJar", "backendMainClasses")
             group = "package"
-            manifest {
-                attributes(
-                        mapOf(
-                                "Implementation-Title" to rootProject.name,
-                                "Implementation-Group" to rootProject.group,
-                                "Implementation-Version" to rootProject.version,
-                                "Timestamp" to System.currentTimeMillis(),
-                                "Main-Class" to mainClassName
-                        )
-                )
+            archiveAppendix.set("backend")
+            classpath = files(kotlin.targets["backend"].compilations["main"].output.allOutputs +
+                    project.configurations["backendRuntimeClasspath"] +
+                    (project.tasks["frontendJar"] as Jar).archiveFile)
+            mainClassName = "com.example.MainKt"
+        }
+        replace("jar").apply {
+            dependsOn("backendJar")
+            group = "package"
+            doFirst {
+                val bootJar = project.tasks["backendJar"] as BootJar
+                val bootFile = bootJar.archiveFile.get().asFile
+                val newName = bootFile.name.replace("-${bootJar.archiveAppendix.get()}", "")
+                copy {
+                    from(bootJar.destinationDirectory.asFile.get().absolutePath)
+                    into(bootJar.destinationDirectory.asFile.get().absolutePath)
+                    include(bootFile.name)
+                    rename(bootFile.name, newName)
+
+                }
             }
-            val dependencies = configurations["backendRuntimeClasspath"].filter { it.name.endsWith(".jar") } +
-                    project.tasks["backendJar"].outputs.files +
-                    project.tasks["frontendJar"].outputs.files
-            dependencies.forEach {
-                if (it.isDirectory) from(it) else from(zipTree(it))
-            }
-            exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
-            inputs.files(dependencies)
-            outputs.file(archiveFile)
+        }
+        getByName("bootRun", BootRun::class) {
+            dependsOn("frontendJar", "backendMainClasses")
+            classpath = files(kotlin.targets["backend"].compilations["main"].output.allOutputs +
+                    project.configurations["backendRuntimeClasspath"] +
+                    (project.tasks["frontendJar"] as Jar).archiveFile)
         }
         create("frontendRun") {
             dependsOn("webpack-run")
             group = "run"
         }
         create("backendRun") {
-            dependsOn("ktor-run")
+            dependsOn("bootRun")
+            shouldRunAfter("frontendRun", "webpack-run")
             group = "run"
         }
         getByName("run") {
@@ -339,12 +362,8 @@ afterEvaluate {
             dependsOn("webpack-stop")
             group = "run"
         }
-        create("backendStop") {
-            dependsOn("ktor-stop")
-            group = "run"
-        }
         getByName("stop") {
-            dependsOn("frontendStop", "backendStop")
+            dependsOn("frontendStop")
         }
     }
 }
