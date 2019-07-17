@@ -142,7 +142,7 @@ tasks {
         }
     }
     create("generatePotFile", Exec::class) {
-        dependsOn("npm-install", "generateGruntfile", "processResources")
+        dependsOn("npm-install", "generateGruntfile")
         workingDir = file("$buildDir")
         executable = project.nodeJs.root.nodeCommand
         args("$buildDir/node_modules/.bin/grunt", "pot")
