@@ -68,9 +68,9 @@ class DropDownTab : SimplePanel() {
             }
             dropDown(tr("Dropdown with custom list"), icon = "fa-picture-o", style = ButtonStyle.WARNING) {
                 minWidth = 250.px
-                image(require("./img/cat.jpg")) { margin = 10.px; title = "Cat" }
+                image(require("img/cat.jpg")) { margin = 10.px; title = "Cat" }
                 separator()
-                image(require("./img/dog.jpg")) { margin = 10.px; title = "Dog" }
+                image(require("img/dog.jpg")) { margin = 10.px; title = "Dog" }
             }
             hPanel(spacing = 5) {
                 val fdd = dropDown(

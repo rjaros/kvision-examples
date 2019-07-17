@@ -67,7 +67,7 @@ class ModalsTab : SimplePanel() {
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor."
                 )
             )
-            modal.add(Image(require("./img/dog.jpg")))
+            modal.add(Image(require("img/dog.jpg")))
             modal.addButton(Button(tr("Close")).onClick {
                 modal.hide()
             })

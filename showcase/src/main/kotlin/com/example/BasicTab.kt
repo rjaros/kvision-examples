@@ -64,7 +64,7 @@ class BasicTab : SimplePanel() {
             span {
                 +tr("(hover to view a tooltip and click to view a popover)")
             }
-            image(require("./img/dog.jpg"), shape = ImageShape.CIRCLE) {
+            image(require("img/dog.jpg"), shape = ImageShape.CIRCLE) {
                 enableTooltip(TooltipOptions(title = tr("This is a tooltip")))
                 enablePopover(
                     PopoverOptions(

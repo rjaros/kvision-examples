@@ -24,7 +24,12 @@ object Showcase : ApplicationBase {
     override fun start(state: Map<String, Any>) {
 
         I18n.manager =
-            DefaultI18nManager(mapOf("pl" to require("./messages-pl.json"), "en" to require("./messages-en.json")))
+            DefaultI18nManager(
+                mapOf(
+                    "pl" to require("i18n/messages-pl.json"),
+                    "en" to require("i18n/messages-en.json")
+                )
+            )
         Pace.init()
         root = Root("showcase") {
             tabPanel(scrollableTabs = true) {
@@ -65,5 +70,5 @@ object Showcase : ApplicationBase {
         return mapOf()
     }
 
-    val css = require("./css/showcase.css")
+    val css = require("css/showcase.css")
 }
