@@ -2,6 +2,7 @@ package com.example
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.list
 import org.w3c.dom.get
 import org.w3c.dom.set
@@ -60,14 +61,14 @@ object Model {
     }
 
     private fun storeAddresses() {
-        val jsonString = Json.stringify(Address.serializer().list, addresses)
-        localStorage["addresses"] = jsonString
+        val jsonString = Json(JsonConfiguration.Stable).stringify(Address.serializer().list, addresses)
+        localStorage["addressesTabulator"] = jsonString
     }
 
     fun loadAddresses() {
-        localStorage["addresses"]?.let {
+        localStorage["addressesTabulator"]?.let {
             addresses.clear()
-            Json.parse(Address.serializer().list, it).forEach {
+            Json(JsonConfiguration.Stable).parse(Address.serializer().list, it).forEach {
                 addresses.add(it)
             }
             counter = (addresses.maxBy { it.id ?: 0 }?.id ?: 0) + 1

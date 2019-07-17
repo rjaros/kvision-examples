@@ -7,6 +7,7 @@ import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextInputType
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.StackPanel
@@ -24,16 +25,16 @@ object EditPanel : StackPanel() {
         padding = 10.px
 
         formPanel = formPanel {
-            add(Address::firstName, Text(label = "First name:"))
-            add(Address::lastName, Text(label = "Last name:"))
-            add(Address::email, Text(TextInputType.EMAIL, label = "E-mail:"))
-            add(Address::favourite, CheckBox(label = "Mark as favourite"))
+            add(Address::firstName, Text(label = tr("First name:")))
+            add(Address::lastName, Text(label = tr("Last name:")))
+            add(Address::email, Text(TextInputType.EMAIL, label = tr("E-mail:")))
+            add(Address::favourite, CheckBox(label = tr("Mark as favourite")))
 
             add(HPanel(spacing = 10) {
-                button("Save", "fa-check", ButtonStyle.PRIMARY).onClick {
+                button(tr("Save"), "fa-check", ButtonStyle.PRIMARY).onClick {
                     save()
                 }
-                button("Cancel", "fa-times", ButtonStyle.DEFAULT).onClick {
+                button(tr("Cancel"), "fa-times", ButtonStyle.DEFAULT).onClick {
                     cancel()
                 }
             })
@@ -46,7 +47,7 @@ object EditPanel : StackPanel() {
             }
         }
         mainPanel = simplePanel {
-            button("Add new address", "fa-plus", style = ButtonStyle.PRIMARY) {
+            button(tr("Add new address"), "fa-plus", style = ButtonStyle.PRIMARY) {
                 onClick {
                     add()
                 }
