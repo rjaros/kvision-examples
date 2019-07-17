@@ -1,8 +1,6 @@
 import org.jetbrains.kotlin.gradle.frontend.KotlinFrontendExtension
 import org.jetbrains.kotlin.gradle.frontend.npm.NpmExtension
-import org.jetbrains.kotlin.gradle.frontend.util.nodePath
 import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackExtension
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsExec
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.nodeJs
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
@@ -26,6 +24,7 @@ repositories {
     jcenter()
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     maven { url = uri("https://kotlin.bintray.com/kotlinx") }
+    maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
     maven { url = uri("https://dl.bintray.com/gbaldeck/kotlin") }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     mavenLocal()
@@ -43,7 +42,6 @@ dependencies {
     implementation(kotlin("stdlib-js"))
     implementation("pl.treksoft:kvision:$kvisionVersion")
     implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
-    implementation("pl.treksoft:kvision-select:$kvisionVersion")
     implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
     implementation("pl.treksoft:kvision-datacontainer:$kvisionVersion")
     testImplementation(kotlin("test-js"))
@@ -103,73 +101,70 @@ tasks {
             }
         }
     }
-    create("generateNpmScripts") {
-        doFirst("generatePotScript") {
-            file("$projectDir/package.json.d/pot.json").run {
-                parentFile.mkdirs()
-                writeText("""{"scripts": {"pot": "grunt pot"}}""")
-            }
-        }
-    }
     create("generateGruntfile") {
         outputs.file("$buildDir/Gruntfile.js")
         doLast {
             file("$buildDir/Gruntfile.js").run {
-                writeText("""
+                writeText(
+                    """
                     module.exports = function (grunt) {
                         grunt.initConfig({
                             pot: {
                                 options: {
                                     text_domain: "messages",
-                                    dest: "$buildDir/resources/main/i18n/",
+                                    dest: "../src/main/resources/i18n/",
                                     keywords: ["tr", "ntr:1,2", "gettext", "ngettext:1,2"],
                                     encoding: "UTF-8"
                                 },
                                 files: {
-                                    src: ["$projectDir/src/main/kotlin/**/*.kt"],
+                                    src: ["../src/main/kotlin/**/*.kt"],
                                     expand: true,
                                 },
                             }
                         });
                         grunt.loadNpmTasks("grunt-pot");
                     };
-                """.trimIndent())
+                """.trimIndent()
+                )
             }
         }
     }
-    create("generatePotFile", NodeJsExec::class) {
-        dependsOn("npm-install", "generateNpmScripts", "generateGruntfile", "processResources")
+    create("generatePotFile", Exec::class) {
+        dependsOn("npm-install", "generateGruntfile")
         workingDir = file("$buildDir")
-        args(nodePath(project, "npm").first().absolutePath, "run", "pot")
+        executable = project.nodeJs.root.nodeCommand
+        args("$buildDir/node_modules/.bin/grunt", "pot")
         inputs.files(sourceSets["main"].allSource)
-        outputs.file("$buildDir/resources/main/i18n/messages.pot")
+        outputs.file("$projectDir/src/main/resources/i18n/messages.pot")
     }
 }
 afterEvaluate {
     tasks {
         getByName("processResources", Copy::class) {
             dependsOn("npm-install")
+            exclude("**/*.pot")
             doLast("Convert PO to JSON") {
                 destinationDir.walkTopDown().filter {
                     it.isFile && it.extension == "po"
                 }.forEach {
                     exec {
                         executable = project.nodeJs.root.nodeCommand
-                        args("$buildDir/node_modules/.bin/po2json",
-                                it.absolutePath,
-                                "${it.parent}/${it.nameWithoutExtension}.json",
-                                "-f",
-                                "jed1.x")
+                        args(
+                            "$buildDir/node_modules/.bin/po2json",
+                            it.absolutePath,
+                            "${it.parent}/${it.nameWithoutExtension}.json",
+                            "-f",
+                            "jed1.x"
+                        )
                         println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
                     }
                     it.delete()
                 }
             }
         }
-        getByName("npm-configure").shouldRunAfter("generateNpmScripts")
         getByName("webpack-run").dependsOn("classes")
         getByName("webpack-bundle").dependsOn("classes", "runDceKotlinJs")
-        replace("jar", Jar::class).apply {
+        create("webJar", Jar::class) {
             dependsOn("webpack-bundle")
             group = "package"
             val from = project.tasks["webpack-bundle"].outputs.files + webDir
@@ -179,12 +174,12 @@ afterEvaluate {
 
             manifest {
                 attributes(
-                        mapOf(
-                                "Implementation-Title" to rootProject.name,
-                                "Implementation-Group" to rootProject.group,
-                                "Implementation-Version" to rootProject.version,
-                                "Timestamp" to System.currentTimeMillis()
-                        )
+                    mapOf(
+                        "Implementation-Title" to rootProject.name,
+                        "Implementation-Group" to rootProject.group,
+                        "Implementation-Version" to rootProject.version,
+                        "Timestamp" to System.currentTimeMillis()
+                    )
                 )
             }
         }
@@ -201,6 +196,6 @@ afterEvaluate {
 }
 
 fun KotlinFrontendExtension.webpackBundle(block: WebPackExtension.() -> Unit) =
-        bundle("webpack", delegateClosureOf(block))
+    bundle("webpack", delegateClosureOf(block))
 
 fun KotlinFrontendExtension.npm(block: NpmExtension.() -> Unit) = configure(block)
