@@ -124,7 +124,7 @@ tasks {
                             pot: {
                                 options: {
                                     text_domain: "messages",
-                                    dest: "../translation/",
+                                    dest: "../src/main/resources/i18n/",
                                     keywords: ["tr", "ntr:1,2", "gettext", "ngettext:1,2"],
                                     encoding: "UTF-8"
                                 },
@@ -147,13 +147,14 @@ tasks {
         executable = project.nodeJs.root.nodeCommand
         args("$buildDir/node_modules/.bin/grunt", "pot")
         inputs.files(sourceSets["main"].allSource)
-        outputs.file("$projectDir/translation/messages.pot")
+        outputs.file("$projectDir/src/main/resources/i18n/messages.pot")
     }
 }
 afterEvaluate {
     tasks {
         getByName("processResources", Copy::class) {
             dependsOn("npm-install")
+            exclude("**/*.pot")
             doLast("Convert PO to JSON") {
                 destinationDir.walkTopDown().filter {
                     it.isFile && it.extension == "po"
