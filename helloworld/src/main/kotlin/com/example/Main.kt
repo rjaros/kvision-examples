@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
 fun start(state: dynamic): ApplicationBase? {
     if (document.getElementById("helloworld") == null) return null
     @Suppress("UnsafeCastFromDynamic")
-    Helloworld.start(state?.appState ?: emptyMap())
+    Helloworld.start(state?.appState ?: emptyMap<String, Any>())
     return Helloworld
 }
 

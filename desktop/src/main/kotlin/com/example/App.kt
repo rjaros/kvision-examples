@@ -90,7 +90,7 @@ object App : ApplicationBase {
         return mapOf()
     }
 
-    val css = require("./css/kvapp.css")
+    val css = require("css/kvapp.css")
 
     lateinit var taskBar: Nav
 

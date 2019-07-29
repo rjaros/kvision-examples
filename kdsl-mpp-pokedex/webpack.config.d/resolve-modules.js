@@ -1,1 +1,0 @@
-config.resolve.modules.push('/home/mpetuska/IdeaProjects/Personal/kvision-examples/kdsl-mpp-pokedex/build/processedResources/frontend/main');

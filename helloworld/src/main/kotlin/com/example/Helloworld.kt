@@ -21,14 +21,14 @@ object Helloworld : ApplicationBase {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                    "en" to require("./messages-en.json"),
-                    "pl" to require("./messages-pl.json"),
-                    "de" to require("./messages-de.json"),
-                    "es" to require("./messages-es.json"),
-                    "fr" to require("./messages-fr.json"),
-                    "ru" to require("./messages-ru.json"),
-                    "ja" to require("./messages-ja.json"),
-                    "ko" to require("./messages-ko.json")
+                    "en" to require("i18n/messages-en.json"),
+                    "pl" to require("i18n/messages-pl.json"),
+                    "de" to require("i18n/messages-de.json"),
+                    "es" to require("i18n/messages-es.json"),
+                    "fr" to require("i18n/messages-fr.json"),
+                    "ru" to require("i18n/messages-ru.json"),
+                    "ja" to require("i18n/messages-ja.json"),
+                    "ko" to require("i18n/messages-ko.json")
                 )
             )
 
@@ -47,5 +47,5 @@ object Helloworld : ApplicationBase {
         return mapOf()
     }
 
-    val css = require("./css/helloworld.css")
+    val css = require("css/helloworld.css")
 }
