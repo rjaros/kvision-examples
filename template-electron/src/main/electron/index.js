@@ -7,7 +7,7 @@ const path = require('path');
 let mainWindow
 
 function createMainWindow() {
-  const window = new BrowserWindow()
+  const window = new BrowserWindow({ webPreferences: { nodeIntegration: true } })
 
   if (!app.isPackaged) {
     window.webContents.openDevTools()

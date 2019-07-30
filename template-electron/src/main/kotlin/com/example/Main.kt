@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
 fun start(state: dynamic): ApplicationBase? {
     if (document.getElementById("kvapp") == null) return null
     @Suppress("UnsafeCastFromDynamic")
-    ElectronApp.start(state?.appState ?: emptyMap())
+    ElectronApp.start(state?.appState ?: emptyMap<String, Any>())
     return ElectronApp
 }
 

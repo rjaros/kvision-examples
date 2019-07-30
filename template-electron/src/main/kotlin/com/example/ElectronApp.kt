@@ -32,8 +32,8 @@ object ElectronApp : ApplicationBase {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                    "en" to require("./messages-en.json"),
-                    "pl" to require("./messages-pl.json")
+                    "en" to require("i18n/messages-en.json"),
+                    "pl" to require("i18n/messages-pl.json")
                 )
             )
 

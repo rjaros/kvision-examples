@@ -1,7 +1,7 @@
 appId: template-electron
-electronVersion: 4.0.7
+electronVersion: 6.0.0
 directories:
-  output: ../../electron
+  output: ../electron
 linux:
   target: AppImage
 win:
