@@ -47,7 +47,12 @@ object App : ApplicationBase {
     override fun start(state: Map<String, Any>) {
 
         I18n.manager =
-            DefaultI18nManager(mapOf("pl" to require("./messages-pl.json"), "en" to require("./messages-en.json")))
+            DefaultI18nManager(
+                mapOf(
+                    "pl" to require("i18n/messages-pl.json"),
+                    "en" to require("i18n/messages-en.json")
+                )
+            )
 
         root = Root("kvapp") {
             vPanel(alignItems = FlexAlignItems.STRETCH, spacing = 10) {
@@ -102,5 +107,5 @@ object App : ApplicationBase {
         return mapOf()
     }
 
-    val css = require("./css/kvapp.css")
+    val css = require("css/kvapp.css")
 }

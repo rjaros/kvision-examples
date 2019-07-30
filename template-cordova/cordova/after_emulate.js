@@ -7,7 +7,7 @@ module.exports = function(ctx) {
 
     var config = fs.readFileSync(configFile, 'utf8');
 
-    var config2 = config.replace('<content src="http://10.0.2.2:8088/" />', '<content src="index.html" />');
+    var config2 = config.replace('<content src="http://10.0.2.2:3000/" />', '<content src="index.html" />');
 
     if (config2 != config) {
         fs.writeFileSync(configFile, config2);

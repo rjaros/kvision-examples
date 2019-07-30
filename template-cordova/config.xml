@@ -25,5 +25,5 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <allow-navigation href="http://10.0.2.2:8088/*" />
+    <allow-navigation href="http://10.0.2.2:3000/*" />
 </widget>
