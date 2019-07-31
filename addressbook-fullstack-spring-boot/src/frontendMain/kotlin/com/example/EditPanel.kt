@@ -9,6 +9,7 @@ import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextInputType
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.StackPanel
 import pl.treksoft.kvision.utils.ENTER_KEY
@@ -24,21 +25,21 @@ object EditPanel : StackPanel() {
         padding = 10.px
 
         formPanel = formPanel {
-            add(Address::firstName, Text(label = "First name:").apply { maxlength = 255 })
-            add(Address::lastName, Text(label = "Last name:").apply { maxlength = 255 })
-            add(Address::email, Text(TextInputType.EMAIL, label = "E-mail:").apply { maxlength = 255 }) {
+            add(Address::firstName, Text(label = "${tr("First name")}:").apply { maxlength = 255 })
+            add(Address::lastName, Text(label = "${tr("Last name")}:").apply { maxlength = 255 })
+            add(Address::email, Text(TextInputType.EMAIL, label = "${tr("E-mail")}:").apply { maxlength = 255 }) {
                 it.getValue()
-                    ?.matches("(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
+                        ?.matches("(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
             }
-            add(Address::phone, Text(label = "Phone number:").apply { maxlength = 255 })
-            add(Address::postalAddress, Text(label = "Postal address:").apply { maxlength = 255 })
-            add(Address::favourite, CheckBox(label = "Mark as favourite"))
+            add(Address::phone, Text(label = "${tr("Phone number")}:").apply { maxlength = 255 })
+            add(Address::postalAddress, Text(label = "${tr("Postal address")}:").apply { maxlength = 255 })
+            add(Address::favourite, CheckBox(label = tr("Mark as favourite")))
 
             add(HPanel(spacing = 10) {
-                button("Save", "fa-check", ButtonStyle.PRIMARY).onClick {
+                button(tr("Save"), "fa-check", ButtonStyle.PRIMARY).onClick {
                     save()
                 }
-                button("Cancel", "fa-times", ButtonStyle.DEFAULT).onClick {
+                button(tr("Cancel"), "fa-times", ButtonStyle.DEFAULT).onClick {
                     close()
                 }
             })

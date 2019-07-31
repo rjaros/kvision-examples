@@ -9,6 +9,7 @@ import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
 import pl.treksoft.kvision.form.text.TextInputType
 import pl.treksoft.kvision.html.Icon.Companion.icon
 import pl.treksoft.kvision.html.Link.Companion.link
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.FlexWrap
@@ -27,23 +28,23 @@ object ListPanel : SimplePanel() {
         padding = 10.px
 
         val table = Table(types = setOf(TableType.STRIPED, TableType.HOVER)) {
-            addHeaderCell(sortingHeaderCell("First name", Sort.FN))
-            addHeaderCell(sortingHeaderCell("Last name", Sort.LN))
-            addHeaderCell(sortingHeaderCell("E-mail", Sort.E))
+            addHeaderCell(sortingHeaderCell(tr("First name"), Sort.FN))
+            addHeaderCell(sortingHeaderCell(tr("Last name"), Sort.LN))
+            addHeaderCell(sortingHeaderCell(tr("E-mail"), Sort.E))
             addHeaderCell(sortingHeaderCell("", Sort.F))
             addHeaderCell(HeaderCell(""))
         }
 
         hPanel(FlexWrap.WRAP, alignItems = FlexAlignItems.CENTER, spacing = 20) {
             textInput(TextInputType.SEARCH) {
-                placeholder = "Search ..."
+                placeholder = "${tr("Search")} ..."
                 setEventListener<TextInput> {
                     input = {
                         Model.search = self.value
                     }
                 }
             }
-            radioGroup(listOf("all" to "All", "fav" to "Favourites"), "all", inline = true) {
+            radioGroup(listOf("all" to tr("All"), "fav" to tr("Favourites")), "all", inline = true) {
                 marginBottom = 0.px
                 setEventListener<RadioGroup> {
                     change = {
@@ -68,13 +69,13 @@ object ListPanel : SimplePanel() {
                     cell {
                         address.favourite?.let {
                             if (it) icon("fa-heart-o") {
-                                title = "Favourite"
+                                title = tr("Favourite")
                             }
                         }
                     }
                     cell {
                         icon("fa-times") {
-                            title = "Delete"
+                            title = tr("Delete")
                             setEventListener {
                                 click = { e ->
                                     e.stopPropagation()

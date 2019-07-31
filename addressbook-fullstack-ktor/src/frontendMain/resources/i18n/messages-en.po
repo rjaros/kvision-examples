@@ -1,97 +1,94 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the addressbook-fullstack-ktor package.
+# This file is distributed under the same license as the KVision package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: addressbook-fullstack-ktor 1.0.0-SNAPSHOT\n"
+"Project-Id-Version: KVision\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-11 13:15+0300\n"
+"POT-Creation-Date: 2018-08-18 01:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: English\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/App.kt:27
-msgid "Language"
-msgstr ""
-
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/EditPanel.kt:36
+#: ../src/frontendMain/kotlin/com/example/EditPanel.kt:36
 msgid "Mark as favourite"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/EditPanel.kt:39
+#: ../src/frontendMain/kotlin/com/example/EditPanel.kt:39
 msgid "Save"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/EditPanel.kt:42
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:73
+#: ../src/frontendMain/kotlin/com/example/EditPanel.kt:42
+#: ../src/frontendMain/kotlin/com/example/Security.kt:73
 msgid "Cancel"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/ListPanel.kt:31
+#: ../src/frontendMain/kotlin/com/example/ListPanel.kt:31
 msgid "First name"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/ListPanel.kt:32
+#: ../src/frontendMain/kotlin/com/example/ListPanel.kt:32
 msgid "Last name"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/ListPanel.kt:33
+#: ../src/frontendMain/kotlin/com/example/ListPanel.kt:33
 msgid "E-mail"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/ListPanel.kt:47
+#: ../src/frontendMain/kotlin/com/example/ListPanel.kt:47
 msgid "All"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/ListPanel.kt:47
+#: ../src/frontendMain/kotlin/com/example/ListPanel.kt:47
 msgid "Favourites"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/ListPanel.kt:72
+#: ../src/frontendMain/kotlin/com/example/ListPanel.kt:72
 msgid "Favourite"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/ListPanel.kt:78
+#: ../src/frontendMain/kotlin/com/example/ListPanel.kt:78
 msgid "Delete"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/MainPanel.kt:15
+#: ../src/frontendMain/kotlin/com/example/MainPanel.kt:15
 msgid "Add new address"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:59
+#: ../src/frontendMain/kotlin/com/example/Security.kt:59
 msgid "Password too short"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:65
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:66
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:70
+#: ../src/frontendMain/kotlin/com/example/Security.kt:65
+#: ../src/frontendMain/kotlin/com/example/Security.kt:66
+#: ../src/frontendMain/kotlin/com/example/Security.kt:70
 msgid "Passwords are not the same"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:76
+#: ../src/frontendMain/kotlin/com/example/Security.kt:76
 msgid "Register"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:79
+#: ../src/frontendMain/kotlin/com/example/Security.kt:79
 msgid "Login"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:82
+#: ../src/frontendMain/kotlin/com/example/Security.kt:82
 msgid "Register user"
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:132
+#: ../src/frontendMain/kotlin/com/example/Security.kt:132
 msgid "User registered. You can now log in."
 msgstr ""
 
-#: addressbook-fullstack-ktor/src/frontendMain/kotlin/com/example/Security.kt:136
+#: ../src/frontendMain/kotlin/com/example/Security.kt:136
 msgid "This login is not available. Please try again."
 msgstr ""

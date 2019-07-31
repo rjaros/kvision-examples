@@ -7,6 +7,7 @@ import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.panel.SplitPanel.Companion.splitPanel
+import pl.treksoft.kvision.require
 import pl.treksoft.kvision.utils.vh
 
 object App : ApplicationBase {
@@ -17,8 +18,8 @@ object App : ApplicationBase {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                    "en" to pl.treksoft.kvision.require("i18n/messages-en.json"),
-                    "pl" to pl.treksoft.kvision.require("i18n/messages-pl.json")
+                    "en" to require("i18n/messages-en.json"),
+                    "pl" to require("i18n/messages-pl.json")
                 )
             )
         root = Root("kvapp") {

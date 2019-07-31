@@ -9,6 +9,7 @@ import pl.treksoft.kvision.form.text.Password
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Dialog
 import pl.treksoft.kvision.remote.Credentials
@@ -36,8 +37,8 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
 
     init {
         loginPanel = formPanel {
-            add(Credentials::username, Text(label = "Login:"), required = true)
-            add(Credentials::password, Password(label = "Password:"), required = true)
+            add(Credentials::username, Text(label = "${tr("Login")}:"), required = true)
+            add(Credentials::password, Password(label = "${tr("Password")}:"), required = true)
             setEventListener {
                 keydown = {
                     if (it.keyCode == ENTER_KEY) {
@@ -47,38 +48,38 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
             }
         }
         registerPanel = formPanel {
-            add(User::name, Text(label = "Your name:"), required = true)
+            add(User::name, Text(label = "${tr("Your name")}:"), required = true)
             add(User::username, Text(label = "Login:"), required = true)
             add(
-                User::password, Password(label = "Password:"), required = true,
+                    User::password, Password(label = "${tr("Password")}:"), required = true,
                 validatorMessage = { "Password too short" }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
-            add(User::password2, Password(label = "Confirm password:"), required = true,
-                validatorMessage = { "Password too short" }) {
+            add(User::password2, Password(label = "${tr("Confirm password")}:"), required = true,
+                    validatorMessage = { tr("Password too short") }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
             validator = {
                 val result = it[User::password] == it[User::password2]
                 if (!result) {
-                    it.getControl(User::password)?.validatorError = "Passwords are not the same"
-                    it.getControl(User::password2)?.validatorError = "Passwords are not the same"
+                    it.getControl(User::password)?.validatorError = tr("Passwords are not the same")
+                    it.getControl(User::password2)?.validatorError = tr("Passwords are not the same")
                 }
                 result
             }
-            validatorMessage = { "Passwords are not the same." }
+            validatorMessage = { tr("Passwords are not the same") }
 
         }
-        cancelButton = Button("Cancel", "fa-times").onClick {
+        cancelButton = Button(tr("Cancel"), "fa-times").onClick {
             hideRegisterForm()
         }
-        registerButton = Button("Register", "fa-check", ButtonStyle.PRIMARY).onClick {
+        registerButton = Button(tr("Register"), "fa-check", ButtonStyle.PRIMARY).onClick {
             processRegister()
         }
-        loginButton = Button("Login", "fa-check", ButtonStyle.PRIMARY).onClick {
+        loginButton = Button(tr("Login"), "fa-check", ButtonStyle.PRIMARY).onClick {
             processCredentials()
         }
-        userButton = Button("Register user", "fa-user").onClick {
+        userButton = Button(tr("Register user"), "fa-user").onClick {
             showRegisterForm()
         }
         addButton(userButton)
@@ -128,11 +129,11 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
                         userData.password ?: ""
                     )
                 ) {
-                    Alert.show(text = "User registered. You can now log in.") {
+                    Alert.show(text = tr("User registered. You can now log in.")) {
                         hideRegisterForm()
                     }
                 } else {
-                    Alert.show(text = "This login is not available. Please try again.")
+                    Alert.show(text = tr("This login is not available. Please try again."))
                 }
             }
         }
