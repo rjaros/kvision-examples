@@ -1,1 +1,1 @@
-web: java -jar server/build/libs/server-all.jar -port=$PORT
+web: java -jar build/libs/numbers-fullstack-ktor-1.0.0-SNAPSHOT.jar -port=$PORT
