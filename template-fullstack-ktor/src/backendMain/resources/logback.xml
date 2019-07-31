@@ -31,7 +31,7 @@
     <root level="INFO">
         <appender-ref ref="FILE-ROLLING"/>
     </root>
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

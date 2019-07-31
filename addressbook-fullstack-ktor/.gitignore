@@ -6,4 +6,3 @@ out/
 *.ipr
 *.iws
 *.idea
-/package.json.d/
