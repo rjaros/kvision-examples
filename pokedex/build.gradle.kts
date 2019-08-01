@@ -135,7 +135,7 @@ tasks {
         dependsOn("npm-install", "generateGruntfile")
         workingDir = file("$buildDir")
         executable = project.nodeJs.root.nodeCommand
-        args("$buildDir/node_modules/.bin/grunt", "pot")
+        args("$buildDir/node_modules/grunt/bin/grunt", "pot")
         inputs.files(sourceSets["main"].allSource)
         outputs.file("$projectDir/src/main/resources/i18n/messages.pot")
     }
@@ -152,7 +152,7 @@ afterEvaluate {
                     exec {
                         executable = project.nodeJs.root.nodeCommand
                         args(
-                            "$buildDir/node_modules/.bin/po2json",
+                            "$buildDir/node_modules/po2json/bin/po2json",
                             it.absolutePath,
                             "${it.parent}/${it.nameWithoutExtension}.json",
                             "-f",
