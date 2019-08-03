@@ -3,7 +3,7 @@ Whenever you want to produce a minified "production" version of your code pass i
 ### Resource Processing
 * generatePotFile - Generates a `src/frontendMain/resources/i18n/messages.pot` translation template file.
 ### Running
-* backendRun - Starts a jooby dev server on port 8080
+* backendRun - Starts a dev server on port 8080
 * frontendRun - Starts a webpack dev server on port 3000. Logs to `build/logs/webpack-dev-server.log`
 * frontendStop - Stops a webpack dev server.
 * run - Starts all configured servers.
