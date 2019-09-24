@@ -40,7 +40,12 @@ object App : ApplicationBase {
 
     override fun start(state: Map<String, Any>) {
         I18n.manager =
-                DefaultI18nManager(mapOf("pl" to require("i18n/messages-pl.json"), "en" to require("i18n/messages-en.json")))
+            DefaultI18nManager(
+                mapOf(
+                    "pl" to require("i18n/messages-pl.json"),
+                    "en" to require("i18n/messages-en.json")
+                )
+            )
 
         root = Root("kvapp") {
             vPanel(alignItems = FlexAlignItems.STRETCH) {
@@ -94,8 +99,8 @@ object App : ApplicationBase {
 
     private fun Container.pokemonGrid(state: Pokedex) {
         gridPanel(
-                templateColumns = "repeat(auto-fill, minmax(250px, 1fr))",
-                justifyItems = GridJustify.CENTER
+            templateColumns = "repeat(auto-fill, minmax(250px, 1fr))",
+            justifyItems = GridJustify.CENTER
         ) {
             state.visiblePokemons.forEach {
                 add(PokeBox(it))
@@ -129,8 +134,8 @@ object App : ApplicationBase {
             val restClient = RestClient()
             dispatch(PokeAction.StartDownload)
             restClient.remoteCall(
-                    "https://pokeapi.co/api/v2/pokemon/", obj { limit = 800 },
-                    deserializer = Pokemon.serializer().list
+                "https://pokeapi.co/api/v2/pokemon/", obj { limit = 800 },
+                deserializer = Pokemon.serializer().list
             ) {
                 it.results
             }.then { list ->

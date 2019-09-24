@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.frontend.KotlinFrontendExtension
 import org.jetbrains.kotlin.gradle.frontend.npm.NpmExtension
 import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackExtension
 import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackRunTask
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.nodeJs
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
 
@@ -22,6 +22,7 @@ version = "1.0.0-SNAPSHOT"
 group = "com.example"
 
 repositories {
+    mavenCentral()
     jcenter()
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     maven { url = uri("https://kotlin.bintray.com/kotlinx") }
@@ -207,7 +208,7 @@ tasks {
     create("generatePotFile", Exec::class) {
         dependsOn("npm-install", "generateGruntfile")
         workingDir = file("$buildDir")
-        executable = project.nodeJs.root.nodeCommand
+        executable = NodeJsRootPlugin.apply(project).nodeCommand
         args("$buildDir/node_modules/grunt/bin/grunt", "pot")
         inputs.files(kotlin.sourceSets["frontendMain"].kotlin.files)
         outputs.file("$projectDir/src/frontendMain/resources/i18n/messages.pot")
@@ -223,7 +224,7 @@ afterEvaluate {
                     it.isFile && it.extension == "po"
                 }.forEach {
                     exec {
-                        executable = project.nodeJs.root.nodeCommand
+                        executable = NodeJsRootPlugin.apply(project).nodeCommand
                         args(
                             "$buildDir/node_modules/po2json/bin/po2json",
                             it.absolutePath,

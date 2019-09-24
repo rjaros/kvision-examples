@@ -20,12 +20,12 @@ import pl.treksoft.kvision.html.TAG.*
 import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.redux.RAction
 import pl.treksoft.kvision.redux.StateBinding.Companion.stateBinding
 import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.routing.routing
 import pl.treksoft.kvision.utils.ENTER_KEY
 import pl.treksoft.kvision.utils.ESC_KEY
-import redux.RAction
 import kotlin.browser.localStorage
 
 enum class MODE {
