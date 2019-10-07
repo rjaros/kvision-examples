@@ -14,6 +14,7 @@ import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
 object App : ApplicationBase {
@@ -31,6 +32,7 @@ object App : ApplicationBase {
             )
         root = Root("kvapp") {
             vPanel(spacing = 10) {
+                width = 100.perc
                 margin = 30.px
                 val input = textAreaInput {
                     placeholder = tr("Enter some text")

@@ -21,16 +21,15 @@ class ButtonsTab : SimplePanel() {
         this.marginTop = 10.px
         hPanel(wrap = FlexWrap.WRAP, spacing = 100) {
             vPanel(spacing = 7) {
-                button(tr("Default button"), style = ButtonStyle.DEFAULT) { width = 200.px }
-                button(tr("Primary button"), style = ButtonStyle.PRIMARY) { width = 200.px }
-                button(tr("Success button"), style = ButtonStyle.SUCCESS) { width = 200.px }
-                button(tr("Info button"), style = ButtonStyle.INFO) { width = 200.px }
-                button(tr("Warning button"), style = ButtonStyle.WARNING) { width = 200.px }
-                button(tr("Danger button"), style = ButtonStyle.DANGER) { width = 200.px }
-                button(tr("Link button"), style = ButtonStyle.LINK) { width = 200.px }
+                button(tr("Primary button"), style = ButtonStyle.PRIMARY) { width = 250.px }
+                button(tr("Success button"), style = ButtonStyle.SUCCESS) { width = 250.px }
+                button(tr("Info button"), style = ButtonStyle.INFO) { width = 250.px }
+                button(tr("Warning button"), style = ButtonStyle.WARNING) { width = 250.px }
+                button(tr("Danger button"), style = ButtonStyle.DANGER) { width = 250.px }
+                button(tr("Link button"), style = ButtonStyle.LINK) { width = 250.px }
             }
             vPanel {
-                checkBox(true, label = tr("Default checkbox")) { style = CheckBoxStyle.DEFAULT }
+                checkBox(true, label = tr("Default checkbox"))
                 checkBox(true, label = tr("Primary checkbox")) { style = CheckBoxStyle.PRIMARY }
                 checkBox(true, label = tr("Success checkbox")) { style = CheckBoxStyle.SUCCESS }
                 checkBox(true, label = tr("Info checkbox")) { style = CheckBoxStyle.INFO }
@@ -39,7 +38,7 @@ class ButtonsTab : SimplePanel() {
                 checkBox(true, label = tr("Circled checkbox")) { circled = true }
             }
             vPanel {
-                radio(name = "radio", label = tr("Default radiobutton")) { style = RadioStyle.DEFAULT }
+                radio(name = "radio", label = tr("Default radiobutton"))
                 radio(name = "radio", label = tr("Primary radiobutton")) { style = RadioStyle.PRIMARY }
                 radio(name = "radio", label = tr("Success radiobutton")) { style = RadioStyle.SUCCESS }
                 radio(name = "radio", label = tr("Info radiobutton")) { style = RadioStyle.INFO }

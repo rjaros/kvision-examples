@@ -1,8 +1,10 @@
 package com.example
 
-import pl.treksoft.kvision.dropdown.ContextMenu
 import pl.treksoft.kvision.dropdown.ContextMenu.Companion.contextMenu
 import pl.treksoft.kvision.dropdown.DD
+import pl.treksoft.kvision.dropdown.Direction
+import pl.treksoft.kvision.dropdown.DropDown.Companion.cmLink
+import pl.treksoft.kvision.dropdown.DropDown.Companion.ddLink
 import pl.treksoft.kvision.dropdown.DropDown.Companion.dropDown
 import pl.treksoft.kvision.dropdown.Header.Companion.header
 import pl.treksoft.kvision.dropdown.Separator.Companion.separator
@@ -11,12 +13,10 @@ import pl.treksoft.kvision.form.text.Text.Companion.text
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Image.Companion.image
-import pl.treksoft.kvision.html.Link.Companion.link
 import pl.treksoft.kvision.html.Span.Companion.span
-import pl.treksoft.kvision.html.TAG
-import pl.treksoft.kvision.html.Tag.Companion.tag
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.navbar.Nav.Companion.nav
+import pl.treksoft.kvision.navbar.Nav.Companion.navLink
 import pl.treksoft.kvision.navbar.NavForm.Companion.navForm
 import pl.treksoft.kvision.navbar.Navbar.Companion.navbar
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
@@ -32,27 +32,23 @@ class DropDownTab : SimplePanel() {
         vPanel(spacing = 30) {
             navbar("NavBar") {
                 nav {
-                    tag(TAG.LI) {
-                        link(tr("File"), icon = "fa-file")
-                    }
-                    tag(TAG.LI) {
-                        link(tr("Edit"), icon = "fa-bars")
-                    }
+                    navLink(tr("File"), icon = "fas fa-file")
+                    navLink(tr("Edit"), icon = "fas fa-bars")
                     dropDown(
                         tr("Favourites"),
                         listOf(tr("HTML") to "#!/basic", tr("Forms") to "#!/forms"),
-                        icon = "fa-star",
+                        icon = "fas fa-star",
                         forNavbar = true
                     )
                 }
                 navForm {
                     text(label = tr("Search:"))
-                    checkBox()
+                    checkBox(label = tr("Search")) {
+                        inline = true
+                    }
                 }
                 nav(rightAlign = true) {
-                    tag(TAG.LI) {
-                        link(tr("System"), icon = "fa-windows")
-                    }
+                    navLink(tr("System"), icon = "fab fa-windows")
                 }
             }
             dropDown(
@@ -62,11 +58,11 @@ class DropDownTab : SimplePanel() {
                     tr("Buttons") to "#!/buttons",
                     tr("Dropdowns") to "#!/dropdowns",
                     tr("Containers") to "#!/containers"
-                ), "fa-arrow-right", style = ButtonStyle.SUCCESS
+                ), "fas fa-arrow-right", style = ButtonStyle.SUCCESS
             ).apply {
                 minWidth = 250.px
             }
-            dropDown(tr("Dropdown with custom list"), icon = "fa-picture-o", style = ButtonStyle.WARNING) {
+            dropDown(tr("Dropdown with custom list"), icon = "far fa-image", style = ButtonStyle.WARNING) {
                 minWidth = 250.px
                 image(require("img/cat.jpg")) { margin = 10.px; title = "Cat" }
                 separator()
@@ -83,9 +79,9 @@ class DropDownTab : SimplePanel() {
                         tr("Dropdowns (disabled)") to DD.DISABLED.option,
                         tr("Separator") to DD.SEPARATOR.option,
                         tr("Containers") to "#!/containers"
-                    ), "fa-asterisk", style = ButtonStyle.PRIMARY
+                    ), "fas fa-asterisk", style = ButtonStyle.PRIMARY
                 ) {
-                    dropup = true
+                    direction = Direction.DROPUP
                     minWidth = 250.px
                 }
                 button(tr("Toggle dropdown"), style = ButtonStyle.INFO).onClick { e ->
@@ -96,14 +92,14 @@ class DropDownTab : SimplePanel() {
             span(tr("Open the context menu with right mouse click."))
             contextMenu {
                 header(tr("Menu header"))
-                link(tr("HTML"), "#!/basic")
-                link(tr("Forms"), "#!/forms")
-                link(tr("Buttons"), "#!/buttons")
-                link(tr("Dropdowns"), "#!/dropdowns")
+                cmLink(tr("HTML"), "#!/basic")
+                cmLink(tr("Forms"), "#!/forms")
+                cmLink(tr("Buttons"), "#!/buttons")
+                cmLink(tr("Dropdowns"), "#!/dropdowns")
                 separator()
-                dropDown(tr("Dropdown"), forNavbar = true) {
-                    link(tr("Containers"), "#!/containers")
-                    link(tr("Layout"), "#!/layout")
+                dropDown(tr("Dropdown"), forDropDown = true) {
+                    ddLink(tr("Containers"), "#!/containers")
+                    ddLink(tr("Layout"), "#!/layout")
                 }
             }
         }

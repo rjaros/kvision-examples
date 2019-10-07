@@ -12,6 +12,7 @@ import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.Button.Companion.button
+import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Canvas
 import pl.treksoft.kvision.html.Icon.Companion.icon
 import pl.treksoft.kvision.modal.Confirm
@@ -27,7 +28,7 @@ import kotlin.math.abs
 
 val colorTable = arrayOf(Col.WHITE, Col.BLACK, Col.RED, Col.GREEN, Col.BLUE, Col.YELLOW)
 
-class Paint : DesktopWindow("Paint", "fa-paint-brush", 600, 400) {
+class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
 
     lateinit var buttonPoint: Button
     lateinit var buttonPencil: Button
@@ -41,49 +42,49 @@ class Paint : DesktopWindow("Paint", "fa-paint-brush", 600, 400) {
     init {
         dockPanel {
             height = 100.perc
-            val canvas = PaintCanvas(510, 320)
+            val canvas = PaintCanvas(610, 320)
             add(canvas, Side.CENTER)
             val buttons = VPanel(spacing = 5) {
                 width = 80.px
                 height = 100.perc
                 alignItems = FlexAlignItems.CENTER
                 paddingTop = 5.px
-                buttonPoint = button("", "fa-circle") {
+                buttonPoint = button("", "fas fa-circle", ButtonStyle.SECONDARY) {
                     title = "Point"
                     onClick {
                         canvas.selectedTool = Tool.POINT
                         selectTool(this)
                     }
                 }
-                buttonPencil = button("", "fa-pencil") {
+                buttonPencil = button("", "fas fa-pencil-alt", ButtonStyle.SECONDARY) {
                     title = "Pencil"
                     onClick {
                         canvas.selectedTool = Tool.PENCIL
                         selectTool(this)
                     }
                 }
-                buttonLine = button("", "fa-minus") {
+                buttonLine = button("", "fas fa-minus", ButtonStyle.SECONDARY) {
                     title = "Line"
                     onClick {
                         canvas.selectedTool = Tool.LINE
                         selectTool(this)
                     }
                 }
-                buttonRectangle = button("", "fa-square-o") {
+                buttonRectangle = button("", "far fa-square", ButtonStyle.SECONDARY) {
                     title = "Rectangle"
                     onClick {
                         canvas.selectedTool = Tool.RECTANGLE
                         selectTool(this)
                     }
                 }
-                buttonCircle = button("", "fa-circle-thin") {
+                buttonCircle = button("", "far fa-circle", ButtonStyle.SECONDARY) {
                     title = "Circle"
                     onClick {
                         canvas.selectedTool = Tool.CIRCLE
                         selectTool(this)
                     }
                 }
-                button("", "fa-undo") {
+                button("", "fas fa-undo", ButtonStyle.SECONDARY) {
                     title = "Undo"
                     marginTop = 20.px
                     onClick {
@@ -91,7 +92,7 @@ class Paint : DesktopWindow("Paint", "fa-paint-brush", 600, 400) {
                     }
                 }
 
-                button("", "fa-ban") {
+                button("", "fas fa-ban", ButtonStyle.SECONDARY) {
                     title = "Clear"
                     onClick {
                         canvas.clearAll()
@@ -101,11 +102,11 @@ class Paint : DesktopWindow("Paint", "fa-paint-brush", 600, 400) {
             add(buttons, Side.LEFT)
             val colors = VPanel(spacing = 8) {
                 paddingLeft = 80.px
-                height = 60.px
+                height = 64.px
                 width = 100.perc
 
                 hPanel(spacing = 6) {
-                    icon("fa-heart-o") {
+                    icon("far fa-heart") {
                         title = "Line color"
                         marginRight = 4.px
                     }
@@ -124,7 +125,7 @@ class Paint : DesktopWindow("Paint", "fa-paint-brush", 600, 400) {
                 }
 
                 hPanel(spacing = 6) {
-                    icon("fa-heart") {
+                    icon("fas fa-heart") {
                         title = "Fill color"
                         marginRight = 4.px
                     }
@@ -165,7 +166,7 @@ class Paint : DesktopWindow("Paint", "fa-paint-brush", 600, 400) {
         selectTool(buttonPencil)
         selectLineColor(lineColorButtons[1])
         selectFillColor(fillColorButtons[0])
-        height = 453.px
+        height = 460.px
     }
 
     fun selectTool(button: Button) {

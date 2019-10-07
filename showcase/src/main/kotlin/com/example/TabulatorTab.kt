@@ -154,7 +154,7 @@ class TabulatorTab : SimplePanel() {
                         editorComponentFunction = { _, _, success, _, data ->
                             DateTimeInput(value = data.startDate, format = "YYYY-MM-DD").apply {
                                 size = InputSize.SMALL
-                                clearBtn = false
+                                showClear = false
                                 setEventListener<DateTimeInput> {
                                     change = {
                                         success(self.value)
@@ -183,7 +183,7 @@ class TabulatorTab : SimplePanel() {
                         align = Align.CENTER,
                         width = "50",
                         formatterComponentFunction = { _, _, d ->
-                            Icon("fa-times").apply {
+                            Icon("fas fa-times").apply {
                                 setEventListener<Icon> {
                                     click = {
                                         Confirm.show(tr("Are you sure?"), tr("Delete row?")) {
@@ -200,11 +200,11 @@ class TabulatorTab : SimplePanel() {
             height = 430.px
         }
         hPanel(spacing = 5) {
-            button(tr("Add new employee"), "fa-plus").onClick {
+            button(tr("Add new employee"), "fas fa-plus").onClick {
                 data.add(Employee(null, null, null, false, null, null))
             }
 
-            button(tr("Show current data model"), "fa-search").onClick {
+            button(tr("Show current data model"), "fas fa-search").onClick {
                 console.log(data.toList())
                 Alert.show(tr("Current data model"), data.toList().toString())
             }

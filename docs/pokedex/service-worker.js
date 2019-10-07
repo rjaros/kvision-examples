@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.fc401abd2c1ac832552ec9cf5f5b0e01.js"
+  "precache-manifest.2a1bc516a3cc0c72f3a713b2af08dec8.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "pokedex"});
@@ -33,7 +33,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "index.html",
-    "revision": "86ac32e8d5652f1aec1f190bf6091193"
+    "revision": "f0699670dcad3f0a317750bf8e57c4c8"
   },
   {
     "url": "manifest.json",

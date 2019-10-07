@@ -27,6 +27,7 @@ import pl.treksoft.kvision.rest.RestClient
 import pl.treksoft.kvision.toolbar.ButtonGroup.Companion.buttonGroup
 import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.obj
+import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 import kotlin.browser.document
 
@@ -49,6 +50,7 @@ object App : ApplicationBase {
 
         root = Root("kvapp") {
             vPanel(alignItems = FlexAlignItems.STRETCH) {
+                width = 100.perc
                 searchField()
                 vPanel(alignItems = FlexAlignItems.STRETCH) {
                     maxWidth = 1200.px

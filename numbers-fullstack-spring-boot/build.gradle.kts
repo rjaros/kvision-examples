@@ -115,7 +115,8 @@ kotlin {
                 implementation(kotlin("stdlib-js"))
                 implementation("pl.treksoft:kvision:$kvisionVersion")
                 implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
-                implementation("pl.treksoft:kvision-select:$kvisionVersion")
+                implementation("pl.treksoft:kvision-bootstrap-css:$kvisionVersion")
+                implementation("pl.treksoft:kvision-bootstrap-select:$kvisionVersion")
                 implementation("pl.treksoft:kvision-remote:$kvisionVersion")
             }
         }

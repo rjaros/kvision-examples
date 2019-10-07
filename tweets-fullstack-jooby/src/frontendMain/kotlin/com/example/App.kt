@@ -25,8 +25,9 @@ object App : ApplicationBase {
 
     override fun start(state: Map<String, Any>) {
         root = Root("kvapp") {
-            margin = 10.px
             vPanel(FlexJustify.CENTER, FlexAlignItems.CENTER, spacing = 5) {
+                margin = 10.px
+                width = 100.perc
                 val nickname = text(value = "Guest", label = "Nickname") {
                     width = 500.px
                 }

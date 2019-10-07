@@ -21,7 +21,7 @@ class ChartTab : SimplePanel() {
     init {
         this.marginTop = 10.px
 
-        gridPanel(templateColumns = "50% 50%", columnGap = 20, rowGap = 20) {
+        gridPanel(templateColumns = "50% 50%", columnGap = 30, rowGap = 30) {
             @Suppress("UnsafeCastFromDynamic")
             chart(
                 Configuration(

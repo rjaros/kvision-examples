@@ -26,6 +26,7 @@ import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.table.Cell.Companion.cell
+import pl.treksoft.kvision.table.ResponsiveType
 import pl.treksoft.kvision.table.Row.Companion.row
 import pl.treksoft.kvision.table.Table.Companion.table
 import pl.treksoft.kvision.table.TableType
@@ -85,7 +86,8 @@ class BasicTab : SimplePanel() {
             }
             table(
                 listOf(tr("Column 1"), tr("Column 2"), tr("Column 3")),
-                setOf(TableType.BORDERED, TableType.CONDENSED, TableType.STRIPED, TableType.HOVER), responsive = true
+                setOf(TableType.BORDERED, TableType.SMALL, TableType.STRIPED, TableType.HOVER),
+                responsiveType = ResponsiveType.RESPONSIVE
             ) {
                 row {
                     cell {

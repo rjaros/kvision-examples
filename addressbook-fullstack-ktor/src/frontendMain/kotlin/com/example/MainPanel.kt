@@ -12,12 +12,12 @@ import kotlin.browser.document
 
 object MainPanel : HPanel(justify = FlexJustify.SPACEBETWEEN) {
     init {
-        button(tr("Add new address"), "fa-plus", style = ButtonStyle.PRIMARY).onClick {
+        button(tr("Add new address"), "fas fa-plus", style = ButtonStyle.PRIMARY).onClick {
             EditPanel.add()
         }
         dataContainer(Model.profile, { profile, _, _ ->
             if (profile.id != null) {
-                Button("Logout: ${profile.displayName}", "fa-sign-out", style = ButtonStyle.WARNING).onClick {
+                Button("Logout: ${profile.displayName}", "fas fa-sign-out-alt", style = ButtonStyle.WARNING).onClick {
                     document.location?.href = "/logout"
                 }
             } else {

@@ -43,7 +43,7 @@ object ListPanel : VPanel() {
         }
         val tabulator = tabulator(
             Model.addresses, options = TabulatorOptions(
-                height = "calc(100vh - 60px)", layout = Layout.FITCOLUMNS, columns = listOf(
+                height = "calc(100vh - 75px)", layout = Layout.FITCOLUMNS, columns = listOf(
                     ColumnDefinition(tr("First name"), "firstName"),
                     ColumnDefinition(tr("Last name"), "lastName"),
                     ColumnDefinition(tr("E-mail"), "email", formatterFunction = { cell, _, _ ->

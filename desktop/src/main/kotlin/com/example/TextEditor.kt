@@ -10,7 +10,7 @@ import pl.treksoft.kvision.core.UNIT
 import pl.treksoft.kvision.form.text.RichTextInput
 import pl.treksoft.kvision.utils.px
 
-class TextEditor : DesktopWindow("Text Editor", "fa-edit", 600, 400) {
+class TextEditor : DesktopWindow("Text Editor", "fas fa-edit", 700, 400) {
 
     override var height: CssSize?
         get() = super.height

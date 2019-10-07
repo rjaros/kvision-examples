@@ -82,7 +82,7 @@ class ModalsTab : SimplePanel() {
                 )
             }
             var counter = 1
-            button(tr("Open new window"), style = ButtonStyle.PRIMARY, icon = "fa-window-maximize").onClick {
+            button(tr("Open new window"), style = ButtonStyle.PRIMARY, icon = "far fa-window-maximize").onClick {
                 val sw = ShowcaseWindow(I18n.gettext("Window") + " " + counter++) {
                     left = ((Random.nextDouble() * 800).toInt()).px
                     top = ((Random.nextDouble() * 300).toInt()).px

@@ -15,6 +15,7 @@ import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
 object App : ApplicationBase {
@@ -27,6 +28,7 @@ object App : ApplicationBase {
     override fun start(state: Map<String, Any>) {
         root = Root("kvapp") {
             vPanel(justify = FlexJustify.CENTER, alignItems = FlexAlignItems.CENTER, spacing = 50) {
+                width = 100.perc
                 marginTop = 50.px
                 hPanel(justify = FlexJustify.CENTER, alignItems = FlexAlignItems.CENTER, spacing = 20) {
                     span("Your number:")

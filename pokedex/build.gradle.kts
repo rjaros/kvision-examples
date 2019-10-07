@@ -43,6 +43,7 @@ dependencies {
     implementation(kotlin("stdlib-js"))
     implementation("pl.treksoft:kvision:$kvisionVersion")
     implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
+    implementation("pl.treksoft:kvision-bootstrap-css:$kvisionVersion")
     implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
     implementation("pl.treksoft:kvision-redux:$kvisionVersion")
     testImplementation(kotlin("test-js"))

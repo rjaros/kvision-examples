@@ -9,6 +9,7 @@ import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.Button
+import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Div
 import pl.treksoft.kvision.html.Div.Companion.div
 import pl.treksoft.kvision.panel.GridJustify
@@ -22,7 +23,7 @@ enum class Operator {
     MULTIPLY
 }
 
-class Calculator : DesktopWindow("Calculator", "fa-calculator", 280, 270) {
+class Calculator : DesktopWindow("Calculator", "fas fa-calculator", 280, 270) {
 
     val inputDiv: Div
     var input: String = "0"
@@ -134,7 +135,7 @@ class Calculator : DesktopWindow("Calculator", "fa-calculator", 280, 270) {
     }
 }
 
-class CalcButton(label: String) : Button(label) {
+class CalcButton(label: String) : Button(label, style = ButtonStyle.SECONDARY) {
     init {
         width = 50.px
     }

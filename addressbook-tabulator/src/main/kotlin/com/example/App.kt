@@ -6,6 +6,7 @@ import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.panel.SplitPanel.Companion.splitPanel
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.vh
 
 object App : ApplicationBase {
@@ -26,6 +27,7 @@ object App : ApplicationBase {
         root = Root("kvapp") {
             splitPanel {
                 height = 100.vh
+                width = 100.perc
                 add(ListPanel)
                 add(EditPanel)
                 Model.loadAddresses()

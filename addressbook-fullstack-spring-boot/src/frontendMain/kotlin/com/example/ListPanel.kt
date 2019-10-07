@@ -68,13 +68,13 @@ object ListPanel : SimplePanel() {
                     }
                     cell {
                         address.favourite?.let {
-                            if (it) icon("fa-heart-o") {
+                            if (it) icon("far fa-heart") {
                                 title = tr("Favourite")
                             }
                         }
                     }
                     cell {
-                        icon("fa-times") {
+                        icon("fas fa-times") {
                             title = tr("Delete")
                             setEventListener {
                                 click = { e ->

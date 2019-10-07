@@ -70,16 +70,16 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
             validatorMessage = { tr("Passwords are not the same") }
 
         }
-        cancelButton = Button(tr("Cancel"), "fa-times").onClick {
+        cancelButton = Button(tr("Cancel"), "fas fa-times").onClick {
             hideRegisterForm()
         }
-        registerButton = Button(tr("Register"), "fa-check", ButtonStyle.PRIMARY).onClick {
+        registerButton = Button(tr("Register"), "fas fa-check", ButtonStyle.PRIMARY).onClick {
             processRegister()
         }
-        loginButton = Button(tr("Login"), "fa-check", ButtonStyle.PRIMARY).onClick {
+        loginButton = Button(tr("Login"), "fas fa-check", ButtonStyle.PRIMARY).onClick {
             processCredentials()
         }
-        userButton = Button(tr("Register user"), "fa-user").onClick {
+        userButton = Button(tr("Register user"), "fas fa-user").onClick {
             showRegisterForm()
         }
         addButton(userButton)

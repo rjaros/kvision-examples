@@ -36,10 +36,10 @@ object EditPanel : StackPanel() {
             add(Address::favourite, CheckBox(label = tr("Mark as favourite")))
 
             add(HPanel(spacing = 10) {
-                button(tr("Save"), "fa-check", ButtonStyle.PRIMARY).onClick {
+                button(tr("Save"), "fas fa-check", ButtonStyle.PRIMARY).onClick {
                     save()
                 }
-                button(tr("Cancel"), "fa-times", ButtonStyle.DEFAULT).onClick {
+                button(tr("Cancel"), "fas fa-times", ButtonStyle.SECONDARY).onClick {
                     close()
                 }
             })

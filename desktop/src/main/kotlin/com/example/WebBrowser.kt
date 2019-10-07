@@ -16,7 +16,7 @@ import pl.treksoft.kvision.toolbar.ButtonGroup.Companion.buttonGroup
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
-class WebBrowser : DesktopWindow("Web Browser", "fa-firefox", 800, 400) {
+class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
 
     override var height: CssSize?
         get() = super.height
@@ -54,10 +54,10 @@ class WebBrowser : DesktopWindow("Web Browser", "fa-firefox", 800, 400) {
             navForm {
                 paddingLeft = 0.px
                 buttonGroup {
-                    button("", icon = "fa-arrow-left").onClick {
+                    button("", icon = "fas fa-arrow-left").onClick {
                         iframe.getIframeWindow().history.back()
                     }
-                    button("", icon = "fa-arrow-right").onClick {
+                    button("", icon = "fas fa-arrow-right").onClick {
                         iframe.getIframeWindow().history.forward()
                     }
                 }

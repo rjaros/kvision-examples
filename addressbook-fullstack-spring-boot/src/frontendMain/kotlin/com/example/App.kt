@@ -8,9 +8,13 @@ import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.panel.Root
 import pl.treksoft.kvision.panel.SplitPanel.Companion.splitPanel
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.vh
 
 object App : ApplicationBase {
+    init {
+        require("css/kvapp.css")
+    }
 
     private lateinit var root: Root
 
@@ -24,6 +28,7 @@ object App : ApplicationBase {
             )
         root = Root("kvapp") {
             splitPanel {
+                width = 100.perc
                 height = 100.vh
                 add(ListPanel)
                 add(EditPanel)

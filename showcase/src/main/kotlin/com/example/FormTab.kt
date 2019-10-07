@@ -153,11 +153,11 @@ class FormTab : SimplePanel() {
                 marginBottom = 0.px
                 width = 300.px
             }
-            button(tr("Show data"), "fa-info", ButtonStyle.SUCCESS).onClick {
+            button(tr("Show data"), "fas fa-info", ButtonStyle.SUCCESS).onClick {
                 console.log(formPanel.getDataJson())
                 Alert.show(tr("Form data in plain JSON"), JSON.stringify(formPanel.getDataJson(), space = 1))
             }
-            button(tr("Clear data"), "fa-times", ButtonStyle.DANGER).onClick {
+            button(tr("Clear data"), "fas fa-times", ButtonStyle.DANGER).onClick {
                 Confirm.show(
                     tr("Are you sure?"),
                     tr("Do you want to clear your data?"),
@@ -169,7 +169,7 @@ class FormTab : SimplePanel() {
                     p.progress = 0
                 }
             }
-            button(tr("Validate"), "fa-check", ButtonStyle.INFO).onClick {
+            button(tr("Validate"), "fas fa-check", ButtonStyle.INFO).onClick {
                 GlobalScope.launch {
                     p.progress = 100
                     delay(500)
