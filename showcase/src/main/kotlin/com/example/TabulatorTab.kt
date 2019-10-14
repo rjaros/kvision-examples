@@ -15,6 +15,7 @@ import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
+import pl.treksoft.kvision.state.observableListOf
 import pl.treksoft.kvision.table.TableType
 import pl.treksoft.kvision.tabulator.Align
 import pl.treksoft.kvision.tabulator.ColumnDefinition
@@ -27,7 +28,6 @@ import pl.treksoft.kvision.tabulator.TabulatorOptions
 import pl.treksoft.kvision.types.toDateF
 import pl.treksoft.kvision.types.toStringF
 import pl.treksoft.kvision.utils.obj
-import pl.treksoft.kvision.utils.observableListOf
 import pl.treksoft.kvision.utils.px
 import kotlin.js.Date
 

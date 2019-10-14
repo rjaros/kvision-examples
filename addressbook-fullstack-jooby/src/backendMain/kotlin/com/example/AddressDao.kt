@@ -1,23 +1,27 @@
-/*
- * Copyright (c) 2018. Robert Jaros
- */
-
 package com.example
 
 import com.github.andrewoma.kwery.core.Session
 import com.github.andrewoma.kwery.core.builder.query
-import com.github.andrewoma.kwery.mapper.*
+import com.github.andrewoma.kwery.mapper.AbstractDao
+import com.github.andrewoma.kwery.mapper.SimpleConverter
+import com.github.andrewoma.kwery.mapper.Table
+import com.github.andrewoma.kwery.mapper.TableConfiguration
+import com.github.andrewoma.kwery.mapper.Value
+import com.github.andrewoma.kwery.mapper.prefixed
+import com.github.andrewoma.kwery.mapper.reifiedConverter
+import com.github.andrewoma.kwery.mapper.standardConverters
 import com.github.andrewoma.kwery.mapper.util.camelToLowerUnderscore
 import java.sql.Timestamp
-import java.util.*
+import java.time.LocalDateTime
+import java.time.ZoneId
 
-object DateConverter : SimpleConverter<Date>(
-    { row, c -> Date(row.timestamp(c).time) },
-    { Timestamp(it.time) }
+object LocalDateTimeConverter : SimpleConverter<LocalDateTime>(
+    { row, c -> row.timestamp(c).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() },
+    { Timestamp(java.util.Date.from(it.atZone(ZoneId.systemDefault()).toInstant()).time) }
 )
 
 val kvTableConfig = TableConfiguration(
-    converters = standardConverters + reifiedConverter(DateConverter),
+    converters = standardConverters + reifiedConverter(LocalDateTimeConverter),
     namingConvention = camelToLowerUnderscore
 )
 

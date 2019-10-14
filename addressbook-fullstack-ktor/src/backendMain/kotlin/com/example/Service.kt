@@ -6,11 +6,17 @@ import com.github.andrewoma.kwery.core.builder.query
 import com.google.inject.Inject
 import io.ktor.application.ApplicationCall
 import org.apache.commons.codec.digest.DigestUtils
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.update
 import org.joda.time.DateTime
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.withProfile
 import java.sql.ResultSet
+import java.time.ZoneId
 
 actual class AddressService : IAddressService {
 
@@ -65,7 +71,7 @@ actual class AddressService : IAddressService {
                 it[userId] = profile.id?.toInt()!!
 
             } get AddressDao.id)
-        }!!
+        }
         getAddress(key)!!
     }
 
@@ -80,7 +86,8 @@ actual class AddressService : IAddressService {
                         it[phone] = address.phone
                         it[postalAddress] = address.postalAddress
                         it[favourite] = address.favourite ?: false
-                        it[createdAt] = DateTime(oldAddress.createdAt)
+                        it[createdAt] = oldAddress.createdAt
+                            ?.let { DateTime(java.util.Date.from(it.atZone(ZoneId.systemDefault()).toInstant())) }
                         it[userId] = profile.id?.toInt()!!
                     }
                 }
@@ -110,7 +117,8 @@ actual class AddressService : IAddressService {
             phone = row[AddressDao.phone],
             postalAddress = row[AddressDao.postalAddress],
             favourite = row[AddressDao.favourite],
-            createdAt = row[AddressDao.createdAt]?.toDate(),
+            createdAt = row[AddressDao.createdAt]?.millis?.let { java.util.Date(it) }?.toInstant()
+                ?.atZone(ZoneId.systemDefault())?.toLocalDateTime(),
             userId = row[AddressDao.userId]
         )
 
@@ -123,7 +131,8 @@ actual class AddressService : IAddressService {
             phone = rs.getString(AddressDao.phone.name),
             postalAddress = rs.getString(AddressDao.postalAddress.name),
             favourite = rs.getBoolean(AddressDao.favourite.name),
-            createdAt = rs.getTimestamp(AddressDao.createdAt.name),
+            createdAt = rs.getTimestamp(AddressDao.createdAt.name)?.toInstant()
+                ?.atZone(ZoneId.systemDefault())?.toLocalDateTime(),
             userId = rs.getInt(AddressDao.userId.name)
         )
 }

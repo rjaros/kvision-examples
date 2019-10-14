@@ -1,4 +1,4 @@
-@file:ContextualSerialization(Date::class)
+@file:ContextualSerialization(LocalDateTime::class)
 
 package com.example
 
@@ -8,12 +8,12 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.remote.KVServiceManager
-import pl.treksoft.kvision.types.Date
+import pl.treksoft.kvision.types.LocalDateTime
 
 @Serializable
 data class Tweet(
     val id: Int,
-    val date: Date,
+    val date: LocalDateTime,
     val nickname: String,
     val message: String,
     val tags: List<String>

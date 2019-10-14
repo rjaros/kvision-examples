@@ -13,7 +13,7 @@ import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel
-import pl.treksoft.kvision.utils.observableListOf
+import pl.treksoft.kvision.state.observableListOf
 import pl.treksoft.kvision.utils.px
 
 class DragDropTab : SimplePanel() {

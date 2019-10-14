@@ -2,9 +2,9 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.form.select.SelectInput.Companion.selectInput
 import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
-import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Div
@@ -13,20 +13,20 @@ import pl.treksoft.kvision.html.Span.Companion.span
 import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
-import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.Root.Companion.root
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
-object App : ApplicationBase {
+class App : Application() {
 
     private val numberService = NumberService()
 
-    private lateinit var root: Root
     private lateinit var outputDiv: Div
 
-    override fun start(state: Map<String, Any>) {
-        root = Root("kvapp") {
+    override fun start() {
+        root("kvapp") {
             vPanel(justify = FlexJustify.CENTER, alignItems = FlexAlignItems.CENTER, spacing = 50) {
                 width = 100.perc
                 marginTop = 50.px
@@ -60,9 +60,8 @@ object App : ApplicationBase {
             }
         }
     }
+}
 
-    override fun dispose(): Map<String, Any> {
-        root.dispose()
-        return mapOf()
-    }
+fun main() {
+    startApplication(::App)
 }

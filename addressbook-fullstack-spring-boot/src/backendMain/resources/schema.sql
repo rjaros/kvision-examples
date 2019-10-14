@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS users (
-  id varchar(255),
-  username varchar(255),
-  password varchar(255),
-  linkedid varchar(255),
-  serializedprofile varchar(10000),
-  PRIMARY KEY (id)
+  id serial NOT NULL,
+  username varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  name varchar(255) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE(username)
 );
 
 CREATE TABLE IF NOT EXISTS address (
@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS address (
     phone varchar(255),
     postal_address varchar(255),
     favourite boolean NOT NULL DEFAULT false,
-    created_at timestamp,
-    user_id varchar(255),
+    created_at timestamp with time zone,
+    user_id int NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE
 );

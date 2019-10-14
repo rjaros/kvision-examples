@@ -1,7 +1,6 @@
 package test.com.example
 
-import com.example.Todomvc
-import kotlin.browser.document
+import pl.treksoft.kvision.test.DomSpec
 import kotlin.test.Test
 import kotlin.test.assertTrue
 

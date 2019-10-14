@@ -1,6 +1,6 @@
 package com.example
 
-import pl.treksoft.kvision.utils.observableListOf
+import pl.treksoft.kvision.state.observableListOf
 
 
 object Model {

@@ -6,11 +6,11 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 import org.w3c.dom.get
 import org.w3c.dom.set
+import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.form.FieldLabel.Companion.fieldLabel
 import pl.treksoft.kvision.form.check.CheckBoxInput.Companion.checkBoxInput
 import pl.treksoft.kvision.form.text.TextInput
 import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
-import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.Div.Companion.div
 import pl.treksoft.kvision.html.Link.Companion.link
@@ -19,11 +19,12 @@ import pl.treksoft.kvision.html.ListType
 import pl.treksoft.kvision.html.TAG.*
 import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.Tag.Companion.tag
-import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.Root.Companion.root
 import pl.treksoft.kvision.redux.RAction
-import pl.treksoft.kvision.redux.StateBinding.Companion.stateBinding
 import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.routing.routing
+import pl.treksoft.kvision.startApplication
+import pl.treksoft.kvision.state.StateBinding.Companion.stateBinding
 import pl.treksoft.kvision.utils.ENTER_KEY
 import pl.treksoft.kvision.utils.ESC_KEY
 import kotlin.browser.localStorage
@@ -82,14 +83,12 @@ fun todoReducer(state: State, action: TodoAction): State = when (action) {
     is TodoAction.ShowCompleted -> state.copy(mode = COMPLETED)
 }
 
-object Todomvc : ApplicationBase {
+class Todomvc : Application() {
 
     val todoStore = createReduxStore(::todoReducer, State(mutableListOf(), ALL))
 
-    private lateinit var root: Root
-
-    override fun start(state: Map<String, Any>) {
-        root = Root("todomvc") {
+    override fun start() {
+        root("todomvc") {
             tag(SECTION, classes = setOf("todoapp")).stateBinding(todoStore) { state ->
                 tag(HEADER, classes = setOf("header")) {
                     tag(H1, "todos")
@@ -224,9 +223,8 @@ object Todomvc : ApplicationBase {
             todoStore.dispatch(TodoAction.Delete(index))
         }
     }
+}
 
-    override fun dispose(): Map<String, Any> {
-        root.dispose()
-        return mapOf()
-    }
+fun main() {
+    startApplication(::Todomvc)
 }

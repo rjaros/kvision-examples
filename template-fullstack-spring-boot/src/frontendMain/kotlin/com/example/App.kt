@@ -2,15 +2,25 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.hmr.ApplicationBase
+import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.html.Span
+import pl.treksoft.kvision.i18n.DefaultI18nManager
+import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.startApplication
 
-object App : ApplicationBase {
+class App : Application() {
 
     private lateinit var root: Root
 
     override fun start(state: Map<String, Any>) {
+        I18n.manager =
+            DefaultI18nManager(
+                mapOf(
+                    "en" to pl.treksoft.kvision.require("i18n/messages-en.json"),
+                    "pl" to pl.treksoft.kvision.require("i18n/messages-pl.json")
+                )
+            )
         root = Root("kvapp") {
         }
         GlobalScope.launch {
@@ -23,4 +33,8 @@ object App : ApplicationBase {
         root.dispose()
         return mapOf()
     }
+}
+
+fun main() {
+    startApplication(::App)
 }

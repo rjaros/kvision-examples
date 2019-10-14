@@ -37,6 +37,7 @@ repositories {
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
     maven { url = uri("https://dl.bintray.com/gbaldeck/kotlin") }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
+    maven { url = uri("https://repo.spring.io/milestone") }
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
     mavenLocal()
 }
@@ -44,13 +45,6 @@ repositories {
 // Versions
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by project
-val springMvcPac4jVersion: String by project
-val pac4jVersion: String by project
-val springSecurityCryptoVersion: String by project
-val commonsLoggingVersion: String by project
-val h2Version: String by project
-val pgsqlVersion: String by project
-val kweryVersion: String by project
 
 // Custom Properties
 val webDir = file("src/frontendMain/web")
@@ -98,7 +92,7 @@ kotlin {
                 implementation("pl.treksoft:kvision-server-spring-boot:$kvisionVersion")
                 implementation("org.springframework.boot:spring-boot-starter")
                 implementation("org.springframework.boot:spring-boot-devtools")
-                implementation("org.springframework.boot:spring-boot-starter-web")
+                implementation("org.springframework.boot:spring-boot-starter-webflux")
             }
         }
         getByName("backendTest") {

@@ -1,10 +1,10 @@
-@file:ContextualSerialization(Date::class)
+@file:ContextualSerialization(LocalDateTime::class)
 
 package com.example
 
 import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.types.Date
+import pl.treksoft.kvision.types.LocalDateTime
 
 @Serializable
 data class Address(
@@ -15,6 +15,6 @@ data class Address(
     val phone: String? = null,
     val postalAddress: String? = null,
     val favourite: Boolean? = false,
-    val createdAt: Date? = null,
+    val createdAt: LocalDateTime? = null,
     val userId: Int? = null
 )

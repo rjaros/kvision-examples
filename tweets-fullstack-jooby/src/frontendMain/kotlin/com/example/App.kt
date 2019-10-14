@@ -5,26 +5,25 @@ import com.example.Model.tweetChannel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.w3c.dom.events.KeyboardEvent
+import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.Text.Companion.text
 import pl.treksoft.kvision.form.text.TextAreaInput.Companion.textAreaInput
-import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
-import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.Root.Companion.root
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.ENTER_KEY
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
-object App : ApplicationBase {
+class App : Application() {
 
-    private lateinit var root: Root
-
-    override fun start(state: Map<String, Any>) {
-        root = Root("kvapp") {
+    override fun start() {
+        root("kvapp") {
             vPanel(FlexJustify.CENTER, FlexAlignItems.CENTER, spacing = 5) {
                 margin = 10.px
                 width = 100.perc
@@ -87,9 +86,8 @@ object App : ApplicationBase {
         }
         connectToServer()
     }
+}
 
-    override fun dispose(): Map<String, Any> {
-        root.dispose()
-        return mapOf()
-    }
+fun main() {
+    startApplication(::App)
 }

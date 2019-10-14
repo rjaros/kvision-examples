@@ -6,8 +6,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 import org.w3c.dom.get
 import org.w3c.dom.set
-import pl.treksoft.kvision.utils.ObservableList
-import pl.treksoft.kvision.utils.observableListOf
+import pl.treksoft.kvision.state.ObservableList
+import pl.treksoft.kvision.state.observableListOf
 import kotlin.browser.localStorage
 
 @Serializable

@@ -4,7 +4,11 @@ import com.example.Db.dbQuery
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
-import io.ktor.auth.*
+import io.ktor.auth.Authentication
+import io.ktor.auth.UserIdPrincipal
+import io.ktor.auth.authenticate
+import io.ktor.auth.form
+import io.ktor.auth.principal
 import io.ktor.features.CallLogging
 import io.ktor.features.Compression
 import io.ktor.features.DefaultHeaders
@@ -14,14 +18,19 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.routing
-import io.ktor.sessions.*
+import io.ktor.sessions.SessionStorageMemory
+import io.ktor.sessions.Sessions
+import io.ktor.sessions.clear
+import io.ktor.sessions.cookie
+import io.ktor.sessions.get
+import io.ktor.sessions.sessions
+import io.ktor.sessions.set
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.applyRoutes
 import pl.treksoft.kvision.remote.kvisionInit
-import kotlin.collections.firstOrNull
 import kotlin.collections.set
 
 fun Application.main() {
@@ -41,7 +50,6 @@ fun Application.main() {
         form {
             userParamName = "username"
             passwordParamName = "password"
-            challenge = FormAuthChallenge.Unauthorized
             validate { credentials ->
                 dbQuery {
                     UserDao.select {

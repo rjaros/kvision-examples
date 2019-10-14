@@ -1,6 +1,6 @@
 package com.example
 
-import pl.treksoft.kvision.hmr.ApplicationBase
+import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.html.Div.Companion.div
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
@@ -8,15 +8,17 @@ import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.FlexDir
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.FlexPanel.Companion.flexPanel
-import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.Root.Companion.root
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.px
 
-object Helloworld : ApplicationBase {
+class Helloworld : Application() {
+    init {
+        require("css/helloworld.css")
+    }
 
-    private lateinit var root: Root
-
-    override fun start(state: Map<String, Any>) {
+    override fun start() {
 
         I18n.manager =
             DefaultI18nManager(
@@ -32,7 +34,7 @@ object Helloworld : ApplicationBase {
                 )
             )
 
-        root = Root("helloworld") {
+        root("helloworld") {
             flexPanel(FlexDir.ROW, justify = FlexJustify.CENTER) {
                 div(tr("Hello world!"), classes = setOf("helloworld")) {
                     marginTop = 50.px
@@ -41,11 +43,8 @@ object Helloworld : ApplicationBase {
             }
         }
     }
+}
 
-    override fun dispose(): Map<String, Any> {
-        root.dispose()
-        return mapOf()
-    }
-
-    val css = require("css/helloworld.css")
+fun main() {
+    startApplication(::Helloworld)
 }

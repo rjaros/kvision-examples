@@ -47,6 +47,7 @@ dependencies {
     implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
     implementation("pl.treksoft:kvision-redux:$kvisionVersion")
     testImplementation(kotlin("test-js"))
+    testImplementation("pl.treksoft:kvision-testutils:$kvisionVersion:tests")
 }
 
 kotlinFrontend {

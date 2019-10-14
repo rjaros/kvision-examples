@@ -1,11 +1,10 @@
 package test.com.example
 
-import com.example.App
-import kotlin.browser.document
+import pl.treksoft.kvision.test.SimpleSpec
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-class AppSpec : DomSpec {
+class AppSpec : SimpleSpec {
 
     @Test
     fun render() {

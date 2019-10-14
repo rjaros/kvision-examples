@@ -47,6 +47,7 @@ dependencies {
     implementation("pl.treksoft:kvision-fontawesome:$kvisionVersion")
     implementation("pl.treksoft:kvision-richtext:$kvisionVersion")
     testImplementation(kotlin("test-js"))
+    testImplementation("pl.treksoft:kvision-testutils:$kvisionVersion:tests")
 }
 
 kotlinFrontend {

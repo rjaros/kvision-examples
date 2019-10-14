@@ -1,11 +1,11 @@
 package com.example
 
 import kotlinx.serialization.list
+import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.core.TextAlign
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.Text.Companion.text
-import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.Div.Companion.div
 import pl.treksoft.kvision.i18n.DefaultI18nManager
@@ -17,13 +17,14 @@ import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.GridJustify
 import pl.treksoft.kvision.panel.GridPanel.Companion.gridPanel
 import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
-import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.Root.Companion.root
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.redux.ActionCreator
-import pl.treksoft.kvision.redux.StateBinding.Companion.stateBinding
 import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.rest.RestClient
+import pl.treksoft.kvision.startApplication
+import pl.treksoft.kvision.state.StateBinding.Companion.stateBinding
 import pl.treksoft.kvision.toolbar.ButtonGroup.Companion.buttonGroup
 import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.obj
@@ -31,15 +32,13 @@ import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 import kotlin.browser.document
 
-object App : ApplicationBase {
+class App : Application() {
 
     private val store = createReduxStore(::pokedexReducer, Pokedex(false, null, listOf(), listOf(), null, 0, 1))
 
-    private lateinit var root: Root
-
     private val hammerjs = require("hammerjs")
 
-    override fun start(state: Map<String, Any>) {
+    override fun start() {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
@@ -48,7 +47,7 @@ object App : ApplicationBase {
                 )
             )
 
-        root = Root("kvapp") {
+        root("kvapp") {
             vPanel(alignItems = FlexAlignItems.STRETCH) {
                 width = 100.perc
                 searchField()
@@ -154,9 +153,8 @@ object App : ApplicationBase {
             }
         }
     }
+}
 
-    override fun dispose(): Map<String, Any> {
-        root.dispose()
-        return mapOf()
-    }
+fun main() {
+    startApplication(::App)
 }

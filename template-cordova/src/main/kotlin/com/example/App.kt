@@ -2,6 +2,7 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.cordova.Camera
 import pl.treksoft.kvision.cordova.CameraException
 import pl.treksoft.kvision.cordova.CameraOptions
@@ -9,7 +10,6 @@ import pl.treksoft.kvision.cordova.File
 import pl.treksoft.kvision.cordova.Result
 import pl.treksoft.kvision.cordova.failure
 import pl.treksoft.kvision.cordova.success
-import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.Div.Companion.div
 import pl.treksoft.kvision.html.Image.Companion.image
@@ -17,12 +17,13 @@ import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.Root.Companion.root
 import pl.treksoft.kvision.panel.SimplePanel.Companion.simplePanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
-import pl.treksoft.kvision.redux.StateBinding.Companion.stateBinding
 import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.startApplication
+import pl.treksoft.kvision.state.StateBinding.Companion.stateBinding
 import pl.treksoft.kvision.utils.px
 import redux.RAction
 
@@ -38,13 +39,14 @@ fun imageReducer(state: ImageState, action: ImageAction): ImageState = when (act
     is ImageAction.Error -> ImageState(null, action.errorMessage)
 }
 
-object App : ApplicationBase {
+class App : Application() {
+    init {
+        require("css/kvapp.css")
+    }
 
     private val store = createReduxStore(::imageReducer, ImageState(null, null))
 
-    private lateinit var root: Root
-
-    override fun start(state: Map<String, Any>) {
+    override fun start() {
 
         I18n.manager =
             DefaultI18nManager(
@@ -54,7 +56,7 @@ object App : ApplicationBase {
                 )
             )
 
-        root = Root("kvapp") {
+        root("kvapp") {
             vPanel(alignItems = FlexAlignItems.STRETCH, spacing = 10) {
                 marginTop = 10.px
                 button(tr("Take a photo"), "fa-camera") {
@@ -101,11 +103,8 @@ object App : ApplicationBase {
             store.dispatch(ImageAction.Error(it.message ?: tr("No data")))
         }
     }
+}
 
-    override fun dispose(): Map<String, Any> {
-        root.dispose()
-        return mapOf()
-    }
-
-    val css = require("css/kvapp.css")
+fun main() {
+    startApplication(::App)
 }

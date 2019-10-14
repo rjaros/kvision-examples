@@ -1,22 +1,21 @@
 package com.example
 
-import pl.treksoft.kvision.hmr.ApplicationBase
+import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
-import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.Root.Companion.root
 import pl.treksoft.kvision.panel.SplitPanel.Companion.splitPanel
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.vh
 
-object App : ApplicationBase {
+class App : Application() {
     init {
         require("css/kvapp.css")
     }
 
-    private lateinit var root: Root
-
-    override fun start(state: Map<String, Any>) {
+    override fun start() {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
@@ -24,7 +23,7 @@ object App : ApplicationBase {
                     "pl" to require("i18n/messages-pl.json")
                 )
             )
-        root = Root("kvapp") {
+        root("kvapp") {
             splitPanel {
                 height = 100.vh
                 width = 100.perc
@@ -34,9 +33,8 @@ object App : ApplicationBase {
             }
         }
     }
+}
 
-    override fun dispose(): Map<String, Any> {
-        root.dispose()
-        return mapOf()
-    }
+fun main() {
+    startApplication(::App)
 }

@@ -2,35 +2,39 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.core.*
+import pl.treksoft.kvision.Application
+import pl.treksoft.kvision.core.Border
+import pl.treksoft.kvision.core.BorderStyle
+import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.Overflow
+import pl.treksoft.kvision.core.OverflowWrap
 import pl.treksoft.kvision.form.select.SelectInput.Companion.selectInput
 import pl.treksoft.kvision.form.text.TextAreaInput.Companion.textAreaInput
-import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.html.Button.Companion.button
 import pl.treksoft.kvision.html.Div.Companion.div
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.Root.Companion.root
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
-object App : ApplicationBase {
+class App : Application() {
 
-    private lateinit var root: Root
     private val service = EncodingService()
 
-    override fun start(state: Map<String, Any>) {
+    override fun start() {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                        "en" to require("i18n/messages-en.json"),
-                        "pl" to require("i18n/messages-pl.json")
+                    "en" to require("i18n/messages-en.json"),
+                    "pl" to require("i18n/messages-pl.json")
                 )
             )
-        root = Root("kvapp") {
+        root("kvapp") {
             vPanel(spacing = 10) {
                 width = 100.perc
                 margin = 30.px
@@ -64,9 +68,8 @@ object App : ApplicationBase {
             }
         }
     }
+}
 
-    override fun dispose(): Map<String, Any> {
-        root.dispose()
-        return mapOf()
-    }
+fun main() {
+    startApplication(::App)
 }

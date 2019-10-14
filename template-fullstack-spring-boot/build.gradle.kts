@@ -37,6 +37,7 @@ repositories {
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
     maven { url = uri("https://dl.bintray.com/gbaldeck/kotlin") }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
+    maven { url = uri("https://repo.spring.io/milestone") }
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
     mavenLocal()
 }
@@ -44,12 +45,10 @@ repositories {
 // Versions
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by project
-val springMvcPac4jVersion: String by project
-val pac4jVersion: String by project
-val springSecurityCryptoVersion: String by project
-val commonsLoggingVersion: String by project
-val h2Version: String by project
-val pgsqlVersion: String by project
+val springAutoconfigureR2dbcVersion: String by project
+val springDataR2dbcVersion: String by project
+val r2dbcPostgresqlVersion: String by project
+val r2dbcH2Version: String by project
 val kweryVersion: String by project
 
 // Custom Properties
@@ -98,17 +97,13 @@ kotlin {
                 implementation("pl.treksoft:kvision-server-spring-boot:$kvisionVersion")
                 implementation("org.springframework.boot:spring-boot-starter")
                 implementation("org.springframework.boot:spring-boot-devtools")
-                implementation("org.springframework.boot:spring-boot-starter-web")
-                implementation("org.springframework.boot:spring-boot-starter-jdbc")
-                implementation("org.pac4j:spring-webmvc-pac4j:$springMvcPac4jVersion")
-                implementation("org.pac4j:pac4j-http:$pac4jVersion")
-                implementation("org.pac4j:pac4j-sql:$pac4jVersion")
-                implementation("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
-                implementation("commons-logging:commons-logging:$commonsLoggingVersion")
-                implementation("com.h2database:h2:$h2Version")
-                implementation("org.postgresql:postgresql:$pgsqlVersion")
+                implementation("org.springframework.boot:spring-boot-starter-webflux")
+                implementation("org.springframework.boot:spring-boot-starter-security")
+                implementation("org.springframework.boot.experimental:spring-boot-actuator-autoconfigure-r2dbc:$springAutoconfigureR2dbcVersion")
+                implementation("org.springframework.data:spring-data-r2dbc:$springDataR2dbcVersion")
+                implementation("io.r2dbc:r2dbc-postgresql:$r2dbcPostgresqlVersion")
+                implementation("io.r2dbc:r2dbc-h2:$r2dbcH2Version")
                 implementation("com.github.andrewoma.kwery:core:$kweryVersion")
-                implementation("com.github.andrewoma.kwery:mapper:$kweryVersion")
             }
         }
         getByName("backendTest") {

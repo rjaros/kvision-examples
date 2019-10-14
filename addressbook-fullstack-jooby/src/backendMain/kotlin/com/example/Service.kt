@@ -8,6 +8,7 @@ import org.jooby.Request
 import org.pac4j.sql.profile.DbProfile
 import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.withProfile
+import java.time.LocalDateTime
 import java.util.*
 import javax.inject.Named
 import javax.sql.DataSource
@@ -35,7 +36,7 @@ actual class AddressService : IAddressService {
         }
 
     override suspend fun addAddress(address: Address) = request.withProfile { profile ->
-        getAddressDao().insert(address.copy(userId = profile.id, createdAt = Date()))
+        getAddressDao().insert(address.copy(userId = profile.id, createdAt = LocalDateTime.now()))
     }
 
     override suspend fun updateAddress(address: Address) = request.withProfile { profile ->

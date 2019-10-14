@@ -60,6 +60,7 @@ dependencies {
     implementation("pl.treksoft:kvision-pace:$kvisionVersion")
     implementation("pl.treksoft:kvision-moment:$kvisionVersion")
     testImplementation(kotlin("test-js"))
+    testImplementation("pl.treksoft:kvision-testutils:$kvisionVersion:tests")
 }
 
 kotlinFrontend {

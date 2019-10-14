@@ -1,28 +1,30 @@
 package com.example
 
+import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.form.select.Select
 import pl.treksoft.kvision.form.select.Select.Companion.select
-import pl.treksoft.kvision.hmr.ApplicationBase
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.pace.Pace
-import pl.treksoft.kvision.panel.Root
+import pl.treksoft.kvision.panel.Root.Companion.root
 import pl.treksoft.kvision.panel.TabPanel.Companion.tabPanel
 import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
-object Showcase : ApplicationBase {
+class Showcase : Application() {
+    init {
+        require("css/showcase.css")
+    }
 
-    private lateinit var root: Root
-
-    override fun start(state: Map<String, Any>) {
+    override fun start() {
 
         I18n.manager =
             DefaultI18nManager(
@@ -32,7 +34,7 @@ object Showcase : ApplicationBase {
                 )
             )
         Pace.init()
-        root = Root("showcase") {
+        root("showcase") {
             vPanel {
                 width = 100.perc
                 tabPanel(scrollableTabs = true) {
@@ -68,11 +70,8 @@ object Showcase : ApplicationBase {
             }
         }
     }
+}
 
-    override fun dispose(): Map<String, Any> {
-        root.dispose()
-        return mapOf()
-    }
-
-    val css = require("css/showcase.css")
+fun main() {
+    startApplication(::Showcase)
 }

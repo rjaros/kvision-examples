@@ -5,6 +5,7 @@ import com.example.Model.tweets
 import org.springframework.beans.factory.config.ConfigurableBeanFactory
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 import java.util.*
 
 object Model {
@@ -17,7 +18,7 @@ object Model {
 actual class TweetService : ITweetService {
 
     override suspend fun sendTweet(nickname: String, message: String, tags: List<String>): Int {
-        val tweet = Tweet(counter++, Date(), nickname, message, tags)
+        val tweet = Tweet(counter++, LocalDateTime.now(), nickname, message, tags)
         tweets.add(tweet)
         return tweet.id
     }
