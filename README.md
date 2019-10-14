@@ -65,8 +65,9 @@ endpoints). The example project utilizes:
 
 - H2 SQL database (local) or PostgreSQL database (configured on Heroku)
 - [Exposed](https://github.com/JetBrains/Exposed) Kotlin SQL library for database connectivity (used in Ktor version)
-- [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity (used in Jooby and Spring Boot versions)
-- [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management (used in Jooby and Spring Boot versions)
+- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) with Kotlin Coroutines extensions (used in Spring Boot version)
+- [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity (used in Jooby version)
+- [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management (used in Jooby version)
 
 The architecture of the project is heavily based on Kotlin coroutines, wrapping asynchronous client-server calls into 
 easy-to-read synchronous-like code.
