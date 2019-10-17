@@ -3,11 +3,11 @@ package com.example
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import pl.treksoft.kvision.form.FormPanel
-import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
+import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextInputType
-import pl.treksoft.kvision.html.Button.Companion.button
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.HPanel

@@ -11,9 +11,9 @@ import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Div
-import pl.treksoft.kvision.html.Div.Companion.div
+import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.panel.GridJustify
-import pl.treksoft.kvision.panel.GridPanel.Companion.gridPanel
+import pl.treksoft.kvision.panel.gridPanel
 import pl.treksoft.kvision.utils.px
 
 enum class Operator {

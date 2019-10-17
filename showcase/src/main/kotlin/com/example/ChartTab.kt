@@ -1,6 +1,6 @@
 package com.example
 
-import pl.treksoft.kvision.chart.Chart.Companion.chart
+import pl.treksoft.kvision.chart.chart
 import pl.treksoft.kvision.chart.ChartScales
 import pl.treksoft.kvision.chart.ChartType
 import pl.treksoft.kvision.chart.Configuration
@@ -11,7 +11,7 @@ import pl.treksoft.kvision.chart.TitleOptions
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.GridPanel.Companion.gridPanel
+import pl.treksoft.kvision.panel.gridPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px

@@ -8,11 +8,11 @@ import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.core.CssSize
 import pl.treksoft.kvision.core.UNIT
 import pl.treksoft.kvision.form.text.TextInput
-import pl.treksoft.kvision.html.Button.Companion.button
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.Iframe
-import pl.treksoft.kvision.navbar.NavForm.Companion.navForm
-import pl.treksoft.kvision.navbar.Navbar.Companion.navbar
-import pl.treksoft.kvision.toolbar.ButtonGroup.Companion.buttonGroup
+import pl.treksoft.kvision.navbar.navForm
+import pl.treksoft.kvision.navbar.navbar
+import pl.treksoft.kvision.toolbar.buttonGroup
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 

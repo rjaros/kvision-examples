@@ -1,22 +1,22 @@
 package com.example
 
 import pl.treksoft.kvision.form.check.RadioGroup
-import pl.treksoft.kvision.form.check.RadioGroup.Companion.radioGroup
+import pl.treksoft.kvision.form.check.radioGroup
 import pl.treksoft.kvision.form.text.TextInput
-import pl.treksoft.kvision.form.text.TextInput.Companion.textInput
+import pl.treksoft.kvision.form.text.textInput
 import pl.treksoft.kvision.form.text.TextInputType
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.FlexWrap
-import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.VPanel
 import pl.treksoft.kvision.tabulator.Align
 import pl.treksoft.kvision.tabulator.ColumnDefinition
 import pl.treksoft.kvision.tabulator.Formatter
 import pl.treksoft.kvision.tabulator.Layout
 import pl.treksoft.kvision.tabulator.Tabulator
-import pl.treksoft.kvision.tabulator.Tabulator.Companion.tabulator
+import pl.treksoft.kvision.tabulator.tabulator
 import pl.treksoft.kvision.tabulator.TabulatorOptions
 import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px

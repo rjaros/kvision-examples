@@ -1,11 +1,11 @@
 package com.example
 
 import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.html.Div.Companion.div
+import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.Root.Companion.root
+import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
 

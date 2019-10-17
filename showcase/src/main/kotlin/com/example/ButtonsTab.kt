@@ -1,19 +1,19 @@
 package com.example
 
-import pl.treksoft.kvision.form.check.CheckBox.Companion.checkBox
+import pl.treksoft.kvision.form.check.checkBox
 import pl.treksoft.kvision.form.check.CheckBoxStyle
-import pl.treksoft.kvision.form.check.Radio.Companion.radio
+import pl.treksoft.kvision.form.check.radio
 import pl.treksoft.kvision.form.check.RadioStyle
-import pl.treksoft.kvision.html.Button.Companion.button
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.html.Span.Companion.span
+import pl.treksoft.kvision.html.span
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.FlexWrap
-import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
-import pl.treksoft.kvision.toolbar.ButtonGroup.Companion.buttonGroup
-import pl.treksoft.kvision.toolbar.Toolbar.Companion.toolbar
+import pl.treksoft.kvision.panel.vPanel
+import pl.treksoft.kvision.toolbar.buttonGroup
+import pl.treksoft.kvision.toolbar.toolbar
 import pl.treksoft.kvision.utils.px
 
 class ButtonsTab : SimplePanel() {

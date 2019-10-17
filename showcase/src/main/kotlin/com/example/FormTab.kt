@@ -7,7 +7,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
+import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.check.Radio
 import pl.treksoft.kvision.form.check.RadioGroup
@@ -21,7 +21,7 @@ import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextArea
 import pl.treksoft.kvision.form.time.DateTime
 import pl.treksoft.kvision.form.upload.Upload
-import pl.treksoft.kvision.html.Button.Companion.button
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Alert

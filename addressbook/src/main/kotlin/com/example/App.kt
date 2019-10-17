@@ -4,8 +4,8 @@ import kotlinx.serialization.UnstableDefault
 import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
-import pl.treksoft.kvision.panel.Root.Companion.root
-import pl.treksoft.kvision.panel.SplitPanel.Companion.splitPanel
+import pl.treksoft.kvision.panel.root
+import pl.treksoft.kvision.panel.splitPanel
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.perc

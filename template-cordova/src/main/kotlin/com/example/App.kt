@@ -10,22 +10,22 @@ import pl.treksoft.kvision.cordova.File
 import pl.treksoft.kvision.cordova.Result
 import pl.treksoft.kvision.cordova.failure
 import pl.treksoft.kvision.cordova.success
-import pl.treksoft.kvision.html.Button.Companion.button
-import pl.treksoft.kvision.html.Div.Companion.div
-import pl.treksoft.kvision.html.Image.Companion.image
+import pl.treksoft.kvision.html.button
+import pl.treksoft.kvision.html.div
+import pl.treksoft.kvision.html.image
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.Root.Companion.root
-import pl.treksoft.kvision.panel.SimplePanel.Companion.simplePanel
-import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.panel.root
+import pl.treksoft.kvision.panel.simplePanel
+import pl.treksoft.kvision.panel.vPanel
+import pl.treksoft.kvision.redux.RAction
 import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.state.StateBinding.Companion.stateBinding
+import pl.treksoft.kvision.state.stateBinding
 import pl.treksoft.kvision.utils.px
-import redux.RAction
 
 data class ImageState(val url: String?, val errorMessage: String?)
 

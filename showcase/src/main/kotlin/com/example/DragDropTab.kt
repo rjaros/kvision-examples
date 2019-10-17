@@ -10,7 +10,7 @@ import pl.treksoft.kvision.html.Div
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.FlexJustify
-import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel
 import pl.treksoft.kvision.state.observableListOf

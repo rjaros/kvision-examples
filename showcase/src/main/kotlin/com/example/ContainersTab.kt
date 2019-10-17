@@ -3,19 +3,19 @@ package com.example
 import pl.treksoft.kvision.core.Background
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Container
-import pl.treksoft.kvision.dropdown.DropDown.Companion.dropDown
+import pl.treksoft.kvision.dropdown.dropDown
 import pl.treksoft.kvision.html.TAG
 import pl.treksoft.kvision.html.Tag
-import pl.treksoft.kvision.html.Tag.Companion.tag
+import pl.treksoft.kvision.html.tag
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.Direction
 import pl.treksoft.kvision.panel.SideTabSize
 import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.SplitPanel.Companion.splitPanel
-import pl.treksoft.kvision.panel.StackPanel.Companion.stackPanel
-import pl.treksoft.kvision.panel.TabPanel.Companion.tabPanel
+import pl.treksoft.kvision.panel.splitPanel
+import pl.treksoft.kvision.panel.stackPanel
+import pl.treksoft.kvision.panel.tabPanel
 import pl.treksoft.kvision.panel.TabPosition
-import pl.treksoft.kvision.panel.VPanel.Companion.vPanel
+import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.utils.px
 
 class ContainersTab : SimplePanel() {

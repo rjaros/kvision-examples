@@ -5,10 +5,10 @@ import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Style
-import pl.treksoft.kvision.core.Style.Companion.style
+import pl.treksoft.kvision.core.style
 import pl.treksoft.kvision.core.TextAlign
 import pl.treksoft.kvision.html.Div
-import pl.treksoft.kvision.html.Image.Companion.image
+import pl.treksoft.kvision.html.image
 import pl.treksoft.kvision.panel.DockPanel
 import pl.treksoft.kvision.panel.Side
 import pl.treksoft.kvision.utils.perc

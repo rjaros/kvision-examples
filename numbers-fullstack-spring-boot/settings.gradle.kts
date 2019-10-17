@@ -7,6 +7,7 @@ pluginManagement {
         maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
         maven { url = uri("https://kotlin.bintray.com/kotlinx") }
         maven { url = uri("https://repo.spring.io/milestone") }
+        maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
         mavenLocal()
     }
     resolutionStrategy {

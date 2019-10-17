@@ -1,8 +1,8 @@
 package com.example
 
-import pl.treksoft.kvision.data.DataContainer.Companion.dataContainer
+import pl.treksoft.kvision.data.dataContainer
 import pl.treksoft.kvision.html.Button
-import pl.treksoft.kvision.html.Button.Companion.button
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Span
 import pl.treksoft.kvision.i18n.I18n.tr

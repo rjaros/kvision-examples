@@ -7,11 +7,11 @@ import pl.treksoft.kvision.core.FontWeight
 import pl.treksoft.kvision.core.Overflow
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.data.SorterType
-import pl.treksoft.kvision.html.Link.Companion.link
-import pl.treksoft.kvision.html.Span.Companion.span
+import pl.treksoft.kvision.html.link
+import pl.treksoft.kvision.html.span
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.FlexWrap
-import pl.treksoft.kvision.panel.HPanel.Companion.hPanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel
 import pl.treksoft.kvision.types.toStringF

@@ -4,7 +4,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.form.FormPanel
-import pl.treksoft.kvision.form.FormPanel.Companion.formPanel
+import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.text.Password
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.html.Button
