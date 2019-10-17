@@ -13,6 +13,10 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 buildscript {
     extra.set("production", (findProperty("prod") ?: findProperty("production") ?: "false") == "true")
     extra.set("kotlin.version", System.getProperty("kotlinVersion"))
+
+    dependencies {
+        classpath("pl.treksoft:kvision-gradle-plugin:${System.getProperty("kvisionVersion")}")
+    }
 }
 
 plugins {
@@ -25,6 +29,8 @@ plugins {
     id("kotlin-dce-js") version kotlinVersion
     kotlin("frontend") version System.getProperty("frontendPluginVersion")
 }
+
+apply(plugin = "pl.treksoft.kvision")
 
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
@@ -45,7 +51,7 @@ repositories {
 
 // Versions
 val kotlinVersion: String by System.getProperties()
-val kvisionVersion: String by project
+val kvisionVersion: String by System.getProperties()
 val springAutoconfigureR2dbcVersion: String by project
 val springDataR2dbcVersion: String by project
 val r2dbcPostgresqlVersion: String by project
@@ -83,7 +89,9 @@ kotlin {
                 implementation(kotlin("stdlib-common"))
                 implementation("pl.treksoft:kvision-common-types:$kvisionVersion")
                 implementation("pl.treksoft:kvision-common-remote:$kvisionVersion")
+                implementation("pl.treksoft:kvision-common-annotations:$kvisionVersion")
             }
+            kotlin.srcDir("build/generated-src/common")
         }
         getByName("commonTest") {
             dependencies {
@@ -127,6 +135,7 @@ kotlin {
                 implementation("pl.treksoft:kvision-remote:$kvisionVersion")
                 implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
             }
+            kotlin.srcDir("build/generated-src/frontend")
         }
         getByName("frontendTest") {
             dependencies {
@@ -355,6 +364,12 @@ afterEvaluate {
         }
         getByName("stop") {
             dependsOn("frontendStop")
+        }
+        getByName("compileKotlinBackend") {
+            dependsOn("compileKotlinMetadata")
+        }
+        getByName("compileKotlinFrontend") {
+            dependsOn("compileKotlinMetadata")
         }
     }
 }

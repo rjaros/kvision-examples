@@ -13,6 +13,10 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 buildscript {
     extra.set("production", (findProperty("prod") ?: findProperty("production") ?: "false") == "true")
     extra.set("kotlin.version", System.getProperty("kotlinVersion"))
+
+    dependencies {
+        classpath("pl.treksoft:kvision-gradle-plugin:${System.getProperty("kvisionVersion")}")
+    }
 }
 
 plugins {
@@ -25,6 +29,8 @@ plugins {
     id("kotlin-dce-js") version kotlinVersion
     kotlin("frontend") version System.getProperty("frontendPluginVersion")
 }
+
+apply(plugin = "pl.treksoft.kvision")
 
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
@@ -44,7 +50,7 @@ repositories {
 
 // Versions
 val kotlinVersion: String by System.getProperties()
-val kvisionVersion: String by project
+val kvisionVersion: String by System.getProperties()
 val springAutoconfigureR2dbcVersion: String by project
 val springDataR2dbcVersion: String by project
 val r2dbcPostgresqlVersion: String by project
@@ -82,7 +88,9 @@ kotlin {
                 implementation(kotlin("stdlib-common"))
                 implementation("pl.treksoft:kvision-common-types:$kvisionVersion")
                 implementation("pl.treksoft:kvision-common-remote:$kvisionVersion")
+                implementation("pl.treksoft:kvision-common-annotations:$kvisionVersion")
             }
+            kotlin.srcDir("build/generated-src/common")
         }
         getByName("commonTest") {
             dependencies {
@@ -135,6 +143,7 @@ kotlin {
                 implementation("pl.treksoft:kvision-moment:$kvisionVersion")
                 implementation("pl.treksoft:kvision-remote:$kvisionVersion")
             }
+            kotlin.srcDir("build/generated-src/frontend")
         }
         getByName("frontendTest") {
             dependencies {
@@ -207,7 +216,8 @@ tasks {
         outputs.file("$buildDir/Gruntfile.js")
         doLast {
             file("$buildDir/Gruntfile.js").run {
-                writeText("""
+                writeText(
+                    """
                     module.exports = function (grunt) {
                         grunt.initConfig({
                             pot: {
@@ -225,7 +235,8 @@ tasks {
                         });
                         grunt.loadNpmTasks("grunt-pot");
                     };
-                """.trimIndent())
+                """.trimIndent()
+                )
             }
         }
     }
@@ -249,11 +260,13 @@ afterEvaluate {
                 }.forEach {
                     exec {
                         executable = NodeJsRootPlugin.apply(project).nodeCommand
-                        args("$buildDir/node_modules/po2json/bin/po2json",
-                                it.absolutePath,
-                                "${it.parent}/${it.nameWithoutExtension}.json",
-                                "-f",
-                                "jed1.x")
+                        args(
+                            "$buildDir/node_modules/po2json/bin/po2json",
+                            it.absolutePath,
+                            "${it.parent}/${it.nameWithoutExtension}.json",
+                            "-f",
+                            "jed1.x"
+                        )
                         println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
                     }
                     it.delete()
@@ -290,12 +303,12 @@ afterEvaluate {
 
             manifest {
                 attributes(
-                        mapOf(
-                                "Implementation-Title" to rootProject.name,
-                                "Implementation-Group" to rootProject.group,
-                                "Implementation-Version" to rootProject.version,
-                                "Timestamp" to System.currentTimeMillis()
-                        )
+                    mapOf(
+                        "Implementation-Title" to rootProject.name,
+                        "Implementation-Group" to rootProject.group,
+                        "Implementation-Version" to rootProject.version,
+                        "Timestamp" to System.currentTimeMillis()
+                    )
                 )
             }
         }
@@ -311,16 +324,20 @@ afterEvaluate {
         }
         getByName("bootJar", BootJar::class) {
             dependsOn("backendMainClasses")
-            classpath = files(kotlin.targets["backend"].compilations["main"].output.allOutputs +
-                    project.configurations["backendRuntimeClasspath"])
+            classpath = files(
+                kotlin.targets["backend"].compilations["main"].output.allOutputs +
+                        project.configurations["backendRuntimeClasspath"]
+            )
         }
         replace("backendJar", BootJar::class).apply {
             dependsOn("frontendJar", "backendMainClasses")
             group = "package"
             archiveAppendix.set("backend")
-            classpath = files(kotlin.targets["backend"].compilations["main"].output.allOutputs +
-                    project.configurations["backendRuntimeClasspath"] +
-                    (project.tasks["frontendJar"] as Jar).archiveFile)
+            classpath = files(
+                kotlin.targets["backend"].compilations["main"].output.allOutputs +
+                        project.configurations["backendRuntimeClasspath"] +
+                        (project.tasks["frontendJar"] as Jar).archiveFile
+            )
             mainClassName = "com.example.MainKt"
         }
         replace("jar").apply {
@@ -341,9 +358,11 @@ afterEvaluate {
         }
         getByName("bootRun", BootRun::class) {
             dependsOn("frontendJar", "backendMainClasses")
-            classpath = files(kotlin.targets["backend"].compilations["main"].output.allOutputs +
-                    project.configurations["backendRuntimeClasspath"] +
-                    (project.tasks["frontendJar"] as Jar).archiveFile)
+            classpath = files(
+                kotlin.targets["backend"].compilations["main"].output.allOutputs +
+                        project.configurations["backendRuntimeClasspath"] +
+                        (project.tasks["frontendJar"] as Jar).archiveFile
+            )
         }
         create("frontendRun") {
             dependsOn("webpack-run")
@@ -364,10 +383,16 @@ afterEvaluate {
         getByName("stop") {
             dependsOn("frontendStop")
         }
+        getByName("compileKotlinBackend") {
+            dependsOn("compileKotlinMetadata")
+        }
+        getByName("compileKotlinFrontend") {
+            dependsOn("compileKotlinMetadata")
+        }
     }
 }
 
 fun KotlinFrontendExtension.webpackBundle(block: WebPackExtension.() -> Unit) =
-        bundle("webpack", delegateClosureOf(block))
+    bundle("webpack", delegateClosureOf(block))
 
 fun KotlinFrontendExtension.npm(block: NpmExtension.() -> Unit) = configure(block)

@@ -2,12 +2,9 @@
 
 package com.example
 
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.remote.KVServiceManager
+import pl.treksoft.kvision.annotations.KVService
 import pl.treksoft.kvision.types.LocalDateTime
 
 @Serializable
@@ -19,20 +16,9 @@ data class Tweet(
     val tags: List<String>
 )
 
+@KVService
 interface ITweetService {
     suspend fun sendTweet(nickname: String, message: String, tags: List<String>): Int
     suspend fun getTweet(id: Int): Tweet
     suspend fun getTweets(limit: Int? = null): List<Tweet>
-}
-
-expect class TweetService : ITweetService
-
-object TweetServiceManager : KVServiceManager<TweetService>(TweetService::class) {
-    init {
-        GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
-            bind(ITweetService::sendTweet)
-            bind(ITweetService::getTweet)
-            bind(ITweetService::getTweets)
-        }
-    }
 }

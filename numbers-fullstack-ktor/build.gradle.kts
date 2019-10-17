@@ -8,6 +8,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
 
 buildscript {
     extra.set("production", (findProperty("prod") ?: findProperty("production") ?: "false") == "true")
+
+    dependencies {
+        classpath("pl.treksoft:kvision-gradle-plugin:${System.getProperty("kvisionVersion")}")
+    }
 }
 
 plugins {
@@ -17,6 +21,8 @@ plugins {
     id("kotlin-dce-js") version kotlinVersion
     kotlin("frontend") version System.getProperty("frontendPluginVersion")
 }
+
+apply(plugin = "pl.treksoft.kvision")
 
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
@@ -41,7 +47,7 @@ val h2Version: String by project
 val pgsqlVersion: String by project
 val kweryVersion: String by project
 val logbackVersion: String by project
-val kvisionVersion: String by project
+val kvisionVersion: String by System.getProperties()
 val commonsCodecVersion: String by project
 val jdbcNamedParametersVersion: String by project
 
@@ -76,7 +82,9 @@ kotlin {
                 implementation(kotlin("stdlib-common"))
                 implementation("pl.treksoft:kvision-common-types:$kvisionVersion")
                 implementation("pl.treksoft:kvision-common-remote:$kvisionVersion")
+                implementation("pl.treksoft:kvision-common-annotations:$kvisionVersion")
             }
+            kotlin.srcDir("build/generated-src/common")
         }
         getByName("commonTest") {
             dependencies {
@@ -110,6 +118,7 @@ kotlin {
                 implementation("pl.treksoft:kvision-bootstrap-select:$kvisionVersion")
                 implementation("pl.treksoft:kvision-remote:$kvisionVersion")
             }
+            kotlin.srcDir("build/generated-src/frontend")
         }
         getByName("frontendTest") {
             dependencies {
@@ -335,6 +344,12 @@ afterEvaluate {
         }
         getByName("stop") {
             dependsOn("frontendStop", "backendStop")
+        }
+        getByName("compileKotlinBackend") {
+            dependsOn("compileKotlinMetadata")
+        }
+        getByName("compileKotlinFrontend") {
+            dependsOn("compileKotlinMetadata")
         }
     }
 }

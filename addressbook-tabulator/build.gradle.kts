@@ -33,7 +33,7 @@ repositories {
 
 // Versions
 val kotlinVersion: String by System.getProperties()
-val kvisionVersion: String by project
+val kvisionVersion: String by System.getProperties()
 
 // Custom Properties
 val webDir = file("src/main/web")
