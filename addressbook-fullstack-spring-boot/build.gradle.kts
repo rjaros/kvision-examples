@@ -91,7 +91,7 @@ kotlin {
                 implementation("pl.treksoft:kvision-common-remote:$kvisionVersion")
                 implementation("pl.treksoft:kvision-common-annotations:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/common")
+            kotlin.srcDir("$buildDir/generated-src/common")
         }
         getByName("commonTest") {
             dependencies {
@@ -135,7 +135,7 @@ kotlin {
                 implementation("pl.treksoft:kvision-remote:$kvisionVersion")
                 implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/frontend")
+            kotlin.srcDir("$buildDir/generated-src/frontend")
         }
         getByName("frontendTest") {
             dependencies {
