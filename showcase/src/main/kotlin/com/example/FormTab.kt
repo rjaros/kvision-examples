@@ -7,10 +7,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.check.Radio
 import pl.treksoft.kvision.form.check.RadioGroup
+import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.select.AjaxOptions
 import pl.treksoft.kvision.form.select.Select
 import pl.treksoft.kvision.form.select.SimpleSelect
@@ -21,8 +21,8 @@ import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextArea
 import pl.treksoft.kvision.form.time.DateTime
 import pl.treksoft.kvision.form.upload.Upload
-import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
@@ -32,6 +32,7 @@ import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.progress.ProgressBar
 import pl.treksoft.kvision.types.KFile
+import pl.treksoft.kvision.utils.getDataWithFileContent
 import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px
 import kotlin.js.Date
@@ -134,6 +135,8 @@ class FormTab : SimplePanel() {
                 )
             )
             add(Form::upload, Upload("/", multiple = true, label = tr("Upload files (images only)")).apply {
+                showUpload = false
+                showCancel = false
                 explorerTheme = true
                 dropZoneEnabled = false
                 allowedFileTypes = setOf("image")
@@ -156,6 +159,9 @@ class FormTab : SimplePanel() {
             button(tr("Show data"), "fas fa-info", ButtonStyle.SUCCESS).onClick {
                 console.log(formPanel.getDataJson())
                 Alert.show(tr("Form data in plain JSON"), JSON.stringify(formPanel.getDataJson(), space = 1))
+                GlobalScope.launch {
+                    console.log(formPanel.getDataWithFileContent())
+                }
             }
             button(tr("Clear data"), "fas fa-times", ButtonStyle.DANGER).onClick {
                 Confirm.show(
