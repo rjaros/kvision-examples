@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS users (
   UNIQUE(username)
 );
 
-
 CREATE TABLE IF NOT EXISTS address (
     id serial NOT NULL,
     first_name varchar(255),

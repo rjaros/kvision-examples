@@ -65,7 +65,7 @@ actual class AddressService(private val databaseClient: DatabaseClient) : IAddre
     }
 
     override suspend fun addAddress(address: Address): Address {
-        val newAddress = address.copy(userId = profile.id, createdAt = OffsetDateTime.now())
+        val newAddress = address.copy(userId = profile.id?.toInt(), createdAt = OffsetDateTime.now())
         val id = databaseClient.insert().into(Address::class.java).using(newAddress)
             .map { row -> row.get("id", java.lang.Integer::class.java) }.awaitOne()
         return newAddress.copy(id = id?.toInt())
@@ -78,7 +78,7 @@ actual class AddressService(private val databaseClient: DatabaseClient) : IAddre
                     profile.id?.toInt() ?: 0
                 )
             ).fetch().awaitOneOrNull()?.let { oldAddress ->
-                val newAddress = address.copy(userId = profile.id, createdAt = oldAddress.createdAt)
+                val newAddress = address.copy(userId = profile.id?.toInt(), createdAt = oldAddress.createdAt)
                 databaseClient.update().table(Address::class.java)
                     .using(newAddress).fetch().rowsUpdated().awaitSingle()
                 return newAddress

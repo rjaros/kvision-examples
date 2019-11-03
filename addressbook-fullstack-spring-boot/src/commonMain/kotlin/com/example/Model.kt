@@ -18,5 +18,5 @@ data class Address(
     val postalAddress: String? = null,
     val favourite: Boolean? = false,
     val createdAt: OffsetDateTime? = null,
-    val userId: String? = null
+    val userId: Int? = null
 )
