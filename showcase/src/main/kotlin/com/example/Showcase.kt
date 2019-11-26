@@ -4,6 +4,7 @@ import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.select.Select
 import pl.treksoft.kvision.form.select.select
 import pl.treksoft.kvision.i18n.DefaultI18nManager
@@ -61,7 +62,7 @@ class Showcase : Application() {
                     width = 300.px
                     marginLeft = auto
                     marginRight = auto
-                    setEventListener<Select> {
+                    onEvent {
                         change = {
                             I18n.language = self.value ?: "en"
                         }

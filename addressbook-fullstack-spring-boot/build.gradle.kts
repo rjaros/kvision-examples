@@ -52,6 +52,7 @@ repositories {
 // Versions
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
+val coroutinesVersion: String by project
 val springAutoconfigureR2dbcVersion: String by project
 val springDataR2dbcVersion: String by project
 val r2dbcPostgresqlVersion: String by project
@@ -126,6 +127,7 @@ kotlin {
             resources.srcDir(webDir)
             dependencies {
                 implementation(kotlin("stdlib-js"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutinesVersion")
                 implementation("pl.treksoft:kvision:$kvisionVersion")
                 implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
                 implementation("pl.treksoft:kvision-bootstrap-select:$kvisionVersion")

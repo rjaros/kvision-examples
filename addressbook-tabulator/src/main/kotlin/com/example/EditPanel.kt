@@ -1,5 +1,6 @@
 package com.example
 
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.FormPanel
 import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
@@ -39,7 +40,7 @@ object EditPanel : StackPanel() {
                     cancel()
                 }
             })
-            setEventListener {
+            onEvent {
                 keydown = { e ->
                     if (e.keyCode == ENTER_KEY) {
                         save()

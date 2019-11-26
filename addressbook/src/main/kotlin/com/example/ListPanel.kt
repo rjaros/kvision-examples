@@ -2,6 +2,7 @@ package com.example
 
 import kotlinx.serialization.UnstableDefault
 import pl.treksoft.kvision.core.FontStyle
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.data.dataContainer
 import pl.treksoft.kvision.data.SorterType
@@ -47,28 +48,28 @@ object ListPanel : SimplePanel() {
 
         val table = Table(types = setOf(TableType.STRIPED, TableType.HOVER)) {
             addHeaderCell(HeaderCell(tr("First name")) {
-                setEventListener {
+                onEvent {
                     click = {
                         sort = Sort.FN
                     }
                 }
             })
             addHeaderCell(HeaderCell(tr("Last name")) {
-                setEventListener {
+                onEvent {
                     click = {
                         sort = Sort.LN
                     }
                 }
             })
             addHeaderCell(HeaderCell(tr("E-mail")) {
-                setEventListener {
+                onEvent {
                     click = {
                         sort = Sort.E
                     }
                 }
             })
             addHeaderCell(HeaderCell("") {
-                setEventListener {
+                onEvent {
                     click = {
                         sort = Sort.F
                     }
@@ -108,7 +109,7 @@ object ListPanel : SimplePanel() {
                 cell {
                     icon("fas fa-times") {
                         title = tr("Delete")
-                        setEventListener {
+                        onEvent {
                             click = { e ->
                                 e.stopPropagation()
                                 Confirm.show(tr("Are you sure?"), tr("Do you want to delete this address?")) {
@@ -118,7 +119,7 @@ object ListPanel : SimplePanel() {
                         }
                     }
                 }
-                setEventListener {
+                onEvent {
                     click = {
                         EditPanel.edit(index)
                     }
@@ -140,12 +141,12 @@ object ListPanel : SimplePanel() {
             }
         }
         )
-        search.setEventListener {
+        search.onEvent {
             input = {
                 container.update()
             }
         }
-        types.setEventListener {
+        types.onEvent {
             change = {
                 container.update()
             }

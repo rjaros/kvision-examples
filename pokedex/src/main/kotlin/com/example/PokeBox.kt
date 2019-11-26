@@ -33,7 +33,7 @@ val pokeBoxStyle = Style {
 
 class PokeBox(pokemon: Pokemon) : DockPanel() {
     init {
-        addCssClass(pokeBoxStyle)
+        addCssStyle(pokeBoxStyle)
         image(
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.substring(
                 34,

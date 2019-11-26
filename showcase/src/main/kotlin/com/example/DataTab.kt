@@ -1,6 +1,7 @@
 package com.example
 
 import pl.treksoft.kvision.core.FontWeight
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.data.BaseDataComponent
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.form.check.CheckBox
@@ -68,7 +69,7 @@ class DataTab : SimplePanel() {
         panel.add(HPanel(spacing = 10, wrap = FlexWrap.WRAP) {
             textInput(type = TextInputType.SEARCH) {
                 placeholder = tr("Search ...")
-                setEventListener<TextInput> {
+                onEvent {
                     input = {
                         searchFilter = self.value
                         dataContainer.update()

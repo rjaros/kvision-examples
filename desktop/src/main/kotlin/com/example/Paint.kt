@@ -10,6 +10,7 @@ import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Container
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.ButtonStyle
@@ -207,7 +208,7 @@ class PaintCanvas(width: Int, height: Int) : Canvas(width, height) {
     init {
         border = Border(1.px, BorderStyle.SOLID, Col.BLACK)
 
-        setEventListener {
+        onEvent {
             mousedown = { e ->
                 if (currentFig == null) handleMouseDown(e.offsetX.toInt(), e.offsetY.toInt())
             }

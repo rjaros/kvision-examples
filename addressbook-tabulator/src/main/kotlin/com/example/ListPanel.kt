@@ -1,5 +1,6 @@
 package com.example
 
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.check.RadioGroup
 import pl.treksoft.kvision.form.check.radioGroup
 import pl.treksoft.kvision.form.text.TextInput
@@ -85,12 +86,12 @@ object ListPanel : VPanel() {
             }
         }
 
-        search.setEventListener {
+        search.onEvent {
             input = {
                 tabulator.applyFilter()
             }
         }
-        searchTypes.setEventListener {
+        searchTypes.onEvent {
             change = {
                 tabulator.applyFilter()
             }

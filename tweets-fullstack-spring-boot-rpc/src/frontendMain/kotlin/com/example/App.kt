@@ -5,6 +5,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.w3c.dom.events.KeyboardEvent
 import pl.treksoft.kvision.Application
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.text
 import pl.treksoft.kvision.form.text.textAreaInput
@@ -69,11 +70,11 @@ class App : Application() {
                         }
                     }
 
-                    tweet.setEventListener {
+                    tweet.onEvent {
                         keydown = ::keyDownHandler
                     }
 
-                    tags.setEventListener {
+                    tags.onEvent {
                         keydown = ::keyDownHandler
                     }
 

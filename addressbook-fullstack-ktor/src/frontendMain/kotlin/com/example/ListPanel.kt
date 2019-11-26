@@ -1,6 +1,7 @@
 package com.example
 
 import pl.treksoft.kvision.core.FontStyle
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.data.dataContainer
 import pl.treksoft.kvision.form.check.RadioGroup
 import pl.treksoft.kvision.form.check.radioGroup
@@ -76,7 +77,7 @@ object ListPanel : SimplePanel() {
                     cell {
                         icon("fas fa-times") {
                             title = tr("Delete")
-                            setEventListener {
+                            onEvent {
                                 click = { e ->
                                     e.stopPropagation()
                                     Confirm.show("Are you sure?", "Do you want to delete this address?") {
@@ -86,7 +87,7 @@ object ListPanel : SimplePanel() {
                             }
                         }
                     }
-                    setEventListener {
+                    onEvent {
                         click = {
                             EditPanel.edit(index)
                         }
@@ -97,7 +98,7 @@ object ListPanel : SimplePanel() {
     }
 
     private fun sortingHeaderCell(title: String, sort: Sort) = HeaderCell(title) {
-        setEventListener {
+        onEvent {
             click = {
                 Model.sort = sort
             }

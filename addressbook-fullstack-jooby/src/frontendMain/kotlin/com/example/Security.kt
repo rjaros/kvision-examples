@@ -3,6 +3,7 @@ package com.example
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.FormPanel
 import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.text.Password
@@ -39,7 +40,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
         loginPanel = formPanel {
             add(Credentials::username, Text(label = "${tr("Login")}:"), required = true)
             add(Credentials::password, Password(label = "${tr("Password")}:"), required = true)
-            setEventListener {
+            onEvent {
                 keydown = {
                     if (it.keyCode == ENTER_KEY) {
                         processCredentials()

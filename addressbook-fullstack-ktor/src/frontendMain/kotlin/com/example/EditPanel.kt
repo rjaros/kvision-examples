@@ -2,6 +2,7 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.FormPanel
 import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
@@ -43,7 +44,7 @@ object EditPanel : StackPanel() {
                     close()
                 }
             })
-            setEventListener {
+            onEvent {
                 keydown = {
                     if (it.keyCode == ENTER_KEY) {
                         save()

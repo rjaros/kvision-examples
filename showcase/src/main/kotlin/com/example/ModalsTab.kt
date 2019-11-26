@@ -1,5 +1,6 @@
 package com.example
 
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.check.checkBox
 import pl.treksoft.kvision.form.text.TextInput
 import pl.treksoft.kvision.form.text.textInput
@@ -104,7 +105,7 @@ class ShowcaseWindow(caption: String?, init: (ShowcaseWindow.() -> Unit)? = null
         vPanel {
             margin = 10.px
             captionInput = textInput(TextInputType.TEXT, caption) {
-                setEventListener<TextInput> {
+                onEvent {
                     change = {
                         this@ShowcaseWindow.caption = self.value
                     }

@@ -1,5 +1,6 @@
 package com.example
 
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.InputSize
 import pl.treksoft.kvision.form.check.CheckBoxInput
 import pl.treksoft.kvision.form.check.checkBoxInput
@@ -91,7 +92,7 @@ class TabulatorTab : SimplePanel() {
                         editorComponentFunction = { _, _, success, _, data ->
                             TextInput(value = data.name).apply {
                                 size = InputSize.SMALL
-                                setEventListener<TextInput> {
+                                onEvent {
                                     change = {
                                         success(self.value)
                                     }
@@ -104,7 +105,7 @@ class TabulatorTab : SimplePanel() {
                         editorComponentFunction = { _, _, success, _, data ->
                             TextInput(value = data.position).apply {
                                 size = InputSize.SMALL
-                                setEventListener<TextInput> {
+                                onEvent {
                                     change = {
                                         success(self.value)
                                     }
@@ -123,7 +124,7 @@ class TabulatorTab : SimplePanel() {
                             emptyOption = true
                         ).apply {
                             size = InputSize.SMALL
-                            setEventListener<SimpleSelectInput> {
+                            onEvent {
                                 change = {
                                     success(self.value)
                                 }
@@ -138,7 +139,7 @@ class TabulatorTab : SimplePanel() {
                             checkBoxInput(value = data.active).apply {
                                 size = InputSize.SMALL
                                 height = 20.px
-                                setEventListener<CheckBoxInput> {
+                                onEvent {
                                     click = {
                                         success(self.value)
                                     }
@@ -155,7 +156,7 @@ class TabulatorTab : SimplePanel() {
                             DateTimeInput(value = data.startDate, format = "YYYY-MM-DD").apply {
                                 size = InputSize.SMALL
                                 showClear = false
-                                setEventListener<DateTimeInput> {
+                                onEvent {
                                     change = {
                                         success(self.value)
                                     }
@@ -170,7 +171,7 @@ class TabulatorTab : SimplePanel() {
                     }, editorComponentFunction = { _, _, success, _, data ->
                         SpinnerInput(data.salary).apply {
                             size = InputSize.SMALL
-                            setEventListener<SpinnerInput> {
+                            onEvent {
                                 blur = {
                                     success(self.value)
                                 }
@@ -184,7 +185,7 @@ class TabulatorTab : SimplePanel() {
                         width = "50",
                         formatterComponentFunction = { _, _, d ->
                             Icon("fas fa-times").apply {
-                                setEventListener<Icon> {
+                                onEvent {
                                     click = {
                                         Confirm.show(tr("Are you sure?"), tr("Delete row?")) {
                                             val row = data.find { it.id == d.id }
