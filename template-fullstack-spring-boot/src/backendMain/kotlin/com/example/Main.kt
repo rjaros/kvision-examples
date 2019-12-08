@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Bean
 @EnableAutoConfiguration(
     exclude = [
         org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration::class,
-        org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration::class
+        org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration::class,
+        org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration::class
     ]
 )
 class KVApplication {
