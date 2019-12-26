@@ -103,7 +103,7 @@ class FormTab : SimplePanel() {
                     options = listOf("first" to tr("First option"), "second" to tr("Second option")),
                     emptyOption = true,
                     label = tr("Simple select")
-                ), required = true
+                ), required = true, requiredMessage = tr("Value is required")
             )
             add(
                 Form::select, Select(
