@@ -25,6 +25,7 @@ import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.state.stateBinding
+import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
 data class ImageState(val url: String?, val errorMessage: String?)
@@ -58,6 +59,7 @@ class App : Application() {
 
         root("kvapp") {
             vPanel(alignItems = FlexAlignItems.STRETCH, spacing = 10) {
+                width = 100.perc
                 marginTop = 10.px
                 button(tr("Take a photo"), "fa-camera") {
                     alignItems = FlexAlignItems.CENTER

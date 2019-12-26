@@ -1,13 +1,12 @@
-import org.jetbrains.kotlin.gradle.frontend.KotlinFrontendExtension
-import org.jetbrains.kotlin.gradle.frontend.npm.NpmExtension
-import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackExtension
-import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackRunTask
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
-import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
 
 buildscript {
     extra.set("production", (findProperty("prod") ?: findProperty("production") ?: "false") == "true")
+    extra.set("kotlin.version", System.getProperty("kotlinVersion"))
 
     dependencies {
         classpath("pl.treksoft:kvision-gradle-plugin:${System.getProperty("kvisionVersion")}")
@@ -19,7 +18,6 @@ plugins {
     id("kotlinx-serialization") version kotlinVersion
     id("kotlin-multiplatform") version kotlinVersion
     id("kotlin-dce-js") version kotlinVersion
-    kotlin("frontend") version System.getProperty("frontendPluginVersion")
 }
 
 apply(plugin = "pl.treksoft.kvision")
@@ -33,13 +31,22 @@ repositories {
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     maven { url = uri("https://kotlin.bintray.com/kotlinx") }
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
-    maven { url = uri("https://dl.bintray.com/gbaldeck/kotlin") }
+    maven {
+        url = uri("https://dl.bintray.com/gbaldeck/kotlin")
+        metadataSources {
+            mavenPom()
+            artifact()
+        }
+    }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
+    maven { url = uri("https://repo.spring.io/milestone") }
+    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
     mavenLocal()
 }
 
 // Versions
 val kotlinVersion: String by System.getProperties()
+val kvisionVersion: String by System.getProperties()
 val joobyVersion: String by project
 val pac4jVersion: String by project
 val springSecurityCryptoVersion: String by project
@@ -47,7 +54,6 @@ val h2Version: String by project
 val pgsqlVersion: String by project
 val kweryVersion: String by project
 val commonsLoggingVersion: String by project
-val kvisionVersion: String by System.getProperties()
 
 // Custom Properties
 val webDir = file("src/frontendMain/web")
@@ -56,6 +62,7 @@ val mainClassName = "com.example.MainKt"
 
 kotlin {
     jvm("backend") {
+        withJava()
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -67,9 +74,29 @@ kotlin {
             kotlinOptions {
                 moduleKind = "umd"
                 sourceMap = !isProductionBuild
-                metaInfo = true
                 if (!isProductionBuild) {
                     sourceMapEmbedSources = "always"
+                }
+            }
+        }
+        browser {
+            runTask {
+                outputFileName = "main.bundle.js"
+                devServer = KotlinWebpackConfig.DevServer(
+                    open = false,
+                    port = 3000,
+                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to "http://localhost:8080"),
+                    contentBase = listOf("$buildDir/processedResources/frontend/main")
+                )
+            }
+            webpackTask {
+                outputFileName = "${project.name}-frontend.js"
+                val runDceFrontendKotlin by tasks.getting(KotlinJsDce::class)
+                dependsOn(runDceFrontendKotlin)
+            }
+            testTask {
+                useKarma {
+                    useChromeHeadless()
                 }
             }
         }
@@ -117,6 +144,10 @@ kotlin {
             resources.srcDir(webDir)
             dependencies {
                 implementation(kotlin("stdlib-js"))
+                implementation(npm("po2json"))
+                implementation(npm("grunt"))
+                implementation(npm("grunt-pot"))
+
                 implementation("pl.treksoft:kvision:$kvisionVersion")
                 implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
                 implementation("pl.treksoft:kvision-bootstrap-select:$kvisionVersion")
@@ -131,52 +162,25 @@ kotlin {
         getByName("frontendTest") {
             dependencies {
                 implementation(kotlin("test-js"))
+                implementation("pl.treksoft:kvision-testutils:$kvisionVersion:tests")
             }
         }
     }
-}
-
-kotlinFrontend {
-    sourceMaps = !isProductionBuild
-    npm {
-        devDependency("po2json")
-        devDependency("grunt")
-        devDependency("grunt-pot")
-    }
-    webpackBundle {
-        bundleName = "main"
-        sourceMapEnabled = false
-        port = 3000
-        proxyUrl = "http://localhost:8080"
-        contentPath = webDir
-        mode = if (isProductionBuild) "production" else "development"
-    }
-
-    define("PRODUCTION", isProductionBuild)
 }
 
 tasks {
-    withType<Kotlin2JsCompile> {
-        kotlinOptions {
-            moduleKind = "umd"
-            sourceMap = !isProductionBuild
-            metaInfo = true
-            if (!isProductionBuild) {
-                sourceMapEmbedSources = "always"
-            }
-        }
-    }
     withType<KotlinJsDce> {
         dceOptions {
             devMode = !isProductionBuild
         }
         inputs.property("production", isProductionBuild)
         doFirst {
+            classpath = classpath.filter { it.extension != "js" }
             destinationDir.deleteRecursively()
         }
         doLast {
             copy {
-                file("$buildDir/node_modules_imported/").listFiles()?.forEach {
+                file("$buildDir/tmp/expandedArchives/").listFiles()?.forEach {
                     if (it.isDirectory && it.name.startsWith("kvision")) {
                         from(it) {
                             include("css/**")
@@ -189,37 +193,45 @@ tasks {
             }
         }
     }
+    withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "1.8"
+        }
+    }
     create("generateGruntfile") {
-        outputs.file("$buildDir/Gruntfile.js")
+        outputs.file("$buildDir/js/Gruntfile.js")
         doLast {
-            file("$buildDir/Gruntfile.js").run {
-                writeText("""
+            file("$buildDir/js/Gruntfile.js").run {
+                writeText(
+                    """
                     module.exports = function (grunt) {
                         grunt.initConfig({
                             pot: {
                                 options: {
                                     text_domain: "messages",
-                                    dest: "../src/frontendMain/resources/i18n/",
+                                    dest: "../../src/frontendMain/resources/i18n/",
                                     keywords: ["tr", "ntr:1,2", "gettext", "ngettext:1,2"],
                                     encoding: "UTF-8"
                                 },
                                 files: {
-                                    src: ["../src/frontendMain/kotlin/**/*.kt"],
+                                    src: ["../../src/frontendMain/kotlin/**/*.kt"],
                                     expand: true,
                                 },
                             }
                         });
                         grunt.loadNpmTasks("grunt-pot");
                     };
-                """.trimIndent())
+                """.trimIndent()
+                )
             }
         }
     }
     create("generatePotFile", Exec::class) {
-        dependsOn("npm-install", "generateGruntfile")
-        workingDir = file("$buildDir")
+        dependsOn("kotlinNpmInstall", "generateGruntfile")
+        workingDir = file("$buildDir/js")
         executable = NodeJsRootPlugin.apply(project).nodeCommand
-        args("$buildDir/node_modules/grunt/bin/grunt", "pot")
+        args("$buildDir/js/node_modules/grunt/bin/grunt", "pot")
         inputs.files(kotlin.sourceSets["frontendMain"].kotlin.files)
         outputs.file("$projectDir/src/frontendMain/resources/i18n/messages.pot")
     }
@@ -227,7 +239,7 @@ tasks {
 afterEvaluate {
     tasks {
         getByName("frontendProcessResources", Copy::class) {
-            dependsOn("npm-install")
+            dependsOn("kotlinNpmInstall")
             exclude("**/*.pot")
             doLast("Convert PO to JSON") {
                 destinationDir.walkTopDown().filter {
@@ -235,115 +247,94 @@ afterEvaluate {
                 }.forEach {
                     exec {
                         executable = NodeJsRootPlugin.apply(project).nodeCommand
-                        args("$buildDir/node_modules/po2json/bin/po2json",
-                                it.absolutePath,
-                                "${it.parent}/${it.nameWithoutExtension}.json",
-                                "-f",
-                                "jed1.x")
+                        args(
+                            "$buildDir/js/node_modules/po2json/bin/po2json",
+                            it.absolutePath,
+                            "${it.parent}/${it.nameWithoutExtension}.json",
+                            "-f",
+                            "jed1.x"
+                        )
                         println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
                     }
                     it.delete()
                 }
-            }
-        }
-        getByName("webpack-run", WebPackRunTask::class) {
-            dependsOn("frontendMainClasses")
-            doFirst {
                 copy {
-                    from((project.tasks["frontendProcessResources"] as Copy).destinationDir)
-                    into((project.tasks["processResources"] as Copy).destinationDir)
+                    file("$buildDir/tmp/expandedArchives/").listFiles()?.forEach {
+                        if (it.isDirectory && it.name.startsWith("kvision")) {
+                            val kvmodule = it.name.split("-$kvisionVersion").first()
+                            from(it) {
+                                include("css/**")
+                                include("img/**")
+                                include("js/**")
+                                into("$kvmodule/$kvisionVersion")
+                            }
+                        }
+                    }
+                    into(file(buildDir.path + "/js/packages_imported"))
                 }
             }
         }
-        getByName("webpack-bundle") {
-            dependsOn("frontendMainClasses", "runDceFrontendKotlin")
-            doFirst {
-                copy {
-                    from((project.tasks["frontendProcessResources"] as Copy).destinationDir)
-                    into((project.tasks["processResources"] as Copy).destinationDir)
-                }
-            }
-        }
-        replace("frontendJar", Jar::class).apply {
-            dependsOn("webpack-bundle")
+        getByName("frontendBrowserWebpack").dependsOn("frontendProcessResources", "runDceFrontendKotlin")
+        create("frontendArchive", Jar::class).apply {
+            dependsOn("frontendBrowserWebpack")
             group = "package"
             archiveAppendix.set("frontend")
-            val from = project.tasks["webpack-bundle"].outputs.files + webDir
-            from(from)
+            val distribution =
+                project.tasks.getByName("frontendBrowserWebpack", KotlinWebpack::class).destinationDirectory
+            from(distribution, webDir)
             into("/assets")
-            inputs.files(from)
+            inputs.files(distribution, webDir)
             outputs.file(archiveFile)
-
             manifest {
                 attributes(
-                        mapOf(
-                                "Implementation-Title" to rootProject.name,
-                                "Implementation-Group" to rootProject.group,
-                                "Implementation-Version" to rootProject.version,
-                                "Timestamp" to System.currentTimeMillis()
-                        )
+                    mapOf(
+                        "Implementation-Title" to rootProject.name,
+                        "Implementation-Group" to rootProject.group,
+                        "Implementation-Version" to rootProject.version,
+                        "Timestamp" to System.currentTimeMillis()
+                    )
                 )
             }
         }
-        create("frontendZip", Zip::class) {
-            dependsOn("webpack-bundle")
-            group = "package"
-            archiveAppendix.set("frontend")
-            destinationDirectory.set(file("$buildDir/libs"))
-            val from = project.tasks["webpack-bundle"].outputs.files + webDir
-            from(from)
-            inputs.files(from)
-            outputs.file(archiveFile)
+        getByName("backendProcessResources", Copy::class) {
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         }
         getByName("backendJar").group = "package"
-        replace("jar", Jar::class).apply {
-            dependsOn("frontendJar", "backendJar")
+        create("shadowJar", Jar::class).apply {
+            dependsOn("frontendArchive", "backendJar")
             group = "package"
             manifest {
                 attributes(
-                        mapOf(
-                                "Implementation-Title" to rootProject.name,
-                                "Implementation-Group" to rootProject.group,
-                                "Implementation-Version" to rootProject.version,
-                                "Timestamp" to System.currentTimeMillis(),
-                                "Main-Class" to mainClassName
-                        )
+                    mapOf(
+                        "Implementation-Title" to rootProject.name,
+                        "Implementation-Group" to rootProject.group,
+                        "Implementation-Version" to rootProject.version,
+                        "Timestamp" to System.currentTimeMillis(),
+                        "Main-Class" to mainClassName
+                    )
                 )
             }
             val dependencies = configurations["backendRuntimeClasspath"].filter { it.name.endsWith(".jar") } +
                     project.tasks["backendJar"].outputs.files +
-                    project.tasks["frontendJar"].outputs.files
+                    project.tasks["frontendArchive"].outputs.files
             dependencies.forEach {
                 if (it.isDirectory) from(it) else from(zipTree(it))
             }
             exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
             inputs.files(dependencies)
             outputs.file(archiveFile)
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         }
-        create("frontendRun") {
-            dependsOn("webpack-run")
-            group = "run"
+        getByName("jar", Jar::class).apply {
+            dependsOn("shadowJar")
         }
         create("backendRun", JavaExec::class) {
             dependsOn("compileKotlinBackend")
-            shouldRunAfter("frontendRun", "webpack-run")
+            shouldRunAfter("frontendRun", "frontendBrowserWebpack")
             group = "run"
             main = mainClassName
             classpath = configurations["backendRuntimeClasspath"] + project.tasks["compileKotlinBackend"].outputs.files +
                     project.tasks["backendProcessResources"].outputs.files
-            doFirst {
-                println(project.tasks["backendProcessResources"].outputs.files)
-            }
-        }
-        getByName("run") {
-            dependsOn("frontendRun", "backendRun")
-        }
-        create("frontendStop") {
-            dependsOn("webpack-stop")
-            group = "run"
-        }
-        getByName("stop") {
-            dependsOn("frontendStop")
         }
         getByName("compileKotlinBackend") {
             dependsOn("compileKotlinMetadata")
@@ -353,8 +344,3 @@ afterEvaluate {
         }
     }
 }
-
-fun KotlinFrontendExtension.webpackBundle(block: WebPackExtension.() -> Unit) =
-        bundle("webpack", delegateClosureOf(block))
-
-fun KotlinFrontendExtension.npm(block: NpmExtension.() -> Unit) = configure(block)

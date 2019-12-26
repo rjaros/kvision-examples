@@ -1,8 +1,6 @@
-import org.jetbrains.kotlin.gradle.frontend.KotlinFrontendExtension
-import org.jetbrains.kotlin.gradle.frontend.npm.NpmExtension
-import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackExtension
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
-import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
 
 buildscript {
@@ -12,9 +10,8 @@ buildscript {
 plugins {
     val kotlinVersion: String by System.getProperties()
     id("kotlinx-serialization") version kotlinVersion
-    id("kotlin2js") version kotlinVersion
+    id("org.jetbrains.kotlin.js") version kotlinVersion
     id("kotlin-dce-js") version kotlinVersion
-    kotlin("frontend") version System.getProperty("frontendPluginVersion")
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -26,7 +23,13 @@ repositories {
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     maven { url = uri("https://kotlin.bintray.com/kotlinx") }
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
-    maven { url = uri("https://dl.bintray.com/gbaldeck/kotlin") }
+    maven {
+        url = uri("https://dl.bintray.com/gbaldeck/kotlin")
+        metadataSources {
+            mavenPom()
+            artifact()
+        }
+    }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     mavenLocal()
 }
@@ -40,72 +43,87 @@ val webDir = file("src/main/web")
 val electronDir = file("src/main/electron")
 val isProductionBuild = project.extra.get("production") as Boolean
 
-dependencies {
-    implementation(kotlin("stdlib-js"))
-    implementation("pl.treksoft:kvision:$kvisionVersion")
-    implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
-    implementation("pl.treksoft:kvision-bootstrap-select:$kvisionVersion")
-    implementation("pl.treksoft:kvision-bootstrap-datetime:$kvisionVersion")
-    implementation("pl.treksoft:kvision-bootstrap-spinner:$kvisionVersion")
-    implementation("pl.treksoft:kvision-richtext:$kvisionVersion")
-    implementation("pl.treksoft:kvision-bootstrap-upload:$kvisionVersion")
-    implementation("pl.treksoft:kvision-handlebars:$kvisionVersion")
-    implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
-    implementation("pl.treksoft:kvision-datacontainer:$kvisionVersion")
-    implementation("pl.treksoft:kvision-bootstrap-dialog:$kvisionVersion")
-    implementation("pl.treksoft:kvision-redux:$kvisionVersion")
-    implementation("pl.treksoft:kvision-chart:$kvisionVersion")
-    implementation("pl.treksoft:kvision-tabulator:$kvisionVersion")
-    implementation("pl.treksoft:kvision-pace:$kvisionVersion")
-    implementation("pl.treksoft:kvision-moment:$kvisionVersion")
-    implementation("pl.treksoft:kvision-electron:$kvisionVersion")
-    testImplementation(kotlin("test-js"))
-}
-
-kotlinFrontend {
-    sourceMaps = !isProductionBuild
-    npm {
-        devDependency("electron", "6.0.0")
-        devDependency("electron-builder", "21.1.5")
-        devDependency("po2json")
-        devDependency("grunt")
-        devDependency("grunt-pot")
-    }
-    webpackBundle {
-        bundleName = "main"
-        sourceMapEnabled = false
-        port = 3000
-        proxyUrl = "http://localhost:8080"
-        contentPath = webDir
-        mode = if (isProductionBuild) "production" else "development"
-    }
-
-    define("PRODUCTION", isProductionBuild)
-}
-sourceSets["main"].resources.srcDir(webDir)
-
-tasks {
-    withType<Kotlin2JsCompile> {
-        kotlinOptions {
-            moduleKind = "umd"
-            sourceMap = !isProductionBuild
-            metaInfo = true
-            if (!isProductionBuild) {
-                sourceMapEmbedSources = "always"
+kotlin {
+    target {
+        compilations.all {
+            kotlinOptions {
+                moduleKind = "umd"
+                sourceMap = !isProductionBuild
+                if (!isProductionBuild) {
+                    sourceMapEmbedSources = "always"
+                }
+            }
+        }
+        browser {
+            runTask {
+                outputFileName = "main.bundle.js"
+                devServer = KotlinWebpackConfig.DevServer(
+                    open = false,
+                    port = 3000,
+                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to "http://localhost:8080"),
+                    contentBase = listOf("$buildDir/processedResources/Js/main")
+                )
+            }
+            webpackTask {
+                val runDceKotlin by tasks.getting(KotlinJsDce::class)
+                dependsOn(runDceKotlin)
+            }
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
             }
         }
     }
+    sourceSets["main"].dependencies {
+        implementation(kotlin("stdlib-js"))
+        implementation(npm("po2json"))
+        implementation(npm("grunt"))
+        implementation(npm("grunt-pot"))
+
+        implementation(npm("electron", "6.0.0"))
+        implementation(npm("electron-builder", "21.1.5"))
+
+        implementation("pl.treksoft:kvision:$kvisionVersion")
+        implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
+        implementation("pl.treksoft:kvision-bootstrap-css:$kvisionVersion")
+        implementation("pl.treksoft:kvision-bootstrap-datetime:$kvisionVersion")
+        implementation("pl.treksoft:kvision-bootstrap-select:$kvisionVersion")
+        implementation("pl.treksoft:kvision-bootstrap-spinner:$kvisionVersion")
+        implementation("pl.treksoft:kvision-bootstrap-upload:$kvisionVersion")
+        implementation("pl.treksoft:kvision-bootstrap-dialog:$kvisionVersion")
+        implementation("pl.treksoft:kvision-fontawesome:$kvisionVersion")
+        implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
+        implementation("pl.treksoft:kvision-richtext:$kvisionVersion")
+        implementation("pl.treksoft:kvision-handlebars:$kvisionVersion")
+        implementation("pl.treksoft:kvision-datacontainer:$kvisionVersion")
+        implementation("pl.treksoft:kvision-redux:$kvisionVersion")
+        implementation("pl.treksoft:kvision-chart:$kvisionVersion")
+        implementation("pl.treksoft:kvision-tabulator:$kvisionVersion")
+        implementation("pl.treksoft:kvision-pace:$kvisionVersion")
+        implementation("pl.treksoft:kvision-moment:$kvisionVersion")
+        implementation("pl.treksoft:kvision-electron:$kvisionVersion")
+    }
+    sourceSets["test"].dependencies {
+        implementation(kotlin("test-js"))
+        implementation("pl.treksoft:kvision-testutils:$kvisionVersion:tests")
+    }
+    sourceSets["main"].resources.srcDir(webDir)
+}
+
+tasks {
     withType<KotlinJsDce> {
         dceOptions {
             devMode = !isProductionBuild
         }
         inputs.property("production", isProductionBuild)
         doFirst {
+            classpath = classpath.filter { it.extension != "js" }
             destinationDir.deleteRecursively()
         }
         doLast {
             copy {
-                file("$buildDir/node_modules_imported/").listFiles()?.forEach {
+                file("$buildDir/tmp/expandedArchives/").listFiles()?.forEach {
                     if (it.isDirectory && it.name.startsWith("kvision")) {
                         from(it) {
                             include("css/**")
@@ -119,9 +137,9 @@ tasks {
         }
     }
     create("generateGruntfile") {
-        outputs.file("$buildDir/Gruntfile.js")
+        outputs.file("$buildDir/js/Gruntfile.js")
         doLast {
-            file("$buildDir/Gruntfile.js").run {
+            file("$buildDir/js/Gruntfile.js").run {
                 writeText(
                     """
                     module.exports = function (grunt) {
@@ -129,12 +147,12 @@ tasks {
                             pot: {
                                 options: {
                                     text_domain: "messages",
-                                    dest: "../src/main/resources/i18n/",
+                                    dest: "../../src/main/resources/i18n/",
                                     keywords: ["tr", "ntr:1,2", "gettext", "ngettext:1,2"],
                                     encoding: "UTF-8"
                                 },
                                 files: {
-                                    src: ["../src/main/kotlin/**/*.kt"],
+                                    src: ["../../src/main/kotlin/**/*.kt"],
                                     expand: true,
                                 },
                             }
@@ -147,18 +165,18 @@ tasks {
         }
     }
     create("generatePotFile", Exec::class) {
-        dependsOn("npm-install", "generateGruntfile")
-        workingDir = file("$buildDir")
+        dependsOn("kotlinNpmInstall", "generateGruntfile")
+        workingDir = file("$buildDir/js")
         executable = NodeJsRootPlugin.apply(project).nodeCommand
-        args("$buildDir/node_modules/grunt/bin/grunt", "pot")
-        inputs.files(sourceSets["main"].allSource)
+        args("$buildDir/js/node_modules/grunt/bin/grunt", "pot")
+        inputs.files(kotlin.sourceSets["main"].kotlin.files)
         outputs.file("$projectDir/src/main/resources/i18n/messages.pot")
     }
 }
 afterEvaluate {
     tasks {
         getByName("processResources", Copy::class) {
-            dependsOn("npm-install")
+            dependsOn("kotlinNpmInstall")
             exclude("**/*.pot")
             doLast("Convert PO to JSON") {
                 destinationDir.walkTopDown().filter {
@@ -167,7 +185,7 @@ afterEvaluate {
                     exec {
                         executable = NodeJsRootPlugin.apply(project).nodeCommand
                         args(
-                            "$buildDir/node_modules/po2json/bin/po2json",
+                            "$buildDir/js/node_modules/po2json/bin/po2json",
                             it.absolutePath,
                             "${it.parent}/${it.nameWithoutExtension}.json",
                             "-f",
@@ -177,44 +195,38 @@ afterEvaluate {
                     }
                     it.delete()
                 }
+                copy {
+                    file("$buildDir/tmp/expandedArchives/").listFiles()?.forEach {
+                        if (it.isDirectory && it.name.startsWith("kvision")) {
+                            val kvmodule = it.name.split("-$kvisionVersion").first()
+                            from(it) {
+                                include("css/**")
+                                include("img/**")
+                                include("js/**")
+                                into("$kvmodule/$kvisionVersion")
+                            }
+                        }
+                    }
+                    into(file(buildDir.path + "/js/packages_imported"))
+                }
             }
         }
-        getByName("webpack-run").dependsOn("classes")
-        getByName("webpack-bundle").dependsOn("classes", "runDceKotlinJs")
-        create("webJar", Jar::class) {
-            dependsOn("webpack-bundle")
-            group = "package"
-            val from = project.tasks["webpack-bundle"].outputs.files + webDir
-            from(from)
-            inputs.files(from)
-            outputs.file(archiveFile)
-
-            manifest {
-                attributes(
-                    mapOf(
-                        "Implementation-Title" to rootProject.name,
-                        "Implementation-Group" to rootProject.group,
-                        "Implementation-Version" to rootProject.version,
-                        "Timestamp" to System.currentTimeMillis()
-                    )
-                )
-            }
-        }
+        getByName("browserWebpack").dependsOn("processResources")
         create("zip", Zip::class) {
-            dependsOn("webpack-bundle")
+            dependsOn("browserWebpack")
             group = "package"
             destinationDirectory.set(file("$buildDir/libs"))
-            val from = project.tasks["webpack-bundle"].outputs.files + webDir
-            from(from)
-            inputs.files(from)
+            val distribution = project.tasks.getByName("browserWebpack",KotlinWebpack::class).destinationDirectory
+            from(distribution, webDir)
+            inputs.files(distribution, webDir)
             outputs.file(archiveFile)
         }
         create("buildApp", Copy::class) {
-            dependsOn("webpack-bundle")
+            dependsOn("browserWebpack")
             group = "build"
-            val from = project.tasks["webpack-bundle"].outputs.files + webDir + electronDir
-            from(from)
-            inputs.files(from)
+            val distribution = project.tasks.getByName("browserWebpack",KotlinWebpack::class).destinationDirectory
+            from(distribution, webDir, electronDir)
+            inputs.files(distribution, webDir, electronDir)
             into("$buildDir/dist")
         }
         create("runApp", Exec::class) {
@@ -222,7 +234,7 @@ afterEvaluate {
             group = "run"
             workingDir = file("$buildDir/dist")
             executable = NodeJsRootPlugin.apply(project).nodeCommand
-            args("$buildDir/node_modules/electron/cli.js", ".")
+            args("$buildDir/js/node_modules/electron/cli.js", ".")
         }
         create("bundleApp", Exec::class) {
             dependsOn("buildApp")
@@ -236,12 +248,7 @@ afterEvaluate {
             }
             workingDir = file("$buildDir/dist")
             executable = NodeJsRootPlugin.apply(project).nodeCommand
-            args("$buildDir/node_modules/electron-builder/out/cli/cli.js", "--config")
+            args("$buildDir/js/node_modules/electron-builder/out/cli/cli.js", "--config")
         }
     }
 }
-
-fun KotlinFrontendExtension.webpackBundle(block: WebPackExtension.() -> Unit) =
-    bundle("webpack", delegateClosureOf(block))
-
-fun KotlinFrontendExtension.npm(block: NpmExtension.() -> Unit) = configure(block)

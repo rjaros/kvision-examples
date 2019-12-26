@@ -1,6 +1,9 @@
 config.module.rules.push(
     {
         test: /\.(jpe?g|png|gif)$/i,
-        loader: 'file-loader'
+        loader: 'file-loader',
+        options: {
+              esModule: false,
+        },
     }
 );

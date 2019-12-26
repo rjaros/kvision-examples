@@ -2,15 +2,14 @@
 Whenever you want to produce a minified "production" version of your code pass in `-Pproduction=true` or `-Pprod=true` to your build command.
 ### Resource Processing
 * generatePotFile - Generates a `src/frontendMain/resources/i18n/messages.pot` translation template file.
+### Compiling
+* compileKotlinFrontend - Compiles frontend sources.
+* compileKotlinBackend - Compiles backend sources.
 ### Running
+* frontendRun - Starts a webpack dev server on port 3000
 * backendRun - Starts a dev server on port 8080
-* frontendRun - Starts a webpack dev server on port 3000. Logs to `build/logs/webpack-dev-server.log`
-* frontendStop - Stops a webpack dev server.
-* run - Starts all configured servers.
-* stop - Stops all configured servers.
 ### Packaging
-* webpack-bundle - Bundles the compiles js files into `build/bundle`
-* backendJar - Packages a backend jar with compiled source files into `build/libs/*.jar`
+* frontendBrowserWebpack - Bundles the compiled js files into `build/distributions`
 * frontendJar - Packages a standalone "web" frontend jar with all required files into `build/libs/*.jar`
-* frontendZip - Packages a frontend zip archive with all required files into `build/libs/*.zip`
+* backendJar - Packages a backend jar with compiled source files into `build/libs/*.jar`
 * jar - Packages a "fat" jar with all backend sources and dependencies while also embedding frontend resources into `build/libs/*.jar`
