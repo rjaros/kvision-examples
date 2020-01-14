@@ -81,8 +81,8 @@ kotlin {
         implementation(npm("grunt"))
         implementation(npm("grunt-pot"))
 
-        implementation(npm("electron", "6.0.0"))
-        implementation(npm("electron-builder", "21.1.5"))
+        implementation(npm("electron", "7.1.9"))
+        implementation(npm("electron-builder", "21.2.0"))
 
         implementation("pl.treksoft:kvision:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
