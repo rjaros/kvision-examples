@@ -11,6 +11,7 @@ import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.check.Radio
 import pl.treksoft.kvision.form.check.RadioGroup
 import pl.treksoft.kvision.form.formPanel
+import pl.treksoft.kvision.form.range.Range
 import pl.treksoft.kvision.form.select.AjaxOptions
 import pl.treksoft.kvision.form.select.Select
 import pl.treksoft.kvision.form.select.SimpleSelect
@@ -19,6 +20,7 @@ import pl.treksoft.kvision.form.text.Password
 import pl.treksoft.kvision.form.text.RichText
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextArea
+import pl.treksoft.kvision.form.text.Typeahead
 import pl.treksoft.kvision.form.time.DateTime
 import pl.treksoft.kvision.form.upload.Upload
 import pl.treksoft.kvision.html.ButtonStyle
@@ -44,6 +46,7 @@ data class Form(
     val password2: String? = null,
     val textarea: String? = null,
     val richtext: String? = null,
+    val typeahead: String? = null,
     val date: Date? = null,
     val time: Date? = null,
     val checkbox: Boolean = false,
@@ -52,6 +55,7 @@ data class Form(
     val select: String? = null,
     val ajaxselect: String? = null,
     val spinner: Double? = null,
+    val range: Double? = null,
     val radiogroup: String? = null,
     val upload: List<KFile>? = null
 )
@@ -84,13 +88,23 @@ class FormTab : SimplePanel() {
                 Form::richtext,
                 RichText(label = tr("Rich text field with a placeholder")).apply { placeholder = tr("Add some info") })
             add(
+                Form::typeahead,
+                Typeahead(
+                    listOf("Alabama", "Alaska", "Arizona", "Arkansas", "California"),
+                    label = tr("Typeahead")
+                ).apply {
+                    autoSelect = false
+                }
+            )
+            add(
                 Form::date,
                 DateTime(format = "YYYY-MM-DD", label = tr("Date field with a placeholder")).apply {
                     placeholder = tr("Enter date")
-                })
+                }, legend = tr("Date and time fieldset")
+            )
             add(
                 Form::time,
-                DateTime(format = "HH:mm", label = tr("Time field"))
+                DateTime(format = "HH:mm", label = tr("Time field")), legend = tr("Date and time fieldset")
             )
             add(
                 Form::checkbox,
@@ -128,6 +142,7 @@ class FormTab : SimplePanel() {
                 }, minLength = 3, requestDelay = 1000)
             })
             add(Form::spinner, Spinner(label = tr("Spinner field 10 - 20"), min = 10, max = 20))
+            add(Form::range, Range(label = tr("Range field 10 - 20"), min = 10, max = 20))
             add(
                 Form::radiogroup, RadioGroup(
                     listOf("option1" to tr("First option"), "option2" to tr("Second option")),

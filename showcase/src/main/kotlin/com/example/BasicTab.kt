@@ -10,26 +10,17 @@ import pl.treksoft.kvision.core.TextDecoration
 import pl.treksoft.kvision.core.TextDecorationLine
 import pl.treksoft.kvision.core.TextDecorationStyle
 import pl.treksoft.kvision.core.TooltipOptions
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.iframe
-import pl.treksoft.kvision.html.image
-import pl.treksoft.kvision.html.ImageShape
-import pl.treksoft.kvision.html.link
-import pl.treksoft.kvision.html.listTag
-import pl.treksoft.kvision.html.ListType
-import pl.treksoft.kvision.html.span
-import pl.treksoft.kvision.html.TAG
-import pl.treksoft.kvision.html.tag
-import pl.treksoft.kvision.html.setData
+import pl.treksoft.kvision.html.*
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.SimplePanel
+import pl.treksoft.kvision.panel.fieldsetPanel
 import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.require
-import pl.treksoft.kvision.table.cell
 import pl.treksoft.kvision.table.ResponsiveType
+import pl.treksoft.kvision.table.TableType
+import pl.treksoft.kvision.table.cell
 import pl.treksoft.kvision.table.row
 import pl.treksoft.kvision.table.table
-import pl.treksoft.kvision.table.TableType
 import pl.treksoft.kvision.utils.px
 
 @Serializable
@@ -81,6 +72,11 @@ class BasicTab : SimplePanel() {
                 +tr("Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; font-size: 14pt\">any <strong>forma</strong>tting</span>.")
             }
             link(tr("A link to Google"), "http://www.google.com")
+            fieldsetPanel(tr("A fieldset")) {
+                paddingTop = 10.px
+                paddingBottom = 10.px
+                tag(TAG.DIV, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+            }
             span {
                 +tr("A responsive table:")
             }

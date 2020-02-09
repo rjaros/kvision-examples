@@ -81,7 +81,7 @@ kotlin {
         implementation(npm("grunt-pot"))
 
         implementation(npm("hammerjs", "2.0.8"))
-        implementation(npm("workbox-webpack-plugin", "4.1.1"))
+        implementation(npm("workbox-webpack-plugin", "4.3.1"))
 
         implementation("pl.treksoft:kvision:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")

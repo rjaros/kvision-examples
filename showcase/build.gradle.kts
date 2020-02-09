@@ -88,6 +88,7 @@ kotlin {
         implementation("pl.treksoft:kvision-bootstrap-spinner:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap-upload:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap-dialog:$kvisionVersion")
+        implementation("pl.treksoft:kvision-bootstrap-typeahead:$kvisionVersion")
         implementation("pl.treksoft:kvision-fontawesome:$kvisionVersion")
         implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
         implementation("pl.treksoft:kvision-richtext:$kvisionVersion")
