@@ -58,13 +58,13 @@ A complete implementation of [TodoMVC](http://todomvc.com/) demo application.
 
 ## Address book - fullstack
 
-A complete, multiplatform address book application. It presents an innovative way to build fullstack applications with KVision and 
-[Ktor](https://ktor.io), [Jooby](https://jooby.org) or [Spring Boot](https://spring.io/projects/spring-boot) frameworks. KVision closely integrates the client and the server side of the project with a 
+A complete, fullstack address book application. It presents an innovative way to build fullstack applications with KVision and 
+[Ktor](https://ktor.io), [Jooby](https://jooby.org), [Spring Boot](https://spring.io/projects/spring-boot) or [Javalin](https://javalin.io) frameworks. KVision closely integrates the client and the server side of the project with a 
 shared data model and fully type-safe connectivity between both sides (based on automatically generated routings and JSON-RPC 
 endpoints). The example project utilizes:
 
 - H2 SQL database (local) or PostgreSQL database (configured on Heroku)
-- [Exposed](https://github.com/JetBrains/Exposed) Kotlin SQL library for database connectivity (used in Ktor version)
+- [Exposed](https://github.com/JetBrains/Exposed) Kotlin SQL library for database connectivity (used in Ktor and Javalin versions)
 - [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) with Kotlin Coroutines extensions (used in Spring Boot version)
 - [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity (used in Jooby version)
 - [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management (used in Jooby version)
