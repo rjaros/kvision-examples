@@ -7,6 +7,8 @@ import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.remote.Id
 import pl.treksoft.kvision.types.OffsetDateTime
 
+expect class Profile
+
 @Serializable
 data class Address(
     @Id

@@ -1,7 +1,6 @@
 package com.example
 
 import pl.treksoft.kvision.annotations.KVService
-import pl.treksoft.kvision.remote.Profile
 
 enum class Sort {
     FN, LN, E, F

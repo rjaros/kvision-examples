@@ -6,6 +6,7 @@ import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.Overflow
 import pl.treksoft.kvision.core.OverflowWrap
 import pl.treksoft.kvision.form.select.selectInput
@@ -53,7 +54,7 @@ class App : Application() {
                 val button = button(tr("Encode"))
                 val output = div {
                     padding = 5.px
-                    border = Border(1.px, BorderStyle.SOLID, Col.BLACK)
+                    border = Border(1.px, BorderStyle.SOLID, Color.name(Col.BLACK))
                     height = 300.px
                     overflow = Overflow.AUTO
                     overflowWrap = OverflowWrap.BREAKWORK

@@ -7,10 +7,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
 buildscript {
     extra.set("production", (findProperty("prod") ?: findProperty("production") ?: "false") == "true")
     extra.set("kotlin.version", System.getProperty("kotlinVersion"))
-
-    dependencies {
-        classpath("pl.treksoft:kvision-gradle-plugin:${System.getProperty("kvisionVersion")}")
-    }
 }
 
 plugins {
@@ -18,9 +14,11 @@ plugins {
     id("kotlinx-serialization") version kotlinVersion
     id("kotlin-multiplatform") version kotlinVersion
     id("kotlin-dce-js") version kotlinVersion
+    val joobyVersion: String by System.getProperties()
+    id("jooby") version joobyVersion
+    val kvisionVersion: String by System.getProperties()
+    id("kvision") version kvisionVersion
 }
-
-apply(plugin = "pl.treksoft.kvision")
 
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
@@ -47,18 +45,25 @@ repositories {
 // Versions
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
-val joobyVersion: String by project
-val pac4jVersion: String by project
-val springSecurityCryptoVersion: String by project
+val joobyVersion: String by System.getProperties()
 val h2Version: String by project
 val pgsqlVersion: String by project
 val kweryVersion: String by project
 val commonsLoggingVersion: String by project
+val pac4jVersion: String by project
+val springSecurityCryptoVersion: String by project
 
 // Custom Properties
 val webDir = file("src/frontendMain/web")
 val isProductionBuild = project.extra.get("production") as Boolean
 val mainClassName = "com.example.MainKt"
+
+joobyRun {
+    mainClass = mainClassName
+    restartExtensions = listOf("conf", "properties", "class")
+    compileExtensions = listOf("java", "kt")
+    port = 8080
+}
 
 kotlin {
     jvm("backend") {
@@ -85,7 +90,7 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to "http://localhost:8080"),
+                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)),
                     contentBase = listOf("$buildDir/processedResources/frontend/main")
                 )
             }
@@ -122,9 +127,9 @@ kotlin {
                 implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation("pl.treksoft:kvision-server-jooby:$kvisionVersion")
-                implementation("org.jooby:jooby-netty:$joobyVersion")
-                implementation("org.jooby:jooby-jdbc:$joobyVersion")
-                implementation("org.jooby:jooby-pac4j2:$joobyVersion")
+                implementation("io.jooby:jooby-netty:$joobyVersion")
+                implementation("io.jooby:jooby-hikari:$joobyVersion")
+                implementation("io.jooby:jooby-pac4j:$joobyVersion")
                 implementation("org.pac4j:pac4j-sql:$pac4jVersion")
                 implementation("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
                 implementation("commons-logging:commons-logging:$commonsLoggingVersion")
@@ -328,13 +333,9 @@ afterEvaluate {
         getByName("jar", Jar::class).apply {
             dependsOn("shadowJar")
         }
-        create("backendRun", JavaExec::class) {
-            dependsOn("compileKotlinBackend")
-            shouldRunAfter("frontendRun", "frontendBrowserWebpack")
+        create("backendRun") {
+            dependsOn("joobyRun")
             group = "run"
-            main = mainClassName
-            classpath = configurations["backendRuntimeClasspath"] + project.tasks["compileKotlinBackend"].outputs.files +
-                    project.tasks["backendProcessResources"].outputs.files
         }
         getByName("compileKotlinBackend") {
             dependsOn("compileKotlinMetadata")

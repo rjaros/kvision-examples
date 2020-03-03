@@ -3,6 +3,7 @@ package com.example
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.FontWeight
 import pl.treksoft.kvision.core.Overflow
 import pl.treksoft.kvision.data.DataContainer
@@ -20,7 +21,7 @@ import pl.treksoft.kvision.utils.px
 
 class TweetPanel : SimplePanel() {
     init {
-        border = Border(1.px, BorderStyle.SOLID, Col.SILVER)
+        border = Border(1.px, BorderStyle.SOLID, Color.name(Col.SILVER))
         width = 500.px
         height = 402.px
 
@@ -43,7 +44,7 @@ class Post(tweet: Tweet) : VPanel(spacing = 2) {
         marginRight = 2.px
         marginLeft = 2.px
         padding = 5.px
-        borderBottom = Border(1.px, BorderStyle.INSET, Col.SILVER)
+        borderBottom = Border(1.px, BorderStyle.INSET, Color.name(Col.SILVER))
         hPanel(justify = FlexJustify.SPACEBETWEEN) {
             span(tweet.nickname) {
                 fontWeight = FontWeight.BOLD

@@ -15,7 +15,6 @@ import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Dialog
 import pl.treksoft.kvision.remote.Credentials
 import pl.treksoft.kvision.remote.LoginService
-import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.SecurityMgr
 import pl.treksoft.kvision.utils.ENTER_KEY
 
@@ -52,12 +51,12 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
             add(User::name, Text(label = "${tr("Your name")}:"), required = true)
             add(User::username, Text(label = "Login:"), required = true)
             add(
-                    User::password, Password(label = "${tr("Password")}:"), required = true,
+                User::password, Password(label = "${tr("Password")}:"), required = true,
                 validatorMessage = { "Password too short" }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
             add(User::password2, Password(label = "${tr("Confirm password")}:"), required = true,
-                    validatorMessage = { tr("Password too short") }) {
+                validatorMessage = { tr("Password too short") }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
             validator = {

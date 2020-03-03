@@ -17,6 +17,7 @@ pluginManagement {
                 requested.id.id == "kotlinx-serialization" -> useModule("org.jetbrains.kotlin:kotlin-serialization:${requested.version}")
                 requested.id.id == "kotlin-dce-js" -> useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
                 requested.id.id == "org.springframework.boot" -> useModule("org.springframework.boot:spring-boot-gradle-plugin:${requested.version}")
+                requested.id.id == "kvision" -> useModule("pl.treksoft:kvision-gradle-plugin:${requested.version}")
             }
         }
     }

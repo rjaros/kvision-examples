@@ -4,6 +4,7 @@ import pl.treksoft.kvision.core.Background
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.Style
 import pl.treksoft.kvision.core.style
 import pl.treksoft.kvision.core.TextAlign
@@ -15,7 +16,7 @@ import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
 val pokeBoxStyle = Style {
-    border = Border(1.px, BorderStyle.SOLID, Col.GRAY)
+    border = Border(1.px, BorderStyle.SOLID, Color.name(Col.GRAY))
     width = 200.px
     height = 200.px
     margin = 10.px
@@ -26,7 +27,7 @@ val pokeBoxStyle = Style {
 
     style("div.caption") {
         textAlign = TextAlign.CENTER
-        background = Background(Col.SILVER)
+        background = Background(Color.name(Col.SILVER))
         width = 100.perc
     }
 }

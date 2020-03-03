@@ -3,6 +3,7 @@ package com.example
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.data.BaseDataComponent
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.html.Align
@@ -52,7 +53,7 @@ class DragDropTab : SimplePanel() {
         }, container = VPanel(spacing = 10) {
             width = 200.px
             padding = 10.px
-            border = Border(2.px, BorderStyle.SOLID, Col.GREEN)
+            border = Border(2.px, BorderStyle.SOLID, Color.name(Col.GREEN))
             setDropTargetData("text/xml") { data ->
                 if (data != null) {
                     val element = listBlue[data.toInt()].text
@@ -71,7 +72,7 @@ class DragDropTab : SimplePanel() {
         }, container = VPanel(spacing = 10) {
             width = 200.px
             padding = 10.px
-            border = Border(2.px, BorderStyle.SOLID, Col.BLUE)
+            border = Border(2.px, BorderStyle.SOLID, Color.name(Col.BLUE))
             setDropTargetData("text/plain") { data ->
                 if (data != null) {
                     val element = listGreen[data.toInt()].text

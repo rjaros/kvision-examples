@@ -4,18 +4,19 @@ import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Component
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.dropdown.ddLink
 import pl.treksoft.kvision.dropdown.dropDown
 import pl.treksoft.kvision.dropdown.separator
 import pl.treksoft.kvision.html.Link
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.navbar.Nav
+import pl.treksoft.kvision.navbar.NavbarType
 import pl.treksoft.kvision.navbar.nav
 import pl.treksoft.kvision.navbar.navbar
-import pl.treksoft.kvision.navbar.NavbarType
 import pl.treksoft.kvision.panel.FlexDir
-import pl.treksoft.kvision.panel.flexPanel
 import pl.treksoft.kvision.panel.FlexWrap
+import pl.treksoft.kvision.panel.flexPanel
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
@@ -60,24 +61,32 @@ class App : Application() {
                 padding = 20.px
                 paddingTop = 70.px
                 height = 100.vh
-                add(DesktopIcon("fas fa-calculator", "Calculator").setEventListener<DesktopIcon> {
-                    dblclick = {
-                        Calculator.run(this@root)
+                add(DesktopIcon("fas fa-calculator", "Calculator").apply {
+                    onEvent {
+                        dblclick = {
+                            Calculator.run(this@root)
+                        }
                     }
                 })
-                add(DesktopIcon("fas fa-edit", "Text Editor").setEventListener<DesktopIcon> {
-                    dblclick = {
-                        TextEditor.run(this@root)
+                add(DesktopIcon("fas fa-edit", "Text Editor").apply {
+                    onEvent {
+                        dblclick = {
+                            TextEditor.run(this@root)
+                        }
                     }
                 })
-                add(DesktopIcon("fas fa-paint-brush", "Paint").setEventListener<DesktopIcon> {
-                    dblclick = {
-                        Paint.run(this@root)
+                add(DesktopIcon("fas fa-paint-brush", "Paint").apply {
+                    onEvent {
+                        dblclick = {
+                            Paint.run(this@root)
+                        }
                     }
                 })
-                add(DesktopIcon("fab fa-firefox", "Web Browser").setEventListener<DesktopIcon> {
-                    dblclick = {
-                        WebBrowser.run(this@root)
+                add(DesktopIcon("fab fa-firefox", "Web Browser").apply {
+                    onEvent {
+                        dblclick = {
+                            WebBrowser.run(this@root)
+                        }
                     }
                 })
             }
@@ -85,18 +94,19 @@ class App : Application() {
     }
 
     companion object {
-        
+
         lateinit var taskBar: Nav
 
         fun addTask(window: DesktopWindow): Component {
-            val task = Link(window.caption ?: "Window", icon = window.icon, classes = setOf("nav-item", "nav-link")).apply {
-                border = Border(1.px, BorderStyle.SOLID)
-                marginLeft = 5.px
-            }.onClick {
-                if (window.minimized) window.toggleMinimize()
-                window.toFront()
-                window.focus()
-            }
+            val task =
+                Link(window.caption ?: "Window", icon = window.icon, classes = setOf("nav-item", "nav-link")).apply {
+                    border = Border(1.px, BorderStyle.SOLID)
+                    marginLeft = 5.px
+                }.onClick {
+                    if (window.minimized) window.toggleMinimize()
+                    window.toFront()
+                    window.focus()
+                }
             taskBar.add(task)
             return task
         }

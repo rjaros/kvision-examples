@@ -2,25 +2,14 @@ package com.example
 
 import pl.treksoft.kvision.core.Background
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.Div
-import pl.treksoft.kvision.html.h4
 import pl.treksoft.kvision.html.Tag
+import pl.treksoft.kvision.html.h4
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.dockPanel
-import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.FlexDir
-import pl.treksoft.kvision.panel.FlexJustify
-import pl.treksoft.kvision.panel.flexPanel
-import pl.treksoft.kvision.panel.FlexWrap
-import pl.treksoft.kvision.panel.GridJustify
-import pl.treksoft.kvision.panel.gridPanel
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.panel.responsiveGridPanel
-import pl.treksoft.kvision.panel.Side
-import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.vPanel
+import pl.treksoft.kvision.panel.*
 import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.px
 
@@ -120,7 +109,7 @@ class LayoutsTab : SimplePanel() {
     private fun Container.addGridPanel1() {
         h4(tr("CSS grid layouts"))
         gridPanel(columnGap = 5, rowGap = 5, justifyItems = GridJustify.CENTER) {
-            background = Background(Col.KHAKI)
+            background = Background(Color.name(Col.KHAKI))
             add(getDiv("1,1", 100), 1, 1)
             add(getDiv("1,2", 100), 1, 2)
             add(getDiv("2,1", 100), 2, 1)
@@ -130,7 +119,7 @@ class LayoutsTab : SimplePanel() {
 
     private fun Container.addGridPanel2() {
         gridPanel(columnGap = 5, rowGap = 5, justifyItems = GridJustify.CENTER) {
-            background = Background(Col.CORNFLOWERBLUE)
+            background = Background(Color.name(Col.CORNFLOWERBLUE))
             add(getDiv("1,1", 150), 1, 1)
             add(getDiv("2,2", 150), 2, 2)
             add(getDiv("3,3", 150), 3, 3)
@@ -140,7 +129,7 @@ class LayoutsTab : SimplePanel() {
     private fun Container.addRespGridPanel() {
         h4(tr("Responsive grid layout"))
         responsiveGridPanel {
-            background = Background(Col.SILVER)
+            background = Background(Color.name(Col.SILVER))
             add(getDiv("1,1", 150), 1, 1)
             add(getDiv("3,1", 150), 3, 1)
             add(getDiv("2,2", 150), 2, 2)
@@ -151,7 +140,7 @@ class LayoutsTab : SimplePanel() {
     private fun Container.addDockPanel() {
         h4(tr("Dock layout"))
         dockPanel {
-            background = Background(Col.YELLOW)
+            background = Background(Color.name(Col.YELLOW))
             add(getDiv(tr("CENTER"), 150).apply { margin = auto }, Side.CENTER)
             add(getDiv(tr("LEFT"), 150), Side.LEFT)
             add(getDiv(tr("RIGHT"), 150), Side.RIGHT)
@@ -164,7 +153,7 @@ class LayoutsTab : SimplePanel() {
         return Div(value).apply {
             paddingTop = ((size / 2) - 10).px
             align = Align.CENTER
-            background = Background(Col.GREEN)
+            background = Background(Color.name(Col.GREEN))
             width = size.px
             height = size.px
         }

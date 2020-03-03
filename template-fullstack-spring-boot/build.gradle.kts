@@ -9,10 +9,6 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 buildscript {
     extra.set("production", (findProperty("prod") ?: findProperty("production") ?: "false") == "true")
     extra.set("kotlin.version", System.getProperty("kotlinVersion"))
-
-    dependencies {
-        classpath("pl.treksoft:kvision-gradle-plugin:${System.getProperty("kvisionVersion")}")
-    }
 }
 
 plugins {
@@ -23,9 +19,9 @@ plugins {
     id("org.springframework.boot") version System.getProperty("springBootVersion")
     kotlin("plugin.spring") version kotlinVersion
     id("kotlin-dce-js") version kotlinVersion
+    val kvisionVersion: String by System.getProperties()
+    id("kvision") version kvisionVersion
 }
-
-apply(plugin = "pl.treksoft.kvision")
 
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
@@ -89,7 +85,7 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to "http://localhost:8080"),
+                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)),
                     contentBase = listOf("$buildDir/processedResources/frontend/main")
                 )
             }
@@ -327,11 +323,10 @@ afterEvaluate {
             dependsOn("bootJar")
         }
         getByName("bootRun", BootRun::class) {
-            dependsOn("frontendArchive", "backendMainClasses")
+            dependsOn("backendMainClasses")
             classpath = files(
                 kotlin.targets["backend"].compilations["main"].output.allOutputs +
-                        project.configurations["backendRuntimeClasspath"] +
-                        (project.tasks["frontendArchive"] as Jar).archiveFile
+                        project.configurations["backendRuntimeClasspath"]
             )
         }
         create("backendRun") {

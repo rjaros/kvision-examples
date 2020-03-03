@@ -1,15 +1,7 @@
 package com.example
 
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.core.Col
-import pl.treksoft.kvision.core.FontStyle
-import pl.treksoft.kvision.core.FontVariant
-import pl.treksoft.kvision.core.FontWeight
-import pl.treksoft.kvision.core.PopoverOptions
-import pl.treksoft.kvision.core.TextDecoration
-import pl.treksoft.kvision.core.TextDecorationLine
-import pl.treksoft.kvision.core.TextDecorationStyle
-import pl.treksoft.kvision.core.TooltipOptions
+import pl.treksoft.kvision.core.*
 import pl.treksoft.kvision.html.*
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.SimplePanel
@@ -43,7 +35,7 @@ class BasicTab : SimplePanel() {
                 fontStyle = FontStyle.OBLIQUE
                 fontWeight = FontWeight.BOLDER
                 fontVariant = FontVariant.SMALLCAPS
-                textDecoration = TextDecoration(TextDecorationLine.UNDERLINE, TextDecorationStyle.DOTTED, Col.RED)
+                textDecoration = TextDecoration(TextDecorationLine.UNDERLINE, TextDecorationStyle.DOTTED, Color.name(Col.RED))
                 +tr("A label with custom CSS styling")
             }
             span {

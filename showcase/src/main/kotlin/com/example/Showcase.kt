@@ -4,6 +4,7 @@ import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.select.Select
 import pl.treksoft.kvision.form.select.select
@@ -44,7 +45,7 @@ class Showcase : Application() {
                     marginLeft = auto
                     marginRight = auto
                     padding = 20.px
-                    border = Border(2.px, BorderStyle.SOLID, Col.SILVER)
+                    border = Border(2.px, BorderStyle.SOLID, Color.name(Col.SILVER))
                     addTab(tr("HTML"), BasicTab(), "fas fa-bars", route = "/basic")
                     addTab(tr("Forms"), FormTab(), "fas fa-edit", route = "/forms")
                     addTab(tr("Buttons"), ButtonsTab(), "far fa-check-square", route = "/buttons")

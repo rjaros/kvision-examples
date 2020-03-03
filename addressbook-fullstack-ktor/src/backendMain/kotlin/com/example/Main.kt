@@ -28,7 +28,6 @@ import io.ktor.sessions.set
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
-import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.applyRoutes
 import pl.treksoft.kvision.remote.kvisionInit
 import kotlin.collections.set
@@ -73,12 +72,8 @@ fun Application.main() {
                 val result = if (principal != null) {
                     dbQuery {
                         UserDao.select { UserDao.username eq principal.name }.firstOrNull()?.let {
-                            val profile = Profile(
-                                it[UserDao.id].toString()
-                            ).apply {
-                                username = it[UserDao.username]
-                                displayName = it[UserDao.name]
-                            }
+                            val profile =
+                                Profile(it[UserDao.id], it[UserDao.name], it[UserDao.username].toString(), null, null)
                             call.sessions.set(profile)
                             HttpStatusCode.OK
                         } ?: HttpStatusCode.Unauthorized

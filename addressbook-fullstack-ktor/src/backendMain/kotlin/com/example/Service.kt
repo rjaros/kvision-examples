@@ -5,6 +5,8 @@ import com.example.Db.queryList
 import com.github.andrewoma.kwery.core.builder.query
 import com.google.inject.Inject
 import io.ktor.application.ApplicationCall
+import io.ktor.sessions.get
+import io.ktor.sessions.sessions
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
@@ -13,10 +15,15 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.update
 import org.joda.time.DateTime
-import pl.treksoft.kvision.remote.Profile
-import pl.treksoft.kvision.remote.withProfile
 import java.sql.ResultSet
 import java.time.ZoneId
+
+suspend fun <RESP> ApplicationCall.withProfile(block: suspend (Profile) -> RESP): RESP {
+    val profile = this.sessions.get<Profile>()
+    return profile?.let {
+        block(profile)
+    } ?: throw IllegalStateException("Profile not set!")
+}
 
 actual class AddressService : IAddressService {
 
@@ -30,7 +37,7 @@ actual class AddressService : IAddressService {
                     select("SELECT * FROM address")
                     whereGroup {
                         where("user_id = :user_id")
-                        parameter("user_id", profile.id?.toInt())
+                        parameter("user_id", profile.id)
                         search?.let {
                             where(
                                 """(lower(first_name) like :search
@@ -68,7 +75,7 @@ actual class AddressService : IAddressService {
                 it[postalAddress] = address.postalAddress
                 it[favourite] = address.favourite ?: false
                 it[createdAt] = DateTime()
-                it[userId] = profile.id?.toInt()!!
+                it[userId] = profile.id!!
 
             } get AddressDao.id)
         }
@@ -88,7 +95,7 @@ actual class AddressService : IAddressService {
                         it[favourite] = address.favourite ?: false
                         it[createdAt] = oldAddress.createdAt
                             ?.let { DateTime(java.util.Date.from(it.atZone(ZoneId.systemDefault()).toInstant())) }
-                        it[userId] = profile.id?.toInt()!!
+                        it[userId] = profile.id!!
                     }
                 }
             }
@@ -98,7 +105,7 @@ actual class AddressService : IAddressService {
 
     override suspend fun deleteAddress(id: Int): Boolean = call.withProfile { profile ->
         dbQuery {
-            AddressDao.deleteWhere { (AddressDao.userId eq profile.id?.toInt()!!) and (AddressDao.id eq id) } > 0
+            AddressDao.deleteWhere { (AddressDao.userId eq profile.id!!) and (AddressDao.id eq id) } > 0
         }
     }
 
@@ -152,7 +159,7 @@ actual class RegisterProfileService : IRegisterProfileService {
         try {
             dbQuery {
                 UserDao.insert {
-                    it[this.name] = profile.displayName!!
+                    it[this.name] = profile.name!!
                     it[this.username] = profile.username!!
                     it[this.password] = DigestUtils.sha256Hex(password)
                 }

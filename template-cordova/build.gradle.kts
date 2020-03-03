@@ -59,7 +59,7 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to "http://localhost:8080"),
+                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)),
                     contentBase = listOf("$buildDir/processedResources/Js/main")
                 )
             }

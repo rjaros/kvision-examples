@@ -1,5 +1,7 @@
 package com.example
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import kotlinx.serialization.Serializable
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.r2dbc.core.DatabaseClient
@@ -9,6 +11,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -20,7 +23,6 @@ import org.springframework.security.web.server.authentication.RedirectServerAuth
 import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers
 import org.springframework.stereotype.Service
-import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.serviceMatchers
 import reactor.core.publisher.Mono
 import java.net.URI
@@ -67,6 +69,58 @@ class SecurityConfiguration {
     }
 }
 
+@Serializable
+actual data class Profile(
+    val id: String? = null,
+    val name: String? = null
+) : UserDetails {
+
+    @Transient
+    @JsonIgnore
+    private var password: String? = null
+    @Transient
+    @JsonIgnore
+    var password2: String? = null
+
+    private var username: String? = null
+
+    override fun getUsername(): String? {
+        return username
+    }
+
+    fun setUsername(username: String?) {
+        this.username = username
+    }
+
+    override fun getPassword(): String? {
+        return password
+    }
+
+    fun setPassword(password: String?) {
+        this.password = password
+    }
+
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+        return mutableListOf()
+    }
+
+    override fun isEnabled(): Boolean {
+        return true
+    }
+
+    override fun isCredentialsNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isAccountNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isAccountNonLocked(): Boolean {
+        return true
+    }
+}
+
 @Table("users")
 data class User(val id: Int? = null, val username: String, val password: String, val name: String)
 
@@ -75,10 +129,9 @@ class MyReactiveUserDetailsService(private val client: DatabaseClient) : Reactiv
     override fun findByUsername(username: String): Mono<UserDetails> {
         return client.select().from(User::class.java).matching(where("username").`is`(username)).fetch().first().map {
             @Suppress("USELESS_CAST")
-            Profile(it.id.toString()).apply {
+            Profile(it.id.toString(), it.name).apply {
                 this.username = it.username
                 this.password = it.password
-                this.displayName = it.name
             } as UserDetails
         }.switchIfEmpty(
             Mono.error(UsernameNotFoundException("User not found"))

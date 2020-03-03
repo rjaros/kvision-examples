@@ -9,6 +9,7 @@ import pl.treksoft.kvision.core.Background
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.html.Button
@@ -115,7 +116,7 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                         val b = button("") {
                             width = 32.px
                             height = 22.px
-                            background = Background(color = color)
+                            background = Background(color = Color.name(color))
                             onClick {
                                 canvas.borderColor = color
                                 selectLineColor(this)
@@ -134,7 +135,7 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                         val b = button("") {
                             width = 32.px
                             height = 22.px
-                            background = Background(color = color)
+                            background = Background(color = Color.name(color))
                             onClick {
                                 canvas.fillColor = color
                                 selectFillColor(this)
@@ -176,17 +177,17 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
         buttonLine.border = null
         buttonRectangle.border = null
         buttonCircle.border = null
-        button.border = Border(1.px, BorderStyle.SOLID, Col.BLUE)
+        button.border = Border(1.px, BorderStyle.SOLID, Color.name(Col.BLUE))
     }
 
     fun selectLineColor(button: Button) {
         lineColorButtons.forEach { it.border = null }
-        button.border = Border(1.px, BorderStyle.SOLID, Col.BLUE)
+        button.border = Border(1.px, BorderStyle.SOLID, Color.name(Col.BLUE))
     }
 
     fun selectFillColor(button: Button) {
         fillColorButtons.forEach { it.border = null }
-        button.border = Border(1.px, BorderStyle.SOLID, Col.BLUE)
+        button.border = Border(1.px, BorderStyle.SOLID, Color.name(Col.BLUE))
     }
 
     companion object {
@@ -206,7 +207,7 @@ class PaintCanvas(width: Int, height: Int) : Canvas(width, height) {
     private var currentFig: Fig? = null
 
     init {
-        border = Border(1.px, BorderStyle.SOLID, Col.BLACK)
+        border = Border(1.px, BorderStyle.SOLID, Color.name(Col.BLACK))
 
         onEvent {
             mousedown = { e ->

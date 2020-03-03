@@ -12,11 +12,20 @@ import org.springframework.data.r2dbc.core.awaitOneOrNull
 import org.springframework.data.r2dbc.core.flow
 import org.springframework.data.r2dbc.mapping.SettableValue
 import org.springframework.data.r2dbc.query.Criteria.where
+import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import pl.treksoft.kvision.remote.Profile
-import pl.treksoft.kvision.remote.WithProfile
+import org.springframework.web.reactive.function.server.ServerRequest
+import pl.treksoft.kvision.remote.WithRequest
 import pl.treksoft.kvision.types.OffsetDateTime
+
+interface WithProfile : WithRequest {
+    suspend fun getProfile(): Profile {
+        return serverRequest.principal().ofType(Authentication::class.java).map {
+            it.principal as Profile
+        }.awaitSingle()
+    }
+}
 
 fun DatabaseClient.GenericExecuteSpec.bindMap(parameters: Map<String, Any?>): DatabaseClient.GenericExecuteSpec {
     return parameters.entries.fold(this) { spec, entry ->
@@ -31,9 +40,10 @@ fun DatabaseClient.GenericExecuteSpec.bindMap(parameters: Map<String, Any?>): Da
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 actual class AddressService(private val databaseClient: DatabaseClient) : IAddressService, WithProfile {
-    override lateinit var profile: Profile
+    override lateinit var serverRequest: ServerRequest
 
     override suspend fun getAddressList(search: String?, types: String, sort: Sort): List<Address> {
+        val profile = getProfile()
         val query = query {
             select("SELECT * FROM address")
             whereGroup {
@@ -65,6 +75,7 @@ actual class AddressService(private val databaseClient: DatabaseClient) : IAddre
     }
 
     override suspend fun addAddress(address: Address): Address {
+        val profile = getProfile()
         val newAddress = address.copy(userId = profile.id?.toInt(), createdAt = OffsetDateTime.now())
         val id = databaseClient.insert().into(Address::class.java).using(newAddress)
             .map { row -> row.get("id", java.lang.Integer::class.java) }.awaitOne()
@@ -72,6 +83,7 @@ actual class AddressService(private val databaseClient: DatabaseClient) : IAddre
     }
 
     override suspend fun updateAddress(address: Address): Address {
+        val profile = getProfile()
         address.id?.let { id ->
             databaseClient.select().from(Address::class.java).matching(
                 where("id").`is`(id).and("user_id").`is`(
@@ -95,9 +107,10 @@ actual class AddressService(private val databaseClient: DatabaseClient) : IAddre
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 actual class ProfileService : IProfileService, WithProfile {
-    override lateinit var profile: Profile
-
-    override suspend fun getProfile() = profile
+    override lateinit var serverRequest: ServerRequest
+    override suspend fun getProfile(): Profile {
+        return super.getProfile()
+    }
 }
 
 @Service
@@ -112,8 +125,8 @@ actual class RegisterProfileService(
             databaseClient.insert().into(User::class.java).using(
                 User(
                     username = profile.username!!,
-                    password = passwordEncoder.encode(password),
-                    name = profile.displayName!!
+                    name = profile.name!!,
+                    password = passwordEncoder.encode(password)
                 )
             ).await()
         } catch (e: Exception) {

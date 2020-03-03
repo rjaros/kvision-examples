@@ -2,6 +2,7 @@ package com.example
 
 import pl.treksoft.kvision.core.Background
 import pl.treksoft.kvision.core.Col
+import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.dropdown.dropDown
 import pl.treksoft.kvision.html.TAG
@@ -35,11 +36,11 @@ class ContainersTab : SimplePanel() {
         tag(TAG.H4, tr("Stack panel"))
         stackPanel {
             add(Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.BLUE)
+                background = Background(Color.name(Col.BLUE))
                 height = 40.px
             }, "/containers/blue")
             add(Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.GREEN)
+                background = Background(Color.name(Col.GREEN))
                 height = 40.px
             }, "/containers/green")
         }
@@ -55,15 +56,15 @@ class ContainersTab : SimplePanel() {
         tag(TAG.H4, tr("Tab panel"))
         tabPanel {
             addTab(tr("Blue panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.BLUE)
+                background = Background(Color.name(Col.BLUE))
                 height = 40.px
             })
             addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.GREEN)
+                background = Background(Color.name(Col.GREEN))
                 height = 40.px
             })
             addTab(tr("Red panel (closable)"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.RED)
+                background = Background(Color.name(Col.RED))
                 height = 40.px
             }, closable = true)
         }
@@ -73,11 +74,11 @@ class ContainersTab : SimplePanel() {
         tag(TAG.H4, tr("Tab panel with tabs on the left"))
         tabPanel(TabPosition.LEFT, SideTabSize.SIZE_1) {
             addTab(tr("Blue panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.BLUE)
+                background = Background(Color.name(Col.BLUE))
                 height = 140.px
             })
             addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.GREEN)
+                background = Background(Color.name(Col.GREEN))
                 height = 140.px
             })
         }
@@ -87,11 +88,11 @@ class ContainersTab : SimplePanel() {
         tag(TAG.H4, tr("Tab panel with tabs on the right"))
         tabPanel(TabPosition.RIGHT, SideTabSize.SIZE_1) {
             addTab(tr("Blue panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.BLUE)
+                background = Background(Color.name(Col.BLUE))
                 height = 140.px
             })
             addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.GREEN)
+                background = Background(Color.name(Col.GREEN))
                 height = 140.px
             })
         }
@@ -101,11 +102,11 @@ class ContainersTab : SimplePanel() {
         tag(TAG.H4, tr("Vertical split panel"))
         splitPanel {
             tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.BLUE)
+                background = Background(Color.name(Col.BLUE))
                 height = 200.px
             }
             tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.GREEN)
+                background = Background(Color.name(Col.GREEN))
                 height = 200.px
             }
         }
@@ -116,11 +117,11 @@ class ContainersTab : SimplePanel() {
         splitPanel(direction = Direction.HORIZONTAL) {
             height = 220.px
             tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.BLUE)
+                background = Background(Color.name(Col.BLUE))
                 height = 100.px
             }
             tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Col.GREEN)
+                background = Background(Color.name(Col.GREEN))
                 height = 100.px
             }
         }

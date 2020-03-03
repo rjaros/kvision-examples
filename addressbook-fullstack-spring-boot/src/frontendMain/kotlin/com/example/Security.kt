@@ -15,12 +15,11 @@ import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Dialog
 import pl.treksoft.kvision.remote.Credentials
 import pl.treksoft.kvision.remote.LoginService
-import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.remote.SecurityMgr
 import pl.treksoft.kvision.utils.ENTER_KEY
 
 @Serializable
-data class User(
+actual data class Profile(
     val name: String? = null,
     val username: String? = null,
     val password: String? = null,
@@ -32,7 +31,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
     private val loginPanel: FormPanel<Credentials>
     private val loginButton: Button
     private val userButton: Button
-    private val registerPanel: FormPanel<User>
+    private val registerPanel: FormPanel<Profile>
     private val registerButton: Button
     private val cancelButton: Button
 
@@ -49,22 +48,22 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
             }
         }
         registerPanel = formPanel {
-            add(User::name, Text(label = "${tr("Your name")}:"), required = true)
-            add(User::username, Text(label = "Login:"), required = true)
+            add(Profile::name, Text(label = "${tr("Your name")}:"), required = true)
+            add(Profile::username, Text(label = "Login:"), required = true)
             add(
-                    User::password, Password(label = "${tr("Password")}:"), required = true,
+                Profile::password, Password(label = "${tr("Password")}:"), required = true,
                 validatorMessage = { "Password too short" }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
-            add(User::password2, Password(label = "${tr("Confirm password")}:"), required = true,
-                    validatorMessage = { tr("Password too short") }) {
+            add(Profile::password2, Password(label = "${tr("Confirm password")}:"), required = true,
+                validatorMessage = { tr("Password too short") }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
             validator = {
-                val result = it[User::password] == it[User::password2]
+                val result = it[Profile::password] == it[Profile::password2]
                 if (!result) {
-                    it.getControl(User::password)?.validatorError = tr("Passwords are not the same")
-                    it.getControl(User::password2)?.validatorError = tr("Passwords are not the same")
+                    it.getControl(Profile::password)?.validatorError = tr("Passwords are not the same")
+                    it.getControl(Profile::password2)?.validatorError = tr("Passwords are not the same")
                 }
                 result
             }
@@ -120,15 +119,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
         if (registerPanel.validate()) {
             val userData = registerPanel.getData()
             GlobalScope.launch {
-                if (Model.registerProfile(
-                        Profile(
-                            userData.username
-                        ).apply {
-                            username = userData.username
-                            displayName = userData.name
-                        },
-                        userData.password ?: ""
-                    )
+                if (Model.registerProfile(userData, userData.password!!)
                 ) {
                     Alert.show(text = tr("User registered. You can now log in.")) {
                         hideRegisterForm()

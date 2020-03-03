@@ -6,6 +6,8 @@ import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.types.LocalDateTime
 
+expect class Profile
+
 @Serializable
 data class Address(
     val id: Int? = 0,

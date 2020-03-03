@@ -2,7 +2,6 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.remote.Profile
 import pl.treksoft.kvision.state.ObservableList
 import pl.treksoft.kvision.state.observableListOf
 import pl.treksoft.kvision.utils.syncWithList

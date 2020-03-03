@@ -7,10 +7,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
 buildscript {
     extra.set("production", (findProperty("prod") ?: findProperty("production") ?: "false") == "true")
     extra.set("kotlin.version", System.getProperty("kotlinVersion"))
-
-    dependencies {
-        classpath("pl.treksoft:kvision-gradle-plugin:${System.getProperty("kvisionVersion")}")
-    }
 }
 
 plugins {
@@ -18,9 +14,9 @@ plugins {
     id("kotlinx-serialization") version kotlinVersion
     id("kotlin-multiplatform") version kotlinVersion
     id("kotlin-dce-js") version kotlinVersion
+    val kvisionVersion: String by System.getProperties()
+    id("kvision") version kvisionVersion
 }
-
-apply(plugin = "pl.treksoft.kvision")
 
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
@@ -86,7 +82,7 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to "http://localhost:8080"),
+                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)),
                     contentBase = listOf("$buildDir/processedResources/frontend/main")
                 )
             }
@@ -339,7 +335,6 @@ afterEvaluate {
         }
         create("backendRun", JavaExec::class) {
             dependsOn("compileKotlinBackend")
-            shouldRunAfter("frontendRun", "frontendBrowserWebpack")
             group = "run"
             main = mainClassName
             classpath = configurations["backendRuntimeClasspath"] + project.tasks["compileKotlinBackend"].outputs.files +
