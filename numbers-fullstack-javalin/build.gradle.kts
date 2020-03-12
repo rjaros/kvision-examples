@@ -228,7 +228,11 @@ afterEvaluate {
                                 include("css/**")
                                 include("img/**")
                                 include("js/**")
-                                into("$kvmodule/$kvisionVersion")
+                                if (kvmodule == "kvision") {
+                                    into("kvision/$kvisionVersion")
+                                } else {
+                                    into("kvision-$kvmodule/$kvisionVersion")
+                                }
                             }
                         }
                     }
