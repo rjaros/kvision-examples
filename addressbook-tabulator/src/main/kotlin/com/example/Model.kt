@@ -3,7 +3,7 @@ package com.example
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
 import org.w3c.dom.get
 import org.w3c.dom.set
 import pl.treksoft.kvision.state.ObservableList

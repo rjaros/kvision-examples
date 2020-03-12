@@ -47,19 +47,16 @@ repositories {
 }
 
 dependencies {
-    backendMainImplementation "io.ktor:ktor-server-netty:$ktorVersion"
-    backendMainImplementation "io.ktor:ktor-html-builder:$ktorVersion"
-    backendMainImplementation "ch.qos.logback:logback-classic:$logbackVersion"
-    backendMainImplementation "pl.treksoft:kvision-server-ktor:${kvisionVersion}"
-
     commonMainImplementation "org.jetbrains.kotlin:kotlin-stdlib-common"
-    commonMainImplementation "pl.treksoft:kvision-common-types:${kvisionVersion}"
-    commonMainImplementation "pl.treksoft:kvision-common-remote:${kvisionVersion}"
+    commonMainApi "pl.treksoft:kvision-server-ktor:${kvisionVersion}"
     commonTestImplementation "org.jetbrains.kotlin:kotlin-test-annotations-common"
     commonTestImplementation "org.jetbrains.kotlin:kotlin-test-common"
 
+    backendMainImplementation "io.ktor:ktor-server-netty:$ktorVersion"
+    backendMainImplementation "io.ktor:ktor-html-builder:$ktorVersion"
+    backendMainImplementation "ch.qos.logback:logback-classic:$logbackVersion"
+
     frontendMainImplementation "org.jetbrains.kotlin:kotlin-stdlib-js"
-    frontendMainImplementation "pl.treksoft:kvision-remote:${kvisionVersion}"
     frontendTestImplementation "org.jetbrains.kotlin:kotlin-test-js"
 
     backendMainImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"

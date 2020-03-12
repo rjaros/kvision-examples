@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
 
 buildscript {
@@ -12,8 +11,7 @@ buildscript {
 plugins {
     val kotlinVersion: String by System.getProperties()
     id("kotlinx-serialization") version kotlinVersion
-    id("kotlin-multiplatform") version kotlinVersion
-    id("kotlin-dce-js") version kotlinVersion
+    kotlin("multiplatform") version kotlinVersion
     val joobyVersion: String by System.getProperties()
     id("jooby") version joobyVersion
     val kvisionVersion: String by System.getProperties()
@@ -69,6 +67,7 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
+                freeCompilerArgs = listOf("-Xjsr305=strict")
             }
         }
     }
@@ -88,14 +87,15 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)),
+                    proxy = mapOf(
+                        "/kv/*" to "http://localhost:8080",
+                        "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
+                    ),
                     contentBase = listOf("$buildDir/processedResources/frontend/main")
                 )
             }
             webpackTask {
                 outputFileName = "${project.name}-frontend.js"
-                val runDceFrontendKotlin by tasks.getting(KotlinJsDce::class)
-                dependsOn(runDceFrontendKotlin)
             }
             testTask {
                 useKarma {
@@ -105,26 +105,23 @@ kotlin {
         }
     }
     sourceSets {
-        getByName("commonMain") {
+        val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
-                implementation("pl.treksoft:kvision-common-types:$kvisionVersion")
-                implementation("pl.treksoft:kvision-common-remote:$kvisionVersion")
-                implementation("pl.treksoft:kvision-common-annotations:$kvisionVersion")
+                api("pl.treksoft:kvision-server-jooby:$kvisionVersion")
             }
             kotlin.srcDir("build/generated-src/common")
         }
-        getByName("commonTest") {
+        val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        getByName("backendMain") {
+        val backendMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
-                implementation("pl.treksoft:kvision-server-jooby:$kvisionVersion")
                 implementation("io.jooby:jooby-netty:$joobyVersion")
                 implementation("io.jooby:jooby-hikari:$joobyVersion")
                 implementation("com.h2database:h2:$h2Version")
@@ -133,13 +130,13 @@ kotlin {
                 implementation("com.github.andrewoma.kwery:mapper:$kweryVersion")
             }
         }
-        getByName("backendTest") {
+        val backendTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
             }
         }
-        getByName("frontendMain") {
+        val frontendMain by getting {
             resources.srcDir(webDir)
             dependencies {
                 implementation(kotlin("stdlib-js"))
@@ -165,11 +162,10 @@ kotlin {
                 implementation("pl.treksoft:kvision-tabulator:$kvisionVersion")
                 implementation("pl.treksoft:kvision-pace:$kvisionVersion")
                 implementation("pl.treksoft:kvision-moment:$kvisionVersion")
-                implementation("pl.treksoft:kvision-remote:$kvisionVersion")
             }
             kotlin.srcDir("build/generated-src/frontend")
         }
-        getByName("frontendTest") {
+        val frontendTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
                 implementation("pl.treksoft:kvision-testutils:$kvisionVersion:tests")
@@ -180,14 +176,6 @@ kotlin {
 
 tasks {
     withType<KotlinJsDce> {
-        dceOptions {
-            devMode = !isProductionBuild
-        }
-        inputs.property("production", isProductionBuild)
-        doFirst {
-            classpath = classpath.filter { it.extension != "js" }
-            destinationDir.deleteRecursively()
-        }
         doLast {
             copy {
                 file("$buildDir/tmp/expandedArchives/").listFiles()?.forEach {
@@ -199,14 +187,8 @@ tasks {
                         }
                     }
                 }
-                into(file(buildDir.path + "/kotlin-js-min/frontend/main"))
+                into(file("${buildDir.path}/js/packages/${project.name}-frontend/kotlin-dce"))
             }
-        }
-    }
-    withType<KotlinCompile> {
-        kotlinOptions {
-            freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "1.8"
         }
     }
     create("generateGruntfile") {
@@ -284,14 +266,17 @@ afterEvaluate {
                 }
             }
         }
-        getByName("frontendBrowserWebpack").dependsOn("frontendProcessResources", "runDceFrontendKotlin")
         create("frontendArchive", Jar::class).apply {
-            dependsOn("frontendBrowserWebpack")
+            dependsOn("frontendBrowserProductionWebpack")
             group = "package"
             archiveAppendix.set("frontend")
             val distribution =
-                project.tasks.getByName("frontendBrowserWebpack", KotlinWebpack::class).destinationDirectory
-            from(distribution, webDir)
+                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory!!
+            from(distribution) {
+                include("*.*")
+            }
+            from(webDir)
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
             into("/assets")
             inputs.files(distribution, webDir)
             outputs.file(archiveFile)

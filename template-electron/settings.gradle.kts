@@ -12,7 +12,6 @@ pluginManagement {
         eachPlugin {
             when {
                 requested.id.id == "kotlinx-serialization" -> useModule("org.jetbrains.kotlin:kotlin-serialization:${requested.version}")
-                requested.id.id == "kotlin-dce-js" -> useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
             }
         }
     }

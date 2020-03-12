@@ -1,6 +1,6 @@
 package com.example
 
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
 import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.core.TextAlign

@@ -2,22 +2,23 @@ package com.example
 
 import com.example.MODE.*
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.list
+import kotlinx.serialization.json.JsonConfiguration
 import org.w3c.dom.get
 import org.w3c.dom.set
 import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.form.fieldLabel
 import pl.treksoft.kvision.form.check.checkBoxInput
+import pl.treksoft.kvision.form.fieldLabel
 import pl.treksoft.kvision.form.text.TextInput
 import pl.treksoft.kvision.form.text.textInput
+import pl.treksoft.kvision.html.ListType
+import pl.treksoft.kvision.html.TAG.*
+import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.html.link
 import pl.treksoft.kvision.html.listTag
-import pl.treksoft.kvision.html.ListType
-import pl.treksoft.kvision.html.TAG.*
-import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.tag
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.redux.RAction
@@ -204,7 +205,8 @@ class Todomvc : Application() {
     }
 
     private fun saveModel() {
-        val jsonString = Json.indented.stringify(Todo.serializer().list, todoStore.getState().todos)
+        val jsonString = Json(JsonConfiguration.Stable.copy(prettyPrint = true))
+            .stringify(Todo.serializer().list, todoStore.getState().todos)
         localStorage.set("todos-kvision", jsonString)
     }
 

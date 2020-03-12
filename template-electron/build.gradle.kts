@@ -10,8 +10,7 @@ buildscript {
 plugins {
     val kotlinVersion: String by System.getProperties()
     id("kotlinx-serialization") version kotlinVersion
-    id("org.jetbrains.kotlin.js") version kotlinVersion
-    id("kotlin-dce-js") version kotlinVersion
+    kotlin("js") version kotlinVersion
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -60,13 +59,12 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)),
+                    proxy = mapOf(
+                        "/kv/*" to "http://localhost:8080",
+                        "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
+                    ),
                     contentBase = listOf("$buildDir/processedResources/Js/main")
                 )
-            }
-            webpackTask {
-                val runDceKotlin by tasks.getting(KotlinJsDce::class)
-                dependsOn(runDceKotlin)
             }
             testTask {
                 useKarma {
@@ -113,14 +111,6 @@ kotlin {
 
 tasks {
     withType<KotlinJsDce> {
-        dceOptions {
-            devMode = !isProductionBuild
-        }
-        inputs.property("production", isProductionBuild)
-        doFirst {
-            classpath = classpath.filter { it.extension != "js" }
-            destinationDir.deleteRecursively()
-        }
         doLast {
             copy {
                 file("$buildDir/tmp/expandedArchives/").listFiles()?.forEach {
@@ -132,7 +122,7 @@ tasks {
                         }
                     }
                 }
-                into(file(buildDir.path + "/kotlin-js-min/main"))
+                into(file("${buildDir.path}/js/packages/${project.name}/kotlin-dce"))
             }
         }
     }
@@ -211,20 +201,25 @@ afterEvaluate {
                 }
             }
         }
-        getByName("browserWebpack").dependsOn("processResources")
         create("zip", Zip::class) {
-            dependsOn("browserWebpack")
+            dependsOn("browserProductionWebpack")
             group = "package"
             destinationDirectory.set(file("$buildDir/libs"))
-            val distribution = project.tasks.getByName("browserWebpack",KotlinWebpack::class).destinationDirectory
-            from(distribution, webDir)
+            val distribution =
+                project.tasks.getByName("browserProductionWebpack", KotlinWebpack::class).destinationDirectory!!
+            from(distribution) {
+                include("*.*")
+            }
+            from(webDir)
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
             inputs.files(distribution, webDir)
             outputs.file(archiveFile)
         }
         create("buildApp", Copy::class) {
-            dependsOn("browserWebpack")
+            dependsOn("browserProductionWebpack")
             group = "build"
-            val distribution = project.tasks.getByName("browserWebpack",KotlinWebpack::class).destinationDirectory
+            val distribution =
+                project.tasks.getByName("browserProductionWebpack", KotlinWebpack::class).destinationDirectory
             from(distribution, webDir, electronDir)
             inputs.files(distribution, webDir, electronDir)
             into("$buildDir/dist")
