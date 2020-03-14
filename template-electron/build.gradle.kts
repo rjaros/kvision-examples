@@ -109,6 +109,15 @@ kotlin {
     sourceSets["main"].resources.srcDir(webDir)
 }
 
+fun getNodeJsBinaryExecutable(): String {
+    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTask.destination
+    val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
+    val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
+    val command = NodeJsRootPlugin.apply(project).nodeCommand
+    val finalCommand = if (isWindows && command == "node") "node.exe" else command
+    return nodeBinDir.resolve(finalCommand).absolutePath
+}
+
 tasks {
     withType<KotlinJsDce> {
         doLast {
@@ -157,7 +166,7 @@ tasks {
     create("generatePotFile", Exec::class) {
         dependsOn("kotlinNpmInstall", "generateGruntfile")
         workingDir = file("$buildDir/js")
-        executable = NodeJsRootPlugin.apply(project).nodeCommand
+        executable = getNodeJsBinaryExecutable()
         args("$buildDir/js/node_modules/grunt/bin/grunt", "pot")
         inputs.files(kotlin.sourceSets["main"].kotlin.files)
         outputs.file("$projectDir/src/main/resources/i18n/messages.pot")
@@ -173,7 +182,7 @@ afterEvaluate {
                     it.isFile && it.extension == "po"
                 }.forEach {
                     exec {
-                        executable = NodeJsRootPlugin.apply(project).nodeCommand
+                        executable = getNodeJsBinaryExecutable()
                         args(
                             "$buildDir/js/node_modules/po2json/bin/po2json",
                             it.absolutePath,
@@ -232,7 +241,7 @@ afterEvaluate {
             dependsOn("buildApp")
             group = "run"
             workingDir = file("$buildDir/dist")
-            executable = NodeJsRootPlugin.apply(project).nodeCommand
+            executable = getNodeJsBinaryExecutable()
             args("$buildDir/js/node_modules/electron/cli.js", ".")
         }
         create("bundleApp", Exec::class) {
@@ -246,7 +255,7 @@ afterEvaluate {
                 targetDir.mkdirs()
             }
             workingDir = file("$buildDir/dist")
-            executable = NodeJsRootPlugin.apply(project).nodeCommand
+            executable = getNodeJsBinaryExecutable()
             args("$buildDir/js/node_modules/electron-builder/out/cli/cli.js", "--config")
         }
     }
