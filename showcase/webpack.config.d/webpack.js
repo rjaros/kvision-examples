@@ -5,11 +5,36 @@ if (!config.devServer && config.output) {
 }
 if (config.devServer) {
     config.devServer.watchOptions = {
-        aggregateTimeout: 1000,
-        poll: 500
+        aggregateTimeout: 300,
+        poll: 300
     };
     config.devServer.stats = {
         warnings: false
     };
     config.devServer.clientLogLevel = 'error';
 }
+
+class KvWebpackPlugin {
+    apply(compiler) {
+        const fs = require('fs')
+        var removedFile = null;
+        compiler.hooks.watchRun.tapAsync("KvWebpackPlugin", (compiler, callback) => {
+            var runCallback = true;
+            for (let item of compiler.removedFiles.values()) {
+                if (item == config.entry.main) {
+                    if (!fs.existsSync(item)) {
+                        fs.watchFile(item, {interval: 50}, (current, previous) => {
+                            if (current.ino > 0) {
+                                fs.unwatchFile(item);
+                                callback();
+                            }
+                        });
+                        runCallback = false;
+                    }
+                }
+            }
+            if (runCallback) callback();
+        });
+    }
+};
+config.plugins.push(new KvWebpackPlugin())
