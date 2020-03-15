@@ -17,7 +17,6 @@ if (config.devServer) {
 class KvWebpackPlugin {
     apply(compiler) {
         const fs = require('fs')
-        var removedFile = null;
         compiler.hooks.watchRun.tapAsync("KvWebpackPlugin", (compiler, callback) => {
             var runCallback = true;
             for (let item of compiler.removedFiles.values()) {
