@@ -47,7 +47,7 @@ val joobyVersion: String by System.getProperties()
 val h2Version: String by project
 val pgsqlVersion: String by project
 val kweryVersion: String by project
-val commonsLoggingVersion: String by project
+val logbackVersion: String by project
 
 // Custom Properties
 val webDir = file("src/frontendMain/web")
@@ -124,6 +124,7 @@ kotlin {
                 implementation(kotlin("reflect"))
                 implementation("io.jooby:jooby-netty:$joobyVersion")
                 implementation("io.jooby:jooby-hikari:$joobyVersion")
+                implementation("ch.qos.logback:logback-classic:$logbackVersion")
                 implementation("com.h2database:h2:$h2Version")
                 implementation("org.postgresql:postgresql:$pgsqlVersion")
                 implementation("com.github.andrewoma.kwery:core:$kweryVersion")

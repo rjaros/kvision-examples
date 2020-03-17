@@ -44,6 +44,7 @@ repositories {
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
 val joobyVersion: String by System.getProperties()
+val logbackVersion: String by project
 
 // Custom Properties
 val webDir = file("src/frontendMain/web")
@@ -119,6 +120,7 @@ kotlin {
                 implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation("io.jooby:jooby-netty:$joobyVersion")
+                implementation("ch.qos.logback:logback-classic:$logbackVersion")
             }
         }
         val backendTest by getting {

@@ -48,6 +48,7 @@ val joobyVersion: String by System.getProperties()
 val h2Version: String by project
 val pgsqlVersion: String by project
 val kweryVersion: String by project
+val logbackVersion: String by project
 val commonsLoggingVersion: String by project
 val pac4jVersion: String by project
 val springSecurityCryptoVersion: String by project
@@ -90,7 +91,12 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf("/kv/*" to "http://localhost:8080", "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)),
+                    proxy = mapOf(
+                        "/kv/*" to "http://localhost:8080",
+                        "/callback" to "http://localhost:8080",
+                        "/logout" to "http://localhost:8080",
+                        "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
+                    ),
                     contentBase = listOf("$buildDir/processedResources/frontend/main")
                 )
             }
@@ -127,6 +133,7 @@ kotlin {
                 implementation("io.jooby:jooby-pac4j:$joobyVersion")
                 implementation("org.pac4j:pac4j-sql:$pac4jVersion")
                 implementation("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
+                implementation("ch.qos.logback:logback-classic:$logbackVersion")
                 implementation("commons-logging:commons-logging:$commonsLoggingVersion")
                 implementation("com.h2database:h2:$h2Version")
                 implementation("org.postgresql:postgresql:$pgsqlVersion")
