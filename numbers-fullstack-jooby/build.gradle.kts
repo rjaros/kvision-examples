@@ -13,7 +13,7 @@ plugins {
     id("kotlinx-serialization") version kotlinVersion
     kotlin("multiplatform") version kotlinVersion
     val joobyVersion: String by System.getProperties()
-    id("jooby") version joobyVersion
+    id("io.jooby.run") version joobyVersion
     val kvisionVersion: String by System.getProperties()
     id("kvision") version kvisionVersion
 }
@@ -49,14 +49,7 @@ val logbackVersion: String by project
 // Custom Properties
 val webDir = file("src/frontendMain/web")
 val isProductionBuild = project.extra.get("production") as Boolean
-val mainClassName = "com.example.MainKt"
-
-joobyRun {
-    mainClass = mainClassName
-    restartExtensions = listOf("conf", "properties", "class")
-    compileExtensions = listOf("java", "kt")
-    port = 8080
-}
+val mainClassNameVal = "com.example.MainKt"
 
 kotlin {
     jvm("backend") {
@@ -164,6 +157,12 @@ fun getNodeJsBinaryExecutable(): String {
 }
 
 tasks {
+    joobyRun {
+        mainClassName = mainClassNameVal
+        restartExtensions = listOf("conf", "properties", "class")
+        compileExtensions = listOf("java", "kt")
+        port = 8080
+    }
     withType<KotlinJsDce> {
         doLast {
             copy {
@@ -298,7 +297,7 @@ afterEvaluate {
                         "Implementation-Group" to rootProject.group,
                         "Implementation-Version" to rootProject.version,
                         "Timestamp" to System.currentTimeMillis(),
-                        "Main-Class" to mainClassName
+                        "Main-Class" to mainClassNameVal
                     )
                 )
             }
