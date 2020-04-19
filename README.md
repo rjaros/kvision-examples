@@ -2,10 +2,6 @@
 
 A set of examples for [KVision](https://github.com/rjaros/kvision) framework.
 
-### Important!
-
-##### Since [Kotlin 1.3.40](https://blog.jetbrains.com/kotlin/2019/06/kotlin-1-3-40-released/) new type inference has been enabled by default in the IntelliJ IDE. There are some incompatibilities, that can result in errors presented in the IDE for some of the example projects. You may wish to [disable this option](https://www.jetbrains.com/help/idea/compiler-kotlin-compiler.html).   
-
 ## Template
 
 An application template. It does nothing, but includes all dependencies to develop KVision applications with all
@@ -59,12 +55,13 @@ A complete implementation of [TodoMVC](http://todomvc.com/) demo application.
 ## Address book - fullstack
 
 A complete, fullstack address book application. It presents an innovative way to build fullstack applications with KVision and 
-[Ktor](https://ktor.io), [Jooby](https://jooby.io), [Spring Boot](https://spring.io/projects/spring-boot) or [Javalin](https://javalin.io) frameworks. KVision closely integrates the client and the server side of the project with a 
+[Ktor](https://ktor.io), [Jooby](https://jooby.io), [Spring Boot](https://spring.io/projects/spring-boot), 
+[Javalin](https://javalin.io) or [Vert.x](https://vertx.io) frameworks. KVision closely integrates the client and the server side of the project with a 
 shared data model and fully type-safe connectivity between both sides (based on automatically generated routings and JSON-RPC 
 endpoints). The example project utilizes:
 
 - H2 SQL database (local) or PostgreSQL database (configured on Heroku)
-- [Exposed](https://github.com/JetBrains/Exposed) Kotlin SQL library for database connectivity (used in Ktor and Javalin versions)
+- [Exposed](https://github.com/JetBrains/Exposed) Kotlin SQL library for database connectivity (used in Ktor, Javalin and Vert.x versions)
 - [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) with Kotlin Coroutines extensions (used in Spring Boot version)
 - [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity (used in Jooby version)
 - [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management (used in Jooby version)
