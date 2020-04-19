@@ -6,14 +6,11 @@ import com.google.inject.Inject
 import com.typesafe.config.Config
 import io.jooby.Context
 import org.pac4j.sql.profile.DbProfile
-import pl.treksoft.kvision.remote.WithContext
 import java.time.LocalDateTime
 import javax.inject.Named
 import javax.sql.DataSource
 
-actual class AddressService : IAddressService, WithContext {
-
-    override lateinit var ctx: Context
+actual class AddressService @Inject constructor(override val ctx: Context) : IAddressService, WithContext {
 
     @Inject
     lateinit var config: Config
@@ -49,9 +46,7 @@ actual class AddressService : IAddressService, WithContext {
 
 }
 
-actual class ProfileService : IProfileService, WithContext {
-
-    override lateinit var ctx: Context
+actual class ProfileService @Inject constructor(override val ctx: Context) : IProfileService, WithContext {
 
     override suspend fun getProfile() = withProfile { it }
 

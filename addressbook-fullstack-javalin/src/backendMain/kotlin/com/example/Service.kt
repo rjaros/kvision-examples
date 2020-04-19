@@ -3,6 +3,7 @@ package com.example
 import com.example.Db.dbQuery
 import com.example.Db.queryList
 import com.github.andrewoma.kwery.core.builder.query
+import com.google.inject.Inject
 import io.javalin.http.Context
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.ResultRow
@@ -12,9 +13,12 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.update
 import org.joda.time.DateTime
-import pl.treksoft.kvision.remote.WithContext
 import java.sql.ResultSet
 import java.time.ZoneId
+
+interface WithContext {
+    val ctx: Context
+}
 
 suspend fun <RESP> WithContext.withProfile(block: suspend (Profile) -> RESP): RESP {
     val profile = this.ctx.sessionAttribute<Profile>(SESSION_PROFILE_KEY)
@@ -23,9 +27,7 @@ suspend fun <RESP> WithContext.withProfile(block: suspend (Profile) -> RESP): RE
     } ?: throw IllegalStateException("Profile not set!")
 }
 
-actual class AddressService : IAddressService, WithContext {
-
-    override lateinit var ctx: Context
+actual class AddressService @Inject constructor(override val ctx: Context) : IAddressService, WithContext {
 
     override suspend fun getAddressList(search: String?, types: String, sort: Sort) =
         withProfile { profile ->
@@ -141,9 +143,7 @@ actual class AddressService : IAddressService, WithContext {
         )
 }
 
-actual class ProfileService : IProfileService, WithContext {
-
-    override lateinit var ctx: Context
+actual class ProfileService @Inject constructor(override val ctx: Context) : IProfileService, WithContext {
 
     override suspend fun getProfile() = withProfile { it }
 

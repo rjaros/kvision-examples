@@ -207,7 +207,7 @@ tasks {
         }
     }
     create("generatePotFile", Exec::class) {
-        dependsOn("kotlinNpmInstall", "generateGruntfile")
+        dependsOn("compileKotlinFrontend", "generateGruntfile")
         workingDir = file("$buildDir/js")
         executable = getNodeJsBinaryExecutable()
         args("$buildDir/js/node_modules/grunt/bin/grunt", "pot")
@@ -218,7 +218,7 @@ tasks {
 afterEvaluate {
     tasks {
         getByName("frontendProcessResources", Copy::class) {
-            dependsOn("kotlinNpmInstall")
+            dependsOn("compileKotlinFrontend")
             exclude("**/*.pot")
             doLast("Convert PO to JSON") {
                 destinationDir.walkTopDown().filter {

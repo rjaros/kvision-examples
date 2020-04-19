@@ -13,12 +13,14 @@ import pl.treksoft.kvision.html.H4
 import pl.treksoft.kvision.html.Image
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
+import pl.treksoft.kvision.i18n.gettext
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.modal.Modal
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.require
+import pl.treksoft.kvision.toast.Toast
 import pl.treksoft.kvision.utils.px
 import pl.treksoft.kvision.window.Window
 import kotlin.random.Random
@@ -90,6 +92,9 @@ class ModalsTab : SimplePanel() {
                 }
                 add(sw)
                 sw.focus()
+            }
+            button(tr("Show toast message"), style = ButtonStyle.PRIMARY, icon = "fas fa-info-circle").onClick {
+                Toast.info(gettext("This is a toast message"))
             }
         }
     }

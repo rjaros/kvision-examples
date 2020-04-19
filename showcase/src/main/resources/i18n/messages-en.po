@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KVision\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-09 03:27+0100\n"
+"POT-Creation-Date: 2020-04-19 22:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,85 +18,85 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:38
+#: ../../src/main/kotlin/com/example/BasicTab.kt:30
 msgid "A simple label"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:47
+#: ../../src/main/kotlin/com/example/BasicTab.kt:39
 msgid "A label with custom CSS styling"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:50
+#: ../../src/main/kotlin/com/example/BasicTab.kt:42
 msgid "A list:"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:52
+#: ../../src/main/kotlin/com/example/BasicTab.kt:44
 msgid "First list element"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:52
+#: ../../src/main/kotlin/com/example/BasicTab.kt:44
 msgid "Second list element"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:52
+#: ../../src/main/kotlin/com/example/BasicTab.kt:44
 msgid "Third list element"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:54
+#: ../../src/main/kotlin/com/example/BasicTab.kt:46
 msgid "An image:"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:57
+#: ../../src/main/kotlin/com/example/BasicTab.kt:49
 msgid "(hover to view a tooltip and click to view a popover)"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:60
+#: ../../src/main/kotlin/com/example/BasicTab.kt:52
 msgid "This is a tooltip"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:63
+#: ../../src/main/kotlin/com/example/BasicTab.kt:55
 msgid "This is a popover"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:69
+#: ../../src/main/kotlin/com/example/BasicTab.kt:61
 msgid "Some text written in <code></code> HTML tag."
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:72
+#: ../../src/main/kotlin/com/example/BasicTab.kt:64
 msgid ""
 "Rich <b>text</b> <i>written</i> with <span style=\"font-family: Verdana; "
 "font-size: 14pt\">any <strong>forma</strong>tting</span>."
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:74
+#: ../../src/main/kotlin/com/example/BasicTab.kt:66
 msgid "A link to Google"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:75
+#: ../../src/main/kotlin/com/example/BasicTab.kt:67
 msgid "A fieldset"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:81
+#: ../../src/main/kotlin/com/example/BasicTab.kt:73
 msgid "A responsive table:"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:84
+#: ../../src/main/kotlin/com/example/BasicTab.kt:76
 msgid "Column 1"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:84
+#: ../../src/main/kotlin/com/example/BasicTab.kt:76
 msgid "Column 2"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:84
+#: ../../src/main/kotlin/com/example/BasicTab.kt:76
 msgid "Column 3"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:112
+#: ../../src/main/kotlin/com/example/BasicTab.kt:104
 msgid "A Handlebars.js template:"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/BasicTab.kt:126
+#: ../../src/main/kotlin/com/example/BasicTab.kt:118
 msgid "An iframe:"
 msgstr ""
 
@@ -210,104 +210,104 @@ msgstr ""
 msgid "North America"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:35
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:36
 msgid "Stack panel"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:47
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:48
 msgid "Activate panel from the stack"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:48
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:57
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:75
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:89
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:49
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:58
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:76
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:90
 msgid "Blue panel"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:49
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:61
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:79
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:93
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:50
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:62
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:80
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:94
 msgid "Green panel"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:55
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:56
 msgid "Tab panel"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:65
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:66
 msgid "Red panel (closable)"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:73
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:74
 msgid "Tab panel with tabs on the left"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:87
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:88
 msgid "Tab panel with tabs on the right"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:101
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:102
 msgid "Vertical split panel"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ContainersTab.kt:115
+#: ../../src/main/kotlin/com/example/ContainersTab.kt:116
 msgid "Horizontal split panel"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:36
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:29
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:30
 msgid "January"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:37
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:30
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:31
 msgid "February"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:38
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:31
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:32
 msgid "March"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:39
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:32
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:33
 msgid "April"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:40
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:33
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:34
 msgid "May"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:41
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:34
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:35
 msgid "June"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:42
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:35
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:36
 msgid "July"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:43
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:36
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:37
 msgid "August"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:44
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:37
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:38
 msgid "September"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:45
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:38
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:39
 msgid "October"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:46
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:39
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:40
 msgid "November"
 msgstr ""
 
@@ -320,7 +320,7 @@ msgid "Add December"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DataTab.kt:80
-#: ../../src/main/kotlin/com/example/DragDropTab.kt:43
+#: ../../src/main/kotlin/com/example/DragDropTab.kt:44
 msgid "December"
 msgstr ""
 
@@ -356,7 +356,7 @@ msgstr ""
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:56
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:75
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:95
-#: ../../src/main/kotlin/com/example/Showcase.kt:48
+#: ../../src/main/kotlin/com/example/Showcase.kt:49
 msgid "HTML"
 msgstr ""
 
@@ -364,7 +364,7 @@ msgstr ""
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:57
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:76
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:96
-#: ../../src/main/kotlin/com/example/Showcase.kt:49
+#: ../../src/main/kotlin/com/example/Showcase.kt:50
 msgid "Forms"
 msgstr ""
 
@@ -387,20 +387,20 @@ msgstr ""
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:58
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:77
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:97
-#: ../../src/main/kotlin/com/example/Showcase.kt:50
+#: ../../src/main/kotlin/com/example/Showcase.kt:51
 msgid "Buttons"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:59
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:98
-#: ../../src/main/kotlin/com/example/Showcase.kt:51
+#: ../../src/main/kotlin/com/example/Showcase.kt:52
 msgid "Dropdowns"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:60
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:81
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:101
-#: ../../src/main/kotlin/com/example/Showcase.kt:52
+#: ../../src/main/kotlin/com/example/Showcase.kt:53
 msgid "Containers"
 msgstr ""
 
@@ -454,8 +454,8 @@ msgid "Enter your age"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/FormTab.kt:74
-#: ../../src/main/kotlin/com/example/FormTab.kt:110
-#: ../../src/main/kotlin/com/example/FormTab.kt:118
+#: ../../src/main/kotlin/com/example/FormTab.kt:112
+#: ../../src/main/kotlin/com/example/FormTab.kt:120
 msgid "Value is required"
 msgstr ""
 
@@ -492,230 +492,238 @@ msgstr ""
 msgid "Typeahead"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:99
+#: ../../src/main/kotlin/com/example/FormTab.kt:101
 msgid "Date field with a placeholder"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:100
+#: ../../src/main/kotlin/com/example/FormTab.kt:102
 msgid "Enter date"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:101
-#: ../../src/main/kotlin/com/example/FormTab.kt:105
+#: ../../src/main/kotlin/com/example/FormTab.kt:103
+#: ../../src/main/kotlin/com/example/FormTab.kt:107
 msgid "Date and time fieldset"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:105
+#: ../../src/main/kotlin/com/example/FormTab.kt:107
 msgid "Time field"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:109
+#: ../../src/main/kotlin/com/example/FormTab.kt:111
 msgid "Required checkbox"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:112
+#: ../../src/main/kotlin/com/example/FormTab.kt:114
 msgid "Radio button"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:115
-#: ../../src/main/kotlin/com/example/FormTab.kt:122
-#: ../../src/main/kotlin/com/example/FormTab.kt:146
+#: ../../src/main/kotlin/com/example/FormTab.kt:117
+#: ../../src/main/kotlin/com/example/FormTab.kt:124
+#: ../../src/main/kotlin/com/example/FormTab.kt:148
 msgid "First option"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:115
-#: ../../src/main/kotlin/com/example/FormTab.kt:122
-#: ../../src/main/kotlin/com/example/FormTab.kt:146
+#: ../../src/main/kotlin/com/example/FormTab.kt:117
+#: ../../src/main/kotlin/com/example/FormTab.kt:124
+#: ../../src/main/kotlin/com/example/FormTab.kt:148
 msgid "Second option"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:117
+#: ../../src/main/kotlin/com/example/FormTab.kt:119
 msgid "Simple select"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:123
+#: ../../src/main/kotlin/com/example/FormTab.kt:125
 msgid "Advanced select"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:126
+#: ../../src/main/kotlin/com/example/FormTab.kt:128
 msgid "Select with remote data source"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:142
+#: ../../src/main/kotlin/com/example/FormTab.kt:144
 msgid "Spinner field 10 - 20"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:143
+#: ../../src/main/kotlin/com/example/FormTab.kt:145
 msgid "Range field 10 - 20"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:147
+#: ../../src/main/kotlin/com/example/FormTab.kt:149
 msgid "Radio button group"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:150
+#: ../../src/main/kotlin/com/example/FormTab.kt:152
 msgid "Upload files (images only)"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:160
-#: ../../src/main/kotlin/com/example/FormTab.kt:161
+#: ../../src/main/kotlin/com/example/FormTab.kt:162
+#: ../../src/main/kotlin/com/example/FormTab.kt:163
 msgid "Passwords are not the same"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:165
+#: ../../src/main/kotlin/com/example/FormTab.kt:167
 msgid "The passwords are not the same."
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:172
+#: ../../src/main/kotlin/com/example/FormTab.kt:174
 msgid "Show data"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:174
+#: ../../src/main/kotlin/com/example/FormTab.kt:176
 msgid "Form data in plain JSON"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:179
+#: ../../src/main/kotlin/com/example/FormTab.kt:181
 msgid "Clear data"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:181
+#: ../../src/main/kotlin/com/example/FormTab.kt:183
 #: ../../src/main/kotlin/com/example/TabulatorTab.kt:190
 msgid "Are you sure?"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:182
-msgid "Do you want to clear your data?"
-msgstr ""
-
-#: ../../src/main/kotlin/com/example/FormTab.kt:183
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:41
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:56
-msgid "Yes"
-msgstr ""
-
 #: ../../src/main/kotlin/com/example/FormTab.kt:184
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:42
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:57
-msgid "No"
+msgid "Do you want to clear your data?"
 msgstr ""
 
 #: ../../src/main/kotlin/com/example/FormTab.kt:185
 #: ../../src/main/kotlin/com/example/ModalsTab.kt:43
 #: ../../src/main/kotlin/com/example/ModalsTab.kt:58
+msgid "Yes"
+msgstr ""
+
+#: ../../src/main/kotlin/com/example/FormTab.kt:186
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:44
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:59
+msgid "No"
+msgstr ""
+
+#: ../../src/main/kotlin/com/example/FormTab.kt:187
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:45
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:60
 msgid "Cancel"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/FormTab.kt:191
+#: ../../src/main/kotlin/com/example/FormTab.kt:193
 msgid "Validate"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:47
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:36
 msgid "Horizontal layout"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:56
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:45
 msgid "Vertical layout"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:65
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:54
 msgid "CSS flexbox layouts"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:121
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:110
 msgid "CSS grid layouts"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:141
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:130
 msgid "Responsive grid layout"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:152
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:141
 msgid "Dock layout"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:155
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:144
 msgid "CENTER"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:156
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:145
 msgid "LEFT"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:157
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:146
 msgid "RIGHT"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:158
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:147
 msgid "UP"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/LayoutsTab.kt:159
+#: ../../src/main/kotlin/com/example/LayoutsTab.kt:148
 msgid "DOWN"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:31
 #: ../../src/main/kotlin/com/example/ModalsTab.kt:33
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:35
 msgid "Alert dialog"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:37
 #: ../../src/main/kotlin/com/example/ModalsTab.kt:39
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:41
 msgid "Confirm dialog"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:45
 #: ../../src/main/kotlin/com/example/ModalsTab.kt:47
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:60
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:49
 #: ../../src/main/kotlin/com/example/ModalsTab.kt:62
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:64
 msgid "Result"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:45
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:60
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:47
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:62
 msgid "You pressed NO button."
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:47
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:62
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:49
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:64
 msgid "You pressed YES button."
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:50
 #: ../../src/main/kotlin/com/example/ModalsTab.kt:52
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:54
 msgid "Cancelable confirm dialog"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:65
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:75
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:67
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:77
 msgid "Custom modal dialog"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:72
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:74
 msgid "Close"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:78
 #: ../../src/main/kotlin/com/example/ModalsTab.kt:80
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:82
 msgid "Alert dialog without animation"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:86
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:88
 msgid "Open new window"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:87
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:89
 msgid "Window"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:114
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:96
+msgid "Show toast message"
+msgstr ""
+
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:97
+msgid "This is a toast message"
+msgstr ""
+
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:119
 msgid "Draggable"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:117
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:122
 msgid "Resizable"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/ModalsTab.kt:120
+#: ../../src/main/kotlin/com/example/ModalsTab.kt:125
 msgid "Close button"
 msgstr ""
 
@@ -723,39 +731,39 @@ msgstr ""
 msgid "Search GitHub"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:53
+#: ../../src/main/kotlin/com/example/Showcase.kt:54
 msgid "Layouts"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:54
+#: ../../src/main/kotlin/com/example/Showcase.kt:55
 msgid "Windows"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:55
+#: ../../src/main/kotlin/com/example/Showcase.kt:56
 msgid "Data binding"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:56
+#: ../../src/main/kotlin/com/example/Showcase.kt:57
 msgid "Drag & Drop"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:57
+#: ../../src/main/kotlin/com/example/Showcase.kt:58
 msgid "Charts"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:58
+#: ../../src/main/kotlin/com/example/Showcase.kt:59
 msgid "Tables"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:59
+#: ../../src/main/kotlin/com/example/Showcase.kt:60
 msgid "RESTful"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:61
+#: ../../src/main/kotlin/com/example/Showcase.kt:62
 msgid "English"
 msgstr ""
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:61
+#: ../../src/main/kotlin/com/example/Showcase.kt:62
 msgid "Polish"
 msgstr ""
 

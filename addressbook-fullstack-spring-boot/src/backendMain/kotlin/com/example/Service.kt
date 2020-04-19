@@ -16,10 +16,11 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerRequest
-import pl.treksoft.kvision.remote.WithRequest
 import pl.treksoft.kvision.types.OffsetDateTime
 
-interface WithProfile : WithRequest {
+interface WithProfile {
+    val serverRequest: ServerRequest
+
     suspend fun getProfile(): Profile {
         return serverRequest.principal().ofType(Authentication::class.java).map {
             it.principal as Profile
@@ -39,8 +40,8 @@ fun DatabaseClient.GenericExecuteSpec.bindMap(parameters: Map<String, Any?>): Da
 
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-actual class AddressService(private val databaseClient: DatabaseClient) : IAddressService, WithProfile {
-    override lateinit var serverRequest: ServerRequest
+actual class AddressService(override val serverRequest: ServerRequest, private val databaseClient: DatabaseClient) :
+    IAddressService, WithProfile {
 
     override suspend fun getAddressList(search: String?, types: String, sort: Sort): List<Address> {
         val profile = getProfile()
@@ -76,7 +77,7 @@ actual class AddressService(private val databaseClient: DatabaseClient) : IAddre
 
     override suspend fun addAddress(address: Address): Address {
         val profile = getProfile()
-        val newAddress = address.copy(userId = profile.id?.toInt(), createdAt = OffsetDateTime.now())
+        val newAddress = address.copy(id = null, userId = profile.id?.toInt(), createdAt = OffsetDateTime.now())
         val id = databaseClient.insert().into(Address::class.java).using(newAddress)
             .map { row -> row.get("id", java.lang.Integer::class.java) }.awaitOne()
         return newAddress.copy(id = id?.toInt())
@@ -106,8 +107,7 @@ actual class AddressService(private val databaseClient: DatabaseClient) : IAddre
 
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-actual class ProfileService : IProfileService, WithProfile {
-    override lateinit var serverRequest: ServerRequest
+actual class ProfileService(override val serverRequest: ServerRequest) : IProfileService, WithProfile {
     override suspend fun getProfile(): Profile {
         return super.getProfile()
     }
