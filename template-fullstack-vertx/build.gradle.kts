@@ -172,18 +172,6 @@ vertx {
 }
 
 tasks {
-    withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask> {
-        doLast {
-            yarnLock.parentFile.resolve("package.json").apply {
-                writeText(readText().replace(
-                    "\"dependencies\": {},",
-                    "\"dependencies\": {},\n  \"resolutions\": { \"moment\": \"2.24.0\", \"jquery\": \"3.4.1\" },"
-                ))
-            }
-            org.jetbrains.kotlin.gradle.targets.js.yarn.YarnWorkspaces()
-                .yarnExec(project, yarnLock.parentFile, "Relaunching Yarn to fix resolutions")
-        }
-    }
     withType<KotlinJsDce> {
         doLast {
             copy {

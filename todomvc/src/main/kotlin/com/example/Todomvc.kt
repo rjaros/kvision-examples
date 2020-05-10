@@ -25,7 +25,7 @@ import pl.treksoft.kvision.redux.RAction
 import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.routing.routing
 import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.state.stateBinding
+import pl.treksoft.kvision.state.bind
 import pl.treksoft.kvision.utils.ENTER_KEY
 import pl.treksoft.kvision.utils.ESC_KEY
 import kotlin.browser.localStorage
@@ -90,7 +90,7 @@ class Todomvc : Application() {
 
     override fun start() {
         root("todomvc") {
-            tag(SECTION, classes = setOf("todoapp")).stateBinding(todoStore) { state ->
+            tag(SECTION, classes = setOf("todoapp")).bind(todoStore) { state ->
                 tag(HEADER, classes = setOf("header")) {
                     tag(H1, "todos")
                     textInput(classes = setOf("new-todo")) {

@@ -24,7 +24,7 @@ import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.rest.RestClient
 import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.state.stateBinding
+import pl.treksoft.kvision.state.bind
 import pl.treksoft.kvision.toolbar.buttonGroup
 import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.obj
@@ -56,7 +56,7 @@ class App : Application() {
                     textAlign = TextAlign.CENTER
                     marginLeft = auto
                     marginRight = auto
-                }.stateBinding(store) { state ->
+                }.bind(store) { state ->
                     informationText(state)
                     if (!state.downloading && state.errorMessage == null) {
                         pokemonGrid(state)

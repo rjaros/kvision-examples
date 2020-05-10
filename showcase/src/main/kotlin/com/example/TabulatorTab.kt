@@ -2,20 +2,19 @@ package com.example
 
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.InputSize
-import pl.treksoft.kvision.form.check.CheckBoxInput
 import pl.treksoft.kvision.form.check.checkBoxInput
 import pl.treksoft.kvision.form.select.SimpleSelectInput
 import pl.treksoft.kvision.form.spinner.SpinnerInput
 import pl.treksoft.kvision.form.text.TextInput
 import pl.treksoft.kvision.form.time.DateTimeInput
-import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.Icon
 import pl.treksoft.kvision.html.Span
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
-import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.state.observableListOf
 import pl.treksoft.kvision.table.TableType
 import pl.treksoft.kvision.tabulator.Align
@@ -24,8 +23,8 @@ import pl.treksoft.kvision.tabulator.Editor
 import pl.treksoft.kvision.tabulator.Formatter
 import pl.treksoft.kvision.tabulator.Layout
 import pl.treksoft.kvision.tabulator.PaginationMode
-import pl.treksoft.kvision.tabulator.tabulator
 import pl.treksoft.kvision.tabulator.TabulatorOptions
+import pl.treksoft.kvision.tabulator.tabulator
 import pl.treksoft.kvision.types.toDateF
 import pl.treksoft.kvision.types.toStringF
 import pl.treksoft.kvision.utils.obj
@@ -134,7 +133,7 @@ class TabulatorTab : SimplePanel() {
                     ColumnDefinition(
                         tr("Active"),
                         "active",
-                        align = Align.CENTER,
+                        hozAlign = Align.CENTER,
                         editorComponentFunction = { _, _, success, _, data ->
                             checkBoxInput(value = data.active).apply {
                                 size = InputSize.SMALL
@@ -181,7 +180,7 @@ class TabulatorTab : SimplePanel() {
                     ColumnDefinition(
                         "",
                         headerSort = false,
-                        align = Align.CENTER,
+                        hozAlign = Align.CENTER,
                         width = "50",
                         formatterComponentFunction = { _, _, d ->
                             Icon("fas fa-times").apply {
