@@ -78,6 +78,8 @@ kotlin {
         implementation(npm("grunt"))
         implementation(npm("grunt-pot"))
 
+        implementation(npm("react-awesome-button"))
+
         implementation("pl.treksoft:kvision:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap-css:$kvisionVersion")
@@ -96,6 +98,7 @@ kotlin {
         implementation("pl.treksoft:kvision-tabulator:$kvisionVersion")
         implementation("pl.treksoft:kvision-pace:$kvisionVersion")
         implementation("pl.treksoft:kvision-toast:$kvisionVersion")
+        implementation("pl.treksoft:kvision-react:$kvisionVersion")
     }
     sourceSets["test"].dependencies {
         implementation(kotlin("test-js"))

@@ -1,20 +1,35 @@
 package com.example
 
-import pl.treksoft.kvision.form.check.checkBox
 import pl.treksoft.kvision.form.check.CheckBoxStyle
-import pl.treksoft.kvision.form.check.radio
 import pl.treksoft.kvision.form.check.RadioStyle
-import pl.treksoft.kvision.html.button
+import pl.treksoft.kvision.form.check.checkBox
+import pl.treksoft.kvision.form.check.radio
 import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.span
+import pl.treksoft.kvision.i18n.I18n.gettext
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.FlexWrap
-import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.vPanel
+import pl.treksoft.kvision.react.react
+import pl.treksoft.kvision.require
 import pl.treksoft.kvision.toolbar.buttonGroup
 import pl.treksoft.kvision.toolbar.toolbar
 import pl.treksoft.kvision.utils.px
+import react.RClass
+import react.RProps
+import kotlin.browser.window
+
+external interface ReactButtonProps : RProps {
+    var type: String
+    var size: String
+    var action: (dynamic, () -> Unit) -> Unit
+}
+
+@Suppress("UnsafeCastFromDynamic")
+val ReactButton: RClass<ReactButtonProps> = require("react-awesome-button").AwesomeButtonProgress
 
 class ButtonsTab : SimplePanel() {
     init {
@@ -47,23 +62,37 @@ class ButtonsTab : SimplePanel() {
                 radio(name = "radio", label = tr("Squared radiobutton")) { squared = true }
             }
         }
-        toolbar {
-            buttonGroup {
-                button("<<")
+        hPanel(wrap = FlexWrap.WRAP, spacing = 100) {
+            toolbar {
+                buttonGroup {
+                    button("<<")
+                }
+                buttonGroup {
+                    button("1", disabled = true)
+                    button("2")
+                    button("3")
+                }
+                buttonGroup {
+                    span("...")
+                }
+                buttonGroup {
+                    button("10")
+                }
+                buttonGroup {
+                    button(">>")
+                }
             }
-            buttonGroup {
-                button("1", disabled = true)
-                button("2")
-                button("3")
-            }
-            buttonGroup {
-                span("...")
-            }
-            buttonGroup {
-                button("10")
-            }
-            buttonGroup {
-                button(">>")
+            react {
+                ReactButton {
+                    attrs.type = "primary"
+                    attrs.size = "large"
+                    attrs.action = { _, next ->
+                        window.setTimeout({
+                            next()
+                        }, 3000)
+                    }
+                    +gettext("React progress button")
+                }
             }
         }
     }

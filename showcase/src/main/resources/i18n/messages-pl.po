@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KVision\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-19 22:38+0200\n"
+"POT-Creation-Date: 2020-05-16 02:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,85 +106,89 @@ msgstr "Szablon Handlebars.js"
 msgid "An iframe:"
 msgstr "Ramka wewnętrzna:"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:24
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:39
 msgid "Primary button"
 msgstr "Przycisk główny"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:25
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:40
 msgid "Success button"
 msgstr "Przycisk sukcesu"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:26
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:41
 msgid "Info button"
 msgstr "Przycisk informacji"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:27
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:42
 msgid "Warning button"
 msgstr "Przycisk ostrzeżenia"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:28
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:43
 msgid "Danger button"
 msgstr "Przycisk niebezpieczeństwa"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:29
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:44
 msgid "Link button"
 msgstr "Przycisk link"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:32
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:47
 msgid "Default checkbox"
 msgstr "Checkbox domyślny"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:33
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:48
 msgid "Primary checkbox"
 msgstr "Checkbox główny"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:34
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:49
 msgid "Success checkbox"
 msgstr "Checkbox sukcesu"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:35
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:50
 msgid "Info checkbox"
 msgstr "Checkbox informacji"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:36
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:51
 msgid "Warning checkbox"
 msgstr "Checkbox ostrzeżenia"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:37
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:52
 msgid "Danger checkbox"
 msgstr "Checkbox niebezpieczeństwa"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:38
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:53
 msgid "Circled checkbox"
 msgstr "Checkbox okrągły"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:41
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:56
 msgid "Default radiobutton"
 msgstr "Przycisk radiowy domyślny"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:42
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:57
 msgid "Primary radiobutton"
 msgstr "Przycisk radiowy główny"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:43
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:58
 msgid "Success radiobutton"
 msgstr "Przycisk radiowy sukcesu"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:44
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:59
 msgid "Info radiobutton"
 msgstr "Przycisk radiowy informacji"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:45
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:60
 msgid "Warning radiobutton"
 msgstr "Przycisk radiowy ostrzeżenia"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:46
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:61
 msgid "Danger radiobutton"
 msgstr "Przycisk radiowy niebezpieczeństwa"
 
-#: ../../src/main/kotlin/com/example/ButtonsTab.kt:47
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:62
 msgid "Squared radiobutton"
 msgstr "Przycisk radiowy kwadratowy"
+
+#: ../../src/main/kotlin/com/example/ButtonsTab.kt:94
+msgid "React progress button"
+msgstr "Przycisk z React"
 
 #: ../../src/main/kotlin/com/example/ChartTab.kt:60
 #: ../../src/main/kotlin/com/example/ChartTab.kt:89
@@ -362,7 +366,7 @@ msgstr "Ulubione"
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:56
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:75
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:95
-#: ../../src/main/kotlin/com/example/Showcase.kt:49
+#: ../../src/main/kotlin/com/example/Showcase.kt:50
 msgid "HTML"
 msgstr "HTML"
 
@@ -370,7 +374,7 @@ msgstr "HTML"
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:57
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:76
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:96
-#: ../../src/main/kotlin/com/example/Showcase.kt:50
+#: ../../src/main/kotlin/com/example/Showcase.kt:51
 msgid "Forms"
 msgstr "Formularze"
 
@@ -393,20 +397,20 @@ msgstr "Lista wyboru z menu nawigacyjnym"
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:58
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:77
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:97
-#: ../../src/main/kotlin/com/example/Showcase.kt:51
+#: ../../src/main/kotlin/com/example/Showcase.kt:52
 msgid "Buttons"
 msgstr "Przyciski"
 
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:59
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:98
-#: ../../src/main/kotlin/com/example/Showcase.kt:52
+#: ../../src/main/kotlin/com/example/Showcase.kt:53
 msgid "Dropdowns"
 msgstr "Listy wyboru"
 
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:60
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:81
 #: ../../src/main/kotlin/com/example/DropDownTab.kt:101
-#: ../../src/main/kotlin/com/example/Showcase.kt:53
+#: ../../src/main/kotlin/com/example/Showcase.kt:54
 msgid "Containers"
 msgstr "Kontenery"
 
@@ -585,7 +589,7 @@ msgid "Clear data"
 msgstr "Wyczyść dane"
 
 #: ../../src/main/kotlin/com/example/FormTab.kt:183
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:190
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:189
 msgid "Are you sure?"
 msgstr "Czy na pewno?"
 
@@ -737,78 +741,78 @@ msgstr "Przycisk zamknij"
 msgid "Search GitHub"
 msgstr "Szukaj na GitHub"
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:54
+#: ../../src/main/kotlin/com/example/Showcase.kt:55
 msgid "Layouts"
 msgstr "Układy"
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:55
+#: ../../src/main/kotlin/com/example/Showcase.kt:56
 msgid "Windows"
 msgstr "Okna"
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:56
+#: ../../src/main/kotlin/com/example/Showcase.kt:57
 msgid "Data binding"
 msgstr "Wiązanie danych"
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:57
+#: ../../src/main/kotlin/com/example/Showcase.kt:58
 msgid "Drag & Drop"
 msgstr "Drag & Drop"
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:58
+#: ../../src/main/kotlin/com/example/Showcase.kt:59
 msgid "Charts"
 msgstr "Wykresy"
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:59
+#: ../../src/main/kotlin/com/example/Showcase.kt:60
 msgid "Tables"
 msgstr "Tabele"
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:60
+#: ../../src/main/kotlin/com/example/Showcase.kt:61
 msgid "RESTful"
 msgstr "RESTful"
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:62
+#: ../../src/main/kotlin/com/example/Showcase.kt:63
 msgid "English"
 msgstr "Angielski"
 
-#: ../../src/main/kotlin/com/example/Showcase.kt:62
+#: ../../src/main/kotlin/com/example/Showcase.kt:63
 msgid "Polish"
 msgstr "Polski"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:91
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:90
 msgid "Name"
 msgstr "Imię i nazwisko"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:104
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:103
 msgid "Position"
 msgstr "Stanowisko"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:115
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:114
 msgid "Office"
 msgstr "Biuro"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:135
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:134
 msgid "Active"
 msgstr "Aktywny"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:151
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:150
 msgid "Start date"
 msgstr "Data zatrudnienia"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:166
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:165
 msgid "Salary"
 msgstr "Pensja"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:190
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:189
 msgid "Delete row?"
 msgstr "Usunąć wiersz?"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:204
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:203
 msgid "Add new employee"
 msgstr "Dodaj nowego pracownika"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:208
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:207
 msgid "Show current data model"
 msgstr "Pokaż aktualny model danych"
 
-#: ../../src/main/kotlin/com/example/TabulatorTab.kt:210
+#: ../../src/main/kotlin/com/example/TabulatorTab.kt:209
 msgid "Current data model"
 msgstr "Aktualny model danych"

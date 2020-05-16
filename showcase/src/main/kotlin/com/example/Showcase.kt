@@ -24,6 +24,7 @@ import pl.treksoft.kvision.utils.px
 class Showcase : Application() {
     init {
         require("css/showcase.css")
+        require("react-awesome-button/dist/themes/theme-blue.css")
     }
 
     override fun start() {
