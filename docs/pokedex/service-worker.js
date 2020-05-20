@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.e0d0b16483ddab03903899dff5724aa4.js"
+  "precache-manifest.e95bd8903f64a1c0320e048019a3d340.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "pokedex"});
