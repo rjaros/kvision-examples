@@ -48,7 +48,6 @@ repositories {
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
 val coroutinesVersion: String by project
-val springAutoconfigureR2dbcVersion: String by project
 val springDataR2dbcVersion: String by project
 val r2dbcPostgresqlVersion: String by project
 val r2dbcH2Version: String by project
@@ -124,7 +123,6 @@ kotlin {
                 implementation("org.springframework.boot:spring-boot-devtools")
                 implementation("org.springframework.boot:spring-boot-starter-webflux")
                 implementation("org.springframework.boot:spring-boot-starter-security")
-                implementation("org.springframework.boot.experimental:spring-boot-actuator-autoconfigure-r2dbc:$springAutoconfigureR2dbcVersion")
                 implementation("org.springframework.data:spring-data-r2dbc:$springDataR2dbcVersion")
                 implementation("io.r2dbc:r2dbc-postgresql:$r2dbcPostgresqlVersion")
                 implementation("io.r2dbc:r2dbc-h2:$r2dbcH2Version")
