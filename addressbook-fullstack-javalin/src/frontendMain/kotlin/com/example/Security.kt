@@ -125,7 +125,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
 
 object Security : SecurityMgr() {
 
-    private val loginService = LoginService("login")
+    private val loginService = LoginService("/login")
     private val loginWindow = LoginWindow()
 
     override suspend fun login(): Boolean {

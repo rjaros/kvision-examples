@@ -11,7 +11,7 @@ import org.springframework.data.r2dbc.core.awaitOne
 import org.springframework.data.r2dbc.core.awaitOneOrNull
 import org.springframework.data.r2dbc.core.flow
 import org.springframework.data.r2dbc.mapping.SettableValue
-import org.springframework.data.r2dbc.query.Criteria.where
+import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service

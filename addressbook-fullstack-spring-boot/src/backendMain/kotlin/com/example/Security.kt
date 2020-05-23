@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.r2dbc.core.DatabaseClient
-import org.springframework.data.r2dbc.query.Criteria.where
+import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.data.relational.core.mapping.Table
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus

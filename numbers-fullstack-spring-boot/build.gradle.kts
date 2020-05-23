@@ -47,12 +47,6 @@ repositories {
 // Versions
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
-val coroutinesVersion: String by project
-val springAutoconfigureR2dbcVersion: String by project
-val springDataR2dbcVersion: String by project
-val r2dbcPostgresqlVersion: String by project
-val r2dbcH2Version: String by project
-val kweryVersion: String by project
 
 // Custom Properties
 val webDir = file("src/frontendMain/web")

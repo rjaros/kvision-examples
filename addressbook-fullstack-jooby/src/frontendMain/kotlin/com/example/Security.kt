@@ -142,7 +142,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
 
 object Security : SecurityMgr() {
 
-    private val loginService = LoginService("callback?client_name=FormClient")
+    private val loginService = LoginService("/callback?client_name=FormClient")
     private val loginWindow = LoginWindow()
 
     override suspend fun login(): Boolean {
