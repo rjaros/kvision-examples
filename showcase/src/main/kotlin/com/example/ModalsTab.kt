@@ -90,7 +90,7 @@ class ModalsTab : SimplePanel() {
                     left = ((Random.nextDouble() * 800).toInt()).px
                     top = ((Random.nextDouble() * 300).toInt()).px
                 }
-                add(sw)
+                this@ModalsTab.add(sw)
                 sw.focus()
             }
             button(tr("Show toast message"), style = ButtonStyle.PRIMARY, icon = "fas fa-info-circle").onClick {
