@@ -2,6 +2,10 @@
 
 A set of examples for [KVision](https://github.com/rjaros/kvision) framework.
 
+## Mini template
+
+A minimal KVision application with simplified build configuration. A perfect project for quick start.
+
 ## Template
 
 An application template. It does nothing, but includes all dependencies to develop KVision applications with all
