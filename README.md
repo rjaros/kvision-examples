@@ -62,7 +62,9 @@ An example mobile application created with KVision's bindings for [Onsen UI](htt
 It's an almost 1 to 1 rewrite of an [official Vue Kitchen Sink example](https://github.com/OnsenUI/vue-onsenui-kitchensink). 
 It presents how to use all Onsen UI visual components with fully type-safe Kotlin API and DSL builders.
 
-[See live demo](https://rjaros.github.io/kvision-examples/onsenui-kitchensink/)
+[See live demo with iOS platform](https://rjaros.github.io/kvision-examples/onsenui-kitchensink/?platform=ios)
+
+[See live demo with Android platform](https://rjaros.github.io/kvision-examples/onsenui-kitchensink/?platform=android)
 
 ## Address book - fullstack
 

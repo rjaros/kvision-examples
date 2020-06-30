@@ -37,7 +37,6 @@ class App : Application() {
     private val mdColors = listOf(Color.hex(0xf44336), Color.hex(0xf44336), Color.hex(0x1e88e5), Color.hex(0x673ab7))
 
     val isMD = OnsenUi.isAndroid()
-    val isIOS = OnsenUi.isIOS()
 
     lateinit var navigator: Navigator
     lateinit var tabbar: Tabbar
@@ -47,7 +46,7 @@ class App : Application() {
 
     override fun start() {
         root("kvapp", ContainerType.NONE, false) {
-            if (!isMD && !isIOS) {
+            if (!OnsenUi.isAndroid(true) && !OnsenUi.isIOS(true)) {
                 jQuery("body").addClass("mobile-emulate")
                 OnsenUi.mockStatusBar()
             }

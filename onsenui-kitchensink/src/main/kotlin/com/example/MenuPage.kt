@@ -26,7 +26,7 @@ val accessList = listOf(
 val linksList = listOf(
     LinkItem("KVision", "fa-github", "https://github.com/rjaros/kvision"),
     LinkItem("Onsen UI", "fa-mobile-alt", "https://onsen.io"),
-    LinkItem("Code", "fa-code", "https://github.com/rjaros/kvision-examples/onsenui-kitchensink")
+    LinkItem("Code", "fa-code", "https://github.com/rjaros/kvision-examples/tree/master/onsenui-kitchensink")
 )
 
 fun SplitterSide.menuPage(app: App) {
