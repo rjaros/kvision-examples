@@ -56,6 +56,14 @@ A complete implementation of [TodoMVC](http://todomvc.com/) demo application.
 
 [See live demo](https://rjaros.github.io/kvision-examples/todomvc/)
 
+## Onsen UI Kitchen Sink
+
+An example mobile application created with KVision's bindings for [Onsen UI](https://onsen.io/) library. 
+It's an almost 1 to 1 rewrite of an [official Vue Kitchen Sink example](https://github.com/OnsenUI/vue-onsenui-kitchensink). 
+It presents how to use all Onsen UI visual components with fully type-safe Kotlin API and DSL builders.
+
+[See live demo](https://rjaros.github.io/kvision-examples/onsenui-kitchensink/)
+
 ## Address book - fullstack
 
 A complete, fullstack address book application. It presents an innovative way to build fullstack applications with KVision and 
