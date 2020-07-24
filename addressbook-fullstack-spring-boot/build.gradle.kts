@@ -1,15 +1,9 @@
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
-import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
 
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 import org.springframework.boot.gradle.tasks.run.BootRun
-
-buildscript {
-    extra.set("production", (findProperty("prod") ?: findProperty("production") ?: "false") == "true")
-    extra.set("kotlin.version", System.getProperty("kotlinVersion"))
-}
 
 plugins {
     val kotlinVersion: String by System.getProperties()
@@ -53,9 +47,7 @@ val r2dbcPostgresqlVersion: String by project
 val r2dbcH2Version: String by project
 val kweryVersion: String by project
 
-// Custom Properties
 val webDir = file("src/frontendMain/web")
-val isProductionBuild = project.extra.get("production") as Boolean
 val mainClassName = "com.example.MainKt"
 
 kotlin {
@@ -69,15 +61,6 @@ kotlin {
         }
     }
     js("frontend") {
-        compilations.all {
-            kotlinOptions {
-                moduleKind = "umd"
-                sourceMap = !isProductionBuild
-                if (!isProductionBuild) {
-                    sourceMapEmbedSources = "always"
-                }
-            }
-        }
         browser {
             runTask {
                 outputFileName = "main.bundle.js"
@@ -94,7 +77,7 @@ kotlin {
                 )
             }
             webpackTask {
-                outputFileName = "${project.name}-frontend.js"
+                outputFileName = "main.bundle.js"
             }
             testTask {
                 useKarma {
@@ -176,22 +159,6 @@ fun getNodeJsBinaryExecutable(): String {
 }
 
 tasks {
-    withType<KotlinJsDce> {
-        doLast {
-            copy {
-                file("$buildDir/tmp/expandedArchives/").listFiles()?.forEach {
-                    if (it.isDirectory && it.name.startsWith("kvision")) {
-                        from(it) {
-                            include("css/**")
-                            include("img/**")
-                            include("js/**")
-                        }
-                    }
-                }
-                into(file("${buildDir.path}/js/packages/${project.name}-frontend/kotlin-dce"))
-            }
-        }
-    }
     create("generateGruntfile") {
         outputs.file("$buildDir/js/Gruntfile.js")
         doLast {
@@ -250,24 +217,6 @@ afterEvaluate {
                         println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
                     }
                     it.delete()
-                }
-                copy {
-                    file("$buildDir/tmp/expandedArchives/").listFiles()?.forEach {
-                        if (it.isDirectory && it.name.startsWith("kvision")) {
-                            val kvmodule = it.name.split("-$kvisionVersion").first()
-                            from(it) {
-                                include("css/**")
-                                include("img/**")
-                                include("js/**")
-                                if (kvmodule == "kvision") {
-                                    into("kvision/$kvisionVersion")
-                                } else {
-                                    into("kvision-$kvmodule/$kvisionVersion")
-                                }
-                            }
-                        }
-                    }
-                    into(file(buildDir.path + "/js/packages_imported"))
                 }
             }
         }

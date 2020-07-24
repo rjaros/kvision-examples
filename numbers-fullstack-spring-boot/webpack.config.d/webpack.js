@@ -1,8 +1,5 @@
 config.resolve.modules.push("../../processedResources/frontend/main");
-if (!config.devServer && config.output) {
-    config.devtool = false
-    config.output.filename = "main.bundle.js"
-}
+
 if (config.devServer) {
     config.devServer.watchOptions = {
         aggregateTimeout: 300,

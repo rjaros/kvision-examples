@@ -1,9 +1,10 @@
 package com.example
 
 import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.electron.BrowserWindow
-import pl.treksoft.kvision.electron.Remote
-import pl.treksoft.kvision.electron.nodejs.Process
+import pl.treksoft.kvision.electron.Electron.BrowserWindow
+import pl.treksoft.kvision.electron.Electron.BrowserWindowConstructorOptions
+import pl.treksoft.kvision.electron.Electron.remote
+import pl.treksoft.kvision.electron.global
 import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
@@ -15,15 +16,11 @@ import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.createInstance
-import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px
 import kotlin.browser.window
 
-external val process: Process
-
 class ElectronApp : Application() {
 
-    val remote: Remote = require("electron").remote
     private var nativeWindow: BrowserWindow? = null
 
     override fun start() {
@@ -42,25 +39,25 @@ class ElectronApp : Application() {
                 fontSize = 30.px
                 hPanel(spacing = 20) {
                     div(tr("Electron version"))
-                    div("${process.versions?.electron}")
+                    div(global.process.versions.electron)
                 }
                 hPanel(spacing = 20) {
                     div(tr("Chrome version"))
-                    div("${process.versions?.chrome}")
+                    div(global.process.versions.chrome)
                 }
             }
         }
 
-        nativeWindow = remote.BrowserWindow.createInstance(obj {
-            title = "Native window"
-            width = 700
-            height = 500
-        })
+        nativeWindow =
+            remote.BrowserWindow.createInstance<BrowserWindow>(object : BrowserWindowConstructorOptions {}.apply {
+                title = "Native window"
+                width = 700
+                height = 500
+            })
         nativeWindow?.on("closed")
         { _ ->
             nativeWindow = null
         }
-
         window.onunload = {
             nativeWindow?.destroy()
             nativeWindow = null

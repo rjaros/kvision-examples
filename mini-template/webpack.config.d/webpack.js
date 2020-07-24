@@ -1,7 +1,5 @@
 config.resolve.modules.push("../../processedResources/Js/main");
-if (!config.devServer && config.output) {
-    config.devtool = false
-}
+
 if (config.devServer) {
     config.devServer.watchOptions = {
         aggregateTimeout: 300,

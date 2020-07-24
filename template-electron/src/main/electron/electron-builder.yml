@@ -1,5 +1,5 @@
 appId: template-electron
-electronVersion: 7.1.9
+electronVersion: 8.4.1
 directories:
   output: ../electron
 linux:

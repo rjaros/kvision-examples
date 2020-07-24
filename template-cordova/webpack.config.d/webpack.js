@@ -1,18 +1,10 @@
 config.resolve.modules.push("../../processedResources/Js/main");
-if (!config.devServer && config.output) {
-    config.devtool = false
-    config.output.filename = "main.bundle.js"
-}
-if (config.devServer) {
-    const path = require('path');
 
+if (config.devServer) {
     config.devServer.watchOptions = {
         aggregateTimeout: 300,
         poll: 300
     };
-    config.devServer.contentBase.push(path.join(__dirname, "../../../../platforms/android/platform_www"));
-    config.devServer.host = "0.0.0.0";
-
     config.devServer.stats = {
         warnings: false
     };
