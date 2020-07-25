@@ -36,7 +36,7 @@ val kvisionVersion: String by System.getProperties()
 val webDir = file("src/main/web")
 
 kotlin {
-    target {
+    js {
         browser {
             runTask {
                 outputFileName = "main.bundle.js"
@@ -59,14 +59,15 @@ kotlin {
                 }
             }
         }
+        binaries.executable()
     }
     sourceSets["main"].dependencies {
         implementation(kotlin("stdlib-js"))
-        implementation(npm("po2json"))
-        implementation(npm("grunt"))
-        implementation(npm("grunt-pot"))
+        implementation(npm("po2json", "*"))
+        implementation(npm("grunt", "*"))
+        implementation(npm("grunt-pot", "*"))
 
-        implementation(npm("react-awesome-button"))
+        implementation(npm("react-awesome-button", "*"))
 
         implementation("pl.treksoft:kvision:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
@@ -96,7 +97,7 @@ kotlin {
 }
 
 fun getNodeJsBinaryExecutable(): String {
-    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTask.destination
+    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTaskProvider.get().destination
     val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
     val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
     val command = NodeJsRootPlugin.apply(project).nodeCommand

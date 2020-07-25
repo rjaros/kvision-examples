@@ -1,4 +1,4 @@
-config.resolve.modules.push("../../processedResources/Js/main");
+config.resolve.modules.push("../../processedResources/js/main");
 
 if (config.devServer) {
     config.devServer.watchOptions = {
