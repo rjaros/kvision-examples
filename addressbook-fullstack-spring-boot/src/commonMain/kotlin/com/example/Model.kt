@@ -1,9 +1,9 @@
-@file:ContextualSerialization(OffsetDateTime::class)
+@file:UseContextualSerialization(OffsetDateTime::class)
 
 package com.example
 
-import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseContextualSerialization
 import pl.treksoft.kvision.remote.Id
 import pl.treksoft.kvision.types.OffsetDateTime
 

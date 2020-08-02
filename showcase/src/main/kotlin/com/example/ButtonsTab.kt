@@ -20,7 +20,7 @@ import pl.treksoft.kvision.toolbar.toolbar
 import pl.treksoft.kvision.utils.px
 import react.RClass
 import react.RProps
-import kotlin.browser.window
+import kotlinx.browser.window
 
 external interface ReactButtonProps : RProps {
     var type: String
