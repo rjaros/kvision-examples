@@ -241,8 +241,6 @@ tasks {
             )
         }
     }
-    withType<ShadowJar> {
-    }
 }
 
 afterEvaluate {
