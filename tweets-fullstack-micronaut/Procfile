@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -jar build/libs/tweets-fullstack-micronaut-1.0.0-SNAPSHOT-all.jar

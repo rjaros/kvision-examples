@@ -70,13 +70,13 @@ It presents how to use all Onsen UI visual components with fully type-safe Kotli
 
 A complete, fullstack address book application. It presents an innovative way to build fullstack applications with KVision and 
 [Ktor](https://ktor.io), [Jooby](https://jooby.io), [Spring Boot](https://spring.io/projects/spring-boot), 
-[Javalin](https://javalin.io) or [Vert.x](https://vertx.io) frameworks. KVision closely integrates the client and the server side of the project with a 
+[Javalin](https://javalin.io), [Vert.x](https://vertx.io) or [Micronaut](https://micronaut.io) frameworks. KVision closely integrates the client and the server side of the project with a 
 shared data model and fully type-safe connectivity between both sides (based on automatically generated routings and JSON-RPC 
 endpoints). The example project utilizes:
 
 - H2 SQL database (local) or PostgreSQL database (configured on Heroku)
 - [Exposed](https://github.com/JetBrains/Exposed) Kotlin SQL library for database connectivity (used in Ktor, Javalin and Vert.x versions)
-- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) with Kotlin Coroutines extensions (used in Spring Boot version)
+- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) with Kotlin Coroutines extensions (used in Spring Boot and Micronaut version)
 - [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity (used in Jooby version)
 - [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management (used in Jooby version)
 
