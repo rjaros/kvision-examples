@@ -1,10 +1,14 @@
 package com.example
 
+import fs.readFileSync
+import kotlinx.browser.window
 import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.electron.Electron.BrowserWindow
-import pl.treksoft.kvision.electron.Electron.BrowserWindowConstructorOptions
-import pl.treksoft.kvision.electron.Electron.remote
+import pl.treksoft.kvision.electron.electron.BrowserWindow
+import pl.treksoft.kvision.electron.electron.BrowserWindowConstructorOptions
+import pl.treksoft.kvision.electron.electron.OpenDialogSyncOptions
+import pl.treksoft.kvision.electron.electron.remote
 import pl.treksoft.kvision.electron.global
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
@@ -17,7 +21,6 @@ import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.createInstance
 import pl.treksoft.kvision.utils.px
-import kotlin.browser.window
 
 class ElectronApp : Application() {
 
@@ -40,6 +43,17 @@ class ElectronApp : Application() {
                 hPanel(spacing = 20) {
                     div(tr("Electron version"))
                     div(global.process.versions.electron)
+                    button("open file") {
+                        onClick {
+                            val paths = remote.dialog.showOpenDialogSync(object : OpenDialogSyncOptions {}.apply {
+                                title = "Open dialog title"
+                            })
+                            if (paths != undefined) {
+                                val contents = readFileSync(paths[0], "utf8")
+                                this.text = contents
+                            }
+                        }
+                    }
                 }
                 hPanel(spacing = 20) {
                     div(tr("Chrome version"))

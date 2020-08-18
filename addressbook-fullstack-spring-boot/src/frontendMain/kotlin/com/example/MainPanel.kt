@@ -8,7 +8,7 @@ import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.HPanel
-import kotlin.browser.document
+import kotlinx.browser.document
 
 object MainPanel : HPanel(justify = FlexJustify.SPACEBETWEEN) {
     init {

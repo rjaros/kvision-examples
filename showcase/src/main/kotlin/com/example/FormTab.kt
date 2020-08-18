@@ -1,12 +1,12 @@
-@file:ContextualSerialization(Date::class)
+@file:UseContextualSerialization(Date::class)
 
 package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseContextualSerialization
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.check.Radio
 import pl.treksoft.kvision.form.check.RadioGroup

@@ -2,11 +2,12 @@ package com.example
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.r2dbc.core.DatabaseClient
-import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
@@ -78,6 +79,7 @@ actual data class Profile(
     @Transient
     @JsonIgnore
     private var password: String? = null
+
     @Transient
     @JsonIgnore
     var password2: String? = null

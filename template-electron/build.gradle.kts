@@ -63,9 +63,9 @@ kotlin {
     }
     sourceSets["main"].dependencies {
         implementation(kotlin("stdlib-js"))
-        implementation(npm("po2json"))
-        implementation(npm("grunt"))
-        implementation(npm("grunt-pot"))
+        implementation(npm("po2json", "*"))
+        implementation(npm("grunt", "*"))
+        implementation(npm("grunt-pot", "*"))
 
         implementation(npm("electron-builder", "^22.7.0"))
 
@@ -97,7 +97,7 @@ kotlin {
 }
 
 fun getNodeJsBinaryExecutable(): String {
-    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTask.destination
+    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTaskProvider.get().destination
     val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
     val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
     val command = NodeJsRootPlugin.apply(project).nodeCommand

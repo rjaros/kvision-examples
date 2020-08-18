@@ -89,7 +89,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(kotlin("stdlib"))
                 implementation(kotlin("stdlib-common"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 api("pl.treksoft:kvision-server-spring-boot:$kvisionVersion")
             }
             kotlin.srcDir("build/generated-src/common")
@@ -102,6 +104,9 @@ kotlin {
         }
         val backendMain by getting {
             dependencies {
+                implementation(kotlin("stdlib"))
+                implementation(kotlin("stdlib-common"))
+                implementation(kotlin("stdlib-jdk7"))
                 implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation("org.springframework.boot:spring-boot-starter")
@@ -112,6 +117,10 @@ kotlin {
                 implementation("io.r2dbc:r2dbc-postgresql:$r2dbcPostgresqlVersion")
                 implementation("io.r2dbc:r2dbc-h2:$r2dbcH2Version")
                 implementation("com.github.andrewoma.kwery:core:$kweryVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:$coroutinesVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:$coroutinesVersion")
             }
         }
         val backendTest by getting {
@@ -125,10 +134,11 @@ kotlin {
             resources.srcDir(webDir)
             dependencies {
                 implementation(kotlin("stdlib-js"))
-                implementation(npm("po2json"))
-                implementation(npm("grunt"))
-                implementation(npm("grunt-pot"))
+                implementation(npm("po2json", "*"))
+                implementation(npm("grunt", "*"))
+                implementation(npm("grunt-pot", "*"))
 
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutinesVersion")
                 implementation("pl.treksoft:kvision:$kvisionVersion")
                 implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
@@ -150,7 +160,7 @@ kotlin {
 }
 
 fun getNodeJsBinaryExecutable(): String {
-    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTask.destination
+    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTaskProvider.get().destination
     val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
     val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
     val command = NodeJsRootPlugin.apply(project).nodeCommand
@@ -277,4 +287,13 @@ afterEvaluate {
             dependsOn("compileKotlinMetadata")
         }
     }
+    val bootstrapCompilerClasspath = rootProject.buildscript.configurations
+    configurations.findByName("kotlinCompilerClasspath")?.let {
+        dependencies.add(it.name, files(bootstrapCompilerClasspath).filter { !it.name.contains("kotlin-stdlib") })
+        dependencies.add(it.name, "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+        dependencies.add(it.name, "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion")
+        dependencies.add(it.name, "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion")
+        dependencies.add(it.name, "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+    }
+
 }
