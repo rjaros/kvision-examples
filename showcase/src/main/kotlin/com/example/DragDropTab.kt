@@ -1,19 +1,19 @@
 package com.example
 
+import pl.treksoft.kvision.core.AlignItems
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Color
+import pl.treksoft.kvision.core.JustifyContent
 import pl.treksoft.kvision.data.BaseDataComponent
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.Div
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.FlexJustify
-import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.state.observableListOf
 import pl.treksoft.kvision.utils.px
 
@@ -82,7 +82,7 @@ class DragDropTab : SimplePanel() {
             }
         })
 
-        val panel = hPanel(justify = FlexJustify.CENTER, alignItems = FlexAlignItems.FLEXSTART, spacing = 50)
+        val panel = hPanel(justify = JustifyContent.CENTER, alignItems = AlignItems.FLEXSTART, spacing = 50)
         panel.add(dataContainer1)
         panel.add(dataContainer2)
 

@@ -4,17 +4,17 @@ import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Color
+import pl.treksoft.kvision.core.FlexWrap
 import pl.treksoft.kvision.core.FontWeight
+import pl.treksoft.kvision.core.JustifyContent
 import pl.treksoft.kvision.core.Overflow
 import pl.treksoft.kvision.data.DataContainer
 import pl.treksoft.kvision.data.SorterType
 import pl.treksoft.kvision.html.link
 import pl.treksoft.kvision.html.span
-import pl.treksoft.kvision.panel.FlexJustify
-import pl.treksoft.kvision.panel.FlexWrap
-import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.VPanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.types.toStringF
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
@@ -45,7 +45,7 @@ class Post(tweet: Tweet) : VPanel(spacing = 2) {
         marginLeft = 2.px
         padding = 5.px
         borderBottom = Border(1.px, BorderStyle.INSET, Color.name(Col.SILVER))
-        hPanel(justify = FlexJustify.SPACEBETWEEN) {
+        hPanel(justify = JustifyContent.SPACEBETWEEN) {
             span(tweet.nickname) {
                 fontWeight = FontWeight.BOLD
             }

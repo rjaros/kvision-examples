@@ -1,24 +1,24 @@
 package com.example
 
+import pl.treksoft.kvision.core.AlignItems
+import pl.treksoft.kvision.core.FlexWrap
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.check.RadioGroup
 import pl.treksoft.kvision.form.check.radioGroup
 import pl.treksoft.kvision.form.text.TextInput
-import pl.treksoft.kvision.form.text.textInput
 import pl.treksoft.kvision.form.text.TextInputType
+import pl.treksoft.kvision.form.text.textInput
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Confirm
-import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.FlexWrap
-import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.VPanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.tabulator.Align
 import pl.treksoft.kvision.tabulator.ColumnDefinition
 import pl.treksoft.kvision.tabulator.Formatter
 import pl.treksoft.kvision.tabulator.Layout
 import pl.treksoft.kvision.tabulator.Tabulator
-import pl.treksoft.kvision.tabulator.tabulator
 import pl.treksoft.kvision.tabulator.TabulatorOptions
+import pl.treksoft.kvision.tabulator.tabulator
 import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.px
 import pl.treksoft.kvision.utils.vh
@@ -33,7 +33,7 @@ object ListPanel : VPanel() {
         height = 100.vh
         minWidth = 430.px
 
-        hPanel(FlexWrap.NOWRAP, alignItems = FlexAlignItems.CENTER, spacing = 20) {
+        hPanel(FlexWrap.NOWRAP, alignItems = AlignItems.CENTER, spacing = 20) {
             padding = 10.px
             search = textInput(TextInputType.SEARCH) {
                 placeholder = tr("Search ...")
@@ -48,7 +48,7 @@ object ListPanel : VPanel() {
                     ColumnDefinition(tr("First name"), "firstName"),
                     ColumnDefinition(tr("Last name"), "lastName"),
                     ColumnDefinition(tr("E-mail"), "email", formatterFunction = { cell, _, _ ->
-                        cell.getValue()?.let { "<a href='mailto:$it'>$it</a>" } ?: ""
+                        cell.getValue().let { "<a href='mailto:$it'>$it</a>" }
                     }),
                     ColumnDefinition(
                         "",
@@ -78,6 +78,7 @@ object ListPanel : VPanel() {
             marginBottom = 0.px
             setEventListener<Tabulator<Address>> {
                 tabulatorRowClick = { e ->
+                    @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
                     EditPanel.edit((e.detail as JsTabulator.RowComponent).getIndex() as Int)
                 }
             }

@@ -7,6 +7,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseContextualSerialization
+import pl.treksoft.kvision.core.AlignItems
+import pl.treksoft.kvision.core.FlexWrap
 import pl.treksoft.kvision.form.check.CheckBox
 import pl.treksoft.kvision.form.check.Radio
 import pl.treksoft.kvision.form.check.RadioGroup
@@ -28,8 +30,6 @@ import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
-import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.progress.ProgressBar
@@ -166,7 +166,7 @@ class FormTab : SimplePanel() {
             }
             validatorMessage = { tr("The passwords are not the same.") }
         }
-        formPanel.add(HPanel(spacing = 10, alignItems = FlexAlignItems.CENTER, wrap = FlexWrap.WRAP) {
+        formPanel.add(HPanel(spacing = 10, alignItems = AlignItems.CENTER, wrap = FlexWrap.WRAP) {
             val p = ProgressBar(0, striped = true) {
                 marginBottom = 0.px
                 width = 300.px

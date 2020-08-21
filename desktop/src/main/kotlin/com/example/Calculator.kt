@@ -7,12 +7,12 @@ package com.example
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Container
+import pl.treksoft.kvision.core.JustifyItems
 import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.Button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Div
 import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.panel.GridJustify
 import pl.treksoft.kvision.panel.gridPanel
 import pl.treksoft.kvision.utils.px
 
@@ -44,7 +44,7 @@ class Calculator : DesktopWindow("Calculator", "fas fa-calculator", 280, 270) {
             marginRight = 15.px
             border = Border(2.px, BorderStyle.SOLID)
         }
-        gridPanel(columnGap = 5, rowGap = 5, justifyItems = GridJustify.CENTER) {
+        gridPanel(columnGap = 5, rowGap = 5, justifyItems = JustifyItems.CENTER) {
             padding = 10.px
             add(CalcButton("AC").onClick { clear() }, 4, 1)
             add(CalcButton("7").onClick { number(7) }, 1, 2)

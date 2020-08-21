@@ -1,10 +1,10 @@
 package com.example
 
 import com.example.MODE.*
+import kotlinx.browser.localStorage
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import org.w3c.dom.get
 import org.w3c.dom.set
 import pl.treksoft.kvision.Application
@@ -28,7 +28,6 @@ import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.state.bind
 import pl.treksoft.kvision.utils.ENTER_KEY
 import pl.treksoft.kvision.utils.ESC_KEY
-import kotlin.browser.localStorage
 
 enum class MODE {
     ALL,
@@ -199,15 +198,16 @@ class Todomvc : Application() {
     }
 
     private fun loadModel() {
-        localStorage.get("todos-kvision")?.let {
-            todoStore.dispatch(TodoAction.Load(Json.parse(Todo.serializer().list, it)))
+        localStorage["todos-kvision"]?.let {
+            todoStore.dispatch(TodoAction.Load(Json.decodeFromString(ListSerializer(Todo.serializer()), it)))
         }
     }
 
     private fun saveModel() {
-        val jsonString = Json(JsonConfiguration.Stable.copy(prettyPrint = true))
-            .stringify(Todo.serializer().list, todoStore.getState().todos)
-        localStorage.set("todos-kvision", jsonString)
+        val jsonString = Json {
+            prettyPrint = true
+        }.encodeToString(ListSerializer(Todo.serializer()), todoStore.getState().todos)
+        localStorage["todos-kvision"] = jsonString
     }
 
     private fun addTodo(value: String?) {

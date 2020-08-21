@@ -1,29 +1,28 @@
 package com.example
 
-import kotlinx.serialization.UnstableDefault
+import pl.treksoft.kvision.core.AlignItems
+import pl.treksoft.kvision.core.FlexWrap
 import pl.treksoft.kvision.core.FontStyle
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.data.DataContainer
-import pl.treksoft.kvision.data.dataContainer
 import pl.treksoft.kvision.data.SorterType
+import pl.treksoft.kvision.data.dataContainer
 import pl.treksoft.kvision.form.check.RadioGroup
 import pl.treksoft.kvision.form.check.radioGroup
 import pl.treksoft.kvision.form.text.TextInput
-import pl.treksoft.kvision.form.text.textInput
 import pl.treksoft.kvision.form.text.TextInputType
+import pl.treksoft.kvision.form.text.textInput
 import pl.treksoft.kvision.html.icon
 import pl.treksoft.kvision.html.link
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Confirm
-import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.FlexWrap
-import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.table.cell
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.table.HeaderCell
 import pl.treksoft.kvision.table.Row
 import pl.treksoft.kvision.table.Table
 import pl.treksoft.kvision.table.TableType
+import pl.treksoft.kvision.table.cell
 import pl.treksoft.kvision.utils.px
 
 
@@ -31,7 +30,6 @@ enum class Sort {
     FN, LN, E, F
 }
 
-@UnstableDefault
 object ListPanel : SimplePanel() {
 
     private val container: DataContainer<Address, Row, Table>
@@ -78,7 +76,7 @@ object ListPanel : SimplePanel() {
             addHeaderCell(HeaderCell(""))
         }
 
-        hPanel(FlexWrap.WRAP, alignItems = FlexAlignItems.CENTER, spacing = 20) {
+        hPanel(FlexWrap.WRAP, alignItems = AlignItems.CENTER, spacing = 20) {
             search = textInput(TextInputType.SEARCH) {
                 placeholder = tr("Search ...")
             }
@@ -88,58 +86,58 @@ object ListPanel : SimplePanel() {
         }
 
         container = dataContainer(
-                Model.addresses, { address, index, _ ->
-            Row {
-                cell(address.firstName)
-                cell(address.lastName)
-                cell {
-                    address.email?.let {
-                        link(it, "mailto:$it") {
-                            fontStyle = FontStyle.ITALIC
+            Model.addresses, { address, index, _ ->
+                Row {
+                    cell(address.firstName)
+                    cell(address.lastName)
+                    cell {
+                        address.email?.let {
+                            link(it, "mailto:$it") {
+                                fontStyle = FontStyle.ITALIC
+                            }
                         }
                     }
-                }
-                cell {
-                    address.favourite?.let {
-                        if (it) icon("far fa-heart") {
-                            title = tr("Favourite")
+                    cell {
+                        address.favourite?.let {
+                            if (it) icon("far fa-heart") {
+                                title = tr("Favourite")
+                            }
                         }
                     }
-                }
-                cell {
-                    icon("fas fa-times") {
-                        title = tr("Delete")
-                        onEvent {
-                            click = { e ->
-                                e.stopPropagation()
-                                Confirm.show(tr("Are you sure?"), tr("Do you want to delete this address?")) {
-                                    EditPanel.delete(index)
+                    cell {
+                        icon("fas fa-times") {
+                            title = tr("Delete")
+                            onEvent {
+                                click = { e ->
+                                    e.stopPropagation()
+                                    Confirm.show(tr("Are you sure?"), tr("Do you want to delete this address?")) {
+                                        EditPanel.delete(index)
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                onEvent {
-                    click = {
-                        EditPanel.edit(index)
+                    onEvent {
+                        click = {
+                            EditPanel.edit(index)
+                        }
                     }
                 }
+            }, table, filter = { address ->
+                address.match(search.value) && (types.value == "all" || address.favourite ?: false)
+            }, sorter = {
+                when (sort) {
+                    Sort.FN -> it.firstName?.toLowerCase()
+                    Sort.LN -> it.lastName?.toLowerCase()
+                    Sort.E -> it.email?.toLowerCase()
+                    Sort.F -> it.favourite
+                }
+            }, sorterType = {
+                when (sort) {
+                    Sort.F -> SorterType.DESC
+                    else -> SorterType.ASC
+                }
             }
-        }, table, filter = { address ->
-            address.match(search.value) && (types.value == "all" || address.favourite ?: false)
-        }, sorter = {
-            when (sort) {
-                Sort.FN -> it.firstName?.toLowerCase()
-                Sort.LN -> it.lastName?.toLowerCase()
-                Sort.E -> it.email?.toLowerCase()
-                Sort.F -> it.favourite
-            }
-        }, sorterType = {
-            when (sort) {
-                Sort.F -> SorterType.DESC
-                else -> SorterType.ASC
-            }
-        }
         )
         search.onEvent {
             input = {

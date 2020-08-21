@@ -9,7 +9,7 @@ import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.span
 import pl.treksoft.kvision.i18n.I18n.gettext
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.FlexWrap
+import pl.treksoft.kvision.core.FlexWrap
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.vPanel

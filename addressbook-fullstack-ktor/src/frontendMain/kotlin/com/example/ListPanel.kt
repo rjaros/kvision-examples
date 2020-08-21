@@ -1,26 +1,26 @@
 package com.example
 
+import pl.treksoft.kvision.core.AlignItems
+import pl.treksoft.kvision.core.FlexWrap
 import pl.treksoft.kvision.core.FontStyle
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.data.dataContainer
 import pl.treksoft.kvision.form.check.RadioGroup
 import pl.treksoft.kvision.form.check.radioGroup
 import pl.treksoft.kvision.form.text.TextInput
-import pl.treksoft.kvision.form.text.textInput
 import pl.treksoft.kvision.form.text.TextInputType
+import pl.treksoft.kvision.form.text.textInput
 import pl.treksoft.kvision.html.icon
 import pl.treksoft.kvision.html.link
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.modal.Confirm
-import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.FlexWrap
-import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.table.cell
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.table.HeaderCell
 import pl.treksoft.kvision.table.Row
 import pl.treksoft.kvision.table.Table
 import pl.treksoft.kvision.table.TableType
+import pl.treksoft.kvision.table.cell
 import pl.treksoft.kvision.utils.px
 
 object ListPanel : SimplePanel() {
@@ -36,7 +36,7 @@ object ListPanel : SimplePanel() {
             addHeaderCell(HeaderCell(""))
         }
 
-        hPanel(FlexWrap.WRAP, alignItems = FlexAlignItems.CENTER, spacing = 20) {
+        hPanel(FlexWrap.WRAP, alignItems = AlignItems.CENTER, spacing = 20) {
             textInput(TextInputType.SEARCH) {
                 placeholder = "${tr("Search")} ..."
                 setEventListener<TextInput> {

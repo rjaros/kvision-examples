@@ -1,5 +1,6 @@
 package com.example
 
+import kotlinx.browser.window
 import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.html.image
 import pl.treksoft.kvision.onsenui.core.Navigator
@@ -15,7 +16,6 @@ import pl.treksoft.kvision.onsenui.visual.progressCircular
 import pl.treksoft.kvision.state.bind
 import pl.treksoft.kvision.state.observableListOf
 import pl.treksoft.kvision.utils.px
-import kotlin.browser.window
 import kotlin.random.Random
 
 data class Kitten(val name: String, val url: String)

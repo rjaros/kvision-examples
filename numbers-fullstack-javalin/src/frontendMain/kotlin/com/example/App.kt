@@ -3,15 +3,15 @@ package com.example
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import pl.treksoft.kvision.Application
+import pl.treksoft.kvision.core.AlignItems
+import pl.treksoft.kvision.core.JustifyContent
 import pl.treksoft.kvision.form.select.selectInput
 import pl.treksoft.kvision.form.text.textInput
-import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Div
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.html.span
-import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.panel.vPanel
@@ -27,10 +27,10 @@ class App : Application() {
 
     override fun start() {
         root("kvapp") {
-            vPanel(justify = FlexJustify.CENTER, alignItems = FlexAlignItems.CENTER, spacing = 50) {
+            vPanel(justify = JustifyContent.CENTER, alignItems = AlignItems.CENTER, spacing = 50) {
                 width = 100.perc
                 marginTop = 50.px
-                hPanel(justify = FlexJustify.CENTER, alignItems = FlexAlignItems.CENTER, spacing = 20) {
+                hPanel(justify = JustifyContent.CENTER, alignItems = AlignItems.CENTER, spacing = 20) {
                     span("Your number:")
                     val text = textInput {
                         width = 300.px

@@ -1,15 +1,27 @@
 package com.example
 
+import pl.treksoft.kvision.core.AlignItems
 import pl.treksoft.kvision.core.Background
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.Container
+import pl.treksoft.kvision.core.FlexDirection
+import pl.treksoft.kvision.core.FlexWrap
+import pl.treksoft.kvision.core.JustifyContent
+import pl.treksoft.kvision.core.JustifyItems
 import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.Div
 import pl.treksoft.kvision.html.Tag
 import pl.treksoft.kvision.html.h4
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.*
+import pl.treksoft.kvision.panel.Side
+import pl.treksoft.kvision.panel.SimplePanel
+import pl.treksoft.kvision.panel.dockPanel
+import pl.treksoft.kvision.panel.flexPanel
+import pl.treksoft.kvision.panel.gridPanel
+import pl.treksoft.kvision.panel.hPanel
+import pl.treksoft.kvision.panel.responsiveGridPanel
+import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.px
 
@@ -53,7 +65,7 @@ class LayoutsTab : SimplePanel() {
     private fun Container.addFlexPanel1() {
         h4(tr("CSS flexbox layouts"))
         flexPanel(
-            FlexDir.ROW, FlexWrap.WRAP, FlexJustify.FLEXEND, FlexAlignItems.CENTER,
+            FlexDirection.ROW, FlexWrap.WRAP, JustifyContent.FLEXEND, AlignItems.CENTER,
             spacing = 5
         ) {
             add(getDiv("1", 100))
@@ -64,7 +76,7 @@ class LayoutsTab : SimplePanel() {
 
     private fun Container.addFlexPanel2() {
         flexPanel(
-            FlexDir.ROW, FlexWrap.WRAP, FlexJustify.SPACEBETWEEN, FlexAlignItems.CENTER,
+            FlexDirection.ROW, FlexWrap.WRAP, JustifyContent.SPACEBETWEEN, AlignItems.CENTER,
             spacing = 5
         ) {
             add(getDiv("1", 100))
@@ -75,7 +87,7 @@ class LayoutsTab : SimplePanel() {
 
     private fun Container.addFlexPanel3() {
         flexPanel(
-            FlexDir.ROW, FlexWrap.WRAP, FlexJustify.CENTER, FlexAlignItems.CENTER,
+            FlexDirection.ROW, FlexWrap.WRAP, JustifyContent.CENTER, AlignItems.CENTER,
             spacing = 5
         ) {
             add(getDiv("1", 100))
@@ -86,7 +98,7 @@ class LayoutsTab : SimplePanel() {
 
     private fun Container.addFlexPanel4() {
         flexPanel(
-            FlexDir.ROW, FlexWrap.WRAP, FlexJustify.FLEXSTART, FlexAlignItems.CENTER,
+            FlexDirection.ROW, FlexWrap.WRAP, JustifyContent.FLEXSTART, AlignItems.CENTER,
             spacing = 5
         ) {
             add(getDiv("1", 100), order = 3)
@@ -97,7 +109,7 @@ class LayoutsTab : SimplePanel() {
 
     private fun Container.addFlexPanel5() {
         flexPanel(
-            FlexDir.COLUMN, FlexWrap.WRAP, FlexJustify.FLEXSTART, FlexAlignItems.FLEXEND,
+            FlexDirection.COLUMN, FlexWrap.WRAP, JustifyContent.FLEXSTART, AlignItems.FLEXEND,
             spacing = 5
         ) {
             add(getDiv("1", 100), order = 3)
@@ -108,7 +120,7 @@ class LayoutsTab : SimplePanel() {
 
     private fun Container.addGridPanel1() {
         h4(tr("CSS grid layouts"))
-        gridPanel(columnGap = 5, rowGap = 5, justifyItems = GridJustify.CENTER) {
+        gridPanel(columnGap = 5, rowGap = 5, justifyItems = JustifyItems.CENTER) {
             background = Background(Color.name(Col.KHAKI))
             add(getDiv("1,1", 100), 1, 1)
             add(getDiv("1,2", 100), 1, 2)
@@ -118,7 +130,7 @@ class LayoutsTab : SimplePanel() {
     }
 
     private fun Container.addGridPanel2() {
-        gridPanel(columnGap = 5, rowGap = 5, justifyItems = GridJustify.CENTER) {
+        gridPanel(columnGap = 5, rowGap = 5, justifyItems = JustifyItems.CENTER) {
             background = Background(Color.name(Col.CORNFLOWERBLUE))
             add(getDiv("1,1", 150), 1, 1)
             add(getDiv("2,2", 150), 2, 2)

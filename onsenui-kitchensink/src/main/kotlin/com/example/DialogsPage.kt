@@ -1,5 +1,6 @@
 package com.example
 
+import kotlinx.browser.window
 import pl.treksoft.kvision.core.onClick
 import pl.treksoft.kvision.html.Align
 import pl.treksoft.kvision.html.button
@@ -22,7 +23,6 @@ import pl.treksoft.kvision.onsenui.toolbar.toolbar
 import pl.treksoft.kvision.onsenui.toolbar.toolbarButton
 import pl.treksoft.kvision.onsenui.visual.icon
 import pl.treksoft.kvision.utils.obj
-import kotlin.browser.window
 
 fun Navigator.dialogsPage(app: App) {
     lateinit var infoButton: ToolbarButton

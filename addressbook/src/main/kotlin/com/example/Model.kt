@@ -1,14 +1,13 @@
 package com.example
 
+import kotlinx.browser.localStorage
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.builtins.list
 import org.w3c.dom.get
 import org.w3c.dom.set
 import pl.treksoft.kvision.state.ObservableList
 import pl.treksoft.kvision.state.observableListOf
-import kotlin.browser.localStorage
 
 @Serializable
 data class Address(
@@ -33,17 +32,15 @@ object Model {
         Address("William", "Gordon", "w.gordon@mail.com", false)
     )
 
-    @UnstableDefault
     fun storeAddresses() {
-        val jsonString = Json.stringify(Address.serializer().list, addresses)
+        val jsonString = Json.encodeToString(ListSerializer(Address.serializer()), addresses)
         localStorage["addresses"] = jsonString
     }
 
-    @UnstableDefault
     fun loadAddresses() {
         localStorage["addresses"]?.let { address ->
             addresses.clear()
-            Json.parse(Address.serializer().list, address).forEach {
+            Json.decodeFromString(ListSerializer(Address.serializer()), address).forEach {
                 addresses.add(it)
             }
         }

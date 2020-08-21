@@ -1,5 +1,6 @@
 package com.example
 
+import kotlinx.browser.window
 import pl.treksoft.kvision.core.onClick
 import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.html.image
@@ -11,7 +12,6 @@ import pl.treksoft.kvision.onsenui.list.onsListTitle
 import pl.treksoft.kvision.onsenui.splitter.SplitterSide
 import pl.treksoft.kvision.onsenui.visual.icon
 import pl.treksoft.kvision.require
-import kotlin.browser.window
 
 data class AccessItem(val title: String, val icon: String)
 

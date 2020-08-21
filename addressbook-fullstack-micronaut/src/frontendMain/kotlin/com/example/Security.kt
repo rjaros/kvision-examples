@@ -2,7 +2,6 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.FormPanel
 import pl.treksoft.kvision.form.formPanel

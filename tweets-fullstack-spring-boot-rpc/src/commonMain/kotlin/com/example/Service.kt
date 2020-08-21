@@ -1,9 +1,9 @@
-@file:ContextualSerialization(LocalDateTime::class)
+@file:UseContextualSerialization(LocalDateTime::class)
 
 package com.example
 
-import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseContextualSerialization
 import pl.treksoft.kvision.annotations.KVService
 import pl.treksoft.kvision.types.LocalDateTime
 

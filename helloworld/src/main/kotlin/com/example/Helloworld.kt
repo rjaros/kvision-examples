@@ -1,12 +1,12 @@
 package com.example
 
 import pl.treksoft.kvision.Application
+import pl.treksoft.kvision.core.FlexDirection
+import pl.treksoft.kvision.core.JustifyContent
 import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.FlexDir
-import pl.treksoft.kvision.panel.FlexJustify
 import pl.treksoft.kvision.panel.flexPanel
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.require
@@ -35,7 +35,7 @@ class Helloworld : Application() {
             )
 
         root("helloworld") {
-            flexPanel(FlexDir.ROW, justify = FlexJustify.CENTER) {
+            flexPanel(FlexDirection.ROW, justify = JustifyContent.CENTER) {
                 div(tr("Hello world!"), classes = setOf("helloworld")) {
                     marginTop = 50.px
                     fontSize = 50.px

@@ -1,6 +1,7 @@
 package com.example
 
 import pl.treksoft.jquery.jQuery
+import pl.treksoft.jquery.invoke
 import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.core.Background
 import pl.treksoft.kvision.core.Color

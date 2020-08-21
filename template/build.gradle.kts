@@ -17,13 +17,6 @@ repositories {
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     maven { url = uri("https://kotlin.bintray.com/kotlinx") }
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
-    maven {
-        url = uri("https://dl.bintray.com/gbaldeck/kotlin")
-        metadataSources {
-            mavenPom()
-            artifact()
-        }
-    }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     mavenLocal()
 }
@@ -39,6 +32,7 @@ kotlin {
         browser {
             runTask {
                 outputFileName = "main.bundle.js"
+                sourceMaps = false
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,

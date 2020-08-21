@@ -1,8 +1,12 @@
 package com.example
 
-import kotlinx.serialization.builtins.list
+import kotlinx.browser.document
+import kotlinx.serialization.builtins.ListSerializer
 import pl.treksoft.kvision.Application
+import pl.treksoft.kvision.core.AlignItems
 import pl.treksoft.kvision.core.Container
+import pl.treksoft.kvision.core.JustifyContent
+import pl.treksoft.kvision.core.JustifyItems
 import pl.treksoft.kvision.core.TextAlign
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.text
@@ -12,9 +16,6 @@ import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.gettext
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.FlexJustify
-import pl.treksoft.kvision.panel.GridJustify
 import pl.treksoft.kvision.panel.gridPanel
 import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.root
@@ -30,7 +31,6 @@ import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.obj
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
-import kotlin.browser.document
 
 class App : Application() {
 
@@ -48,10 +48,11 @@ class App : Application() {
             )
 
         root("kvapp") {
-            vPanel(alignItems = FlexAlignItems.STRETCH) {
+            vPanel(alignItems = AlignItems.STRETCH) {
+                marginTop = 10.px
                 width = 100.perc
                 searchField()
-                vPanel(alignItems = FlexAlignItems.STRETCH) {
+                vPanel(alignItems = AlignItems.STRETCH) {
                     maxWidth = 1200.px
                     textAlign = TextAlign.CENTER
                     marginLeft = auto
@@ -101,7 +102,7 @@ class App : Application() {
     private fun Container.pokemonGrid(state: Pokedex) {
         gridPanel(
             templateColumns = "repeat(auto-fill, minmax(250px, 1fr))",
-            justifyItems = GridJustify.CENTER
+            justifyItems = JustifyItems.CENTER
         ) {
             state.visiblePokemons.forEach {
                 add(PokeBox(it))
@@ -110,7 +111,7 @@ class App : Application() {
     }
 
     private fun Container.pagination(state: Pokedex) {
-        hPanel(justify = FlexJustify.CENTER) {
+        hPanel(justify = JustifyContent.CENTER) {
             margin = 30.px
             buttonGroup {
                 button("<<") {
@@ -136,7 +137,7 @@ class App : Application() {
             dispatch(PokeAction.StartDownload)
             restClient.remoteCall(
                 "https://pokeapi.co/api/v2/pokemon/", obj { limit = 800 },
-                deserializer = Pokemon.serializer().list
+                deserializer = ListSerializer(Pokemon.serializer())
             ) {
                 it.results
             }.then { list ->

@@ -1,14 +1,13 @@
 package com.example
 
-import kotlinx.serialization.UnstableDefault
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.FormPanel
-import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.check.CheckBox
+import pl.treksoft.kvision.form.formPanel
 import pl.treksoft.kvision.form.text.Text
 import pl.treksoft.kvision.form.text.TextInputType
-import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.ButtonStyle
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
@@ -17,7 +16,6 @@ import pl.treksoft.kvision.panel.simplePanel
 import pl.treksoft.kvision.utils.ENTER_KEY
 import pl.treksoft.kvision.utils.px
 
-@UnstableDefault
 object EditPanel : StackPanel() {
 
     private var editingIndex: Int? = null

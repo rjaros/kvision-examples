@@ -6,13 +6,6 @@ plugins {
 repositories {
     mavenCentral()
     jcenter()
-    maven {
-        url = uri("https://dl.bintray.com/gbaldeck/kotlin")
-        metadataSources {
-            mavenPom()
-            artifact()
-        }
-    }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     mavenLocal()
 }
@@ -20,12 +13,11 @@ repositories {
 val kvisionVersion: String by System.getProperties()
 
 kotlin {
-    target {
+    js {
         browser {
         }
     }
     sourceSets["main"].dependencies {
-        implementation(kotlin("stdlib-js"))
         implementation("pl.treksoft:kvision:$kvisionVersion")
     }
 }

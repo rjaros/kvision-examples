@@ -1,9 +1,12 @@
 package com.example
 
+import kotlinx.browser.document
 import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Component
+import pl.treksoft.kvision.core.FlexDirection
+import pl.treksoft.kvision.core.FlexWrap
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.dropdown.ddLink
 import pl.treksoft.kvision.dropdown.dropDown
@@ -14,15 +17,12 @@ import pl.treksoft.kvision.navbar.Nav
 import pl.treksoft.kvision.navbar.NavbarType
 import pl.treksoft.kvision.navbar.nav
 import pl.treksoft.kvision.navbar.navbar
-import pl.treksoft.kvision.panel.FlexDir
-import pl.treksoft.kvision.panel.FlexWrap
 import pl.treksoft.kvision.panel.flexPanel
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.px
 import pl.treksoft.kvision.utils.vh
-import kotlin.browser.document
 
 class App : Application() {
     init {
@@ -57,7 +57,7 @@ class App : Application() {
                 }
                 taskBar = nav()
             }
-            flexPanel(FlexDir.COLUMN, FlexWrap.WRAP, spacing = 20) {
+            flexPanel(FlexDirection.COLUMN, FlexWrap.WRAP, spacing = 20) {
                 padding = 20.px
                 paddingTop = 70.px
                 height = 100.vh

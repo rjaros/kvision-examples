@@ -1,5 +1,6 @@
 package com.example
 
+import kotlinx.browser.window
 import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.html.p
@@ -20,7 +21,6 @@ import pl.treksoft.kvision.onsenui.visual.icon
 import pl.treksoft.kvision.state.bind
 import pl.treksoft.kvision.state.observableListOf
 import pl.treksoft.kvision.utils.px
-import kotlin.browser.window
 
 object InfiniteScrollModel {
     val items = observableListOf<Int>().apply {

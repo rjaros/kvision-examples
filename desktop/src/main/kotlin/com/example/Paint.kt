@@ -5,6 +5,7 @@
 package com.example
 
 import org.w3c.dom.CanvasRenderingContext2D
+import pl.treksoft.kvision.core.AlignItems
 import pl.treksoft.kvision.core.Background
 import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
@@ -13,16 +14,15 @@ import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.html.Button
-import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.ButtonStyle
 import pl.treksoft.kvision.html.Canvas
+import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.icon
 import pl.treksoft.kvision.modal.Confirm
-import pl.treksoft.kvision.panel.dockPanel
-import pl.treksoft.kvision.panel.FlexAlignItems
-import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.Side
 import pl.treksoft.kvision.panel.VPanel
+import pl.treksoft.kvision.panel.dockPanel
+import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 import kotlin.math.PI
@@ -49,7 +49,7 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
             val buttons = VPanel(spacing = 5) {
                 width = 80.px
                 height = 100.perc
-                alignItems = FlexAlignItems.CENTER
+                alignItems = AlignItems.CENTER
                 paddingTop = 5.px
                 buttonPoint = button("", "fas fa-circle", ButtonStyle.SECONDARY) {
                     title = "Point"

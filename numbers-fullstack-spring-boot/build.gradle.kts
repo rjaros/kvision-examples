@@ -16,6 +16,8 @@ plugins {
     id("kvision") version kvisionVersion
 }
 
+extra["kotlin.version"] = "1.4.0"
+
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
 
@@ -25,13 +27,6 @@ repositories {
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     maven { url = uri("https://kotlin.bintray.com/kotlinx") }
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
-    maven {
-        url = uri("https://dl.bintray.com/gbaldeck/kotlin")
-        metadataSources {
-            mavenPom()
-            artifact()
-        }
-    }
     maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     maven { url = uri("https://repo.spring.io/milestone") }
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
@@ -41,6 +36,7 @@ repositories {
 // Versions
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
+val coroutinesVersion: String by project
 
 val webDir = file("src/frontendMain/web")
 val mainClassName = "com.example.MainKt"
@@ -59,6 +55,7 @@ kotlin {
         browser {
             runTask {
                 outputFileName = "main.bundle.js"
+                sourceMaps = false
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
@@ -82,8 +79,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-common"))
                 api("pl.treksoft:kvision-server-spring-boot:$kvisionVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
             }
             kotlin.srcDir("build/generated-src/common")
         }
@@ -113,11 +110,6 @@ kotlin {
         val frontendMain by getting {
             resources.srcDir(webDir)
             dependencies {
-                implementation(kotlin("stdlib-js"))
-                implementation(npm("po2json"))
-                implementation(npm("grunt"))
-                implementation(npm("grunt-pot"))
-
                 implementation("pl.treksoft:kvision:$kvisionVersion")
                 implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
                 implementation("pl.treksoft:kvision-bootstrap-css:$kvisionVersion")
@@ -135,7 +127,7 @@ kotlin {
 }
 
 fun getNodeJsBinaryExecutable(): String {
-    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTask.destination
+    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTaskProvider.get().destination
     val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
     val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
     val command = NodeJsRootPlugin.apply(project).nodeCommand
@@ -144,39 +136,10 @@ fun getNodeJsBinaryExecutable(): String {
 }
 
 tasks {
-    create("generateGruntfile") {
-        outputs.file("$buildDir/js/Gruntfile.js")
-        doLast {
-            file("$buildDir/js/Gruntfile.js").run {
-                writeText(
-                    """
-                    module.exports = function (grunt) {
-                        grunt.initConfig({
-                            pot: {
-                                options: {
-                                    text_domain: "messages",
-                                    dest: "../../src/frontendMain/resources/i18n/",
-                                    keywords: ["tr", "ntr:1,2", "gettext", "ngettext:1,2"],
-                                    encoding: "UTF-8"
-                                },
-                                files: {
-                                    src: ["../../src/frontendMain/kotlin/**/*.kt"],
-                                    expand: true,
-                                },
-                            }
-                        });
-                        grunt.loadNpmTasks("grunt-pot");
-                    };
-                """.trimIndent()
-                )
-            }
-        }
-    }
     create("generatePotFile", Exec::class) {
-        dependsOn("compileKotlinFrontend", "generateGruntfile")
-        workingDir = file("$buildDir/js")
+        dependsOn("compileKotlinFrontend")
         executable = getNodeJsBinaryExecutable()
-        args("$buildDir/js/node_modules/grunt/bin/grunt", "pot")
+        args("$buildDir/js/node_modules/gettext-extract/bin/gettext-extract")
         inputs.files(kotlin.sourceSets["frontendMain"].kotlin.files)
         outputs.file("$projectDir/src/frontendMain/resources/i18n/messages.pot")
     }
@@ -193,11 +156,9 @@ afterEvaluate {
                     exec {
                         executable = getNodeJsBinaryExecutable()
                         args(
-                            "$buildDir/js/node_modules/po2json/bin/po2json",
+                            "$buildDir/js/node_modules/gettext.js/bin/po2json",
                             it.absolutePath,
-                            "${it.parent}/${it.nameWithoutExtension}.json",
-                            "-f",
-                            "jed1.x"
+                            "${it.parent}/${it.nameWithoutExtension}.json"
                         )
                         println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
                     }

@@ -1,14 +1,13 @@
 package com.example
 
+import kotlinx.browser.localStorage
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
-import kotlinx.serialization.builtins.list
 import org.w3c.dom.get
 import org.w3c.dom.set
 import pl.treksoft.kvision.state.ObservableList
 import pl.treksoft.kvision.state.observableListOf
-import kotlin.browser.localStorage
 
 @Serializable
 data class Address(
@@ -61,17 +60,17 @@ object Model {
     }
 
     private fun storeAddresses() {
-        val jsonString = Json(JsonConfiguration.Stable).stringify(Address.serializer().list, addresses)
+        val jsonString = Json.encodeToString(ListSerializer(Address.serializer()), addresses)
         localStorage["addressesTabulator"] = jsonString
     }
 
     fun loadAddresses() {
         localStorage["addressesTabulator"]?.let {
             addresses.clear()
-            Json(JsonConfiguration.Stable).parse(Address.serializer().list, it).forEach {
+            Json.decodeFromString(ListSerializer(Address.serializer()), it).forEach {
                 addresses.add(it)
             }
-            counter = (addresses.maxBy { it.id ?: 0 }?.id ?: 0) + 1
+            counter = (addresses.maxByOrNull { it.id ?: 0 }?.id ?: 0) + 1
         }
     }
 }

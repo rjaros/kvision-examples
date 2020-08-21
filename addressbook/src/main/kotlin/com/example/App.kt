@@ -1,6 +1,5 @@
 package com.example
 
-import kotlinx.serialization.UnstableDefault
 import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
@@ -16,7 +15,6 @@ class App : Application() {
         require("css/kvapp.css")
     }
 
-    @UnstableDefault
     override fun start() {
         I18n.manager =
             DefaultI18nManager(
