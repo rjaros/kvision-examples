@@ -56,13 +56,7 @@ kotlin {
         }
     }
     sourceSets["main"].dependencies {
-        implementation(kotlin("stdlib-js"))
-        implementation(npm("po2json", "*"))
-        implementation(npm("grunt", "*"))
-        implementation(npm("grunt-pot", "*"))
-
         implementation(npm("electron-builder", "^22.7.0"))
-
         implementation("pl.treksoft:kvision:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap-css:$kvisionVersion")
