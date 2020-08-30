@@ -1,25 +1,23 @@
 package com.example
 
-import fs.readFileSync
 import kotlinx.browser.window
 import pl.treksoft.kvision.Application
+import pl.treksoft.kvision.core.AlignItems
 import pl.treksoft.kvision.electron.electron.BrowserWindow
 import pl.treksoft.kvision.electron.electron.BrowserWindowConstructorOptions
-import pl.treksoft.kvision.electron.electron.OpenDialogSyncOptions
 import pl.treksoft.kvision.electron.electron.remote
 import pl.treksoft.kvision.electron.global
-import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.FlexAlignItems
 import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
 import pl.treksoft.kvision.utils.createInstance
+import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
 class ElectronApp : Application() {
@@ -37,23 +35,13 @@ class ElectronApp : Application() {
             )
 
         root("kvapp") {
-            vPanel(alignItems = FlexAlignItems.CENTER, spacing = 30) {
+            vPanel(alignItems = AlignItems.CENTER, spacing = 30) {
+                width = 100.perc
                 marginTop = 50.px
                 fontSize = 30.px
                 hPanel(spacing = 20) {
                     div(tr("Electron version"))
                     div(global.process.versions.electron)
-                    button("open file") {
-                        onClick {
-                            val paths = remote.dialog.showOpenDialogSync(object : OpenDialogSyncOptions {}.apply {
-                                title = "Open dialog title"
-                            })
-                            if (paths != undefined) {
-                                val contents = readFileSync(paths[0], "utf8")
-                                this.text = contents
-                            }
-                        }
-                    }
                 }
                 hPanel(spacing = 20) {
                     div(tr("Chrome version"))
