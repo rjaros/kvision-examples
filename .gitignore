@@ -9,3 +9,4 @@ build-fullstack.sh
 *.ipr
 *.iws
 /.idea/
+copytodocs.sh

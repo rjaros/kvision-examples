@@ -25,7 +25,6 @@ import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.rest.RestClient
 import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.state.bind
 import pl.treksoft.kvision.toolbar.buttonGroup
 import pl.treksoft.kvision.utils.auto
 import pl.treksoft.kvision.utils.obj
@@ -52,12 +51,11 @@ class App : Application() {
                 marginTop = 10.px
                 width = 100.perc
                 searchField()
-                vPanel(alignItems = AlignItems.STRETCH) {
+                vPanel(store, alignItems = AlignItems.STRETCH) { state ->
                     maxWidth = 1200.px
                     textAlign = TextAlign.CENTER
                     marginLeft = auto
                     marginRight = auto
-                }.bind(store) { state ->
                     informationText(state)
                     if (!state.downloading && state.errorMessage == null) {
                         pokemonGrid(state)

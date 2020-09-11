@@ -16,7 +16,7 @@ plugins {
     id("kvision") version kvisionVersion
 }
 
-extra["kotlin.version"] = "1.4.0"
+extra["kotlin.version"] = "1.4.10"
 
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
