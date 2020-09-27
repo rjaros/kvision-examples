@@ -5,17 +5,17 @@ import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.dropdown.dropDown
-import pl.treksoft.kvision.html.TAG
-import pl.treksoft.kvision.html.Tag
-import pl.treksoft.kvision.html.tag
+import pl.treksoft.kvision.html.div
+import pl.treksoft.kvision.html.h4
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.Direction
 import pl.treksoft.kvision.panel.SideTabSize
 import pl.treksoft.kvision.panel.SimplePanel
+import pl.treksoft.kvision.panel.TabPosition
 import pl.treksoft.kvision.panel.splitPanel
 import pl.treksoft.kvision.panel.stackPanel
+import pl.treksoft.kvision.panel.tab
 import pl.treksoft.kvision.panel.tabPanel
-import pl.treksoft.kvision.panel.TabPosition
 import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.utils.px
 
@@ -33,16 +33,20 @@ class ContainersTab : SimplePanel() {
     }
 
     private fun Container.addStackPanel() {
-        tag(TAG.H4, tr("Stack panel"))
+        h4(tr("Stack panel"))
         stackPanel {
-            add(Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Color.name(Col.BLUE))
-                height = 40.px
-            }, "/containers/blue")
-            add(Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Color.name(Col.GREEN))
-                height = 40.px
-            }, "/containers/green")
+            route("/containers/blue") {
+                div("&nbsp;", rich = true) {
+                    background = Background(Color.name(Col.BLUE))
+                    height = 40.px
+                }
+            }
+            route("/containers/green") {
+                div("&nbsp;", rich = true) {
+                    background = Background(Color.name(Col.GREEN))
+                    height = 40.px
+                }
+            }
         }
         dropDown(
             tr("Activate panel from the stack"), listOf(
@@ -53,59 +57,73 @@ class ContainersTab : SimplePanel() {
     }
 
     private fun Container.addTabPanel() {
-        tag(TAG.H4, tr("Tab panel"))
-        tabPanel {
-            addTab(tr("Blue panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Color.name(Col.BLUE))
-                height = 40.px
-            })
-            addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Color.name(Col.GREEN))
-                height = 40.px
-            })
-            addTab(tr("Red panel (closable)"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Color.name(Col.RED))
-                height = 40.px
-            }, closable = true)
+        h4(tr("Tab panel with draggable tabs"))
+        tabPanel(draggableTabs = true) {
+            tab(tr("Blue panel")) {
+                div("&nbsp;", rich = true) {
+                    background = Background(Color.name(Col.BLUE))
+                    height = 40.px
+                }
+            }
+            tab(tr("Green panel")) {
+                div("&nbsp;", rich = true) {
+                    background = Background(Color.name(Col.GREEN))
+                    height = 40.px
+                }
+            }
+            tab(tr("Red panel (closable)"), closable = true) {
+                div("&nbsp;", rich = true) {
+                    background = Background(Color.name(Col.RED))
+                    height = 40.px
+                }
+            }
         }
     }
 
     private fun Container.addTabPanelLeft() {
-        tag(TAG.H4, tr("Tab panel with tabs on the left"))
+        h4(tr("Tab panel with tabs on the left"))
         tabPanel(TabPosition.LEFT, SideTabSize.SIZE_1) {
-            addTab(tr("Blue panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Color.name(Col.BLUE))
-                height = 140.px
-            })
-            addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Color.name(Col.GREEN))
-                height = 140.px
-            })
+            tab(tr("Blue panel")) {
+                div("&nbsp;", rich = true) {
+                    background = Background(Color.name(Col.BLUE))
+                    height = 140.px
+                }
+            }
+            tab(tr("Green panel")) {
+                div("&nbsp;", rich = true) {
+                    background = Background(Color.name(Col.GREEN))
+                    height = 140.px
+                }
+            }
         }
     }
 
     private fun Container.addTabPanelRight() {
-        tag(TAG.H4, tr("Tab panel with tabs on the right"))
+        h4(tr("Tab panel with tabs on the right"))
         tabPanel(TabPosition.RIGHT, SideTabSize.SIZE_1) {
-            addTab(tr("Blue panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Color.name(Col.BLUE))
-                height = 140.px
-            })
-            addTab(tr("Green panel"), Tag(TAG.DIV, "&nbsp;", rich = true) {
-                background = Background(Color.name(Col.GREEN))
-                height = 140.px
-            })
+            tab(tr("Blue panel")) {
+                div("&nbsp;", rich = true) {
+                    background = Background(Color.name(Col.BLUE))
+                    height = 140.px
+                }
+            }
+            tab(tr("Green panel")) {
+                div("&nbsp;", rich = true) {
+                    background = Background(Color.name(Col.GREEN))
+                    height = 140.px
+                }
+            }
         }
     }
 
     private fun Container.addVerticalSplitPanel() {
-        tag(TAG.H4, tr("Vertical split panel"))
+        h4(tr("Vertical split panel"))
         splitPanel {
-            tag(TAG.DIV, "&nbsp;", rich = true) {
+            div("&nbsp;", rich = true) {
                 background = Background(Color.name(Col.BLUE))
                 height = 200.px
             }
-            tag(TAG.DIV, "&nbsp;", rich = true) {
+            div("&nbsp;", rich = true) {
                 background = Background(Color.name(Col.GREEN))
                 height = 200.px
             }
@@ -113,14 +131,14 @@ class ContainersTab : SimplePanel() {
     }
 
     private fun Container.addHorizontalSplitPanel() {
-        tag(TAG.H4, tr("Horizontal split panel"))
+        h4(tr("Horizontal split panel"))
         splitPanel(direction = Direction.HORIZONTAL) {
             height = 220.px
-            tag(TAG.DIV, "&nbsp;", rich = true) {
+            div("&nbsp;", rich = true) {
                 background = Background(Color.name(Col.BLUE))
                 height = 100.px
             }
-            tag(TAG.DIV, "&nbsp;", rich = true) {
+            div("&nbsp;", rich = true) {
                 background = Background(Color.name(Col.GREEN))
                 height = 100.px
             }

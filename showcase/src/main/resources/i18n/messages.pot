@@ -35,12 +35,16 @@ msgstr ""
 msgid "A simple label"
 msgstr ""
 
-#: src/main/kotlin/com/example/ContainersTab.kt:48
+#: src/main/kotlin/com/example/ContainersTab.kt:52
 msgid "Activate panel from the stack"
 msgstr ""
 
 #: src/main/kotlin/com/example/TabulatorTab.kt:134
 msgid "Active"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:57
+msgid "Add a dot"
 msgstr ""
 
 #: src/main/kotlin/com/example/TabulatorTab.kt:203
@@ -49,6 +53,10 @@ msgstr ""
 
 #: src/main/kotlin/com/example/FormTab.kt:89
 msgid "Add some info"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:49
+msgid "Add some input"
 msgstr ""
 
 #: src/main/kotlin/com/example/FormTab.kt:125
@@ -79,7 +87,7 @@ msgstr ""
 msgid "An image:"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:39
+#: src/main/kotlin/com/example/DataTab.kt:74
 #: src/main/kotlin/com/example/DragDropTab.kt:33
 msgid "April"
 msgstr ""
@@ -95,22 +103,22 @@ msgstr ""
 msgid "Asia"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:43
+#: src/main/kotlin/com/example/DataTab.kt:78
 #: src/main/kotlin/com/example/DragDropTab.kt:37
 msgid "August"
 msgstr ""
 
-#: src/main/kotlin/com/example/ContainersTab.kt:49
-#: src/main/kotlin/com/example/ContainersTab.kt:58
-#: src/main/kotlin/com/example/ContainersTab.kt:76
-#: src/main/kotlin/com/example/ContainersTab.kt:90
+#: src/main/kotlin/com/example/ContainersTab.kt:104
+#: src/main/kotlin/com/example/ContainersTab.kt:53
+#: src/main/kotlin/com/example/ContainersTab.kt:62
+#: src/main/kotlin/com/example/ContainersTab.kt:86
 msgid "Blue panel"
 msgstr ""
 
 #: src/main/kotlin/com/example/DropDownTab.kt:58
 #: src/main/kotlin/com/example/DropDownTab.kt:77
 #: src/main/kotlin/com/example/DropDownTab.kt:97
-#: src/main/kotlin/com/example/Showcase.kt:52
+#: src/main/kotlin/com/example/Showcase.kt:56
 msgid "Buttons"
 msgstr ""
 
@@ -125,15 +133,15 @@ msgstr ""
 msgid "Cancelable confirm dialog"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:144
+#: src/main/kotlin/com/example/LayoutsTab.kt:156
 msgid "CENTER"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:59
+#: src/main/kotlin/com/example/Showcase.kt:77
 msgid "Charts"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:82
+#: src/main/kotlin/com/example/DataTab.kt:117
 msgid "Check all"
 msgstr ""
 
@@ -173,15 +181,15 @@ msgstr ""
 #: src/main/kotlin/com/example/DropDownTab.kt:101
 #: src/main/kotlin/com/example/DropDownTab.kt:60
 #: src/main/kotlin/com/example/DropDownTab.kt:81
-#: src/main/kotlin/com/example/Showcase.kt:54
+#: src/main/kotlin/com/example/Showcase.kt:62
 msgid "Containers"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:54
+#: src/main/kotlin/com/example/LayoutsTab.kt:66
 msgid "CSS flexbox layouts"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:110
+#: src/main/kotlin/com/example/LayoutsTab.kt:122
 msgid "CSS grid layouts"
 msgstr ""
 
@@ -206,7 +214,7 @@ msgstr ""
 msgid "Danger radiobutton"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:57
+#: src/main/kotlin/com/example/Showcase.kt:71
 msgid "Data binding"
 msgstr ""
 
@@ -219,7 +227,7 @@ msgstr ""
 msgid "Date field with a placeholder"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:80
+#: src/main/kotlin/com/example/DataTab.kt:115
 #: src/main/kotlin/com/example/DragDropTab.kt:44
 msgid "December"
 msgstr ""
@@ -240,15 +248,15 @@ msgstr ""
 msgid "Do you want to clear your data?"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:141
+#: src/main/kotlin/com/example/LayoutsTab.kt:153
 msgid "Dock layout"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:148
+#: src/main/kotlin/com/example/LayoutsTab.kt:160
 msgid "DOWN"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:58
+#: src/main/kotlin/com/example/Showcase.kt:74
 msgid "Drag & Drop"
 msgstr ""
 
@@ -274,7 +282,7 @@ msgstr ""
 
 #: src/main/kotlin/com/example/DropDownTab.kt:59
 #: src/main/kotlin/com/example/DropDownTab.kt:98
-#: src/main/kotlin/com/example/Showcase.kt:53
+#: src/main/kotlin/com/example/Showcase.kt:59
 msgid "Dropdowns"
 msgstr ""
 
@@ -286,7 +294,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:63
+#: src/main/kotlin/com/example/Showcase.kt:87
 msgid "English"
 msgstr ""
 
@@ -308,7 +316,7 @@ msgstr ""
 msgid "Favourites"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:37
+#: src/main/kotlin/com/example/DataTab.kt:72
 #: src/main/kotlin/com/example/DragDropTab.kt:31
 msgid "February"
 msgstr ""
@@ -335,14 +343,14 @@ msgstr ""
 #: src/main/kotlin/com/example/DropDownTab.kt:57
 #: src/main/kotlin/com/example/DropDownTab.kt:76
 #: src/main/kotlin/com/example/DropDownTab.kt:96
-#: src/main/kotlin/com/example/Showcase.kt:51
+#: src/main/kotlin/com/example/Showcase.kt:53
 msgid "Forms"
 msgstr ""
 
-#: src/main/kotlin/com/example/ContainersTab.kt:50
-#: src/main/kotlin/com/example/ContainersTab.kt:62
-#: src/main/kotlin/com/example/ContainersTab.kt:80
-#: src/main/kotlin/com/example/ContainersTab.kt:94
+#: src/main/kotlin/com/example/ContainersTab.kt:110
+#: src/main/kotlin/com/example/ContainersTab.kt:54
+#: src/main/kotlin/com/example/ContainersTab.kt:68
+#: src/main/kotlin/com/example/ContainersTab.kt:92
 msgid "Green panel"
 msgstr ""
 
@@ -350,11 +358,11 @@ msgstr ""
 msgid "Header"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:36
+#: src/main/kotlin/com/example/LayoutsTab.kt:48
 msgid "Horizontal layout"
 msgstr ""
 
-#: src/main/kotlin/com/example/ContainersTab.kt:116
+#: src/main/kotlin/com/example/ContainersTab.kt:134
 msgid "Horizontal split panel"
 msgstr ""
 
@@ -378,17 +386,21 @@ msgstr ""
 msgid "Info radiobutton"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:36
+#: src/main/kotlin/com/example/DataTab.kt:48
+msgid "Input"
+msgstr ""
+
+#: src/main/kotlin/com/example/DataTab.kt:71
 #: src/main/kotlin/com/example/DragDropTab.kt:30
 msgid "January"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:42
+#: src/main/kotlin/com/example/DataTab.kt:77
 #: src/main/kotlin/com/example/DragDropTab.kt:36
 msgid "July"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:41
+#: src/main/kotlin/com/example/DataTab.kt:76
 #: src/main/kotlin/com/example/DragDropTab.kt:35
 msgid "June"
 msgstr ""
@@ -403,11 +415,11 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:55
+#: src/main/kotlin/com/example/Showcase.kt:65
 msgid "Layouts"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:145
+#: src/main/kotlin/com/example/LayoutsTab.kt:157
 msgid "LEFT"
 msgstr ""
 
@@ -415,12 +427,12 @@ msgstr ""
 msgid "Link button"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:38
+#: src/main/kotlin/com/example/DataTab.kt:73
 #: src/main/kotlin/com/example/DragDropTab.kt:32
 msgid "March"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:40
+#: src/main/kotlin/com/example/DataTab.kt:75
 #: src/main/kotlin/com/example/DragDropTab.kt:34
 msgid "May"
 msgstr ""
@@ -445,12 +457,12 @@ msgstr ""
 msgid "North America"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:46
+#: src/main/kotlin/com/example/DataTab.kt:81
 #: src/main/kotlin/com/example/DragDropTab.kt:40
 msgid "November"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:45
+#: src/main/kotlin/com/example/DataTab.kt:80
 #: src/main/kotlin/com/example/DragDropTab.kt:39
 msgid "October"
 msgstr ""
@@ -480,7 +492,7 @@ msgstr ""
 msgid "Passwords are not the same"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:63
+#: src/main/kotlin/com/example/Showcase.kt:87
 msgid "Polish"
 msgstr ""
 
@@ -516,11 +528,11 @@ msgstr ""
 msgid "React progress button"
 msgstr ""
 
-#: src/main/kotlin/com/example/ContainersTab.kt:66
+#: src/main/kotlin/com/example/ContainersTab.kt:74
 msgid "Red panel (closable)"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:91
+#: src/main/kotlin/com/example/DataTab.kt:126
 msgid "Remove checked"
 msgstr ""
 
@@ -536,11 +548,11 @@ msgstr ""
 msgid "Resizable"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:130
+#: src/main/kotlin/com/example/LayoutsTab.kt:142
 msgid "Responsive grid layout"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:61
+#: src/main/kotlin/com/example/Showcase.kt:83
 msgid "RESTful"
 msgstr ""
 
@@ -551,7 +563,7 @@ msgstr ""
 msgid "Result"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:88
+#: src/main/kotlin/com/example/DataTab.kt:123
 msgid "Reverse list"
 msgstr ""
 
@@ -563,7 +575,7 @@ msgstr ""
 msgid "Rich text field with a placeholder"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:146
+#: src/main/kotlin/com/example/LayoutsTab.kt:158
 msgid "RIGHT"
 msgstr ""
 
@@ -575,7 +587,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:71
+#: src/main/kotlin/com/example/DataTab.kt:106
 msgid "Search ..."
 msgstr ""
 
@@ -606,7 +618,7 @@ msgstr ""
 msgid "Separator"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:44
+#: src/main/kotlin/com/example/DataTab.kt:79
 #: src/main/kotlin/com/example/DragDropTab.kt:38
 msgid "September"
 msgstr ""
@@ -663,19 +675,19 @@ msgstr ""
 msgid "System"
 msgstr ""
 
-#: src/main/kotlin/com/example/ContainersTab.kt:56
-msgid "Tab panel"
+#: src/main/kotlin/com/example/ContainersTab.kt:60
+msgid "Tab panel with draggable tabs"
 msgstr ""
 
-#: src/main/kotlin/com/example/ContainersTab.kt:74
+#: src/main/kotlin/com/example/ContainersTab.kt:84
 msgid "Tab panel with tabs on the left"
 msgstr ""
 
-#: src/main/kotlin/com/example/ContainersTab.kt:88
+#: src/main/kotlin/com/example/ContainersTab.kt:102
 msgid "Tab panel with tabs on the right"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:60
+#: src/main/kotlin/com/example/Showcase.kt:80
 msgid "Tables"
 msgstr ""
 
@@ -711,11 +723,11 @@ msgstr ""
 msgid "Typeahead"
 msgstr ""
 
-#: src/main/kotlin/com/example/DataTab.kt:85
+#: src/main/kotlin/com/example/DataTab.kt:120
 msgid "Uncheck all"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:147
+#: src/main/kotlin/com/example/LayoutsTab.kt:159
 msgid "UP"
 msgstr ""
 
@@ -727,16 +739,20 @@ msgstr ""
 msgid "Validate"
 msgstr ""
 
+#: src/main/kotlin/com/example/DataTab.kt:52
+msgid "Value"
+msgstr ""
+
 #: src/main/kotlin/com/example/FormTab.kt:120
 #: src/main/kotlin/com/example/FormTab.kt:74
 msgid "Value is required"
 msgstr ""
 
-#: src/main/kotlin/com/example/LayoutsTab.kt:45
+#: src/main/kotlin/com/example/LayoutsTab.kt:57
 msgid "Vertical layout"
 msgstr ""
 
-#: src/main/kotlin/com/example/ContainersTab.kt:102
+#: src/main/kotlin/com/example/ContainersTab.kt:120
 msgid "Vertical split panel"
 msgstr ""
 
@@ -752,7 +768,7 @@ msgstr ""
 msgid "Warning radiobutton"
 msgstr ""
 
-#: src/main/kotlin/com/example/Showcase.kt:56
+#: src/main/kotlin/com/example/Showcase.kt:68
 msgid "Windows"
 msgstr ""
 

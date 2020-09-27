@@ -10,11 +10,10 @@ import pl.treksoft.kvision.core.FlexWrap
 import pl.treksoft.kvision.core.JustifyContent
 import pl.treksoft.kvision.core.JustifyItems
 import pl.treksoft.kvision.html.Align
-import pl.treksoft.kvision.html.Div
 import pl.treksoft.kvision.html.Tag
+import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.html.h4
 import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.Side
 import pl.treksoft.kvision.panel.SimplePanel
 import pl.treksoft.kvision.panel.dockPanel
 import pl.treksoft.kvision.panel.flexPanel
@@ -47,18 +46,18 @@ class LayoutsTab : SimplePanel() {
     private fun Container.addHPanel() {
         h4(tr("Horizontal layout"))
         hPanel(spacing = 5) {
-            add(getDiv("1", 100))
-            add(getDiv("2", 150))
-            add(getDiv("3", 200))
+            customDiv("1", 100)
+            customDiv("2", 150)
+            customDiv("3", 200)
         }
     }
 
     private fun Container.addVPanel() {
         h4(tr("Vertical layout"))
         vPanel(spacing = 5) {
-            add(getDiv("1", 100))
-            add(getDiv("2", 150))
-            add(getDiv("3", 200))
+            customDiv("1", 100)
+            customDiv("2", 150)
+            customDiv("3", 200)
         }
     }
 
@@ -68,9 +67,9 @@ class LayoutsTab : SimplePanel() {
             FlexDirection.ROW, FlexWrap.WRAP, JustifyContent.FLEXEND, AlignItems.CENTER,
             spacing = 5
         ) {
-            add(getDiv("1", 100))
-            add(getDiv("2", 150))
-            add(getDiv("3", 200))
+            customDiv("1", 100)
+            customDiv("2", 150)
+            customDiv("3", 200)
         }
     }
 
@@ -79,9 +78,9 @@ class LayoutsTab : SimplePanel() {
             FlexDirection.ROW, FlexWrap.WRAP, JustifyContent.SPACEBETWEEN, AlignItems.CENTER,
             spacing = 5
         ) {
-            add(getDiv("1", 100))
-            add(getDiv("2", 150))
-            add(getDiv("3", 200))
+            customDiv("1", 100)
+            customDiv("2", 150)
+            customDiv("3", 200)
         }
     }
 
@@ -90,9 +89,9 @@ class LayoutsTab : SimplePanel() {
             FlexDirection.ROW, FlexWrap.WRAP, JustifyContent.CENTER, AlignItems.CENTER,
             spacing = 5
         ) {
-            add(getDiv("1", 100))
-            add(getDiv("2", 150))
-            add(getDiv("3", 200))
+            customDiv("1", 100)
+            customDiv("2", 150)
+            customDiv("3", 200)
         }
     }
 
@@ -101,9 +100,15 @@ class LayoutsTab : SimplePanel() {
             FlexDirection.ROW, FlexWrap.WRAP, JustifyContent.FLEXSTART, AlignItems.CENTER,
             spacing = 5
         ) {
-            add(getDiv("1", 100), order = 3)
-            add(getDiv("2", 150), order = 1)
-            add(getDiv("3", 200), order = 2)
+            options(order = 3) {
+                customDiv("1", 100)
+            }
+            options(order = 1) {
+                customDiv("2", 150)
+            }
+            options(order = 2) {
+                customDiv("3", 200)
+            }
         }
     }
 
@@ -112,9 +117,15 @@ class LayoutsTab : SimplePanel() {
             FlexDirection.COLUMN, FlexWrap.WRAP, JustifyContent.FLEXSTART, AlignItems.FLEXEND,
             spacing = 5
         ) {
-            add(getDiv("1", 100), order = 3)
-            add(getDiv("2", 150), order = 1)
-            add(getDiv("3", 200), order = 2)
+            options(order = 3) {
+                customDiv("1", 100)
+            }
+            options(order = 1) {
+                customDiv("2", 150)
+            }
+            options(order = 2) {
+                customDiv("3", 200)
+            }
         }
     }
 
@@ -122,19 +133,33 @@ class LayoutsTab : SimplePanel() {
         h4(tr("CSS grid layouts"))
         gridPanel(columnGap = 5, rowGap = 5, justifyItems = JustifyItems.CENTER) {
             background = Background(Color.name(Col.KHAKI))
-            add(getDiv("1,1", 100), 1, 1)
-            add(getDiv("1,2", 100), 1, 2)
-            add(getDiv("2,1", 100), 2, 1)
-            add(getDiv("2,2", 100), 2, 2)
+            options(1, 1) {
+                customDiv("1,1", 100)
+            }
+            options(1, 2) {
+                customDiv("1,2", 100)
+            }
+            options(2, 1) {
+                customDiv("2,1", 100)
+            }
+            options(2, 2) {
+                customDiv("2,2", 100)
+            }
         }
     }
 
     private fun Container.addGridPanel2() {
         gridPanel(columnGap = 5, rowGap = 5, justifyItems = JustifyItems.CENTER) {
             background = Background(Color.name(Col.CORNFLOWERBLUE))
-            add(getDiv("1,1", 150), 1, 1)
-            add(getDiv("2,2", 150), 2, 2)
-            add(getDiv("3,3", 150), 3, 3)
+            options(1, 1) {
+                customDiv("1,1", 150)
+            }
+            options(2, 2) {
+                customDiv("2,2", 150)
+            }
+            options(3, 3) {
+                customDiv("3,3", 150)
+            }
         }
     }
 
@@ -142,10 +167,18 @@ class LayoutsTab : SimplePanel() {
         h4(tr("Responsive grid layout"))
         responsiveGridPanel {
             background = Background(Color.name(Col.SILVER))
-            add(getDiv("1,1", 150), 1, 1)
-            add(getDiv("3,1", 150), 3, 1)
-            add(getDiv("2,2", 150), 2, 2)
-            add(getDiv("3,3", 150), 3, 3)
+            options(1, 1) {
+                customDiv("1,1", 150)
+            }
+            options(3, 1) {
+                customDiv("3,1", 150)
+            }
+            options(2, 2) {
+                customDiv("2,2", 150)
+            }
+            options(3, 3) {
+                customDiv("3,3", 150)
+            }
         }
     }
 
@@ -153,16 +186,26 @@ class LayoutsTab : SimplePanel() {
         h4(tr("Dock layout"))
         dockPanel {
             background = Background(Color.name(Col.YELLOW))
-            add(getDiv(tr("CENTER"), 150).apply { margin = auto }, Side.CENTER)
-            add(getDiv(tr("LEFT"), 150), Side.LEFT)
-            add(getDiv(tr("RIGHT"), 150), Side.RIGHT)
-            add(getDiv(tr("UP"), 150).apply { margin = auto; marginBottom = 10.px }, Side.UP)
-            add(getDiv(tr("DOWN"), 150).apply { margin = auto; marginTop = 10.px }, Side.DOWN)
+            center {
+                customDiv(tr("CENTER"), 150).apply { margin = auto }
+            }
+            left {
+                customDiv(tr("LEFT"), 150)
+            }
+            right {
+                customDiv(tr("RIGHT"), 150)
+            }
+            up {
+                customDiv(tr("UP"), 150).apply { margin = auto; marginBottom = 10.px }
+            }
+            down {
+                customDiv(tr("DOWN"), 150).apply { margin = auto; marginTop = 10.px }
+            }
         }
     }
 
-    private fun getDiv(value: String, size: Int): Tag {
-        return Div(value).apply {
+    private fun Container.customDiv(value: String, size: Int): Tag {
+        return div(value).apply {
             paddingTop = ((size / 2) - 10).px
             align = Align.CENTER
             background = Background(Color.name(Col.GREEN))
