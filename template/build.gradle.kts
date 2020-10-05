@@ -74,6 +74,7 @@ kotlin {
         implementation("pl.treksoft:kvision-pace:$kvisionVersion")
         implementation("pl.treksoft:kvision-moment:$kvisionVersion")
         implementation("pl.treksoft:kvision-toast:$kvisionVersion")
+        implementation("pl.treksoft:kvision-print:$kvisionVersion")
     }
     sourceSets["test"].dependencies {
         implementation(kotlin("test-js"))
