@@ -58,7 +58,6 @@ kotlin {
         implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
         implementation("pl.treksoft:kvision-fontawesome:$kvisionVersion")
         implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
-        implementation("pl.treksoft:kvision-datacontainer:$kvisionVersion")
     }
     sourceSets["test"].dependencies {
         implementation(kotlin("test-js"))

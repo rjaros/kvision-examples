@@ -14,6 +14,7 @@ import pl.treksoft.kvision.form.text.text
 import pl.treksoft.kvision.form.text.textAreaInput
 import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.panel.hPanel
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.startApplication
@@ -90,5 +91,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App)
+    startApplication(::App, module.hot)
 }

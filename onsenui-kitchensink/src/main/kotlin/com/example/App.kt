@@ -25,6 +25,7 @@ import pl.treksoft.kvision.onsenui.tabbar.tabbar
 import pl.treksoft.kvision.onsenui.toolbar.toolbar
 import pl.treksoft.kvision.onsenui.toolbar.toolbarButton
 import pl.treksoft.kvision.panel.ContainerType
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
@@ -161,5 +162,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App)
+    startApplication(::App, module.hot)
 }

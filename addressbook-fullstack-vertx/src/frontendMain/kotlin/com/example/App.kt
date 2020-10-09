@@ -5,6 +5,8 @@ import kotlinx.coroutines.launch
 import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
+import pl.treksoft.kvision.module
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.panel.splitPanel
 import pl.treksoft.kvision.require
@@ -40,5 +42,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App)
+    startApplication(::App, module.hot)
 }

@@ -18,6 +18,7 @@ import pl.treksoft.kvision.i18n.I18n.gettext
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.gridPanel
 import pl.treksoft.kvision.panel.hPanel
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.redux.ActionCreator
@@ -155,5 +156,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App)
+    startApplication(::App, module.hot)
 }

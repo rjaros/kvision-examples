@@ -20,6 +20,7 @@ import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.html.link
 import pl.treksoft.kvision.html.listTag
 import pl.treksoft.kvision.html.tag
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.redux.RAction
 import pl.treksoft.kvision.redux.createReduxStore
@@ -228,5 +229,5 @@ class Todomvc : Application() {
 }
 
 fun main() {
-    startApplication(::Todomvc)
+    startApplication(::Todomvc, module.hot)
 }

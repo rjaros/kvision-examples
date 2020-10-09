@@ -6,6 +6,7 @@ import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.html.Span
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.startApplication
 
@@ -29,5 +30,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App)
+    startApplication(::App, module.hot)
 }

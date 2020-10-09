@@ -10,6 +10,7 @@ import pl.treksoft.kvision.form.select.select
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.pace.Pace
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.panel.tab
@@ -100,5 +101,5 @@ class Showcase : Application() {
 }
 
 fun main() {
-    startApplication(::Showcase)
+    startApplication(::Showcase, module.hot)
 }

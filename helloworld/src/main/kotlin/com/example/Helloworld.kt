@@ -8,6 +8,7 @@ import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
 import pl.treksoft.kvision.panel.flexPanel
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
@@ -46,5 +47,5 @@ class Helloworld : Application() {
 }
 
 fun main() {
-    startApplication(::Helloworld)
+    startApplication(::Helloworld, module.hot)
 }

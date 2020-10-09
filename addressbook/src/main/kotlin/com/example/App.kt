@@ -3,6 +3,7 @@ package com.example
 import pl.treksoft.kvision.Application
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.panel.splitPanel
 import pl.treksoft.kvision.require
@@ -27,14 +28,14 @@ class App : Application() {
             splitPanel {
                 height = 100.vh
                 width = 100.perc
-                add(ListPanel)
-                add(EditPanel)
-                Model.loadAddresses()
+                listPanel()
+                editPanel()
             }
         }
+        Model.loadAddresses()
     }
 }
 
 fun main() {
-    startApplication(::App)
+    startApplication(::App, module.hot)
 }

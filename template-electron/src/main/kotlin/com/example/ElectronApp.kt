@@ -11,6 +11,7 @@ import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.tr
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.hPanel
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.panel.vPanel
@@ -76,5 +77,5 @@ class ElectronApp : Application() {
 }
 
 fun main() {
-    startApplication(::ElectronApp)
+    startApplication(::ElectronApp, module.hot)
 }

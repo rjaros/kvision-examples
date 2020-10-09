@@ -18,6 +18,7 @@ import pl.treksoft.kvision.navbar.NavbarType
 import pl.treksoft.kvision.navbar.nav
 import pl.treksoft.kvision.navbar.navbar
 import pl.treksoft.kvision.panel.flexPanel
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.require
 import pl.treksoft.kvision.startApplication
@@ -119,5 +120,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App)
+    startApplication(::App, module.hot)
 }
