@@ -6,12 +6,11 @@ import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Color
 import pl.treksoft.kvision.core.Style
-import pl.treksoft.kvision.core.style
 import pl.treksoft.kvision.core.TextAlign
-import pl.treksoft.kvision.html.Div
+import pl.treksoft.kvision.core.style
+import pl.treksoft.kvision.html.div
 import pl.treksoft.kvision.html.image
 import pl.treksoft.kvision.panel.DockPanel
-import pl.treksoft.kvision.panel.Side
 import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
@@ -36,12 +35,16 @@ class PokeBox(pokemon: Pokemon) : DockPanel() {
     init {
         addCssStyle(pokeBoxStyle)
         image(
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.substring(
-                34,
-                pokemon.url.length - 1
-            )}.png",
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                pokemon.url.substring(
+                    34,
+                    pokemon.url.length - 1
+                )
+            }.png",
             centered = true
         )
-        add(Div(pokemon.name.capitalize(), classes = setOf("caption")), Side.DOWN)
+        down {
+            div(pokemon.name.capitalize(), classes = setOf("caption"))
+        }
     }
 }

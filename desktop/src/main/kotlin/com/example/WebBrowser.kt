@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2018. Robert Jaros
- */
-
 package com.example
 
 import pl.treksoft.kvision.core.Container

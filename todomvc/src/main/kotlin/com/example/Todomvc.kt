@@ -8,25 +8,19 @@ import kotlinx.serialization.json.Json
 import org.w3c.dom.get
 import org.w3c.dom.set
 import pl.treksoft.kvision.Application
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.check.checkBoxInput
 import pl.treksoft.kvision.form.fieldLabel
 import pl.treksoft.kvision.form.text.TextInput
 import pl.treksoft.kvision.form.text.textInput
-import pl.treksoft.kvision.html.ListType
-import pl.treksoft.kvision.html.TAG.*
-import pl.treksoft.kvision.html.Tag
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.link
-import pl.treksoft.kvision.html.listTag
-import pl.treksoft.kvision.html.tag
+import pl.treksoft.kvision.html.*
+import pl.treksoft.kvision.html.TAG.STRONG
 import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.redux.RAction
 import pl.treksoft.kvision.redux.createReduxStore
 import pl.treksoft.kvision.routing.routing
 import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.state.bind
 import pl.treksoft.kvision.utils.ENTER_KEY
 import pl.treksoft.kvision.utils.ESC_KEY
 
@@ -90,13 +84,13 @@ class Todomvc : Application() {
 
     override fun start() {
         root("todomvc") {
-            tag(SECTION, classes = setOf("todoapp")).bind(todoStore) { state ->
-                tag(HEADER, classes = setOf("header")) {
-                    tag(H1, "todos")
-                    textInput(classes = setOf("new-todo")) {
+            section(todoStore, className = "todoapp") { state ->
+                header(className = "header") {
+                    h1("todos")
+                    textInput(className = "new-todo") {
                         placeholder = "What needs to be done?"
                         autofocus = true
-                        setEventListener<TextInput> {
+                        onEvent {
                             keydown = { e ->
                                 if (e.keyCode == ENTER_KEY) {
                                     addTodo(self.value)
@@ -106,29 +100,29 @@ class Todomvc : Application() {
                         }
                     }
                 }
-                tag(SECTION, classes = setOf("main")) {
+                section(className = "main") {
                     visible = state.todos.isNotEmpty()
-                    checkBoxInput(state.areAllCompleted(), classes = setOf("toggle-all")) {
+                    checkBoxInput(state.areAllCompleted(), className = "toggle-all") {
                         id = "toggle-all"
                         onClick {
                             todoStore.dispatch(TodoAction.ToggleAll)
                         }
                     }
                     fieldLabel("toggle-all", "Mark all as complete")
-                    tag(UL, classes = setOf("todo-list")) {
+                    ul(className = "todo-list") {
                         when (state.mode) {
                             ALL -> state.allListIndexed()
                             ACTIVE -> state.activeListIndexed()
                             COMPLETED -> state.completedListIndexed()
                         }.forEach { (index, todo) ->
-                            tag(LI, classes = if (todo.completed) setOf("completed") else setOf()) li@{
+                            li(classes = if (todo.completed) setOf("completed") else setOf()) li@{
                                 lateinit var edit: TextInput
-                                div(classes = setOf("view")) {
-                                    checkBoxInput(todo.completed, classes = setOf("toggle")).onClick {
+                                div(className = "view") {
+                                    checkBoxInput(todo.completed, className = "toggle").onClick {
                                         todoStore.dispatch(TodoAction.ToggleActive(index))
                                     }
-                                    tag(LABEL, todo.title) {
-                                        setEventListener<Tag> {
+                                    label(todo.title) {
+                                        onEvent {
                                             dblclick = {
                                                 this@li.getElementJQuery()?.addClass("editing")
                                                 edit.value = todo.title
@@ -136,12 +130,12 @@ class Todomvc : Application() {
                                             }
                                         }
                                     }
-                                    button("", classes = setOf("destroy")).onClick {
+                                    button("", className = "destroy").onClick {
                                         todoStore.dispatch(TodoAction.Delete(index))
                                     }
                                 }
-                                edit = textInput(classes = setOf("edit")) {
-                                    setEventListener<TextInput> {
+                                edit = textInput(className = "edit") {
+                                    onEvent {
                                         blur = {
                                             if (this@li.getElementJQuery()?.hasClass("editing") == true) {
                                                 this@li.getElementJQuery()?.removeClass("editing")
@@ -163,10 +157,10 @@ class Todomvc : Application() {
                         }
                     }
                 }
-                tag(FOOTER, classes = setOf("footer")) {
+                footer(className = "footer") {
                     visible = state.todos.isNotEmpty()
                     val itemsLeftString = if (state.activeList().size == 1) " item left" else " items left"
-                    tag(SPAN, itemsLeftString, classes = setOf("todo-count")) {
+                    span(itemsLeftString, className = "todo-count") {
                         tag(STRONG, "${state.activeList().size}")
                     }
                     listTag(ListType.UL, classes = setOf("filters")) {
@@ -181,7 +175,7 @@ class Todomvc : Application() {
                         )
                     }
                     if (state.completedList().isNotEmpty()) {
-                        button("Clear completed", classes = setOf("clear-completed")).onClick {
+                        button("Clear completed", className = "clear-completed").onClick {
                             todoStore.dispatch(TodoAction.ClearCompleted)
                         }
                     }

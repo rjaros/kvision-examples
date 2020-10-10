@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2018. Robert Jaros
- */
-
 package com.example
 
 import org.w3c.dom.CanvasRenderingContext2D

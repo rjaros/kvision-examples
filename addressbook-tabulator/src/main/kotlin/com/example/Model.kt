@@ -2,12 +2,12 @@ package com.example
 
 import kotlinx.browser.localStorage
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.w3c.dom.get
 import org.w3c.dom.set
-import pl.treksoft.kvision.state.ObservableList
-import pl.treksoft.kvision.state.observableListOf
+import pl.treksoft.kvision.state.ObservableValue
 
 @Serializable
 data class Address(
@@ -26,51 +26,94 @@ fun Address.match(search: String?): Boolean {
     } ?: true
 }
 
-object Model {
-    private var counter = 1
+enum class Filter {
+    ALL,
+    FAVOURITE
+}
 
-    val addresses: ObservableList<Address> = observableListOf(
-        Address(counter++, "John", "Smith", "john.smith@mail.com", true),
-        Address(counter++, "Karen", "Kowalsky", "kkowalsky@mail.com", true),
-        Address(counter++, "William", "Gordon", "w.gordon@mail.com", false)
+enum class EditMode {
+    NEW,
+    EDIT
+}
+
+data class AddressBookState(
+    val addresses: List<Address>,
+    val search: String? = null,
+    val filter: Filter = Filter.ALL,
+    val editMode: EditMode? = null,
+    val editAddress: Address? = null
+)
+
+object Model {
+    private var counter = 0
+
+    val addressBook = ObservableValue(
+        AddressBookState(
+            listOf(
+                Address(counter++, "John", "Smith", "john.smith@mail.com", true),
+                Address(counter++, "Karen", "Kowalsky", "kkowalsky@mail.com", true),
+                Address(counter++, "William", "Gordon", "w.gordon@mail.com", false)
+            )
+        )
     )
 
-    fun addAddress(address: Address) {
-        addresses.add(address.copy(id = counter++))
+    fun setSearch(search: String?) {
+        addressBook.value = addressBook.value.copy(search = search)
+    }
+
+    fun setFilter(filter: Filter) {
+        addressBook.value = addressBook.value.copy(filter = filter)
+    }
+
+    fun add() {
+        addressBook.value = addressBook.value.copy(editMode = EditMode.NEW, editAddress = null)
+    }
+
+    fun edit(id: Int) {
+        val state = addressBook.value
+        val editAddress = state.addresses.find { it.id == id }
+        if (editAddress != null) {
+            addressBook.value = state.copy(editMode = EditMode.EDIT, editAddress = editAddress)
+        }
+    }
+
+    fun cancel() {
+        addressBook.value = addressBook.value.copy(editMode = null, editAddress = null)
+    }
+
+    fun delete(id: Int) {
+        val state = addressBook.value
+        val newAddresses = state.addresses.filter { it.id != id }
+        addressBook.value = if (state.editAddress?.id == id) {
+            state.copy(editMode = null, addresses = newAddresses, editAddress = null)
+        } else {
+            state.copy(addresses = newAddresses)
+        }
         storeAddresses()
     }
 
-    fun findAddress(id: Int): Address? {
-        return addresses.find { it.id == id }
-    }
-
-    fun delAddress(id: Int) {
-        addresses.find { it.id == id }?.let {
-            addresses.remove(it)
-            storeAddresses()
+    fun save(newAddress: Address) {
+        val state = addressBook.value
+        val newAddresses = if (state.editMode == EditMode.EDIT) {
+            state.addresses.map {
+                if (it.id == state.editAddress?.id) newAddress.copy(id = it.id) else it
+            }
+        } else {
+            state.addresses + newAddress.copy(id = counter++)
         }
+        addressBook.value = state.copy(addresses = newAddresses, editMode = null, editAddress = null)
+        storeAddresses()
     }
 
-    fun saveAddress(id: Int, address: Address) {
-        val index = addresses.map { it.id }.indexOf(id)
-        if (index >= 0) {
-            addresses[index] = address.copy(id = id)
-            storeAddresses()
-        }
-    }
-
-    private fun storeAddresses() {
-        val jsonString = Json.encodeToString(ListSerializer(Address.serializer()), addresses)
+    fun storeAddresses() {
+        val jsonString = Json.encodeToString(addressBook.value.addresses)
         localStorage["addressesTabulator"] = jsonString
     }
 
     fun loadAddresses() {
-        localStorage["addressesTabulator"]?.let {
-            addresses.clear()
-            Json.decodeFromString(ListSerializer(Address.serializer()), it).forEach {
-                addresses.add(it)
-            }
-            counter = (addresses.maxByOrNull { it.id ?: 0 }?.id ?: 0) + 1
+        localStorage["addressesTabulator"]?.let { addressesAsString ->
+            addressBook.value = addressBook.value.copy(addresses = Json.decodeFromString(addressesAsString))
+            counter = (addressBook.value.addresses.maxByOrNull { it.id ?: 0 }?.id ?: 0) + 1
         }
     }
 }

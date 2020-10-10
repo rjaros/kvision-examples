@@ -8,7 +8,7 @@ import pl.treksoft.kvision.core.Container
 import pl.treksoft.kvision.core.JustifyContent
 import pl.treksoft.kvision.core.JustifyItems
 import pl.treksoft.kvision.core.TextAlign
-import pl.treksoft.kvision.form.text.Text
+import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.text.text
 import pl.treksoft.kvision.html.button
 import pl.treksoft.kvision.html.div
@@ -16,9 +16,9 @@ import pl.treksoft.kvision.i18n.DefaultI18nManager
 import pl.treksoft.kvision.i18n.I18n
 import pl.treksoft.kvision.i18n.I18n.gettext
 import pl.treksoft.kvision.i18n.I18n.tr
+import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.gridPanel
 import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.module
 import pl.treksoft.kvision.panel.root
 import pl.treksoft.kvision.panel.vPanel
 import pl.treksoft.kvision.redux.ActionCreator
@@ -82,7 +82,7 @@ class App : Application() {
             marginLeft = auto
             marginRight = auto
             autofocus = true
-            setEventListener<Text> {
+            onEvent {
                 input = {
                     store.dispatch(PokeAction.SetSearchString(self.value))
                 }
