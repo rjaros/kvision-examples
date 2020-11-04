@@ -57,6 +57,7 @@ kotlin {
     }
     sourceSets["main"].dependencies {
         implementation(npm("react-awesome-button", "*"))
+        implementation(npm("prop-types", "*"))
         implementation("pl.treksoft:kvision:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
         implementation("pl.treksoft:kvision-bootstrap-css:$kvisionVersion")
