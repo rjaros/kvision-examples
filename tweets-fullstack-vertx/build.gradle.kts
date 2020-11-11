@@ -9,7 +9,8 @@ plugins {
     kotlin("multiplatform") version kotlinVersion
     val kvisionVersion: String by System.getProperties()
     id("kvision") version kvisionVersion
-    id("io.vertx.vertx-plugin") version "1.0.2"
+    val vertxPluginVersion: String by System.getProperties()
+    id("io.vertx.vertx-plugin") version vertxPluginVersion
 }
 
 version = "1.0.0-SNAPSHOT"
