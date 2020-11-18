@@ -5,6 +5,7 @@ import pl.treksoft.kvision.core.Border
 import pl.treksoft.kvision.core.BorderStyle
 import pl.treksoft.kvision.core.Col
 import pl.treksoft.kvision.core.Color
+import pl.treksoft.kvision.core.Overflow
 import pl.treksoft.kvision.core.onEvent
 import pl.treksoft.kvision.form.select.select
 import pl.treksoft.kvision.i18n.DefaultI18nManager
@@ -47,6 +48,7 @@ class Showcase : Application() {
                     marginLeft = auto
                     marginRight = auto
                     padding = 20.px
+                    overflow = Overflow.HIDDEN
                     border = Border(2.px, BorderStyle.SOLID, Color.name(Col.SILVER))
                     tab(tr("HTML"), "fas fa-bars", route = "/basic") {
                         add(BasicTab())

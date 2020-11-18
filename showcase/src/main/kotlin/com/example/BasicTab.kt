@@ -13,6 +13,7 @@ import pl.treksoft.kvision.table.TableType
 import pl.treksoft.kvision.table.cell
 import pl.treksoft.kvision.table.row
 import pl.treksoft.kvision.table.table
+import pl.treksoft.kvision.utils.perc
 import pl.treksoft.kvision.utils.px
 
 @Serializable
@@ -49,6 +50,7 @@ class BasicTab : SimplePanel() {
                 +tr("(hover to view a tooltip and click to view a popover)")
             }
             image(require("img/dog.jpg"), shape = ImageShape.CIRCLE) {
+                maxWidth = 100.perc
                 enableTooltip(TooltipOptions(title = tr("This is a tooltip")))
                 enablePopover(
                     PopoverOptions(
@@ -119,6 +121,7 @@ class BasicTab : SimplePanel() {
             }
 
             iframe(src = "https://rjaros.github.io/kvision/kvision/index.html") {
+                width = 100.perc
                 iframeWidth = 800
                 iframeHeight = 400
             }
