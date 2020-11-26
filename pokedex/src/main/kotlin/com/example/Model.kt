@@ -38,7 +38,7 @@ fun List<Pokemon>.filterBySearchString(searchString: String?): List<Pokemon> {
 }
 
 fun List<Pokemon>.subListByPageNumber(pageNumber: Int): List<Pokemon> {
-    return this.subList((pageNumber) * MAX_ON_PAGE, (pageNumber + 1) * MAX_ON_PAGE)
+    return this.subList((pageNumber) * MAX_ON_PAGE, minOf((pageNumber + 1) * MAX_ON_PAGE, this.size))
 }
 
 fun pokedexReducer(state: Pokedex, action: PokeAction): Pokedex = when (action) {
