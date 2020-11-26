@@ -45,8 +45,11 @@ kotlin {
     }
     js("frontend") {
         browser {
-            runTask {
+            commonWebpackConfig {
                 outputFileName = "main.bundle.js"
+                this.showProgress
+            }
+            runTask {
                 sourceMaps = false
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
@@ -58,15 +61,13 @@ kotlin {
                     contentBase = listOf("$buildDir/processedResources/frontend/main")
                 )
             }
-            webpackTask {
-                outputFileName = "main.bundle.js"
-            }
             testTask {
                 useKarma {
                     useChromeHeadless()
                 }
             }
         }
+        binaries.executable()
     }
     sourceSets {
         val commonMain by getting {

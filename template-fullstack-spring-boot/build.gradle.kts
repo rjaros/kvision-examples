@@ -16,8 +16,6 @@ plugins {
     id("kvision") version kvisionVersion
 }
 
-extra["kotlin.version"] = "1.4.10"
-
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
 
@@ -37,10 +35,6 @@ repositories {
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
 val coroutinesVersion: String by project
-val springDataR2dbcVersion: String by project
-val r2dbcPostgresqlVersion: String by project
-val r2dbcH2Version: String by project
-val kweryVersion: String by project
 
 val webDir = file("src/frontendMain/web")
 val mainClassName = "com.example.MainKt"
@@ -79,6 +73,7 @@ kotlin {
                 }
             }
         }
+        binaries.executable()
     }
     sourceSets {
         val commonMain by getting {
@@ -102,10 +97,6 @@ kotlin {
                 implementation("org.springframework.boot:spring-boot-devtools")
                 implementation("org.springframework.boot:spring-boot-starter-webflux")
                 implementation("org.springframework.boot:spring-boot-starter-security")
-                implementation("org.springframework.data:spring-data-r2dbc:$springDataR2dbcVersion")
-                implementation("io.r2dbc:r2dbc-postgresql:$r2dbcPostgresqlVersion")
-                implementation("io.r2dbc:r2dbc-h2:$r2dbcH2Version")
-                implementation("com.github.andrewoma.kwery:core:$kweryVersion")
             }
         }
         val backendTest by getting {

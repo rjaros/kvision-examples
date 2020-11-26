@@ -83,6 +83,7 @@ kotlin {
                 }
             }
         }
+        binaries.executable()
     }
     sourceSets {
         val commonMain by getting {

@@ -52,6 +52,7 @@ kotlin {
                 }
             }
         }
+        binaries.executable()
     }
     sourceSets["main"].dependencies {
 

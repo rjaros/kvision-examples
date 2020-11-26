@@ -16,8 +16,6 @@ plugins {
     id("kvision") version kvisionVersion
 }
 
-extra["kotlin.version"] = "1.4.10"
-
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
 
@@ -80,6 +78,7 @@ kotlin {
                 }
             }
         }
+        binaries.executable()
     }
     sourceSets {
         val commonMain by getting {

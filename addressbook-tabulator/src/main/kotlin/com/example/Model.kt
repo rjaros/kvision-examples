@@ -11,11 +11,11 @@ import pl.treksoft.kvision.state.ObservableValue
 
 @Serializable
 data class Address(
-    val id: Int? = null,
-    val firstName: String? = null,
-    val lastName: String? = null,
-    val email: String? = null,
-    val favourite: Boolean? = false
+    var id: Int? = null,
+    var firstName: String? = null,
+    var lastName: String? = null,
+    var email: String? = null,
+    var favourite: Boolean? = false
 )
 
 fun Address.match(search: String?): Boolean {

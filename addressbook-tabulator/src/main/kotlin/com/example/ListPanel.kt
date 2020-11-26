@@ -57,7 +57,7 @@ fun Container.listPanel() {
                     ColumnDefinition(
                         "",
                         "favourite",
-                        align = Align.CENTER,
+                        hozAlign = Align.CENTER,
                         width = "40",
                         formatter = Formatter.TICKCROSS,
                         formatterParams = obj {
@@ -65,7 +65,7 @@ fun Container.listPanel() {
                         }
                     ),
                     ColumnDefinition(
-                        "", align = Align.CENTER,
+                        "", hozAlign = Align.CENTER,
                         width = "40",
                         formatter = Formatter.BUTTONCROSS,
                         headerSort = false,

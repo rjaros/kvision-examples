@@ -54,6 +54,7 @@ kotlin {
                 }
             }
         }
+        binaries.executable()
     }
     sourceSets["main"].dependencies {
         implementation(npm("electron-builder", "^22.7.0"))

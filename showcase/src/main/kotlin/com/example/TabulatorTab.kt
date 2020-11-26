@@ -32,14 +32,14 @@ import pl.treksoft.kvision.utils.px
 import kotlin.js.Date
 
 data class Employee(
-    val name: String?,
-    val position: String?,
-    val office: String?,
-    val active: Boolean = false,
-    val startDate: Date?,
-    val salary: Int?,
-    @Suppress("ArrayInDataClass") val _children: Array<Employee>? = null,
-    val id: Int = counter++
+    var name: String?,
+    var position: String?,
+    var office: String?,
+    var active: Boolean = false,
+    var startDate: Date?,
+    var salary: Int?,
+    @Suppress("ArrayInDataClass") var _children: Array<Employee>? = null,
+    var id: Int = counter++
 ) {
     companion object {
         internal var counter = 0

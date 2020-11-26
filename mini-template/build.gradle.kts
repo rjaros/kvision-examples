@@ -16,6 +16,7 @@ kotlin {
     js {
         browser {
         }
+        binaries.executable()
     }
     sourceSets["main"].dependencies {
         implementation("pl.treksoft:kvision:$kvisionVersion")
