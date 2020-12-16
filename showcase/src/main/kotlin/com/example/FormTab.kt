@@ -32,7 +32,9 @@ import pl.treksoft.kvision.modal.Alert
 import pl.treksoft.kvision.modal.Confirm
 import pl.treksoft.kvision.panel.HPanel
 import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.progress.ProgressBar
+import pl.treksoft.kvision.progress.Bounds
+import pl.treksoft.kvision.progress.Progress
+import pl.treksoft.kvision.progress.progressNumeric
 import pl.treksoft.kvision.types.KFile
 import pl.treksoft.kvision.utils.getDataWithFileContent
 import pl.treksoft.kvision.utils.obj
@@ -167,9 +169,12 @@ class FormTab : SimplePanel() {
             validatorMessage = { tr("The passwords are not the same.") }
         }
         formPanel.add(HPanel(spacing = 10, alignItems = AlignItems.CENTER, wrap = FlexWrap.WRAP) {
-            val p = ProgressBar(0, striped = true) {
+            val p = Progress(0, 100) {
                 marginBottom = 0.px
                 width = 300.px
+                progressNumeric {
+                    striped = true
+                }
             }
             button(tr("Show data"), "fas fa-info", ButtonStyle.SUCCESS).onClick {
                 console.log(formPanel.getDataJson())
@@ -187,12 +192,13 @@ class FormTab : SimplePanel() {
                     cancelTitle = tr("Cancel")
                 ) {
                     formPanel.clearData()
-                    p.progress = 0
+                    p.getFirstProgressBar()?.value = 0
+                    formPanel.clearValidation()
                 }
             }
             button(tr("Validate"), "fas fa-check", ButtonStyle.INFO).onClick {
                 GlobalScope.launch {
-                    p.progress = 100
+                    p.getFirstProgressBar()?.value = 100
                     delay(500)
                     formPanel.validate()
                 }

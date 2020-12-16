@@ -95,6 +95,7 @@ kotlin {
                 implementation(kotlin("reflect"))
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:2.3.2")
             }
         }
         val backendTest by getting {

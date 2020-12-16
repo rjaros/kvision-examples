@@ -28,7 +28,7 @@ import pl.treksoft.kvision.utils.px
 class DropDownTab : SimplePanel() {
     init {
         this.marginTop = 10.px
-        this.minHeight = 400.px
+        this.minHeight = 600.px
         vPanel(spacing = 30) {
             navbar("NavBar") {
                 nav {
@@ -64,9 +64,9 @@ class DropDownTab : SimplePanel() {
             }
             dropDown(tr("Dropdown with custom list"), icon = "far fa-image", style = ButtonStyle.WARNING) {
                 minWidth = 250.px
-                image(require("img/cat.jpg")) { margin = 10.px; title = "Cat" }
+                image(require("img/cat.jpg")) { height = 170.px; margin = 10.px; title = "Cat" }
                 separator()
-                image(require("img/dog.jpg")) { margin = 10.px; title = "Dog" }
+                image(require("img/dog.jpg")) { height = 170.px; margin = 10.px; title = "Dog" }
             }
             hPanel(spacing = 5) {
                 val fdd = dropDown(

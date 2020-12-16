@@ -6,8 +6,10 @@ import io.vertx.core.Handler
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.AuthProvider
 import io.vertx.ext.auth.User
+import io.vertx.ext.auth.authentication.Credentials
+import io.vertx.ext.auth.authorization.Authorization
 import io.vertx.ext.web.RoutingContext
-import io.vertx.ext.web.handler.AuthHandler
+import io.vertx.ext.web.handler.AuthenticationHandler
 import io.vertx.ext.web.handler.impl.HttpStatusException
 
 
@@ -17,6 +19,15 @@ class MyUser(val profile: Profile) : User {
     }
 
     override fun setAuthProvider(authProvider: AuthProvider) {
+    }
+
+    override fun attributes(): JsonObject {
+        return JsonObject()
+    }
+
+    override fun isAuthorized(authority: Authorization, resultHandler: Handler<AsyncResult<Boolean>>): User {
+        resultHandler.handle(Future.succeededFuture(true))
+        return this
     }
 
     override fun isAuthorized(authority: String, resultHandler: Handler<AsyncResult<Boolean>>): User {
@@ -29,16 +40,7 @@ class MyUser(val profile: Profile) : User {
     }
 }
 
-class MyAuthHandler : AuthHandler {
-    override fun addAuthority(authority: String): AuthHandler {
-        return this
-    }
-
-    override fun parseCredentials(context: RoutingContext, handler: Handler<AsyncResult<JsonObject>>) {
-        handler.handle(
-            Future.failedFuture(HttpStatusException(401))
-        )
-    }
+class MyAuthHandler : AuthenticationHandler {
 
     override fun handle(rctx: RoutingContext) {
         val user = rctx.user()
@@ -55,11 +57,9 @@ class MyAuthHandler : AuthHandler {
         rctx.fail(401)
     }
 
-    override fun addAuthorities(authorities: MutableSet<String>): AuthHandler {
-        return this
-    }
-
-    override fun authorize(user: User, handler: Handler<AsyncResult<Void>>) {
-        handler.handle(Future.succeededFuture())
+    override fun parseCredentials(context: RoutingContext, handler: Handler<AsyncResult<Credentials>>) {
+        handler.handle(
+            Future.failedFuture(HttpStatusException(401))
+        )
     }
 }

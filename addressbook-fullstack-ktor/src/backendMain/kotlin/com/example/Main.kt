@@ -37,7 +37,7 @@ fun Application.main() {
     install(DefaultHeaders)
     install(CallLogging)
     install(Sessions) {
-        cookie<Profile>("SESSION", storage = SessionStorageMemory()) {
+        cookie<Profile>("KTSESSION", storage = SessionStorageMemory()) {
             cookie.path = "/"
             cookie.extensions["SameSite"] = "strict"
         }
