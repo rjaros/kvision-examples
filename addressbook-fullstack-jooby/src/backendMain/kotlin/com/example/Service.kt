@@ -25,7 +25,7 @@ actual class AddressService @Inject constructor(override val ctx: Context) : IAd
     }
 
     override suspend fun getAddressList(search: String?, types: String, sort: Sort) = withProfile { profile ->
-        getAddressDao().findByCriteria(profile.id, search, types, sort)
+        getAddressDao().findByCriteria(profile.id!!, search, types, sort)
     }
 
     override suspend fun addAddress(address: Address) = withProfile { profile ->
@@ -59,7 +59,7 @@ actual class RegisterProfileService : IRegisterProfileService {
 
     override suspend fun registerProfile(profile: Profile, password: String): Boolean {
         val dbProfile = DbProfile()
-        dbProfile.build(profile.id, profile.attributes)
+        dbProfile.build(profile.id, profile.attributes as MutableMap<String, Any>)
         profileService.create(dbProfile, password)
         return true
     }

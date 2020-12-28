@@ -1,6 +1,5 @@
 package com.example
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import org.springframework.context.annotation.Bean
@@ -77,11 +76,9 @@ actual data class Profile(
 ) : UserDetails {
 
     @Transient
-    @JsonIgnore
     private var password: String? = null
 
     @Transient
-    @JsonIgnore
     var password2: String? = null
 
     private var username: String? = null
