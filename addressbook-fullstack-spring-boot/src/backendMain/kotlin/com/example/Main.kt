@@ -6,10 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.core.io.Resource
-import org.springframework.data.r2dbc.connectionfactory.init.ConnectionFactoryInitializer
-import org.springframework.data.r2dbc.connectionfactory.init.ResourceDatabasePopulator
-import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
+import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
+import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 
 @EnableR2dbcRepositories
 @SpringBootApplication
@@ -24,11 +23,6 @@ class KVApplication {
         initializer.setConnectionFactory(connectionFactory)
         initializer.setDatabasePopulator(ResourceDatabasePopulator(schema))
         return initializer
-    }
-
-    @Bean
-    fun databaseClient(connectionFactory: ConnectionFactory): DatabaseClient {
-        return DatabaseClient.create(connectionFactory)
     }
 
     @Bean

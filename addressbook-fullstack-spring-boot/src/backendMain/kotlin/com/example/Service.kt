@@ -1,21 +1,26 @@
 package com.example
 
-import com.github.andrewoma.kwery.core.builder.query
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.beans.factory.config.ConfigurableBeanFactory
 import org.springframework.context.annotation.Scope
-import org.springframework.data.r2dbc.core.DatabaseClient
-import org.springframework.data.r2dbc.core.await
-import org.springframework.data.r2dbc.core.awaitOne
+import org.springframework.data.r2dbc.core.allAndAwait
 import org.springframework.data.r2dbc.core.awaitOneOrNull
-import org.springframework.data.r2dbc.core.flow
-import org.springframework.data.r2dbc.mapping.SettableValue
 import org.springframework.data.relational.core.query.Criteria.where
+import org.springframework.data.relational.core.query.Query.query
+import org.springframework.r2dbc.core.flow
 import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerRequest
+import pl.treksoft.e4k.core.DbClient
+import pl.treksoft.e4k.core.delete
+import pl.treksoft.e4k.core.execute
+import pl.treksoft.e4k.core.insert
+import pl.treksoft.e4k.core.table
+import pl.treksoft.e4k.core.update
+import pl.treksoft.e4k.core.using
+import pl.treksoft.e4k.query.query
 import pl.treksoft.kvision.types.OffsetDateTime
 
 interface WithProfile {
@@ -28,19 +33,9 @@ interface WithProfile {
     }
 }
 
-fun DatabaseClient.GenericExecuteSpec.bindMap(parameters: Map<String, Any?>): DatabaseClient.GenericExecuteSpec {
-    return parameters.entries.fold(this) { spec, entry ->
-        if (entry.value == null) {
-            spec.bindNull(entry.key, String::class.java)
-        } else {
-            spec.bind(entry.key, SettableValue.fromOrEmpty(entry.value, entry.value!!::class.java))
-        }
-    }
-}
-
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-actual class AddressService(override val serverRequest: ServerRequest, private val databaseClient: DatabaseClient) :
+actual class AddressService(override val serverRequest: ServerRequest, private val dbClient: DbClient) :
     IAddressService, WithProfile {
 
     override suspend fun getAddressList(search: String?, types: String, sort: Sort): List<Address> {
@@ -71,37 +66,37 @@ actual class AddressService(override val serverRequest: ServerRequest, private v
                 Sort.F -> orderBy("favourite")
             }
         }
-        return databaseClient.execute(query.sql).bindMap(query.parameters).`as`(Address::class.java).fetch().flow()
-            .toList()
+        return dbClient.execute<Address>(query).flow().toList()
     }
 
     override suspend fun addAddress(address: Address): Address {
         val profile = getProfile()
         val newAddress = address.copy(id = null, userId = profile.id?.toInt(), createdAt = OffsetDateTime.now())
-        val id = databaseClient.insert().into(Address::class.java).using(newAddress)
-            .map { row -> row.get("id", java.lang.Integer::class.java) }.awaitOne()
-        return newAddress.copy(id = id?.toInt())
+        val id = dbClient.r2dbcEntityTemplate.insert(Address::class.java).using(newAddress)
+            .map { row -> row.id }.awaitSingle()
+        return newAddress.copy(id = id)
     }
 
     override suspend fun updateAddress(address: Address): Address {
         val profile = getProfile()
         address.id?.let { id ->
-            databaseClient.select().from(Address::class.java).matching(
-                where("id").`is`(id).and("user_id").`is`(
-                    profile.id?.toInt() ?: 0
+            dbClient.r2dbcEntityTemplate.select(Address::class.java).matching(
+                query(
+                    where("id").`is`(id).and("user_id").`is`(
+                        profile.id?.toInt() ?: 0
+                    )
                 )
-            ).fetch().awaitOneOrNull()?.let { oldAddress ->
+            ).awaitOneOrNull()?.let { oldAddress ->
                 val newAddress = address.copy(userId = profile.id?.toInt(), createdAt = oldAddress.createdAt)
-                databaseClient.update().table(Address::class.java)
-                    .using(newAddress).fetch().rowsUpdated().awaitSingle()
+                dbClient.update().table<Address>().using(newAddress, dbClient).awaitSingle()
                 return newAddress
             } ?: throw IllegalArgumentException("Address not found")
         } ?: throw IllegalArgumentException("The ID of the address is not set")
     }
 
     override suspend fun deleteAddress(id: Int): Boolean {
-        return databaseClient.delete().from(Address::class.java)
-            .matching(where("id").`is`(id)).fetch().rowsUpdated().awaitSingle() == 1
+        return dbClient.delete().from(Address::class.java)
+            .matching(query(where("id").`is`(id))).allAndAwait() == 1
     }
 }
 
@@ -116,19 +111,19 @@ actual class ProfileService(override val serverRequest: ServerRequest) : IProfil
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 actual class RegisterProfileService(
-    private val databaseClient: DatabaseClient,
+    private val dbClient: DbClient,
     private val passwordEncoder: PasswordEncoder
 ) : IRegisterProfileService {
 
     override suspend fun registerProfile(profile: Profile, password: String): Boolean {
         try {
-            databaseClient.insert().into(User::class.java).using(
+            dbClient.insert().into(User::class.java).using(
                 User(
                     username = profile.username!!,
                     name = profile.name!!,
                     password = passwordEncoder.encode(password)
                 )
-            ).await()
+            ).awaitSingle()
         } catch (e: Exception) {
             throw Exception("Register operation failed!")
         }

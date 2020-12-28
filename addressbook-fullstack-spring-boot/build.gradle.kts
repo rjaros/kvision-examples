@@ -35,10 +35,9 @@ repositories {
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
 val coroutinesVersion: String by project
-val springDataR2dbcVersion: String by project
 val r2dbcPostgresqlVersion: String by project
 val r2dbcH2Version: String by project
-val kweryVersion: String by project
+val e4kVersion: String by project
 
 val webDir = file("src/frontendMain/web")
 val mainClassName = "com.example.MainKt"
@@ -104,10 +103,10 @@ kotlin {
                 implementation("org.springframework.boot:spring-boot-devtools")
                 implementation("org.springframework.boot:spring-boot-starter-webflux")
                 implementation("org.springframework.boot:spring-boot-starter-security")
-                implementation("org.springframework.data:spring-data-r2dbc:$springDataR2dbcVersion")
+                implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
                 implementation("io.r2dbc:r2dbc-postgresql:$r2dbcPostgresqlVersion")
                 implementation("io.r2dbc:r2dbc-h2:$r2dbcH2Version")
-                implementation("com.github.andrewoma.kwery:core:$kweryVersion")
+                implementation("pl.treksoft:r2dbc-e4k:$e4kVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:$coroutinesVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:$coroutinesVersion")
             }

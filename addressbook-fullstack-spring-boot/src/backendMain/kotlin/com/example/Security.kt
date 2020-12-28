@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.relational.core.mapping.Table
 import org.springframework.data.relational.core.query.Criteria.where
+import org.springframework.data.relational.core.query.Query.query
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
@@ -23,6 +23,7 @@ import org.springframework.security.web.server.authentication.RedirectServerAuth
 import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers
 import org.springframework.stereotype.Service
+import pl.treksoft.e4k.core.DbClient
 import pl.treksoft.kvision.remote.serviceMatchers
 import reactor.core.publisher.Mono
 import java.net.URI
@@ -124,9 +125,10 @@ actual data class Profile(
 data class User(val id: Int? = null, val username: String, val password: String, val name: String)
 
 @Service
-class MyReactiveUserDetailsService(private val client: DatabaseClient) : ReactiveUserDetailsService {
+class MyReactiveUserDetailsService(private val client: DbClient) : ReactiveUserDetailsService {
     override fun findByUsername(username: String): Mono<UserDetails> {
-        return client.select().from(User::class.java).matching(where("username").`is`(username)).fetch().first().map {
+        return client.r2dbcEntityTemplate.select(User::class.java).matching(query(where("username").`is`(username)))
+            .first().map {
             @Suppress("USELESS_CAST")
             Profile(it.id.toString(), it.name).apply {
                 this.username = it.username
