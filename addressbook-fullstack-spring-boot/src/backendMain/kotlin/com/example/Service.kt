@@ -20,6 +20,7 @@ import pl.treksoft.e4k.core.insert
 import pl.treksoft.e4k.core.table
 import pl.treksoft.e4k.core.update
 import pl.treksoft.e4k.core.using
+import pl.treksoft.e4k.query.parameterNullable
 import pl.treksoft.e4k.query.query
 import pl.treksoft.kvision.types.OffsetDateTime
 
@@ -44,7 +45,7 @@ actual class AddressService(override val serverRequest: ServerRequest, private v
             select("SELECT * FROM address")
             whereGroup {
                 where("user_id = :user_id")
-                parameter("user_id", profile.id?.toInt())
+                parameterNullable("user_id", profile.id?.toInt())
                 search?.let {
                     where(
                         """(lower(first_name) like :search
