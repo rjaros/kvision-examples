@@ -131,10 +131,10 @@ kotlin {
 }
 
 fun getNodeJsBinaryExecutable(): String {
-    val nodeDir = NodeJsRootPlugin.apply(project).nodeJsSetupTaskProvider.get().destination
+    val nodeDir = NodeJsRootPlugin.apply(rootProject).nodeJsSetupTaskProvider.get().destination
     val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
     val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
-    val command = NodeJsRootPlugin.apply(project).nodeCommand
+    val command = NodeJsRootPlugin.apply(rootProject).nodeCommand
     val finalCommand = if (isWindows && command == "node") "node.exe" else command
     return nodeBinDir.resolve(finalCommand).absolutePath
 }
@@ -148,7 +148,7 @@ tasks {
     create("generatePotFile", Exec::class) {
         dependsOn("compileKotlinFrontend")
         executable = getNodeJsBinaryExecutable()
-        args("$buildDir/js/node_modules/gettext-extract/bin/gettext-extract")
+        args("${rootProject.buildDir}/js/node_modules/gettext-extract/bin/gettext-extract")
         inputs.files(kotlin.sourceSets["frontendMain"].kotlin.files)
         outputs.file("$projectDir/src/frontendMain/resources/i18n/messages.pot")
     }
@@ -166,7 +166,7 @@ afterEvaluate {
                     exec {
                         executable = getNodeJsBinaryExecutable()
                         args(
-                            "$buildDir/js/node_modules/gettext.js/bin/po2json",
+                            "${rootProject.buildDir}/js/node_modules/gettext.js/bin/po2json",
                             it.absolutePath,
                             "${it.parent}/${it.nameWithoutExtension}.json"
                         )
