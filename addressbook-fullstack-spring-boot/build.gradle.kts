@@ -134,7 +134,7 @@ kotlin {
         val frontendTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
-                implementation("pl.treksoft:kvision-testutils:$kvisionVersion:tests")
+                implementation("pl.treksoft:kvision-testutils:$kvisionVersion")
             }
         }
     }
