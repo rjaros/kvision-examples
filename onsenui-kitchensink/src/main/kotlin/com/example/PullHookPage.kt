@@ -1,21 +1,21 @@
 package com.example
 
 import kotlinx.browser.window
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.image
-import pl.treksoft.kvision.onsenui.core.Navigator
-import pl.treksoft.kvision.onsenui.core.backButton
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.core.pullHook
-import pl.treksoft.kvision.onsenui.list.header
-import pl.treksoft.kvision.onsenui.list.item
-import pl.treksoft.kvision.onsenui.list.onsList
-import pl.treksoft.kvision.onsenui.toolbar.toolbar
-import pl.treksoft.kvision.onsenui.visual.icon
-import pl.treksoft.kvision.onsenui.visual.progressCircular
-import pl.treksoft.kvision.state.bind
-import pl.treksoft.kvision.state.observableListOf
-import pl.treksoft.kvision.utils.px
+import io.kvision.html.div
+import io.kvision.html.image
+import io.kvision.onsenui.core.Navigator
+import io.kvision.onsenui.core.backButton
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.core.pullHook
+import io.kvision.onsenui.list.header
+import io.kvision.onsenui.list.item
+import io.kvision.onsenui.list.onsList
+import io.kvision.onsenui.toolbar.toolbar
+import io.kvision.onsenui.visual.icon
+import io.kvision.onsenui.visual.progressCircular
+import io.kvision.state.bind
+import io.kvision.state.observableListOf
+import io.kvision.utils.px
 import kotlin.random.Random
 
 data class Kitten(val name: String, val url: String)

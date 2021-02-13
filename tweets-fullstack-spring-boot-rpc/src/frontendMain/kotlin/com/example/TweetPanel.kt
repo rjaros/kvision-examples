@@ -1,23 +1,23 @@
 package com.example
 
-import pl.treksoft.kvision.core.Border
-import pl.treksoft.kvision.core.BorderStyle
-import pl.treksoft.kvision.core.Col
-import pl.treksoft.kvision.core.Color
-import pl.treksoft.kvision.core.FlexWrap
-import pl.treksoft.kvision.core.FontWeight
-import pl.treksoft.kvision.core.JustifyContent
-import pl.treksoft.kvision.core.Overflow
-import pl.treksoft.kvision.data.DataContainer
-import pl.treksoft.kvision.data.SorterType
-import pl.treksoft.kvision.html.link
-import pl.treksoft.kvision.html.span
-import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.VPanel
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.types.toStringF
-import pl.treksoft.kvision.utils.perc
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.Border
+import io.kvision.core.BorderStyle
+import io.kvision.core.Col
+import io.kvision.core.Color
+import io.kvision.core.FlexWrap
+import io.kvision.core.FontWeight
+import io.kvision.core.JustifyContent
+import io.kvision.core.Overflow
+import io.kvision.data.DataContainer
+import io.kvision.data.SorterType
+import io.kvision.html.link
+import io.kvision.html.span
+import io.kvision.panel.SimplePanel
+import io.kvision.panel.VPanel
+import io.kvision.panel.hPanel
+import io.kvision.types.toStringF
+import io.kvision.utils.perc
+import io.kvision.utils.px
 
 class TweetPanel : SimplePanel() {
     init {

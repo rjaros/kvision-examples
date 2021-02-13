@@ -4,8 +4,8 @@ package com.example
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseContextualSerialization
-import pl.treksoft.kvision.remote.Id
-import pl.treksoft.kvision.types.OffsetDateTime
+import io.kvision.remote.Id
+import io.kvision.types.OffsetDateTime
 
 expect class Profile
 

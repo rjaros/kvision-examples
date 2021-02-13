@@ -3,20 +3,20 @@ package com.example
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.form.FormPanel
-import pl.treksoft.kvision.form.formPanel
-import pl.treksoft.kvision.form.text.Password
-import pl.treksoft.kvision.form.text.Text
-import pl.treksoft.kvision.html.Button
-import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.modal.Alert
-import pl.treksoft.kvision.modal.Dialog
-import pl.treksoft.kvision.remote.Credentials
-import pl.treksoft.kvision.remote.LoginService
-import pl.treksoft.kvision.remote.SecurityMgr
-import pl.treksoft.kvision.utils.ENTER_KEY
+import io.kvision.core.onEvent
+import io.kvision.form.FormPanel
+import io.kvision.form.formPanel
+import io.kvision.form.text.Password
+import io.kvision.form.text.Text
+import io.kvision.html.Button
+import io.kvision.html.ButtonStyle
+import io.kvision.i18n.I18n.tr
+import io.kvision.modal.Alert
+import io.kvision.modal.Dialog
+import io.kvision.remote.Credentials
+import io.kvision.remote.LoginService
+import io.kvision.remote.SecurityMgr
+import io.kvision.utils.ENTER_KEY
 
 @Serializable
 actual data class Profile(

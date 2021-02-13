@@ -2,8 +2,8 @@ package com.example
 
 import io.vertx.core.AbstractVerticle
 import io.vertx.ext.web.Router
-import pl.treksoft.kvision.remote.applyRoutes
-import pl.treksoft.kvision.remote.kvisionInit
+import io.kvision.remote.applyRoutes
+import io.kvision.remote.kvisionInit
 
 class MainVerticle : AbstractVerticle() {
     override fun start() {

@@ -1,36 +1,38 @@
 package com.example
 
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.form.InputSize
-import pl.treksoft.kvision.form.check.checkBoxInput
-import pl.treksoft.kvision.form.select.SimpleSelectInput
-import pl.treksoft.kvision.form.spinner.SpinnerInput
-import pl.treksoft.kvision.form.text.TextInput
-import pl.treksoft.kvision.form.time.DateTimeInput
-import pl.treksoft.kvision.html.Icon
-import pl.treksoft.kvision.html.Span
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.modal.Alert
-import pl.treksoft.kvision.modal.Confirm
-import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.state.observableListOf
-import pl.treksoft.kvision.table.TableType
-import pl.treksoft.kvision.tabulator.Align
-import pl.treksoft.kvision.tabulator.ColumnDefinition
-import pl.treksoft.kvision.tabulator.Editor
-import pl.treksoft.kvision.tabulator.Formatter
-import pl.treksoft.kvision.tabulator.Layout
-import pl.treksoft.kvision.tabulator.PaginationMode
-import pl.treksoft.kvision.tabulator.TabulatorOptions
-import pl.treksoft.kvision.tabulator.tabulator
-import pl.treksoft.kvision.types.toDateF
-import pl.treksoft.kvision.types.toStringF
-import pl.treksoft.kvision.utils.obj
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.onEvent
+import io.kvision.form.InputSize
+import io.kvision.form.check.checkBoxInput
+import io.kvision.form.select.SimpleSelectInput
+import io.kvision.form.spinner.SpinnerInput
+import io.kvision.form.text.TextInput
+import io.kvision.form.time.DateTimeInput
+import io.kvision.html.Icon
+import io.kvision.html.Span
+import io.kvision.html.button
+import io.kvision.i18n.I18n.tr
+import io.kvision.modal.Alert
+import io.kvision.modal.Confirm
+import io.kvision.panel.SimplePanel
+import io.kvision.panel.hPanel
+import io.kvision.state.observableListOf
+import io.kvision.table.TableType
+import io.kvision.tabulator.Align
+import io.kvision.tabulator.ColumnDefinition
+import io.kvision.tabulator.Editor
+import io.kvision.tabulator.Formatter
+import io.kvision.tabulator.Layout
+import io.kvision.tabulator.PaginationMode
+import io.kvision.tabulator.TabulatorOptions
+import io.kvision.tabulator.tabulator
+import io.kvision.types.toDateF
+import io.kvision.types.toStringF
+import io.kvision.utils.obj
+import io.kvision.utils.px
 import kotlin.js.Date
 
+@OptIn(ExperimentalJsExport::class)
+@JsExport
 data class Employee(
     var name: String?,
     var position: String?,

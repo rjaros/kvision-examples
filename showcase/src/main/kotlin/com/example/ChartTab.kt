@@ -1,20 +1,20 @@
 package com.example
 
-import pl.treksoft.kvision.chart.chart
-import pl.treksoft.kvision.chart.ChartScales
-import pl.treksoft.kvision.chart.ChartType
-import pl.treksoft.kvision.chart.Configuration
-import pl.treksoft.kvision.chart.DataSets
-import pl.treksoft.kvision.chart.LegendOptions
-import pl.treksoft.kvision.chart.ChartOptions
-import pl.treksoft.kvision.chart.TitleOptions
-import pl.treksoft.kvision.core.Col
-import pl.treksoft.kvision.core.Color
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.gridPanel
-import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.utils.obj
-import pl.treksoft.kvision.utils.px
+import io.kvision.chart.chart
+import io.kvision.chart.ChartScales
+import io.kvision.chart.ChartType
+import io.kvision.chart.Configuration
+import io.kvision.chart.DataSets
+import io.kvision.chart.LegendOptions
+import io.kvision.chart.ChartOptions
+import io.kvision.chart.TitleOptions
+import io.kvision.core.Col
+import io.kvision.core.Color
+import io.kvision.i18n.I18n.tr
+import io.kvision.panel.gridPanel
+import io.kvision.panel.SimplePanel
+import io.kvision.utils.obj
+import io.kvision.utils.px
 import kotlin.math.sin
 
 class ChartTab : SimplePanel() {

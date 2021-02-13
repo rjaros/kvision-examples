@@ -1,23 +1,23 @@
 package com.example
 
-import pl.treksoft.kvision.core.Background
-import pl.treksoft.kvision.core.Col
-import pl.treksoft.kvision.core.Color
-import pl.treksoft.kvision.core.Container
-import pl.treksoft.kvision.dropdown.dropDown
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.h4
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.Direction
-import pl.treksoft.kvision.panel.SideTabSize
-import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.TabPosition
-import pl.treksoft.kvision.panel.splitPanel
-import pl.treksoft.kvision.panel.stackPanel
-import pl.treksoft.kvision.panel.tab
-import pl.treksoft.kvision.panel.tabPanel
-import pl.treksoft.kvision.panel.vPanel
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.Background
+import io.kvision.core.Col
+import io.kvision.core.Color
+import io.kvision.core.Container
+import io.kvision.dropdown.dropDown
+import io.kvision.html.div
+import io.kvision.html.h4
+import io.kvision.i18n.I18n.tr
+import io.kvision.panel.Direction
+import io.kvision.panel.SideTabSize
+import io.kvision.panel.SimplePanel
+import io.kvision.panel.TabPosition
+import io.kvision.panel.splitPanel
+import io.kvision.panel.stackPanel
+import io.kvision.panel.tab
+import io.kvision.panel.tabPanel
+import io.kvision.panel.vPanel
+import io.kvision.utils.px
 
 class ContainersTab : SimplePanel() {
     init {

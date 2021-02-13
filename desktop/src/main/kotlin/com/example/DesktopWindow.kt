@@ -2,14 +2,14 @@ package com.example
 
 import com.example.App.Companion.addTask
 import com.example.App.Companion.removeTask
-import pl.treksoft.kvision.core.Component
-import pl.treksoft.kvision.core.CssSize
-import pl.treksoft.kvision.core.UNIT
-import pl.treksoft.kvision.core.Widget
-import pl.treksoft.kvision.utils.px
-import pl.treksoft.kvision.utils.vh
-import pl.treksoft.kvision.utils.vw
-import pl.treksoft.kvision.window.Window
+import io.kvision.core.Component
+import io.kvision.core.CssSize
+import io.kvision.core.UNIT
+import io.kvision.core.Widget
+import io.kvision.utils.px
+import io.kvision.utils.vh
+import io.kvision.utils.vw
+import io.kvision.window.Window
 import kotlin.random.Random
 
 open class DesktopWindow(caption: String, icon: String, width: Int, height: Int) :

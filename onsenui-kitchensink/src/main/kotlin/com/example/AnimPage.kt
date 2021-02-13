@@ -1,12 +1,12 @@
 package com.example
 
-import pl.treksoft.kvision.core.onClick
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.list.header
-import pl.treksoft.kvision.onsenui.list.item
-import pl.treksoft.kvision.onsenui.list.onsList
-import pl.treksoft.kvision.onsenui.tabbar.Tab
-import pl.treksoft.kvision.utils.obj
+import io.kvision.core.onClick
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.list.header
+import io.kvision.onsenui.list.item
+import io.kvision.onsenui.list.onsList
+import io.kvision.onsenui.tabbar.Tab
+import io.kvision.utils.obj
 
 object AnimModel {
     val animations = listOf("none", "default", "slide-ios", "slide-md", "lift-ios", "lift-md", "fade-ios", "fade-md")

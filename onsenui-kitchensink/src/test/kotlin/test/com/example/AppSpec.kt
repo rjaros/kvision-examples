@@ -1,6 +1,6 @@
 package test.com.example
 
-import pl.treksoft.kvision.test.SimpleSpec
+import io.kvision.test.SimpleSpec
 import kotlin.test.Test
 import kotlin.test.assertTrue
 

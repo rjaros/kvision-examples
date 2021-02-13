@@ -1,11 +1,11 @@
 package com.example
 
-import pl.treksoft.kvision.core.onClick
-import pl.treksoft.kvision.html.p
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.tabbar.Tab
-import pl.treksoft.kvision.onsenui.visual.card
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.onClick
+import io.kvision.html.p
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.tabbar.Tab
+import io.kvision.onsenui.visual.card
+import io.kvision.utils.px
 
 data class CardItem(val title: String, val content: String, val pageId: String)
 

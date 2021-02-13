@@ -1,8 +1,8 @@
 package com.example
 
 import io.jooby.runApp
-import pl.treksoft.kvision.remote.applyRoutes
-import pl.treksoft.kvision.remote.kvisionInit
+import io.kvision.remote.applyRoutes
+import io.kvision.remote.kvisionInit
 
 fun main(args: Array<String>) {
     runApp(args) {

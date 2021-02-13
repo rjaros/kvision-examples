@@ -1,21 +1,21 @@
 package com.example
 
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.section
-import pl.treksoft.kvision.onsenui.FloatDirection
-import pl.treksoft.kvision.onsenui.FloatPosition
-import pl.treksoft.kvision.onsenui.control.fab
-import pl.treksoft.kvision.onsenui.control.segment
-import pl.treksoft.kvision.onsenui.control.speedDial
-import pl.treksoft.kvision.onsenui.control.speedDialItem
-import pl.treksoft.kvision.onsenui.core.Navigator
-import pl.treksoft.kvision.onsenui.core.backButton
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.dialog.showConfirm
-import pl.treksoft.kvision.onsenui.form.OnsButtonType
-import pl.treksoft.kvision.onsenui.form.onsButton
-import pl.treksoft.kvision.onsenui.toolbar.toolbar
-import pl.treksoft.kvision.utils.px
+import io.kvision.html.button
+import io.kvision.html.section
+import io.kvision.onsenui.FloatDirection
+import io.kvision.onsenui.FloatPosition
+import io.kvision.onsenui.control.fab
+import io.kvision.onsenui.control.segment
+import io.kvision.onsenui.control.speedDial
+import io.kvision.onsenui.control.speedDialItem
+import io.kvision.onsenui.core.Navigator
+import io.kvision.onsenui.core.backButton
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.dialog.showConfirm
+import io.kvision.onsenui.form.OnsButtonType
+import io.kvision.onsenui.form.onsButton
+import io.kvision.onsenui.toolbar.toolbar
+import io.kvision.utils.px
 
 fun Navigator.buttonsPage() {
     page("buttons") {

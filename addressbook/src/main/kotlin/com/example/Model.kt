@@ -7,7 +7,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.w3c.dom.get
 import org.w3c.dom.set
-import pl.treksoft.kvision.state.ObservableValue
+import io.kvision.state.ObservableValue
 
 @Serializable
 data class Address(

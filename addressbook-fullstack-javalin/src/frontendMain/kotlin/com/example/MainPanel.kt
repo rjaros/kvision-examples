@@ -1,14 +1,14 @@
 package com.example
 
 import kotlinx.browser.document
-import pl.treksoft.kvision.core.JustifyContent
-import pl.treksoft.kvision.data.dataContainer
-import pl.treksoft.kvision.html.Button
-import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.html.Span
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.HPanel
+import io.kvision.core.JustifyContent
+import io.kvision.data.dataContainer
+import io.kvision.html.Button
+import io.kvision.html.ButtonStyle
+import io.kvision.html.Span
+import io.kvision.html.button
+import io.kvision.i18n.I18n.tr
+import io.kvision.panel.HPanel
 
 object MainPanel : HPanel(justify = JustifyContent.SPACEBETWEEN) {
     init {

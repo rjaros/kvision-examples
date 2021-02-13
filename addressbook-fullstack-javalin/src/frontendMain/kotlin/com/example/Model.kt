@@ -2,9 +2,9 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.state.ObservableList
-import pl.treksoft.kvision.state.observableListOf
-import pl.treksoft.kvision.utils.syncWithList
+import io.kvision.state.ObservableList
+import io.kvision.state.observableListOf
+import io.kvision.utils.syncWithList
 
 object Model {
 

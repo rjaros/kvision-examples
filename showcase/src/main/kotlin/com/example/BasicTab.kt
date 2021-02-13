@@ -1,20 +1,20 @@
 package com.example
 
+import io.kvision.core.*
+import io.kvision.html.*
+import io.kvision.i18n.tr
+import io.kvision.panel.SimplePanel
+import io.kvision.panel.fieldsetPanel
+import io.kvision.panel.vPanel
+import io.kvision.require
+import io.kvision.table.ResponsiveType
+import io.kvision.table.TableType
+import io.kvision.table.cell
+import io.kvision.table.row
+import io.kvision.table.table
+import io.kvision.utils.perc
+import io.kvision.utils.px
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.core.*
-import pl.treksoft.kvision.html.*
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.fieldsetPanel
-import pl.treksoft.kvision.panel.vPanel
-import pl.treksoft.kvision.require
-import pl.treksoft.kvision.table.ResponsiveType
-import pl.treksoft.kvision.table.TableType
-import pl.treksoft.kvision.table.cell
-import pl.treksoft.kvision.table.row
-import pl.treksoft.kvision.table.table
-import pl.treksoft.kvision.utils.perc
-import pl.treksoft.kvision.utils.px
 
 @Serializable
 data class HbsKid(val name: String, val age: Int)
@@ -36,7 +36,8 @@ class BasicTab : SimplePanel() {
                 fontStyle = FontStyle.OBLIQUE
                 fontWeight = FontWeight.BOLDER
                 fontVariant = FontVariant.SMALLCAPS
-                textDecoration = TextDecoration(TextDecorationLine.UNDERLINE, TextDecorationStyle.DOTTED, Color.name(Col.RED))
+                textDecoration =
+                    TextDecoration(TextDecorationLine.UNDERLINE, TextDecorationStyle.DOTTED, Color.name(Col.RED))
                 +tr("A label with custom CSS styling")
             }
             span {
@@ -59,7 +60,7 @@ class BasicTab : SimplePanel() {
                     )
                 )
             }
-            tag(TAG.CODE) {
+            code {
                 +tr("Some text written in <code></code> HTML tag.")
             }
             div(rich = true) {
@@ -69,7 +70,7 @@ class BasicTab : SimplePanel() {
             fieldsetPanel(tr("A fieldset")) {
                 paddingTop = 10.px
                 paddingBottom = 10.px
-                tag(TAG.DIV, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
+                div("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis.")
             }
             span {
                 +tr("A responsive table:")

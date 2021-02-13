@@ -4,8 +4,8 @@ package com.example
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseContextualSerialization
-import pl.treksoft.kvision.annotations.KVService
-import pl.treksoft.kvision.types.LocalDateTime
+import io.kvision.annotations.KVService
+import io.kvision.types.LocalDateTime
 
 @Serializable
 data class Tweet(

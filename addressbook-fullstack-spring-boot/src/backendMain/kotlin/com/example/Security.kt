@@ -24,7 +24,7 @@ import org.springframework.security.web.server.authentication.logout.RedirectSer
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers
 import org.springframework.stereotype.Service
 import pl.treksoft.e4k.core.DbClient
-import pl.treksoft.kvision.remote.serviceMatchers
+import io.kvision.remote.serviceMatchers
 import reactor.core.publisher.Mono
 import java.net.URI
 

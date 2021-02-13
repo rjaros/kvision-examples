@@ -28,7 +28,7 @@ import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.relational.core.query.Criteria
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
-import pl.treksoft.kvision.remote.matches
+import io.kvision.remote.matches
 import reactor.core.publisher.Mono
 import reactor.kotlin.adapter.rxjava.toFlowable
 import java.util.*

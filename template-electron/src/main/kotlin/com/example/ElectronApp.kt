@@ -1,25 +1,25 @@
 package com.example
 
 import kotlinx.browser.window
-import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.core.AlignItems
-import pl.treksoft.kvision.electron.electron.BrowserWindow
-import pl.treksoft.kvision.electron.electron.BrowserWindowConstructorOptions
-import pl.treksoft.kvision.electron.electron.remote
-import pl.treksoft.kvision.electron.global
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.i18n.DefaultI18nManager
-import pl.treksoft.kvision.i18n.I18n
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.module
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.panel.root
-import pl.treksoft.kvision.panel.vPanel
-import pl.treksoft.kvision.require
-import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.utils.createInstance
-import pl.treksoft.kvision.utils.perc
-import pl.treksoft.kvision.utils.px
+import io.kvision.Application
+import io.kvision.core.AlignItems
+import io.kvision.electron.electron.BrowserWindow
+import io.kvision.electron.electron.BrowserWindowConstructorOptions
+import io.kvision.electron.electron.remote
+import io.kvision.electron.global
+import io.kvision.html.div
+import io.kvision.i18n.DefaultI18nManager
+import io.kvision.i18n.I18n
+import io.kvision.i18n.I18n.tr
+import io.kvision.module
+import io.kvision.panel.hPanel
+import io.kvision.panel.root
+import io.kvision.panel.vPanel
+import io.kvision.require
+import io.kvision.startApplication
+import io.kvision.utils.createInstance
+import io.kvision.utils.perc
+import io.kvision.utils.px
 
 class ElectronApp : Application() {
 

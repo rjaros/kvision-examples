@@ -22,7 +22,7 @@ import pl.treksoft.e4k.core.update
 import pl.treksoft.e4k.core.using
 import pl.treksoft.e4k.query.parameterNullable
 import pl.treksoft.e4k.query.query
-import pl.treksoft.kvision.types.OffsetDateTime
+import io.kvision.types.OffsetDateTime
 
 interface WithProfile {
     val serverRequest: ServerRequest

@@ -1,26 +1,26 @@
 package com.example
 
 import kotlinx.browser.window
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.p
-import pl.treksoft.kvision.onsenui.OnsenUi
-import pl.treksoft.kvision.onsenui.control.Segment
-import pl.treksoft.kvision.onsenui.control.segment
-import pl.treksoft.kvision.onsenui.core.Navigator
-import pl.treksoft.kvision.onsenui.core.backButton
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.list.item
-import pl.treksoft.kvision.onsenui.list.onsLazyRepeat
-import pl.treksoft.kvision.onsenui.list.onsList
-import pl.treksoft.kvision.onsenui.tabbar.TabsPosition
-import pl.treksoft.kvision.onsenui.tabbar.tab
-import pl.treksoft.kvision.onsenui.tabbar.tabbar
-import pl.treksoft.kvision.onsenui.toolbar.toolbar
-import pl.treksoft.kvision.onsenui.visual.icon
-import pl.treksoft.kvision.state.bind
-import pl.treksoft.kvision.state.observableListOf
-import pl.treksoft.kvision.utils.px
+import io.kvision.html.button
+import io.kvision.html.div
+import io.kvision.html.p
+import io.kvision.onsenui.OnsenUi
+import io.kvision.onsenui.control.Segment
+import io.kvision.onsenui.control.segment
+import io.kvision.onsenui.core.Navigator
+import io.kvision.onsenui.core.backButton
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.list.item
+import io.kvision.onsenui.list.onsLazyRepeat
+import io.kvision.onsenui.list.onsList
+import io.kvision.onsenui.tabbar.TabsPosition
+import io.kvision.onsenui.tabbar.tab
+import io.kvision.onsenui.tabbar.tabbar
+import io.kvision.onsenui.toolbar.toolbar
+import io.kvision.onsenui.visual.icon
+import io.kvision.state.bind
+import io.kvision.state.observableListOf
+import io.kvision.utils.px
 
 object InfiniteScrollModel {
     val items = observableListOf<Int>().apply {

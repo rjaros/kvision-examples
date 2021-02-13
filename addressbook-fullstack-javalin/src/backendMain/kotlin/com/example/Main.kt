@@ -6,8 +6,8 @@ import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
-import pl.treksoft.kvision.remote.applyRoutes
-import pl.treksoft.kvision.remote.kvisionInit
+import io.kvision.remote.applyRoutes
+import io.kvision.remote.kvisionInit
 import javax.servlet.http.HttpServletResponse
 
 const val SESSION_PROFILE_KEY = "com.example.profile"

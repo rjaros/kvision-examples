@@ -1,10 +1,10 @@
 package com.example
 
-import pl.treksoft.kvision.core.Container
-import pl.treksoft.kvision.core.CssSize
-import pl.treksoft.kvision.core.UNIT
-import pl.treksoft.kvision.form.text.RichTextInput
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.Container
+import io.kvision.core.CssSize
+import io.kvision.core.UNIT
+import io.kvision.form.text.RichTextInput
+import io.kvision.utils.px
 
 class TextEditor : DesktopWindow("Text Editor", "fas fa-edit", 700, 400) {
 

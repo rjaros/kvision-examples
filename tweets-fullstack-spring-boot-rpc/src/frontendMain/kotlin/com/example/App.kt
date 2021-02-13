@@ -4,23 +4,23 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.w3c.dom.events.KeyboardEvent
-import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.core.AlignItems
-import pl.treksoft.kvision.core.JustifyContent
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.form.text.Text
-import pl.treksoft.kvision.form.text.text
-import pl.treksoft.kvision.form.text.textAreaInput
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.module
-import pl.treksoft.kvision.panel.root
-import pl.treksoft.kvision.panel.vPanel
-import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.utils.ENTER_KEY
-import pl.treksoft.kvision.utils.perc
-import pl.treksoft.kvision.utils.px
-import pl.treksoft.kvision.utils.syncWithList
+import io.kvision.Application
+import io.kvision.core.AlignItems
+import io.kvision.core.JustifyContent
+import io.kvision.core.onEvent
+import io.kvision.form.text.Text
+import io.kvision.form.text.text
+import io.kvision.form.text.textAreaInput
+import io.kvision.html.button
+import io.kvision.panel.hPanel
+import io.kvision.module
+import io.kvision.panel.root
+import io.kvision.panel.vPanel
+import io.kvision.startApplication
+import io.kvision.utils.ENTER_KEY
+import io.kvision.utils.perc
+import io.kvision.utils.px
+import io.kvision.utils.syncWithList
 
 class App : Application() {
 

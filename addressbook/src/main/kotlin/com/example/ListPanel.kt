@@ -1,26 +1,26 @@
 package com.example
 
-import pl.treksoft.kvision.core.AlignItems
-import pl.treksoft.kvision.core.Container
-import pl.treksoft.kvision.core.FlexWrap
-import pl.treksoft.kvision.core.FontStyle
-import pl.treksoft.kvision.core.onClick
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.form.check.radioGroup
-import pl.treksoft.kvision.form.text.TextInputType
-import pl.treksoft.kvision.form.text.text
-import pl.treksoft.kvision.html.icon
-import pl.treksoft.kvision.html.link
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.modal.Confirm
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.panel.simplePanel
-import pl.treksoft.kvision.table.TableType
-import pl.treksoft.kvision.table.cell
-import pl.treksoft.kvision.table.headerCell
-import pl.treksoft.kvision.table.row
-import pl.treksoft.kvision.table.table
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.AlignItems
+import io.kvision.core.Container
+import io.kvision.core.FlexWrap
+import io.kvision.core.FontStyle
+import io.kvision.core.onClick
+import io.kvision.core.onEvent
+import io.kvision.form.check.radioGroup
+import io.kvision.form.text.TextInputType
+import io.kvision.form.text.text
+import io.kvision.html.icon
+import io.kvision.html.link
+import io.kvision.i18n.I18n.tr
+import io.kvision.modal.Confirm
+import io.kvision.panel.hPanel
+import io.kvision.panel.simplePanel
+import io.kvision.table.TableType
+import io.kvision.table.cell
+import io.kvision.table.headerCell
+import io.kvision.table.row
+import io.kvision.table.table
+import io.kvision.utils.px
 
 fun Container.listPanel() {
     simplePanel {

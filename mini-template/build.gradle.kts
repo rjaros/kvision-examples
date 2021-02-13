@@ -6,7 +6,6 @@ plugins {
 repositories {
     mavenCentral()
     jcenter()
-    maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     mavenLocal()
 }
 
@@ -19,6 +18,6 @@ kotlin {
         binaries.executable()
     }
     sourceSets["main"].dependencies {
-        implementation("pl.treksoft:kvision:$kvisionVersion")
+        implementation("io.kvision:kvision:$kvisionVersion")
     }
 }

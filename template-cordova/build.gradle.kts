@@ -14,10 +14,6 @@ group = "com.example"
 repositories {
     mavenCentral()
     jcenter()
-    maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
-    maven { url = uri("https://kotlin.bintray.com/kotlinx") }
-    maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
-    maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     mavenLocal()
 }
 
@@ -55,16 +51,16 @@ kotlin {
         binaries.executable()
     }
     sourceSets["main"].dependencies {
-        implementation("pl.treksoft:kvision:$kvisionVersion")
-        implementation("pl.treksoft:kvision-bootstrap:$kvisionVersion")
-        implementation("pl.treksoft:kvision-bootstrap-css:$kvisionVersion")
-        implementation("pl.treksoft:kvision-i18n:$kvisionVersion")
-        implementation("pl.treksoft:kvision-redux:$kvisionVersion")
-        implementation("pl.treksoft:kvision-cordova:$kvisionVersion")
+        implementation("io.kvision:kvision:$kvisionVersion")
+        implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
+        implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
+        implementation("io.kvision:kvision-i18n:$kvisionVersion")
+        implementation("io.kvision:kvision-redux:$kvisionVersion")
+        implementation("io.kvision:kvision-cordova:$kvisionVersion")
     }
     sourceSets["test"].dependencies {
         implementation(kotlin("test-js"))
-        implementation("pl.treksoft:kvision-testutils:$kvisionVersion")
+        implementation("io.kvision:kvision-testutils:$kvisionVersion")
     }
     sourceSets["main"].resources.srcDir(webDir)
 }

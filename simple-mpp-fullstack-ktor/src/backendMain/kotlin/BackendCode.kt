@@ -13,8 +13,8 @@ import kotlinx.html.body
 import kotlinx.html.div
 import kotlinx.html.id
 import kotlinx.html.script
-import pl.treksoft.kvision.remote.applyRoutes
-import pl.treksoft.kvision.remote.kvisionInit
+import io.kvision.remote.applyRoutes
+import io.kvision.remote.kvisionInit
 import java.io.File
 
 fun Application.main() {

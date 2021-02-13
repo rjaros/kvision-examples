@@ -2,23 +2,23 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.core.AlignItems
-import pl.treksoft.kvision.core.JustifyContent
-import pl.treksoft.kvision.form.select.selectInput
-import pl.treksoft.kvision.form.text.textInput
-import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.html.Div
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.span
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.module
-import pl.treksoft.kvision.panel.root
-import pl.treksoft.kvision.panel.vPanel
-import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.utils.perc
-import pl.treksoft.kvision.utils.px
+import io.kvision.Application
+import io.kvision.core.AlignItems
+import io.kvision.core.JustifyContent
+import io.kvision.form.select.selectInput
+import io.kvision.form.text.textInput
+import io.kvision.html.ButtonStyle
+import io.kvision.html.Div
+import io.kvision.html.button
+import io.kvision.html.div
+import io.kvision.html.span
+import io.kvision.panel.hPanel
+import io.kvision.module
+import io.kvision.panel.root
+import io.kvision.panel.vPanel
+import io.kvision.startApplication
+import io.kvision.utils.perc
+import io.kvision.utils.px
 
 class App : Application() {
 

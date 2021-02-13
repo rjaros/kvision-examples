@@ -28,8 +28,8 @@ import io.ktor.sessions.set
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
-import pl.treksoft.kvision.remote.applyRoutes
-import pl.treksoft.kvision.remote.kvisionInit
+import io.kvision.remote.applyRoutes
+import io.kvision.remote.kvisionInit
 import kotlin.collections.set
 
 fun Application.main() {
@@ -42,7 +42,6 @@ fun Application.main() {
             cookie.extensions["SameSite"] = "strict"
         }
     }
-    kvisionInit()
     Db.init(environment.config)
 
     install(Authentication) {
@@ -91,4 +90,5 @@ fun Application.main() {
             applyRoutes(ProfileServiceManager)
         }
     }
+    kvisionInit()
 }

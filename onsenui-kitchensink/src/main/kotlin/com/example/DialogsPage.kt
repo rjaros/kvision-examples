@@ -1,28 +1,28 @@
 package com.example
 
 import kotlinx.browser.window
-import pl.treksoft.kvision.core.onClick
-import pl.treksoft.kvision.html.Align
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.p
-import pl.treksoft.kvision.onsenui.FloatDirection
-import pl.treksoft.kvision.onsenui.FloatPosition
-import pl.treksoft.kvision.onsenui.control.fab
-import pl.treksoft.kvision.onsenui.core.Navigator
-import pl.treksoft.kvision.onsenui.core.backButton
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.dialog.*
-import pl.treksoft.kvision.onsenui.form.OnsButtonType
-import pl.treksoft.kvision.onsenui.form.onsButton
-import pl.treksoft.kvision.onsenui.list.DividerType
-import pl.treksoft.kvision.onsenui.list.item
-import pl.treksoft.kvision.onsenui.list.onsList
-import pl.treksoft.kvision.onsenui.list.onsListTitle
-import pl.treksoft.kvision.onsenui.toolbar.ToolbarButton
-import pl.treksoft.kvision.onsenui.toolbar.toolbar
-import pl.treksoft.kvision.onsenui.toolbar.toolbarButton
-import pl.treksoft.kvision.onsenui.visual.icon
-import pl.treksoft.kvision.utils.obj
+import io.kvision.core.onClick
+import io.kvision.html.Align
+import io.kvision.html.button
+import io.kvision.html.p
+import io.kvision.onsenui.FloatDirection
+import io.kvision.onsenui.FloatPosition
+import io.kvision.onsenui.control.fab
+import io.kvision.onsenui.core.Navigator
+import io.kvision.onsenui.core.backButton
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.dialog.*
+import io.kvision.onsenui.form.OnsButtonType
+import io.kvision.onsenui.form.onsButton
+import io.kvision.onsenui.list.DividerType
+import io.kvision.onsenui.list.item
+import io.kvision.onsenui.list.onsList
+import io.kvision.onsenui.list.onsListTitle
+import io.kvision.onsenui.toolbar.ToolbarButton
+import io.kvision.onsenui.toolbar.toolbar
+import io.kvision.onsenui.toolbar.toolbarButton
+import io.kvision.onsenui.visual.icon
+import io.kvision.utils.obj
 
 fun Navigator.dialogsPage(app: App) {
     lateinit var infoButton: ToolbarButton

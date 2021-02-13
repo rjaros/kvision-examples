@@ -16,7 +16,7 @@ import org.springframework.data.r2dbc.core.awaitOneOrNull
 import org.springframework.data.r2dbc.core.flow
 import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.security.crypto.password.PasswordEncoder
-import pl.treksoft.kvision.types.OffsetDateTime
+import io.kvision.types.OffsetDateTime
 
 interface WithProfile {
     val httpRequest: HttpRequest<*>

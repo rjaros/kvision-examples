@@ -1,26 +1,26 @@
 package com.example
 
-import pl.treksoft.kvision.core.AlignItems
-import pl.treksoft.kvision.core.Container
-import pl.treksoft.kvision.core.FlexWrap
-import pl.treksoft.kvision.core.JustifyContent
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.form.check.radioGroup
-import pl.treksoft.kvision.form.text.TextInputType
-import pl.treksoft.kvision.form.text.text
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.modal.Confirm
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.panel.simplePanel
-import pl.treksoft.kvision.tabulator.Align
-import pl.treksoft.kvision.tabulator.ColumnDefinition
-import pl.treksoft.kvision.tabulator.Formatter
-import pl.treksoft.kvision.tabulator.Layout
-import pl.treksoft.kvision.tabulator.Tabulator
-import pl.treksoft.kvision.tabulator.TabulatorOptions
-import pl.treksoft.kvision.tabulator.tabulator
-import pl.treksoft.kvision.utils.obj
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.AlignItems
+import io.kvision.core.Container
+import io.kvision.core.FlexWrap
+import io.kvision.core.JustifyContent
+import io.kvision.core.onEvent
+import io.kvision.form.check.radioGroup
+import io.kvision.form.text.TextInputType
+import io.kvision.form.text.text
+import io.kvision.i18n.I18n.tr
+import io.kvision.modal.Confirm
+import io.kvision.panel.hPanel
+import io.kvision.panel.simplePanel
+import io.kvision.tabulator.Align
+import io.kvision.tabulator.ColumnDefinition
+import io.kvision.tabulator.Formatter
+import io.kvision.tabulator.Layout
+import io.kvision.tabulator.Tabulator
+import io.kvision.tabulator.TabulatorOptions
+import io.kvision.tabulator.tabulator
+import io.kvision.utils.obj
+import io.kvision.utils.px
 
 fun Container.listPanel() {
     simplePanel {
@@ -52,7 +52,7 @@ fun Container.listPanel() {
                     ColumnDefinition(tr("First name"), "firstName"),
                     ColumnDefinition(tr("Last name"), "lastName"),
                     ColumnDefinition(tr("E-mail"), "email", formatterFunction = { cell, _, _ ->
-                        cell.getValue().let { "<a href='mailto:$it'>$it</a>" }
+                        cell.getValue()?.let { "<a href='mailto:$it'>$it</a>" }
                     }),
                     ColumnDefinition(
                         "",
@@ -83,7 +83,7 @@ fun Container.listPanel() {
             setEventListener<Tabulator<Address>> {
                 tabulatorRowClick = { e ->
                     @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
-                    Model.edit((e.detail as pl.treksoft.kvision.tabulator.js.Tabulator.RowComponent).getIndex() as Int)
+                    Model.edit((e.detail as io.kvision.tabulator.js.Tabulator.RowComponent).getIndex() as Int)
                 }
             }
             setFilter { address ->

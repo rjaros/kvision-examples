@@ -1,11 +1,11 @@
 package com.example
 
-import pl.treksoft.kvision.core.AlignItems
-import pl.treksoft.kvision.core.WhiteSpace
-import pl.treksoft.kvision.html.icon
-import pl.treksoft.kvision.html.span
-import pl.treksoft.kvision.panel.VPanel
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.AlignItems
+import io.kvision.core.WhiteSpace
+import io.kvision.html.icon
+import io.kvision.html.span
+import io.kvision.panel.VPanel
+import io.kvision.utils.px
 
 class DesktopIcon(icon: String, content: String) : VPanel(alignItems = AlignItems.CENTER) {
     init {

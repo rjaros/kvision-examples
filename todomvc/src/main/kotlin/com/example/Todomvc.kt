@@ -7,22 +7,22 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import org.w3c.dom.get
 import org.w3c.dom.set
-import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.form.check.checkBoxInput
-import pl.treksoft.kvision.form.fieldLabel
-import pl.treksoft.kvision.form.text.TextInput
-import pl.treksoft.kvision.form.text.textInput
-import pl.treksoft.kvision.html.*
-import pl.treksoft.kvision.html.TAG.STRONG
-import pl.treksoft.kvision.module
-import pl.treksoft.kvision.panel.root
-import pl.treksoft.kvision.redux.RAction
-import pl.treksoft.kvision.redux.createReduxStore
-import pl.treksoft.kvision.routing.routing
-import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.utils.ENTER_KEY
-import pl.treksoft.kvision.utils.ESC_KEY
+import io.kvision.Application
+import io.kvision.core.onEvent
+import io.kvision.form.check.checkBoxInput
+import io.kvision.form.fieldLabel
+import io.kvision.form.text.TextInput
+import io.kvision.form.text.textInput
+import io.kvision.html.*
+import io.kvision.html.TAG.STRONG
+import io.kvision.module
+import io.kvision.panel.root
+import io.kvision.redux.RAction
+import io.kvision.redux.createReduxStore
+import io.kvision.routing.routing
+import io.kvision.startApplication
+import io.kvision.utils.ENTER_KEY
+import io.kvision.utils.ESC_KEY
 
 enum class MODE {
     ALL,

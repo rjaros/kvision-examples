@@ -1,26 +1,26 @@
 package com.example
 
-import pl.treksoft.kvision.core.FlexWrap
-import pl.treksoft.kvision.core.FontWeight
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.data.BaseDataComponent
-import pl.treksoft.kvision.data.DataContainer
-import pl.treksoft.kvision.form.check.CheckBox
-import pl.treksoft.kvision.form.check.CheckBoxStyle
-import pl.treksoft.kvision.form.text.TextInputType
-import pl.treksoft.kvision.form.text.text
-import pl.treksoft.kvision.form.text.textInput
-import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.i18n.I18n.trans
-import pl.treksoft.kvision.panel.HPanel
-import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.vPanel
-import pl.treksoft.kvision.state.ObservableValue
-import pl.treksoft.kvision.state.observableListOf
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.FlexWrap
+import io.kvision.core.FontWeight
+import io.kvision.core.onEvent
+import io.kvision.data.BaseDataComponent
+import io.kvision.data.DataContainer
+import io.kvision.form.check.CheckBox
+import io.kvision.form.check.CheckBoxStyle
+import io.kvision.form.text.TextInputType
+import io.kvision.form.text.text
+import io.kvision.form.text.textInput
+import io.kvision.html.ButtonStyle
+import io.kvision.html.button
+import io.kvision.html.div
+import io.kvision.i18n.I18n.tr
+import io.kvision.i18n.I18n.trans
+import io.kvision.panel.HPanel
+import io.kvision.panel.SimplePanel
+import io.kvision.panel.vPanel
+import io.kvision.state.ObservableValue
+import io.kvision.state.observableListOf
+import io.kvision.utils.px
 
 class DataTab : SimplePanel() {
     init {

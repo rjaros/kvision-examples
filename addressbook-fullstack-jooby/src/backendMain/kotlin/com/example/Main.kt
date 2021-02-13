@@ -10,8 +10,8 @@ import io.jooby.require
 import io.jooby.runApp
 import org.pac4j.core.credentials.UsernamePasswordCredentials
 import org.pac4j.http.client.indirect.FormClient
-import pl.treksoft.kvision.remote.applyRoutes
-import pl.treksoft.kvision.remote.kvisionInit
+import io.kvision.remote.applyRoutes
+import io.kvision.remote.kvisionInit
 import javax.sql.DataSource
 
 fun main(args: Array<String>) {

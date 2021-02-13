@@ -1,6 +1,6 @@
 package test.com.example
 
-import pl.treksoft.kvision.test.DomSpec
+import io.kvision.test.DomSpec
 import kotlinx.browser.document
 import kotlin.test.Test
 import kotlin.test.assertTrue

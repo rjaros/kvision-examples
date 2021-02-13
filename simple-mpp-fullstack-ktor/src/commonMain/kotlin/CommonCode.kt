@@ -3,7 +3,7 @@ package io.ktor.samples.fullstack.mpp
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.remote.KVServiceManager
+import io.kvision.remote.KVServiceManager
 
 interface IPingService {
     suspend fun ping(message: String): String

@@ -1,23 +1,23 @@
 package com.example
 
 import kotlinx.browser.window
-import pl.treksoft.kvision.core.Color
-import pl.treksoft.kvision.core.TextAlign
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.p
-import pl.treksoft.kvision.html.section
-import pl.treksoft.kvision.onsenui.core.Navigator
-import pl.treksoft.kvision.onsenui.core.backButton
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.form.onsButton
-import pl.treksoft.kvision.onsenui.toolbar.toolbar
-import pl.treksoft.kvision.onsenui.visual.icon
-import pl.treksoft.kvision.onsenui.visual.progressBar
-import pl.treksoft.kvision.onsenui.visual.progressCircular
-import pl.treksoft.kvision.state.ObservableValue
-import pl.treksoft.kvision.state.bind
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.Color
+import io.kvision.core.TextAlign
+import io.kvision.core.onEvent
+import io.kvision.html.div
+import io.kvision.html.p
+import io.kvision.html.section
+import io.kvision.onsenui.core.Navigator
+import io.kvision.onsenui.core.backButton
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.form.onsButton
+import io.kvision.onsenui.toolbar.toolbar
+import io.kvision.onsenui.visual.icon
+import io.kvision.onsenui.visual.progressBar
+import io.kvision.onsenui.visual.progressCircular
+import io.kvision.state.ObservableValue
+import io.kvision.state.bind
+import io.kvision.utils.px
 
 object ProgressModel {
     val progress = ObservableValue(0)

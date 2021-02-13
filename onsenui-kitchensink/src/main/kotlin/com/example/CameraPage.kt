@@ -1,8 +1,8 @@
 package com.example
 
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.tabbar.Tab
+import io.kvision.html.div
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.tabbar.Tab
 
 fun Tab.cameraPage() {
     page(className = "cameraPage") {

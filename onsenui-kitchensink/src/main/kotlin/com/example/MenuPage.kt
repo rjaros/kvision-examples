@@ -1,17 +1,17 @@
 package com.example
 
 import kotlinx.browser.window
-import pl.treksoft.kvision.core.onClick
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.image
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.list.DividerType
-import pl.treksoft.kvision.onsenui.list.item
-import pl.treksoft.kvision.onsenui.list.onsList
-import pl.treksoft.kvision.onsenui.list.onsListTitle
-import pl.treksoft.kvision.onsenui.splitter.SplitterSide
-import pl.treksoft.kvision.onsenui.visual.icon
-import pl.treksoft.kvision.require
+import io.kvision.core.onClick
+import io.kvision.html.div
+import io.kvision.html.image
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.list.DividerType
+import io.kvision.onsenui.list.item
+import io.kvision.onsenui.list.onsList
+import io.kvision.onsenui.list.onsListTitle
+import io.kvision.onsenui.splitter.SplitterSide
+import io.kvision.onsenui.visual.icon
+import io.kvision.require
 
 data class AccessItem(val title: String, val icon: String)
 

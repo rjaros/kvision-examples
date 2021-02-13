@@ -4,18 +4,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.asDeferred
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.form.text.textInput
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.Div
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.setData
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.vPanel
-import pl.treksoft.kvision.require
-import pl.treksoft.kvision.rest.RestClient
-import pl.treksoft.kvision.utils.px
+import io.kvision.form.text.textInput
+import io.kvision.html.button
+import io.kvision.html.Div
+import io.kvision.html.div
+import io.kvision.html.setData
+import io.kvision.i18n.I18n.tr
+import io.kvision.panel.hPanel
+import io.kvision.panel.SimplePanel
+import io.kvision.panel.vPanel
+import io.kvision.require
+import io.kvision.rest.RestClient
+import io.kvision.utils.px
 
 @Serializable
 data class Query(val q: String?)

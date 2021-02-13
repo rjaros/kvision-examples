@@ -4,7 +4,7 @@ package com.example
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseContextualSerialization
-import pl.treksoft.kvision.types.LocalDateTime
+import io.kvision.types.LocalDateTime
 
 @Serializable
 data class Profile(

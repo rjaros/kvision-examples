@@ -1,20 +1,20 @@
 package com.example
 
-import pl.treksoft.kvision.core.Background
-import pl.treksoft.kvision.core.Col
-import pl.treksoft.kvision.core.Color
-import pl.treksoft.kvision.core.onClick
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.span
-import pl.treksoft.kvision.onsenui.carousel.carousel
-import pl.treksoft.kvision.onsenui.carousel.carouselItem
-import pl.treksoft.kvision.onsenui.core.Navigator
-import pl.treksoft.kvision.onsenui.core.backButton
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.toolbar.toolbar
-import pl.treksoft.kvision.state.ObservableValue
-import pl.treksoft.kvision.state.bind
+import io.kvision.core.Background
+import io.kvision.core.Col
+import io.kvision.core.Color
+import io.kvision.core.onClick
+import io.kvision.core.onEvent
+import io.kvision.html.div
+import io.kvision.html.span
+import io.kvision.onsenui.carousel.carousel
+import io.kvision.onsenui.carousel.carouselItem
+import io.kvision.onsenui.core.Navigator
+import io.kvision.onsenui.core.backButton
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.toolbar.toolbar
+import io.kvision.state.ObservableValue
+import io.kvision.state.bind
 
 object CarouselModel {
     val carouselColors = mapOf(

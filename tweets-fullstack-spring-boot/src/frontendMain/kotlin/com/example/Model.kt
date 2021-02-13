@@ -5,7 +5,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.state.observableListOf
+import io.kvision.state.observableListOf
 
 object Model {
 

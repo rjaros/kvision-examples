@@ -1,12 +1,12 @@
 package com.example
 
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.html.Align
-import pl.treksoft.kvision.html.p
-import pl.treksoft.kvision.onsenui.core.Navigator
-import pl.treksoft.kvision.onsenui.core.backButton
-import pl.treksoft.kvision.onsenui.core.page
-import pl.treksoft.kvision.onsenui.toolbar.toolbar
+import io.kvision.core.onEvent
+import io.kvision.html.Align
+import io.kvision.html.p
+import io.kvision.onsenui.core.Navigator
+import io.kvision.onsenui.core.backButton
+import io.kvision.onsenui.core.page
+import io.kvision.onsenui.toolbar.toolbar
 
 fun Navigator.presentationPage() {
     page("presentation") {

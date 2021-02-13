@@ -1,18 +1,18 @@
 package com.example
 
-import pl.treksoft.kvision.core.Background
-import pl.treksoft.kvision.core.Border
-import pl.treksoft.kvision.core.BorderStyle
-import pl.treksoft.kvision.core.Col
-import pl.treksoft.kvision.core.Color
-import pl.treksoft.kvision.core.Style
-import pl.treksoft.kvision.core.TextAlign
-import pl.treksoft.kvision.core.style
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.html.image
-import pl.treksoft.kvision.panel.DockPanel
-import pl.treksoft.kvision.utils.perc
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.Background
+import io.kvision.core.Border
+import io.kvision.core.BorderStyle
+import io.kvision.core.Col
+import io.kvision.core.Color
+import io.kvision.core.Style
+import io.kvision.core.TextAlign
+import io.kvision.core.style
+import io.kvision.html.div
+import io.kvision.html.image
+import io.kvision.panel.DockPanel
+import io.kvision.utils.perc
+import io.kvision.utils.px
 
 val pokeBoxStyle = Style {
     border = Border(1.px, BorderStyle.SOLID, Color.name(Col.GRAY))

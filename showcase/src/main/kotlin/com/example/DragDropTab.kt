@@ -1,21 +1,21 @@
 package com.example
 
-import pl.treksoft.kvision.core.AlignItems
-import pl.treksoft.kvision.core.Border
-import pl.treksoft.kvision.core.BorderStyle
-import pl.treksoft.kvision.core.Col
-import pl.treksoft.kvision.core.Color
-import pl.treksoft.kvision.core.JustifyContent
-import pl.treksoft.kvision.data.BaseDataComponent
-import pl.treksoft.kvision.data.DataContainer
-import pl.treksoft.kvision.html.Align
-import pl.treksoft.kvision.html.Div
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.SimplePanel
-import pl.treksoft.kvision.panel.VPanel
-import pl.treksoft.kvision.panel.hPanel
-import pl.treksoft.kvision.state.observableListOf
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.AlignItems
+import io.kvision.core.Border
+import io.kvision.core.BorderStyle
+import io.kvision.core.Col
+import io.kvision.core.Color
+import io.kvision.core.JustifyContent
+import io.kvision.data.BaseDataComponent
+import io.kvision.data.DataContainer
+import io.kvision.html.Align
+import io.kvision.html.Div
+import io.kvision.i18n.I18n.tr
+import io.kvision.panel.SimplePanel
+import io.kvision.panel.VPanel
+import io.kvision.panel.hPanel
+import io.kvision.state.observableListOf
+import io.kvision.utils.px
 
 class DragDropTab : SimplePanel() {
     init {

@@ -4,7 +4,7 @@ package com.example
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseContextualSerialization
-import pl.treksoft.kvision.types.OffsetDateTime
+import io.kvision.types.OffsetDateTime
 
 @OptIn(ExperimentalMultiplatform::class)
 @OptionalExpectation

@@ -2,19 +2,19 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.core.onEvent
-import pl.treksoft.kvision.form.FormPanel
-import pl.treksoft.kvision.form.formPanel
-import pl.treksoft.kvision.form.check.CheckBox
-import pl.treksoft.kvision.form.text.Text
-import pl.treksoft.kvision.form.text.TextInputType
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.panel.HPanel
-import pl.treksoft.kvision.panel.StackPanel
-import pl.treksoft.kvision.utils.ENTER_KEY
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.onEvent
+import io.kvision.form.FormPanel
+import io.kvision.form.formPanel
+import io.kvision.form.check.CheckBox
+import io.kvision.form.text.Text
+import io.kvision.form.text.TextInputType
+import io.kvision.html.button
+import io.kvision.html.ButtonStyle
+import io.kvision.i18n.I18n.tr
+import io.kvision.panel.HPanel
+import io.kvision.panel.StackPanel
+import io.kvision.utils.ENTER_KEY
+import io.kvision.utils.px
 
 object EditPanel : StackPanel() {
 

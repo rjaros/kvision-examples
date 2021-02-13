@@ -1,7 +1,7 @@
 package com.example
 
 import kotlinx.serialization.Serializable
-import pl.treksoft.kvision.redux.RAction
+import io.kvision.redux.RAction
 
 const val MAX_ON_PAGE = 12
 

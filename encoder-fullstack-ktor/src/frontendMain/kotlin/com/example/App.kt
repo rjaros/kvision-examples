@@ -2,27 +2,27 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.core.Border
-import pl.treksoft.kvision.core.BorderStyle
-import pl.treksoft.kvision.core.Col
-import pl.treksoft.kvision.core.Color
-import pl.treksoft.kvision.core.Overflow
-import pl.treksoft.kvision.core.OverflowWrap
-import pl.treksoft.kvision.form.select.selectInput
-import pl.treksoft.kvision.form.text.textAreaInput
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.i18n.DefaultI18nManager
-import pl.treksoft.kvision.i18n.I18n
-import pl.treksoft.kvision.i18n.I18n.tr
-import pl.treksoft.kvision.module
-import pl.treksoft.kvision.panel.root
-import pl.treksoft.kvision.panel.vPanel
-import pl.treksoft.kvision.require
-import pl.treksoft.kvision.startApplication
-import pl.treksoft.kvision.utils.perc
-import pl.treksoft.kvision.utils.px
+import io.kvision.Application
+import io.kvision.core.Border
+import io.kvision.core.BorderStyle
+import io.kvision.core.Col
+import io.kvision.core.Color
+import io.kvision.core.Overflow
+import io.kvision.core.OverflowWrap
+import io.kvision.form.select.selectInput
+import io.kvision.form.text.textAreaInput
+import io.kvision.html.button
+import io.kvision.html.div
+import io.kvision.i18n.DefaultI18nManager
+import io.kvision.i18n.I18n
+import io.kvision.i18n.I18n.tr
+import io.kvision.module
+import io.kvision.panel.root
+import io.kvision.panel.vPanel
+import io.kvision.require
+import io.kvision.startApplication
+import io.kvision.utils.perc
+import io.kvision.utils.px
 
 class App : Application() {
 

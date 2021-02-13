@@ -1,16 +1,16 @@
 package com.example
 
-import pl.treksoft.kvision.core.Container
-import pl.treksoft.kvision.core.CssSize
-import pl.treksoft.kvision.core.UNIT
-import pl.treksoft.kvision.form.text.TextInput
-import pl.treksoft.kvision.html.button
-import pl.treksoft.kvision.html.Iframe
-import pl.treksoft.kvision.navbar.navForm
-import pl.treksoft.kvision.navbar.navbar
-import pl.treksoft.kvision.toolbar.buttonGroup
-import pl.treksoft.kvision.utils.perc
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.Container
+import io.kvision.core.CssSize
+import io.kvision.core.UNIT
+import io.kvision.form.text.TextInput
+import io.kvision.html.button
+import io.kvision.html.Iframe
+import io.kvision.navbar.navForm
+import io.kvision.navbar.navbar
+import io.kvision.toolbar.buttonGroup
+import io.kvision.utils.perc
+import io.kvision.utils.px
 
 class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
 
@@ -31,7 +31,7 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
         minWidth = 400.px
         minHeight = 150.px
         padding = 2.px
-        iframe = Iframe("https://rjaros.github.io/kvision/api/").apply {
+        iframe = Iframe("https://rjaros.github.io/kvision/kvision/index.html").apply {
             width = 100.perc
             height = 340.px
         }

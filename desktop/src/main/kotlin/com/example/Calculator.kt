@@ -1,16 +1,16 @@
 package com.example
 
-import pl.treksoft.kvision.core.Border
-import pl.treksoft.kvision.core.BorderStyle
-import pl.treksoft.kvision.core.Container
-import pl.treksoft.kvision.core.JustifyItems
-import pl.treksoft.kvision.html.Align
-import pl.treksoft.kvision.html.Button
-import pl.treksoft.kvision.html.ButtonStyle
-import pl.treksoft.kvision.html.Div
-import pl.treksoft.kvision.html.div
-import pl.treksoft.kvision.panel.gridPanel
-import pl.treksoft.kvision.utils.px
+import io.kvision.core.Border
+import io.kvision.core.BorderStyle
+import io.kvision.core.Container
+import io.kvision.core.JustifyItems
+import io.kvision.html.Align
+import io.kvision.html.Button
+import io.kvision.html.ButtonStyle
+import io.kvision.html.Div
+import io.kvision.html.div
+import io.kvision.panel.gridPanel
+import io.kvision.utils.px
 
 enum class Operator {
     PLUS,

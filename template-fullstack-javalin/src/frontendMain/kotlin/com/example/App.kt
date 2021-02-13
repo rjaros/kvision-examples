@@ -2,13 +2,13 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.treksoft.kvision.Application
-import pl.treksoft.kvision.html.Span
-import pl.treksoft.kvision.i18n.DefaultI18nManager
-import pl.treksoft.kvision.i18n.I18n
-import pl.treksoft.kvision.module
-import pl.treksoft.kvision.panel.root
-import pl.treksoft.kvision.startApplication
+import io.kvision.Application
+import io.kvision.html.Span
+import io.kvision.i18n.DefaultI18nManager
+import io.kvision.i18n.I18n
+import io.kvision.module
+import io.kvision.panel.root
+import io.kvision.startApplication
 
 class App : Application() {
 
@@ -16,8 +16,8 @@ class App : Application() {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                    "en" to pl.treksoft.kvision.require("i18n/messages-en.json"),
-                    "pl" to pl.treksoft.kvision.require("i18n/messages-pl.json")
+                    "en" to io.kvision.require("i18n/messages-en.json"),
+                    "pl" to io.kvision.require("i18n/messages-pl.json")
                 )
             )
         val root = root("kvapp") {
