@@ -52,7 +52,7 @@ The list of Pokémon with live search, build with Redux module. It's also a full
 
 ## TodoMVC
 
-A complete implementation of [TodoMVC](http://todomvc.com/) demo application.
+A complete implementation of [TodoMVC](https://todomvc.com/) demo application.
 
 [See live demo](https://rjaros.github.io/kvision-examples/todomvc/)
 
@@ -65,6 +65,14 @@ It presents how to use all Onsen UI visual components with fully type-safe Kotli
 [See live demo with iOS platform](https://rjaros.github.io/kvision-examples/onsenui-kitchensink/?platform=ios)
 
 [See live demo with Android platform](https://rjaros.github.io/kvision-examples/onsenui-kitchensink/?platform=android)
+
+## Patternfly demo
+
+A demo application created with [Patternfly UI toolkit](https://www.patternfly.org/). It shows how to create
+KVision application with a modern design system alternative to Bootstrap. The application is heavily inspired by
+[Patternfly Kotlin project](https://patternfly-kotlin.github.io/patternfly-fritz2-showcase/#user-demo).
+
+[See live demo](https://rjaros.github.io/kvision-examples/patternfly/)
 
 ## Address book - fullstack
 
