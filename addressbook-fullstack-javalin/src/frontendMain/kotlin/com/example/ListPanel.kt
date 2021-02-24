@@ -29,10 +29,10 @@ object ListPanel : SimplePanel() {
         padding = 10.px
 
         val table = Table(types = setOf(TableType.STRIPED, TableType.HOVER)) {
-            addHeaderCell(sortingHeaderCell(tr("First name"), Sort.FN))
-            addHeaderCell(sortingHeaderCell(tr("Last name"), Sort.LN))
-            addHeaderCell(sortingHeaderCell(tr("E-mail"), Sort.E))
-            addHeaderCell(sortingHeaderCell("", Sort.F))
+            addHeaderCell(this@ListPanel.sortingHeaderCell(tr("First name"), Sort.FN))
+            addHeaderCell(this@ListPanel.sortingHeaderCell(tr("Last name"), Sort.LN))
+            addHeaderCell(this@ListPanel.sortingHeaderCell(tr("E-mail"), Sort.E))
+            addHeaderCell(this@ListPanel.sortingHeaderCell("", Sort.F))
             addHeaderCell(HeaderCell(""))
         }
 

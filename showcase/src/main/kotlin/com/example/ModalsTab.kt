@@ -109,7 +109,7 @@ class ShowcaseWindow(caption: String?, init: (ShowcaseWindow.() -> Unit)? = null
         init?.invoke(this)
         vPanel {
             margin = 10.px
-            captionInput = textInput(TextInputType.TEXT, caption) {
+            this@ShowcaseWindow.captionInput = textInput(TextInputType.TEXT, caption) {
                 onEvent {
                     change = {
                         this@ShowcaseWindow.caption = self.value

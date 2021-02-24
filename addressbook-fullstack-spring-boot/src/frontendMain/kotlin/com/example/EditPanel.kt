@@ -38,16 +38,16 @@ object EditPanel : StackPanel() {
 
             add(HPanel(spacing = 10) {
                 button(tr("Save"), "fas fa-check", ButtonStyle.PRIMARY).onClick {
-                    save()
+                    this@EditPanel.save()
                 }
                 button(tr("Cancel"), "fas fa-times", ButtonStyle.SECONDARY).onClick {
-                    close()
+                    this@EditPanel.close()
                 }
             })
             onEvent {
                 keydown = {
                     if (it.keyCode == ENTER_KEY) {
-                        save()
+                        this@EditPanel.save()
                     }
                 }
             }

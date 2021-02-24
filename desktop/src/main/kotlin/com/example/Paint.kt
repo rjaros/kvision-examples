@@ -47,39 +47,39 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                 height = 100.perc
                 alignItems = AlignItems.CENTER
                 paddingTop = 5.px
-                buttonPoint = button("", "fas fa-circle", ButtonStyle.SECONDARY) {
+                this@Paint.buttonPoint = button("", "fas fa-circle", ButtonStyle.SECONDARY) {
                     title = "Point"
                     onClick {
                         canvas.selectedTool = Tool.POINT
-                        selectTool(this)
+                        this@Paint.selectTool(this)
                     }
                 }
-                buttonPencil = button("", "fas fa-pencil-alt", ButtonStyle.SECONDARY) {
+                this@Paint.buttonPencil = button("", "fas fa-pencil-alt", ButtonStyle.SECONDARY) {
                     title = "Pencil"
                     onClick {
                         canvas.selectedTool = Tool.PENCIL
-                        selectTool(this)
+                        this@Paint.selectTool(this)
                     }
                 }
-                buttonLine = button("", "fas fa-minus", ButtonStyle.SECONDARY) {
+                this@Paint.buttonLine = button("", "fas fa-minus", ButtonStyle.SECONDARY) {
                     title = "Line"
                     onClick {
                         canvas.selectedTool = Tool.LINE
-                        selectTool(this)
+                        this@Paint.selectTool(this)
                     }
                 }
-                buttonRectangle = button("", "far fa-square", ButtonStyle.SECONDARY) {
+                this@Paint.buttonRectangle = button("", "far fa-square", ButtonStyle.SECONDARY) {
                     title = "Rectangle"
                     onClick {
                         canvas.selectedTool = Tool.RECTANGLE
-                        selectTool(this)
+                        this@Paint.selectTool(this)
                     }
                 }
-                buttonCircle = button("", "far fa-circle", ButtonStyle.SECONDARY) {
+                this@Paint.buttonCircle = button("", "far fa-circle", ButtonStyle.SECONDARY) {
                     title = "Circle"
                     onClick {
                         canvas.selectedTool = Tool.CIRCLE
-                        selectTool(this)
+                        this@Paint.selectTool(this)
                     }
                 }
                 button("", "fas fa-undo", ButtonStyle.SECONDARY) {
@@ -115,10 +115,10 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                             background = Background(color = Color.name(color))
                             onClick {
                                 canvas.borderColor = color
-                                selectLineColor(this)
+                                this@Paint.selectLineColor(this)
                             }
                         }
-                        lineColorButtons.add(b)
+                        this@Paint.lineColorButtons.add(b)
                     }
                 }
 
@@ -134,10 +134,10 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                             background = Background(color = Color.name(color))
                             onClick {
                                 canvas.fillColor = color
-                                selectFillColor(this)
+                                this@Paint.selectFillColor(this)
                             }
                         }
-                        fillColorButtons.add(b)
+                        this@Paint.fillColorButtons.add(b)
                     }
                     val b = button("", classes = setOf("stripes")) {
                         title = "Empty fill"
@@ -145,10 +145,10 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                         height = 22.px
                         onClick {
                             canvas.fillColor = null
-                            selectFillColor(this)
+                            this@Paint.selectFillColor(this)
                         }
                     }
-                    fillColorButtons.add(b)
+                    this@Paint.fillColorButtons.add(b)
                 }
 
             }

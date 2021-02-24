@@ -20,6 +20,7 @@ import io.kvision.panel.root
 import io.kvision.redux.RAction
 import io.kvision.redux.createReduxStore
 import io.kvision.routing.routing
+import io.kvision.routing.Routing
 import io.kvision.startApplication
 import io.kvision.utils.ENTER_KEY
 import io.kvision.utils.ESC_KEY
@@ -83,6 +84,7 @@ class Todomvc : Application() {
     val todoStore = createReduxStore(::todoReducer, State(mutableListOf(), ALL))
 
     override fun start() {
+        Routing.init()
         root("todomvc") {
             section(todoStore, className = "todoapp") { state ->
                 header(className = "header") {
@@ -164,13 +166,13 @@ class Todomvc : Application() {
                         tag(STRONG, "${state.activeList().size}")
                     }
                     listTag(ListType.UL, classes = setOf("filters")) {
-                        link("All", "#!/", classes = if (state.mode == ALL) setOf("selected") else setOf())
+                        link("All", "#/", classes = if (state.mode == ALL) setOf("selected") else setOf())
                         link(
-                            "Active", "#!/active",
+                            "Active", "#/active",
                             classes = if (state.mode == ACTIVE) setOf("selected") else setOf()
                         )
                         link(
-                            "Completed", "#!/completed",
+                            "Completed", "#/completed",
                             classes = if (state.mode == COMPLETED) setOf("selected") else setOf()
                         )
                     }

@@ -39,7 +39,7 @@ class RestTab : SimplePanel() {
                 button(tr("Search GitHub")).onClick {
                     GlobalScope.launch {
                         input.value?.let {
-                            val searchResult = restClient.call<SearchResult, Query>(
+                            val searchResult = this@RestTab.restClient.call<SearchResult, Query>(
                                 "https://api.github.com/search/repositories",
                                 Query(it)
                             ).asDeferred().await()

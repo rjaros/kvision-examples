@@ -18,6 +18,7 @@ import io.kvision.panel.tab
 import io.kvision.panel.tabPanel
 import io.kvision.panel.vPanel
 import io.kvision.require
+import io.kvision.routing.Routing
 import io.kvision.startApplication
 import io.kvision.utils.auto
 import io.kvision.utils.perc
@@ -38,6 +39,7 @@ class Showcase : Application() {
                     "en" to require("i18n/messages-en.json")
                 )
             )
+        Routing.init()
         Pace.init()
         root("showcase") {
             vPanel {

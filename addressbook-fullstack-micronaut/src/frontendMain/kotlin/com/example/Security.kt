@@ -33,7 +33,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
             onEvent {
                 keydown = {
                     if (it.keyCode == ENTER_KEY) {
-                        processCredentials()
+                        this@LoginWindow.processCredentials()
                     }
                 }
             }
@@ -62,16 +62,16 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
 
         }
         cancelButton = Button(tr("Cancel"), "fas fa-times").onClick {
-            hideRegisterForm()
+            this@LoginWindow.hideRegisterForm()
         }
         registerButton = Button(tr("Register"), "fas fa-check", ButtonStyle.PRIMARY).onClick {
-            processRegister()
+            this@LoginWindow.processRegister()
         }
         loginButton = Button(tr("Login"), "fas fa-check", ButtonStyle.PRIMARY).onClick {
-            processCredentials()
+            this@LoginWindow.processCredentials()
         }
         userButton = Button(tr("Register user"), "fas fa-user").onClick {
-            showRegisterForm()
+            this@LoginWindow.showRegisterForm()
         }
         addButton(userButton)
         addButton(loginButton)

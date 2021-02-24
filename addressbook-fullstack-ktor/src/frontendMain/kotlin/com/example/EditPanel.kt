@@ -1,20 +1,20 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import io.kvision.core.onEvent
 import io.kvision.form.FormPanel
-import io.kvision.form.formPanel
 import io.kvision.form.check.CheckBox
+import io.kvision.form.formPanel
 import io.kvision.form.text.Text
 import io.kvision.form.text.TextInputType
-import io.kvision.html.button
 import io.kvision.html.ButtonStyle
+import io.kvision.html.button
 import io.kvision.i18n.I18n.tr
 import io.kvision.panel.HPanel
 import io.kvision.panel.StackPanel
 import io.kvision.utils.ENTER_KEY
 import io.kvision.utils.px
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 object EditPanel : StackPanel() {
 
@@ -38,16 +38,16 @@ object EditPanel : StackPanel() {
 
             add(HPanel(spacing = 10) {
                 button(tr("Save"), "fas fa-check", ButtonStyle.PRIMARY).onClick {
-                    save()
+                    this@EditPanel.save()
                 }
                 button(tr("Cancel"), "fas fa-times", ButtonStyle.SECONDARY).onClick {
-                    close()
+                    this@EditPanel.close()
                 }
             })
             onEvent {
                 keydown = {
                     if (it.keyCode == ENTER_KEY) {
-                        save()
+                        this@EditPanel.save()
                     }
                 }
             }

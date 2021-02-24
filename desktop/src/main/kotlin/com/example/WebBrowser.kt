@@ -40,7 +40,7 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
             marginLeft = 10.px
             setEventListener<TextInput> {
                 change = {
-                    iframe.location = self.value
+                    this@WebBrowser.iframe.location = self.value
                 }
             }
         }
@@ -51,13 +51,13 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
                 paddingLeft = 0.px
                 buttonGroup {
                     button("", icon = "fas fa-arrow-left").onClick {
-                        iframe.getIframeWindow().history.back()
+                        this@WebBrowser.iframe.getIframeWindow().history.back()
                     }
                     button("", icon = "fas fa-arrow-right").onClick {
-                        iframe.getIframeWindow().history.forward()
+                        this@WebBrowser.iframe.getIframeWindow().history.forward()
                     }
                 }
-                add(urlInput)
+                add(this@WebBrowser.urlInput)
             }
         }
         add(iframe)

@@ -73,6 +73,7 @@ kotlin {
         implementation("io.kvision:kvision-pace:$kvisionVersion")
         implementation("io.kvision:kvision-toast:$kvisionVersion")
         implementation("io.kvision:kvision-react:$kvisionVersion")
+        implementation("io.kvision:kvision-routing-navigo:$kvisionVersion")
     }
     sourceSets["test"].dependencies {
         implementation(kotlin("test-js"))

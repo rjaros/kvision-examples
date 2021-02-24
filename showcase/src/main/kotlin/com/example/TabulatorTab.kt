@@ -189,8 +189,8 @@ class TabulatorTab : SimplePanel() {
                                 onEvent {
                                     click = {
                                         Confirm.show(tr("Are you sure?"), tr("Delete row?")) {
-                                            val row = data.find { it.id == d.id }
-                                            data.remove(row)
+                                            val row = this@TabulatorTab.data.find { it.id == d.id }
+                                            this@TabulatorTab.data.remove(row)
                                         }
                                     }
                                 }
@@ -203,12 +203,12 @@ class TabulatorTab : SimplePanel() {
         }
         hPanel(spacing = 5) {
             button(tr("Add new employee"), "fas fa-plus").onClick {
-                data.add(Employee(null, null, null, false, null, null))
+                this@TabulatorTab.data.add(Employee(null, null, null, false, null, null))
             }
 
             button(tr("Show current data model"), "fas fa-search").onClick {
-                console.log(data.toList())
-                Alert.show(tr("Current data model"), data.toList().toString())
+                console.log(this@TabulatorTab.data.toList())
+                Alert.show(tr("Current data model"), this@TabulatorTab.data.toList().toString())
             }
         }
     }
