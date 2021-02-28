@@ -74,6 +74,13 @@ KVision application with a modern design system alternative to Bootstrap. The ap
 
 [See live demo](https://rjaros.github.io/kvision-examples/patternfly/)
 
+## Fomantic-UI demo
+
+A demo application created with [Fomantic-UI toolkit](https://fomantic-ui.com/). It shows how to create
+KVision application with a modern design system alternative to Bootstrap.
+
+[See live demo](https://rjaros.github.io/kvision-examples/fomantic/)
+
 ## Address book - fullstack
 
 A complete, fullstack address book application. It presents an innovative way to build fullstack applications with KVision and 
