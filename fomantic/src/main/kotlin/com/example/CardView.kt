@@ -10,11 +10,12 @@ import io.kvision.html.i
 import io.kvision.html.span
 import io.kvision.panel.gridPanel
 import io.kvision.panel.hPanel
+import io.kvision.redux.Dispatch
 import io.kvision.toast.Toast
 import io.kvision.utils.em
 import io.kvision.utils.px
 
-fun Container.cardView(state: State) {
+fun Container.cardView(state: State, dispatch: Dispatch<Action>) {
     gridPanel(
         templateColumns = "repeat(auto-fill, minmax(250px, 1fr))",
         justifyItems = JustifyItems.CENTER,
@@ -23,12 +24,12 @@ fun Container.cardView(state: State) {
         className = "ui cards"
     ) {
         state.usersVisible().forEach {
-            card(state, it)
+            card(state, it, dispatch)
         }
     }
 }
 
-fun Container.card(state: State, user: User) {
+fun Container.card(state: State, user: User, dispatch: Dispatch<Action>) {
     article(className = "ui raised link centered card") {
         div(className = "content") {
             natImage(user)
@@ -52,7 +53,11 @@ fun Container.card(state: State, user: User) {
                     }
                 }
                 checkBoxInput(state.selected.contains(user.login.uuid)).onClick {
-                    Model.selectUser(this.value, user.login.uuid)
+                    if (this.value) {
+                        dispatch(Action.SelectUser(user.login.uuid))
+                    } else {
+                        dispatch(Action.DeSelectUser(user.login.uuid))
+                    }
                 }
             }
             hPanel(className = "description", spacing = 10, alignItems = AlignItems.CENTER, noWrappers = true) {
