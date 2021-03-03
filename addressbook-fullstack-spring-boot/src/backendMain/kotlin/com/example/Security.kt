@@ -25,6 +25,7 @@ import org.springframework.security.web.server.util.matcher.ServerWebExchangeMat
 import org.springframework.stereotype.Service
 import pl.treksoft.e4k.core.DbClient
 import io.kvision.remote.serviceMatchers
+import org.springframework.data.annotation.Id
 import reactor.core.publisher.Mono
 import java.net.URI
 
@@ -122,7 +123,7 @@ actual data class Profile(
 }
 
 @Table("users")
-data class User(val id: Int? = null, val username: String, val password: String, val name: String)
+data class User(@Id val id: Int? = null, val username: String, val password: String, val name: String)
 
 @Service
 class MyReactiveUserDetailsService(private val client: DbClient) : ReactiveUserDetailsService {
