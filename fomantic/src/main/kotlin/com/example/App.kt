@@ -23,7 +23,7 @@ class App : Application(), CoroutineScope by CoroutineScope(Dispatchers.Default)
         require("css/kvapp.css")
     }
 
-    override fun start(state: Map<String, Any>) {
+    override fun start() {
         val stateFlow = MutableStateFlow(State())
         val actionFlow = MutableSharedFlow<Action>()
         launch {

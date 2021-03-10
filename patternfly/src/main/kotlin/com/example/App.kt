@@ -16,7 +16,7 @@ class App : Application() {
         require("css/kvapp.css")
     }
 
-    override fun start(state: Map<String, Any>) {
+    override fun start() {
         root("kvapp") {
             padding = 10.px
             simplePanel(Model.store) { state ->
