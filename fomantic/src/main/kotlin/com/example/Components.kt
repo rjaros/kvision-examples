@@ -2,7 +2,7 @@ package com.example
 
 import io.kvision.core.Container
 import io.kvision.core.PosFloat
-import io.kvision.core.onClick
+import io.kvision.core.onClickLaunch
 import io.kvision.html.TAG
 import io.kvision.html.div
 import io.kvision.html.i
@@ -15,7 +15,7 @@ fun Container.menuItem(
     label: String,
     checked: Boolean,
     className: String = "check",
-    handler: () -> Unit
+    handler: suspend () -> Unit
 ) {
     div(label, className = "item") {
         if (checked) {
@@ -24,7 +24,7 @@ fun Container.menuItem(
                 marginRight = 0.px
             }
         }
-        onClick {
+        onClickLaunch {
             handler()
         }
     }

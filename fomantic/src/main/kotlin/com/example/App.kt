@@ -4,14 +4,18 @@ import io.kvision.Application
 import io.kvision.html.div
 import io.kvision.module
 import io.kvision.panel.root
-import io.kvision.panel.simplePanel
-import io.kvision.redux.Dispatch
-import io.kvision.redux.createReduxStore
 import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.px
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.await
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class App : Application() {
+class App : Application(), CoroutineScope by CoroutineScope(Dispatchers.Default) {
 
     init {
         require("fomantic-ui-css/semantic.min.css")
@@ -20,23 +24,25 @@ class App : Application() {
     }
 
     override fun start(state: Map<String, Any>) {
-        val store = createReduxStore(::reducer, State())
-        val dispatch: Dispatch<Action> = {
-            store.dispatch(it)
+        val stateFlow = MutableStateFlow(State())
+        val actionFlow = MutableSharedFlow<Action>()
+        launch {
+            actionFlow.collect {
+                stateFlow.value = stateReducer(stateFlow.value, it)
+            }
+        }
+        launch {
+            val users = randomUsers(73).await()
+            actionFlow.emit(Action.SetUsers(users))
         }
         root("kvapp") {
             padding = 10.px
-            simplePanel(store) { state ->
-                div(className = "ui fluid container") {
-                    div(className = "ui segment") {
-                        toolbar(state, dispatch)
-                        cardView(state, dispatch)
-                    }
+            div(className = "ui fluid container") {
+                div(className = "ui segment") {
+                    toolbar(stateFlow, actionFlow)
+                    cardView(stateFlow, actionFlow)
                 }
             }
-        }
-        randomUsers(73).then {
-            dispatch(Action.SetUsers(it))
         }
     }
 }

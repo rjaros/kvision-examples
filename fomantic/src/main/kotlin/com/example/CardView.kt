@@ -3,6 +3,7 @@ package com.example
 import io.kvision.core.AlignItems
 import io.kvision.core.Container
 import io.kvision.core.JustifyItems
+import io.kvision.core.onClickLaunch
 import io.kvision.form.check.checkBoxInput
 import io.kvision.html.article
 import io.kvision.html.div
@@ -10,26 +11,28 @@ import io.kvision.html.i
 import io.kvision.html.span
 import io.kvision.panel.gridPanel
 import io.kvision.panel.hPanel
-import io.kvision.redux.Dispatch
+import io.kvision.state.bind
 import io.kvision.toast.Toast
 import io.kvision.utils.em
 import io.kvision.utils.px
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.StateFlow
 
-fun Container.cardView(state: State, dispatch: Dispatch<Action>) {
+fun Container.cardView(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
     gridPanel(
         templateColumns = "repeat(auto-fill, minmax(250px, 1fr))",
         justifyItems = JustifyItems.CENTER,
         noWrappers = true,
         columnGap = 20,
         className = "ui cards"
-    ) {
+    ).bind(stateFlow) { state ->
         state.usersVisible().forEach {
-            card(state, it, dispatch)
+            card(state, it, actionFlow)
         }
     }
 }
 
-fun Container.card(state: State, user: User, dispatch: Dispatch<Action>) {
+fun Container.card(state: State, user: User, actionFlow: MutableSharedFlow<Action>) {
     article(className = "ui raised link centered card") {
         div(className = "content") {
             natImage(user)
@@ -52,11 +55,11 @@ fun Container.card(state: State, user: User, dispatch: Dispatch<Action>) {
                         getElementJQueryD().dropdown()
                     }
                 }
-                checkBoxInput(state.selected.contains(user.login.uuid)).onClick {
+                checkBoxInput(state.selected.contains(user.login.uuid)).onClickLaunch {
                     if (this.value) {
-                        dispatch(Action.SelectUser(user.login.uuid))
+                        actionFlow.emit(Action.SelectUser(user.login.uuid))
                     } else {
-                        dispatch(Action.DeSelectUser(user.login.uuid))
+                        actionFlow.emit(Action.DeSelectUser(user.login.uuid))
                     }
                 }
             }

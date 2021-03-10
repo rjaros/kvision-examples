@@ -80,11 +80,6 @@ kotlin {
         implementation("io.kvision:kvision-testutils:$kvisionVersion")
     }
     sourceSets["main"].resources.srcDir(webDir)
-    sourceSets.all {
-        languageSettings.apply {
-            useExperimentalAnnotation("io.kvision.core.ExperimentalNonDslContainer")
-        }
-    }
 }
 
 fun getNodeJsBinaryExecutable(): String {

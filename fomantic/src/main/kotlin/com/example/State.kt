@@ -1,6 +1,5 @@
 package com.example
 
-import io.kvision.redux.RAction
 import kotlin.math.min
 
 enum class TriState {
@@ -29,7 +28,7 @@ data class State(
     val perPage: Int = 10,
     val page: Int = 1,
     val search: String? = null,
-    val sortItem: SortItem? = null,
+    val sortItem: SortItem? = SortItem.LAST_NAME,
     val sortType: SortType = SortType.ASC,
     val selected: Set<String> = emptySet(),
     val users: List<User> = emptyList(),
@@ -47,7 +46,7 @@ data class State(
     }
 }
 
-sealed class Action : RAction {
+sealed class Action {
     data class SetUsers(val users: List<User>) : Action()
     object SelectNone : Action()
     object SelectVisible : Action()
@@ -62,7 +61,7 @@ sealed class Action : RAction {
 }
 
 
-fun reducer(state: State, action: Action): State = when (action) {
+fun stateReducer(state: State, action: Action): State = when (action) {
     is Action.SetUsers -> {
         state.copy(users = action.users)
     }

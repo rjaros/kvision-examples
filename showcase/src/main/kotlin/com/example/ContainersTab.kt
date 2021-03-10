@@ -8,18 +8,10 @@ import io.kvision.dropdown.dropDown
 import io.kvision.html.div
 import io.kvision.html.h4
 import io.kvision.i18n.I18n.tr
-import io.kvision.panel.BasicPanel
-import io.kvision.panel.Direction
-import io.kvision.panel.SideTabSize
-import io.kvision.panel.TabPosition
-import io.kvision.panel.splitPanel
-import io.kvision.panel.stackPanel
-import io.kvision.panel.tab
-import io.kvision.panel.tabPanel
-import io.kvision.panel.vPanel
+import io.kvision.panel.*
 import io.kvision.utils.px
 
-class ContainersTab : BasicPanel() {
+class ContainersTab : SimplePanel() {
     init {
         this.marginTop = 10.px
         vPanel(spacing = 5) {

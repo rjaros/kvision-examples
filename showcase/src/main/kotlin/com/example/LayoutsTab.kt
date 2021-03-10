@@ -14,7 +14,7 @@ import io.kvision.html.Tag
 import io.kvision.html.div
 import io.kvision.html.h4
 import io.kvision.i18n.I18n.tr
-import io.kvision.panel.BasicPanel
+import io.kvision.panel.SimplePanel
 import io.kvision.panel.dockPanel
 import io.kvision.panel.flexPanel
 import io.kvision.panel.gridPanel
@@ -24,7 +24,7 @@ import io.kvision.panel.vPanel
 import io.kvision.utils.auto
 import io.kvision.utils.px
 
-class LayoutsTab : BasicPanel() {
+class LayoutsTab : SimplePanel() {
     init {
         this.marginTop = 10.px
         this.minHeight = 400.px

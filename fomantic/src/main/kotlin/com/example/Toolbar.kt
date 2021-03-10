@@ -3,7 +3,7 @@ package com.example
 import io.kvision.core.Container
 import io.kvision.core.FlexWrap
 import io.kvision.core.JustifyContent
-import io.kvision.core.onClick
+import io.kvision.core.onClickLaunch
 import io.kvision.form.check.checkBoxInput
 import io.kvision.form.form
 import io.kvision.form.text.textInput
@@ -13,38 +13,41 @@ import io.kvision.html.i
 import io.kvision.html.label
 import io.kvision.html.link
 import io.kvision.panel.hPanel
-import io.kvision.redux.Dispatch
+import io.kvision.state.bind
+import io.kvision.state.subFlow
 import io.kvision.utils.px
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlin.math.min
 
-fun Container.toolbar(state: State, dispatch: Dispatch<Action>) {
+fun Container.toolbar(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
     form(className = "ui form") {
         hPanel(justify = JustifyContent.SPACEBETWEEN, wrap = FlexWrap.WRAP, noWrappers = true) {
             div(className = "fields") {
                 div(className = "field") {
-                    bulkSelect(state, dispatch)
+                    bulkSelect(stateFlow, actionFlow)
                 }
                 div(className = "field") {
-                    searchBox(state, dispatch)
+                    searchBox(stateFlow, actionFlow)
                 }
                 div(className = "field") {
-                    sortSelect(state, dispatch)
+                    sortSelect(stateFlow, actionFlow)
                 }
             }
             div(className = "fields") {
-                pagination(state, dispatch)
+                pagination(stateFlow, actionFlow)
             }
         }
     }
 }
 
-fun Container.bulkSelect(state: State, dispatch: Dispatch<Action>) {
-    div(className = "ui buttons") {
+fun Container.bulkSelect(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
+    div(className = "ui buttons").bind(stateFlow.subFlow { it.selectionState }) { selectionState ->
         div(className = "ui button") {
             checkBoxInput {
                 id = "toolbar-selection-state"
                 setAttribute("aria-labelledby", "toolbar-selection-state-info")
-                when (state.selectionState.check) {
+                when (selectionState.check) {
                     TriState.CHECKED -> {
                         value = true
                     }
@@ -57,12 +60,12 @@ fun Container.bulkSelect(state: State, dispatch: Dispatch<Action>) {
                         }
                     }
                 }
-                onClick {
-                    if (this.value) dispatch(Action.SelectAll) else dispatch(Action.SelectNone)
+                onClickLaunch {
+                    if (this.value) actionFlow.emit(Action.SelectAll) else actionFlow.emit(Action.SelectNone)
                 }
             }
             +" "
-            label(state.selectionState.info) {
+            label(selectionState.info) {
                 id = "toolbar-selection-state-info"
                 setAttribute("aria-hidden", "true")
             }
@@ -70,14 +73,14 @@ fun Container.bulkSelect(state: State, dispatch: Dispatch<Action>) {
         div(className = "ui floating dropdown icon button") {
             i(className = "dropdown icon")
             div(className = "menu") {
-                div("Select none", className = "item").onClick {
-                    dispatch(Action.SelectNone)
+                div("Select none", className = "item").onClickLaunch {
+                    actionFlow.emit(Action.SelectNone)
                 }
-                div("Select visible", className = "item").onClick {
-                    dispatch(Action.SelectVisible)
+                div("Select visible", className = "item").onClickLaunch {
+                    actionFlow.emit(Action.SelectVisible)
                 }
-                div("Select all", className = "item").onClick {
-                    dispatch(Action.SelectAll)
+                div("Select all", className = "item").onClickLaunch {
+                    actionFlow.emit(Action.SelectAll)
                 }
             }
             addAfterInsertHook {
@@ -88,43 +91,43 @@ fun Container.bulkSelect(state: State, dispatch: Dispatch<Action>) {
     }
 }
 
-fun Container.searchBox(state: State, dispatch: Dispatch<Action>) {
+fun Container.searchBox(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
     div(className = "ui icon input") {
-        val input = textInput(value = state.search)
+        val input = textInput().bind(stateFlow.subFlow { it.search }) { value = it }
         i(className = "search link icon") {
             setAttribute("aria-hidden", "true")
-        }.onClick {
-            dispatch(Action.Search(input.value))
+        }.onClickLaunch {
+            actionFlow.emit(Action.Search(input.value))
         }
     }
 }
 
-fun Container.sortSelect(state: State, dispatch: Dispatch<Action>) {
+fun Container.sortSelect(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
     div(className = "ui floating dropdown icon button") {
         i(className = "sort amount down icon")
-        div(className = "menu") {
+        div(className = "menu").bind(stateFlow.subFlow { it.sortItem to it.sortType }) {
             width = 150.px
-            menuItem("Last name", state.sortItem == SortItem.LAST_NAME) {
-                dispatch(Action.Sort(SortItem.LAST_NAME, state.sortType))
+            menuItem("Last name", it.first == SortItem.LAST_NAME) {
+                actionFlow.emit(Action.Sort(SortItem.LAST_NAME, it.second))
             }
-            menuItem("First name", state.sortItem == SortItem.FIRST_NAME) {
-                dispatch(Action.Sort(SortItem.FIRST_NAME, state.sortType))
+            menuItem("First name", it.first == SortItem.FIRST_NAME) {
+                actionFlow.emit(Action.Sort(SortItem.FIRST_NAME, it.second))
             }
-            menuItem("User name", state.sortItem == SortItem.USER_NAME) {
-                dispatch(Action.Sort(SortItem.USER_NAME, state.sortType))
+            menuItem("User name", it.first == SortItem.USER_NAME) {
+                actionFlow.emit(Action.Sort(SortItem.USER_NAME, it.second))
             }
-            menuItem("Age", state.sortItem == SortItem.AGE) {
-                dispatch(Action.Sort(SortItem.AGE, state.sortType))
+            menuItem("Age", it.first == SortItem.AGE) {
+                actionFlow.emit(Action.Sort(SortItem.AGE, it.second))
             }
-            menuItem("Nationality", state.sortItem == SortItem.NATIONALITY) {
-                dispatch(Action.Sort(SortItem.NATIONALITY, state.sortType))
+            menuItem("Nationality", it.first == SortItem.NATIONALITY) {
+                actionFlow.emit(Action.Sort(SortItem.NATIONALITY, it.second))
             }
             div(className = "divider")
-            menuItem("Ascending", state.sortType == SortType.ASC) {
-                dispatch(Action.Sort(state.sortItem, SortType.ASC))
+            menuItem("Ascending", it.second == SortType.ASC) {
+                actionFlow.emit(Action.Sort(it.first, SortType.ASC))
             }
-            menuItem("Descending", state.sortType == SortType.DESC) {
-                dispatch(Action.Sort(state.sortItem, SortType.DESC))
+            menuItem("Descending", it.second == SortType.DESC) {
+                actionFlow.emit(Action.Sort(it.first, SortType.DESC))
             }
         }
         addAfterInsertHook {
@@ -134,12 +137,13 @@ fun Container.sortSelect(state: State, dispatch: Dispatch<Action>) {
     }
 }
 
-fun Container.pagination(state: State, dispatch: Dispatch<Action>) {
-    val itemsFiltered = state.usersFiltered()
-    val rowsInfo = "${(state.page - 1) * state.perPage + 1} - ${min(itemsFiltered.size, state.page * state.perPage)}"
-    val lastPage = ((itemsFiltered.size - 1) / state.perPage) + 1
+fun Container.pagination(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
+    div(className = "field").bind(stateFlow) { state ->
+        val itemsFiltered = state.usersFiltered()
+        val rowsInfo =
+            "${(state.page - 1) * state.perPage + 1} - ${min(itemsFiltered.size, state.page * state.perPage)}"
+        val lastPage = ((itemsFiltered.size - 1) / state.perPage) + 1
 
-    div(className = "field") {
         div(className = "ui left labeled button") {
             link("$rowsInfo of ${itemsFiltered.size}", className = "ui basic label")
         }
@@ -148,16 +152,16 @@ fun Container.pagination(state: State, dispatch: Dispatch<Action>) {
             div(className = "menu") {
                 width = 150.px
                 menuItem("10 per page", state.perPage == 10) {
-                    dispatch(Action.SetPageSize(10))
+                    actionFlow.emit(Action.SetPageSize(10))
                 }
                 menuItem("20 per page", state.perPage == 20) {
-                    dispatch(Action.SetPageSize(20))
+                    actionFlow.emit(Action.SetPageSize(20))
                 }
                 menuItem("50 per page", state.perPage == 50) {
-                    dispatch(Action.SetPageSize(50))
+                    actionFlow.emit(Action.SetPageSize(50))
                 }
                 menuItem("100 per page", state.perPage == 100) {
-                    dispatch(Action.SetPageSize(100))
+                    actionFlow.emit(Action.SetPageSize(100))
                 }
             }
             addAfterInsertHook {
@@ -169,15 +173,15 @@ fun Container.pagination(state: State, dispatch: Dispatch<Action>) {
             button("", "angle left icon", className = "ui icon button") {
                 disabled = state.page == 1
                 setAttribute("aria-label", "Go to previous page")
-                onClick {
-                    dispatch(Action.PrevPage)
+                onClickLaunch {
+                    actionFlow.emit(Action.PrevPage)
                 }
             }
             button("", "angle right icon", className = "ui icon button") {
                 disabled = state.page == lastPage
                 setAttribute("aria-label", "Go to next page")
-                onClick {
-                    dispatch(Action.NextPage)
+                onClickLaunch {
+                    actionFlow.emit(Action.NextPage)
                 }
             }
         }

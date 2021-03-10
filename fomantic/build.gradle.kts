@@ -53,7 +53,7 @@ kotlin {
     sourceSets["main"].dependencies {
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-i18n:$kvisionVersion")
-        implementation("io.kvision:kvision-redux-kotlin:$kvisionVersion")
+        implementation("io.kvision:kvision-event-flow:$kvisionVersion")
         implementation("io.kvision:kvision-toast:$kvisionVersion")
         implementation(npm("fomantic-ui-css", "2.8.7"))
     }
