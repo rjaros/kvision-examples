@@ -77,7 +77,8 @@ KVision application with a modern design system alternative to Bootstrap. The ap
 ## Fomantic-UI demo
 
 A demo application created with [Fomantic-UI toolkit](https://fomantic-ui.com/). It shows how to create
-KVision application with a modern design system alternative to Bootstrap.
+KVision application with a modern design system alternative to Bootstrap. It also presents state management based 
+on Kotlin flows (using both StateFlow and SharedFlow).
 
 [See live demo](https://rjaros.github.io/kvision-examples/fomantic/)
 
