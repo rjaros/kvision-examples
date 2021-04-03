@@ -27,13 +27,13 @@ class App : Application(), CoroutineScope by CoroutineScope(Dispatchers.Default)
         val stateFlow = MutableStateFlow(State())
         val actionFlow = MutableSharedFlow<Action>()
         launch {
+            val users = randomUsers(1000).await()
+            actionFlow.emit(Action.SetUsers(users))
+        }
+        launch {
             actionFlow.collect {
                 stateFlow.value = stateReducer(stateFlow.value, it)
             }
-        }
-        launch {
-            val users = randomUsers(73).await()
-            actionFlow.emit(Action.SetUsers(users))
         }
         root("kvapp") {
             padding = 10.px

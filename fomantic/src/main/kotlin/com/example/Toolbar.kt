@@ -160,8 +160,8 @@ fun Container.pagination(stateFlow: StateFlow<State>, actionFlow: MutableSharedF
                 menuItem("50 per page", state.perPage == 50) {
                     actionFlow.emit(Action.SetPageSize(50))
                 }
-                menuItem("100 per page", state.perPage == 100) {
-                    actionFlow.emit(Action.SetPageSize(100))
+                menuItem("100 per page", state.perPage == 1000) {
+                    actionFlow.emit(Action.SetPageSize(1000))
                 }
             }
             addAfterInsertHook {

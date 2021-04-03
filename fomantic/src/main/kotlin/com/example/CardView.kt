@@ -12,6 +12,8 @@ import io.kvision.html.span
 import io.kvision.panel.gridPanel
 import io.kvision.panel.hPanel
 import io.kvision.state.bind
+import io.kvision.state.bindEach
+import io.kvision.state.subFlow
 import io.kvision.toast.Toast
 import io.kvision.utils.em
 import io.kvision.utils.px
@@ -25,14 +27,12 @@ fun Container.cardView(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlo
         noWrappers = true,
         columnGap = 20,
         className = "ui cards"
-    ).bind(stateFlow) { state ->
-        state.usersVisible().forEach {
-            card(state, it, actionFlow)
-        }
+    ).bindEach(stateFlow.subFlow { it.usersVisible() }) { user ->
+        card(stateFlow, user, actionFlow)
     }
 }
 
-fun Container.card(state: State, user: User, actionFlow: MutableSharedFlow<Action>) {
+fun Container.card(stateFlow: StateFlow<State>, user: User, actionFlow: MutableSharedFlow<Action>) {
     article(className = "ui raised link centered card") {
         div(className = "content") {
             natImage(user)
@@ -55,7 +55,9 @@ fun Container.card(state: State, user: User, actionFlow: MutableSharedFlow<Actio
                         getElementJQueryD().dropdown()
                     }
                 }
-                checkBoxInput(state.selected.contains(user.login.uuid)).onClickLaunch {
+                checkBoxInput().bind(stateFlow.subFlow { it.selected.contains(user.login.uuid) }) {
+                    value = it
+                }.onClickLaunch {
                     if (this.value) {
                         actionFlow.emit(Action.SelectUser(user.login.uuid))
                     } else {

@@ -129,7 +129,7 @@ fun stateReducer(state: State, action: Action): State = when (action) {
         } ?: state
     }
     is Action.SetPageSize -> {
-        if (action.perPage == 10 || action.perPage == 20 || action.perPage == 50 || action.perPage == 100) {
+        if (action.perPage == 10 || action.perPage == 20 || action.perPage == 50 || action.perPage == 1000) {
             val lastPage = ((state.usersFiltered().size - 1) / action.perPage) + 1
             state.copy(perPage = action.perPage, page = min(state.page, lastPage))
         } else {
