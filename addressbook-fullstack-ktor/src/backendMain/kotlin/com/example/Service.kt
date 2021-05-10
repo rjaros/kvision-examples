@@ -46,7 +46,7 @@ actual class AddressService : IAddressService {
                             OR lower(phone) like :search
                             OR lower(postal_address) like :search)""".trimMargin()
                             )
-                            parameter("search", "%${it.toLowerCase()}%")
+                            parameter("search", "%${it.lowercase()}%")
                         }
                         if (types == "fav") {
                             where("favourite")

@@ -1,7 +1,5 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import io.kvision.Application
 import io.kvision.core.Border
 import io.kvision.core.BorderStyle
@@ -23,6 +21,12 @@ import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.perc
 import io.kvision.utils.px
+import kotlinx.browser.window
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
+
+val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 
 class App : Application() {
 
@@ -61,7 +65,7 @@ class App : Application() {
                     overflowWrap = OverflowWrap.BREAKWORK
                 }
                 button.onClick {
-                    GlobalScope.launch {
+                    AppScope.launch {
                         val encodingType = select.value?.let { EncodingType.valueOf(it) } ?: EncodingType.BASE64
                         val result = service.encode(input.value ?: "", encodingType)
                         output.content = result

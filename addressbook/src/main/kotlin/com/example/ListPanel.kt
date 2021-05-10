@@ -65,9 +65,9 @@ fun Container.listPanel() {
                     it.second.match(state.search) && (state.filter == Filter.ALL || it.second.favourite ?: false)
                 }.sortedBy {
                     when (state.sort) {
-                        Sort.FN -> it.second.firstName?.toLowerCase()
-                        Sort.LN -> it.second.lastName?.toLowerCase()
-                        Sort.E -> it.second.email?.toLowerCase()
+                        Sort.FN -> it.second.firstName?.lowercase()
+                        Sort.LN -> it.second.lastName?.lowercase()
+                        Sort.E -> it.second.email?.lowercase()
                         Sort.F -> it.second.favourite.toString()
                     }
                 }.forEach { (index, address) ->

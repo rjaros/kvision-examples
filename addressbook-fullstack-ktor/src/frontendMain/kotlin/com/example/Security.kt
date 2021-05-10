@@ -1,7 +1,5 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import io.kvision.core.onEvent
 import io.kvision.form.FormPanel
 import io.kvision.form.formPanel
@@ -16,6 +14,7 @@ import io.kvision.remote.Credentials
 import io.kvision.remote.LoginService
 import io.kvision.remote.SecurityMgr
 import io.kvision.utils.ENTER_KEY
+import kotlinx.coroutines.launch
 
 class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, animation = false) {
 
@@ -109,7 +108,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
     private fun processRegister() {
         if (registerPanel.validate()) {
             val userData = registerPanel.getData()
-            GlobalScope.launch {
+            AppScope.launch {
                 if (Model.registerProfile(userData, userData.password!!)
                 ) {
                     Alert.show(text = tr("User registered. You can now log in.")) {

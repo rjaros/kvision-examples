@@ -32,7 +32,7 @@ sealed class PokeAction : RAction {
 fun List<Pokemon>.filterBySearchString(searchString: String?): List<Pokemon> {
     return searchString?.let { search ->
         this.filter {
-            it.name.toLowerCase().contains(search.toLowerCase())
+            it.name.lowercase().contains(search.lowercase())
         }
     } ?: this
 }

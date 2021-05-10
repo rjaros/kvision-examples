@@ -26,10 +26,10 @@ data class User(
     val nat: String
 ) {
     fun match(query: String): Boolean = if (query.isEmpty()) true else {
-        name.first.toLowerCase().contains(query.toLowerCase()) ||
-                name.last.toLowerCase().contains(query.toLowerCase()) ||
-                email.toLowerCase().contains(query.toLowerCase()) ||
-                login.username.toLowerCase().contains(query.toLowerCase())
+        name.first.lowercase().contains(query.lowercase()) ||
+                name.last.lowercase().contains(query.lowercase()) ||
+                email.lowercase().contains(query.lowercase()) ||
+                login.username.lowercase().contains(query.lowercase())
     }
 }
 

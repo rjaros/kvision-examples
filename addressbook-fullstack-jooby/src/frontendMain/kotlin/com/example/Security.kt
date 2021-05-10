@@ -1,8 +1,5 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
 import io.kvision.core.onEvent
 import io.kvision.form.FormPanel
 import io.kvision.form.formPanel
@@ -17,6 +14,8 @@ import io.kvision.remote.Credentials
 import io.kvision.remote.LoginService
 import io.kvision.remote.SecurityMgr
 import io.kvision.utils.ENTER_KEY
+import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
@@ -118,7 +117,7 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
     private fun processRegister() {
         if (registerPanel.validate()) {
             val userData = registerPanel.getData()
-            GlobalScope.launch {
+            AppScope.launch {
                 if (Model.registerProfile(
                         Profile(
                             userData.username

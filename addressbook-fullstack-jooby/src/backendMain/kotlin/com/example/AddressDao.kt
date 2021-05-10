@@ -70,7 +70,7 @@ class AddressDao(session: Session) :
                             OR lower(a.phone) like :search
                             OR lower(a.postal_address) like :search)""".trimMargin()
                     )
-                    parameter("search", "%${it.toLowerCase()}%")
+                    parameter("search", "%${it.lowercase()}%")
                 }
                 if (types == "fav") {
                     where("a.favourite")

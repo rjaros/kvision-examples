@@ -2,11 +2,6 @@
 
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseContextualSerialization
 import io.kvision.core.AlignItems
 import io.kvision.core.FlexWrap
 import io.kvision.form.check.CheckBox
@@ -32,13 +27,16 @@ import io.kvision.modal.Alert
 import io.kvision.modal.Confirm
 import io.kvision.panel.HPanel
 import io.kvision.panel.SimplePanel
-import io.kvision.progress.Bounds
 import io.kvision.progress.Progress
 import io.kvision.progress.progressNumeric
 import io.kvision.types.KFile
 import io.kvision.utils.getDataWithFileContent
 import io.kvision.utils.obj
 import io.kvision.utils.px
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseContextualSerialization
 import kotlin.js.Date
 
 @Serializable
@@ -111,6 +109,7 @@ class FormTab : SimplePanel() {
             add(
                 Form::checkbox,
                 CheckBox(label = tr("Required checkbox")),
+                required = true,
                 validatorMessage = { tr("Value is required") }
             ) { it.getValue() }
             add(Form::radio, Radio(label = tr("Radio button")))
@@ -149,7 +148,7 @@ class FormTab : SimplePanel() {
                 Form::radiogroup, RadioGroup(
                     listOf("option1" to tr("First option"), "option2" to tr("Second option")),
                     inline = true, label = tr("Radio button group")
-                )
+                ), required = true
             )
             add(Form::upload, Upload("/", multiple = true, label = tr("Upload files (images only)")).apply {
                 showUpload = false
@@ -179,7 +178,7 @@ class FormTab : SimplePanel() {
             button(tr("Show data"), "fas fa-info", ButtonStyle.SUCCESS).onClick {
                 console.log(formPanel.getDataJson())
                 Alert.show(tr("Form data in plain JSON"), JSON.stringify(formPanel.getDataJson(), space = 1))
-                GlobalScope.launch {
+                AppScope.launch {
                     console.log(formPanel.getDataWithFileContent())
                 }
             }
@@ -197,7 +196,7 @@ class FormTab : SimplePanel() {
                 }
             }
             button(tr("Validate"), "fas fa-check", ButtonStyle.INFO).onClick {
-                GlobalScope.launch {
+                AppScope.launch {
                     p.getFirstProgressBar()?.value = 100
                     delay(500)
                     formPanel.validate()

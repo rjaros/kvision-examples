@@ -32,7 +32,7 @@ fun Container.menuItem(
 
 fun Container.natImage(user: User) {
     image(
-        "https://lipis.github.io/flag-icon-css/flags/4x3/${user.nat.toLowerCase()}.svg",
+        "https://lipis.github.io/flag-icon-css/flags/4x3/${user.nat.lowercase()}.svg",
         className = "ui mini middle aligned image"
     ) {
         title = user.nat

@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     val kotlinVersion: String by System.getProperties()
-    id("kotlinx-serialization") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     kotlin("js") version kotlinVersion
 }
 
@@ -53,7 +53,8 @@ kotlin {
     sourceSets["main"].dependencies {
 
         implementation(npm("hammerjs", "2.0.8"))
-        implementation(npm("workbox-webpack-plugin", "4.3.1"))
+        implementation(npm("workbox-webpack-plugin", "6.1.5"))
+        implementation(npm("ur-workbox-utils", "0.1.1"))
 
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap:$kvisionVersion")

@@ -1,7 +1,5 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import io.kvision.Application
 import io.kvision.core.AlignItems
 import io.kvision.core.JustifyContent
@@ -12,13 +10,19 @@ import io.kvision.html.Div
 import io.kvision.html.button
 import io.kvision.html.div
 import io.kvision.html.span
-import io.kvision.panel.hPanel
 import io.kvision.module
+import io.kvision.panel.hPanel
 import io.kvision.panel.root
 import io.kvision.panel.vPanel
 import io.kvision.startApplication
 import io.kvision.utils.perc
 import io.kvision.utils.px
+import kotlinx.browser.window
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
+
+val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 
 class App : Application() {
 
@@ -45,7 +49,7 @@ class App : Application() {
                     )
                     val languageSelect = selectInput(languages, "${Language.ENGLISH}")
                     button("Convert", style = ButtonStyle.PRIMARY).onClick {
-                        GlobalScope.launch {
+                        AppScope.launch {
                             val result = text.value?.toIntOrNull()?.let { number ->
                                 languageSelect.value?.let { lang ->
                                     numberService.numberToWords(number, Language.valueOf(lang))

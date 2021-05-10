@@ -37,7 +37,7 @@ class RestTab : SimplePanel() {
             hPanel(spacing = 5) {
                 val input = textInput()
                 button(tr("Search GitHub")).onClick {
-                    GlobalScope.launch {
+                    AppScope.launch {
                         input.value?.let {
                             val searchResult = this@RestTab.restClient.call<SearchResult, Query>(
                                 "https://api.github.com/search/repositories",

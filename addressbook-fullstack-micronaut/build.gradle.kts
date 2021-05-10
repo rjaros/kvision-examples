@@ -5,7 +5,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     val kotlinVersion: String by System.getProperties()
-    id("kotlinx-serialization") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     kotlin("multiplatform") version kotlinVersion
     kotlin("plugin.allopen") version kotlinVersion
     kotlin("kapt") version kotlinVersion

@@ -1,10 +1,9 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import io.kvision.state.ObservableList
 import io.kvision.state.observableListOf
 import io.kvision.utils.syncWithList
+import kotlinx.coroutines.launch
 
 object Model {
 
@@ -18,21 +17,21 @@ object Model {
     var search: String? = null
         set(value) {
             field = value
-            GlobalScope.launch {
+            AppScope.launch {
                 getAddressList()
             }
         }
     var types: String = "all"
         set(value) {
             field = value
-            GlobalScope.launch {
+            AppScope.launch {
                 getAddressList()
             }
         }
     var sort = Sort.FN
         set(value) {
             field = value
-            GlobalScope.launch {
+            AppScope.launch {
                 getAddressList()
             }
         }

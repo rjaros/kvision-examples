@@ -7,7 +7,7 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
     val kotlinVersion: String by System.getProperties()
-    id("kotlinx-serialization") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     kotlin("multiplatform") version kotlinVersion
     id("io.spring.dependency-management") version System.getProperty("dependencyManagementPluginVersion")
     id("org.springframework.boot") version System.getProperty("springBootVersion")
@@ -15,6 +15,9 @@ plugins {
     val kvisionVersion: String by System.getProperties()
     id("kvision") version kvisionVersion
 }
+
+extra["kotlin.version"] = "1.5.0"
+extra["kotlin-coroutines.version"] = "1.5.0-RC"
 
 version = "1.0.0-SNAPSHOT"
 group = "com.example"

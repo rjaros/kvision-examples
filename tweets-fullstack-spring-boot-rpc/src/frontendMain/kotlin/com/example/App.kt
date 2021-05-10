@@ -1,9 +1,5 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import org.w3c.dom.events.KeyboardEvent
 import io.kvision.Application
 import io.kvision.core.AlignItems
 import io.kvision.core.JustifyContent
@@ -12,8 +8,8 @@ import io.kvision.form.text.Text
 import io.kvision.form.text.text
 import io.kvision.form.text.textAreaInput
 import io.kvision.html.button
-import io.kvision.panel.hPanel
 import io.kvision.module
+import io.kvision.panel.hPanel
 import io.kvision.panel.root
 import io.kvision.panel.vPanel
 import io.kvision.startApplication
@@ -21,6 +17,14 @@ import io.kvision.utils.ENTER_KEY
 import io.kvision.utils.perc
 import io.kvision.utils.px
 import io.kvision.utils.syncWithList
+import kotlinx.browser.window
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.w3c.dom.events.KeyboardEvent
+
+val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 
 class App : Application() {
 
@@ -47,7 +51,7 @@ class App : Application() {
                     }
 
                     fun post() {
-                        GlobalScope.launch {
+                        AppScope.launch {
                             val tagList = tags.value?.let {
                                 it.split(" ").map { it.replace("#", "").replace(",", "").trim() }
                                     .filter { it.isNotBlank() }
@@ -88,7 +92,7 @@ class App : Application() {
                 add(TweetPanel())
             }
         }
-        GlobalScope.launch {
+        AppScope.launch {
             while (true) {
                 val tweets = Model.tweetService.getTweets(20)
                 Model.tweets.syncWithList(tweets)

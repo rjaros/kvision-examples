@@ -1,7 +1,5 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import io.kvision.Application
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
@@ -12,6 +10,12 @@ import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.perc
 import io.kvision.utils.vh
+import kotlinx.browser.window
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
+
+val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 
 class App : Application() {
     init {
@@ -34,7 +38,7 @@ class App : Application() {
                 add(EditPanel)
             }
         }
-        GlobalScope.launch {
+        AppScope.launch {
             Model.getAddressList()
         }
     }

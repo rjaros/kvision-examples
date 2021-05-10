@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     val kotlinVersion: String by System.getProperties()
-    id("kotlinx-serialization") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     kotlin("js") version kotlinVersion
 }
 
@@ -53,7 +53,6 @@ kotlin {
     sourceSets["main"].dependencies {
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-onsenui:$kvisionVersion")
-        implementation("io.kvision:kvision-onsenui-css:$kvisionVersion")
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
     }
     sourceSets["test"].dependencies {

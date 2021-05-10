@@ -13,7 +13,6 @@ import io.kvision.panel.HPanel
 import io.kvision.panel.StackPanel
 import io.kvision.utils.ENTER_KEY
 import io.kvision.utils.px
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 object EditPanel : StackPanel() {
@@ -67,7 +66,7 @@ object EditPanel : StackPanel() {
     }
 
     private fun save() {
-        GlobalScope.launch {
+        AppScope.launch {
             if (formPanel.validate()) {
                 val address = formPanel.getData()
                 if (editingId != null) {
@@ -81,7 +80,7 @@ object EditPanel : StackPanel() {
     }
 
     fun delete(index: Int) {
-        GlobalScope.launch {
+        AppScope.launch {
             close()
             Model.addresses[index].id?.let {
                 Model.deleteAddress(it)
