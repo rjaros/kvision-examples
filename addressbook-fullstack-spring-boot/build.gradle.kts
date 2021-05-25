@@ -54,13 +54,13 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf(
+                    proxy = mutableMapOf(
                         "/kv/*" to "http://localhost:8080",
                         "/login" to "http://localhost:8080",
                         "/logout" to "http://localhost:8080",
                         "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
                     ),
-                    contentBase = listOf("$buildDir/processedResources/frontend/main")
+                    static = mutableListOf("$buildDir/processedResources/frontend/main")
                 )
             }
             webpackTask {
@@ -231,13 +231,4 @@ afterEvaluate {
             dependsOn("compileKotlinMetadata")
         }
     }
-    val bootstrapCompilerClasspath = rootProject.buildscript.configurations
-    configurations.findByName("kotlinCompilerClasspath")?.let {
-        dependencies.add(it.name, files(bootstrapCompilerClasspath).filter { !it.name.contains("kotlin-stdlib") })
-        dependencies.add(it.name, "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
-        dependencies.add(it.name, "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion")
-        dependencies.add(it.name, "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion")
-        dependencies.add(it.name, "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
-    }
-
 }

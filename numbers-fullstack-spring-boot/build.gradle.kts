@@ -51,11 +51,11 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf(
+                    proxy = mutableMapOf(
                         "/kv/*" to "http://localhost:8080",
                         "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
                     ),
-                    contentBase = listOf("$buildDir/processedResources/frontend/main")
+                    static = mutableListOf("$buildDir/processedResources/frontend/main")
                 )
             }
             webpackTask {

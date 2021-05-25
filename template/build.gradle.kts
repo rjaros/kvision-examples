@@ -32,11 +32,11 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf(
+                    proxy = mutableMapOf(
                         "/kv/*" to "http://localhost:8080",
                         "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
                     ),
-                    contentBase = listOf("$buildDir/processedResources/js/main")
+                    static = mutableListOf("$buildDir/processedResources/js/main")
                 )
             }
             webpackTask {
@@ -61,6 +61,10 @@ kotlin {
         implementation("io.kvision:kvision-testutils:$kvisionVersion")
     }
     sourceSets["main"].resources.srcDir(webDir)
+}
+
+rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin::class.java) {
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().versions.sourceMapLoader.version = "3.0.0"
 }
 
 fun getNodeJsBinaryExecutable(): String {

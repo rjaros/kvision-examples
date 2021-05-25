@@ -61,11 +61,11 @@ kotlin {
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mapOf(
+                    proxy = mutableMapOf(
                         "/kv/*" to "http://localhost:8080",
                         "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
                     ),
-                    contentBase = listOf("$buildDir/processedResources/frontend/main")
+                    static = mutableListOf("$buildDir/processedResources/frontend/main")
                 )
             }
             webpackTask {
@@ -96,7 +96,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
-                implementation(project.dependencies.enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+                implementation(project.dependencies.platform("io.micronaut:micronaut-bom:$micronautVersion"))
                 implementation("io.micronaut:micronaut-inject")
                 implementation("io.micronaut:micronaut-validation")
                 implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
@@ -112,7 +112,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation(project.dependencies.enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+                implementation(project.dependencies.platform("io.micronaut:micronaut-bom:$micronautVersion"))
                 implementation("org.junit.jupiter:junit-jupiter-api")
                 implementation("io.micronaut.test:micronaut-test-junit5")
                 implementation("org.junit.jupiter:junit-jupiter-engine")

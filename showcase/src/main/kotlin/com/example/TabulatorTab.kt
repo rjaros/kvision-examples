@@ -40,7 +40,6 @@ data class Employee(
     var active: Boolean = false,
     var startDate: Date?,
     var salary: Int?,
-    @Suppress("ArrayInDataClass") var _children: Array<Employee>? = null,
     var id: Int = counter++
 ) {
     companion object {
@@ -57,11 +56,7 @@ class TabulatorTab : SimplePanel() {
             "Edinburgh",
             false,
             "2011-04-25".toDateF("YYYY-MM-DD"),
-            320800,
-            arrayOf(
-                Employee("John Snow", "Programmer", "Edinburgh", true, "2012-04-23".toDateF("YYY-MM-DD"), 100000),
-                Employee("Mark Lee", "Junior programmer", "Edinburgh", true, "2016-06-02".toDateF("YYY-MM-DD"), 80000)
-            )
+            320800
         ),
         Employee(
             "Garrett Winters",
@@ -196,7 +191,7 @@ class TabulatorTab : SimplePanel() {
                                 }
                             }
                         })
-                ), pagination = PaginationMode.LOCAL, paginationSize = 10, dataTree = true
+                ), pagination = PaginationMode.LOCAL, paginationSize = 10
             ), types = setOf(TableType.BORDERED, TableType.STRIPED, TableType.HOVER)
         ) {
             height = 430.px
