@@ -27,6 +27,7 @@ import io.kvision.tabulator.TabulatorOptions
 import io.kvision.tabulator.tabulator
 import io.kvision.types.toDateF
 import io.kvision.types.toStringF
+import io.kvision.utils.auto
 import io.kvision.utils.obj
 import io.kvision.utils.px
 import kotlin.js.Date
@@ -134,7 +135,8 @@ class TabulatorTab : SimplePanel() {
                         editorComponentFunction = { _, _, success, _, data ->
                             checkBoxInput(value = data.active).apply {
                                 size = InputSize.SMALL
-                                height = 20.px
+                                height = 44.px
+                                margin = auto
                                 onEvent {
                                     click = {
                                         success(self.value)
