@@ -135,8 +135,9 @@ class TabulatorTab : SimplePanel() {
                         editorComponentFunction = { _, _, success, _, data ->
                             checkBoxInput(value = data.active).apply {
                                 size = InputSize.SMALL
-                                height = 44.px
                                 margin = auto
+                                marginTop = 14.px
+                                height = 13.px
                                 onEvent {
                                     click = {
                                         success(self.value)
