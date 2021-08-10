@@ -1,7 +1,6 @@
 package com.example
 
 import io.kvision.core.AlignItems
-import io.kvision.core.FlexWrap
 import io.kvision.core.FontStyle
 import io.kvision.core.onEvent
 import io.kvision.data.dataContainer
@@ -9,7 +8,7 @@ import io.kvision.form.check.RadioGroup
 import io.kvision.form.check.radioGroup
 import io.kvision.form.text.TextInput
 import io.kvision.form.text.TextInputType
-import io.kvision.form.text.textInput
+import io.kvision.form.text.text
 import io.kvision.html.icon
 import io.kvision.html.link
 import io.kvision.i18n.I18n.tr
@@ -26,7 +25,7 @@ import io.kvision.utils.px
 object ListPanel : SimplePanel() {
 
     init {
-        padding = 10.px
+        padding = 5.px
 
         val table = Table(types = setOf(TableType.STRIPED, TableType.HOVER)) {
             addHeaderCell(this@ListPanel.sortingHeaderCell(tr("First name"), Sort.FN))
@@ -36,8 +35,8 @@ object ListPanel : SimplePanel() {
             addHeaderCell(HeaderCell(""))
         }
 
-        hPanel(FlexWrap.WRAP, alignItems = AlignItems.CENTER, spacing = 20) {
-            textInput(TextInputType.SEARCH) {
+        hPanel(alignItems = AlignItems.CENTER, spacing = 20) {
+            text(TextInputType.SEARCH) {
                 placeholder = "${tr("Search")} ..."
                 setEventListener<TextInput> {
                     input = {

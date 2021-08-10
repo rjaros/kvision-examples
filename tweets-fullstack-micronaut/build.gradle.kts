@@ -12,7 +12,7 @@ plugins {
     val shadowVersion: String by System.getProperties()
     id("com.github.johnrengelman.shadow") version shadowVersion
     val kvisionVersion: String by System.getProperties()
-    id("kvision") version kvisionVersion
+    id("io.kvision") version kvisionVersion
     id("application")
 }
 
@@ -122,6 +122,7 @@ kotlin {
                 implementation("io.kvision:kvision:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
+                implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
                 implementation("io.kvision:kvision-datacontainer:$kvisionVersion")
             }
             kotlin.srcDir("build/generated-src/frontend")
@@ -135,23 +136,7 @@ kotlin {
     }
 }
 
-fun getNodeJsBinaryExecutable(): String {
-    val nodeDir = NodeJsRootPlugin.apply(rootProject).nodeJsSetupTaskProvider.get().destination
-    val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
-    val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
-    val command = NodeJsRootPlugin.apply(rootProject).nodeCommand
-    val finalCommand = if (isWindows && command == "node") "node.exe" else command
-    return nodeBinDir.resolve(finalCommand).absolutePath
-}
-
 tasks {
-    create("generatePotFile", Exec::class) {
-        dependsOn("compileKotlinFrontend")
-        executable = getNodeJsBinaryExecutable()
-        args("${rootProject.buildDir}/js/node_modules/gettext-extract/bin/gettext-extract")
-        inputs.files(kotlin.sourceSets["frontendMain"].kotlin.files)
-        outputs.file("$projectDir/src/frontendMain/resources/i18n/messages.pot")
-    }
     withType<JavaExec> {
         jvmArgs("-XX:TieredStopAtLevel=1", "-Dcom.sun.management.jmxremote")
         if (gradle.startParameter.isContinuous) {
@@ -168,26 +153,6 @@ tasks {
 
 afterEvaluate {
     tasks {
-        getByName("frontendProcessResources", Copy::class) {
-            dependsOn("compileKotlinFrontend")
-            exclude("**/*.pot")
-            doLast("Convert PO to JSON") {
-                destinationDir.walkTopDown().filter {
-                    it.isFile && it.extension == "po"
-                }.forEach {
-                    exec {
-                        executable = getNodeJsBinaryExecutable()
-                        args(
-                            "${rootProject.buildDir}/js/node_modules/gettext.js/bin/po2json",
-                            it.absolutePath,
-                            "${it.parent}/${it.nameWithoutExtension}.json"
-                        )
-                        println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
-                    }
-                    it.delete()
-                }
-            }
-        }
         create("frontendArchive", Jar::class).apply {
             dependsOn("frontendBrowserProductionWebpack")
             group = "package"
@@ -238,12 +203,6 @@ afterEvaluate {
         }
         create("backendRun", JavaExec::class) {
             dependsOn("run")
-        }
-        getByName("compileKotlinBackend") {
-            dependsOn("compileKotlinMetadata")
-        }
-        getByName("compileKotlinFrontend") {
-            dependsOn("compileKotlinMetadata")
         }
     }
 }

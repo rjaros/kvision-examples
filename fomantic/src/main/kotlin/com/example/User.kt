@@ -9,6 +9,7 @@ package com.example
 
 import kotlinx.serialization.Serializable
 import io.kvision.rest.RestClient
+import io.kvision.rest.call
 import kotlin.js.Promise
 
 @Serializable

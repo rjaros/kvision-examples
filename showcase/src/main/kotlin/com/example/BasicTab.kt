@@ -1,7 +1,16 @@
 package com.example
 
 import io.kvision.core.*
-import io.kvision.html.*
+import io.kvision.html.ImageShape
+import io.kvision.html.ListType
+import io.kvision.html.code
+import io.kvision.html.div
+import io.kvision.html.iframe
+import io.kvision.html.image
+import io.kvision.html.link
+import io.kvision.html.listTag
+import io.kvision.html.setData
+import io.kvision.html.span
 import io.kvision.i18n.tr
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.fieldsetPanel
@@ -26,7 +35,7 @@ class BasicTab : SimplePanel() {
     init {
         this.marginTop = 10.px
         this.minHeight = 400.px
-        vPanel(spacing = 3) {
+        vPanel(spacing = 3, useWrappers = true) {
             span {
                 +tr("A simple label")
             }
@@ -48,11 +57,10 @@ class BasicTab : SimplePanel() {
                 +tr("An image:")
             }
             span {
-                +tr("(hover to view a tooltip and click to view a popover)")
+                +tr("(click to view a popover)")
             }
             image(require("img/dog.jpg"), shape = ImageShape.CIRCLE) {
                 maxWidth = 100.perc
-                enableTooltip(TooltipOptions(title = tr("This is a tooltip")))
                 enablePopover(
                     PopoverOptions(
                         title = tr("This is a popover"),

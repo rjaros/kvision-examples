@@ -82,7 +82,8 @@ class DragDropTab : SimplePanel() {
             }
         })
 
-        val panel = hPanel(justify = JustifyContent.CENTER, alignItems = AlignItems.FLEXSTART, spacing = 50)
+        val panel =
+            hPanel(justify = JustifyContent.CENTER, alignItems = AlignItems.FLEXSTART, useWrappers = true, spacing = 50)
         panel.add(dataContainer1)
         panel.add(dataContainer2)
 

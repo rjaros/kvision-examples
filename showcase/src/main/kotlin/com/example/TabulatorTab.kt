@@ -1,3 +1,5 @@
+@file:UseContextualSerialization(Date::class)
+
 package com.example
 
 import io.kvision.core.onEvent
@@ -16,13 +18,13 @@ import io.kvision.modal.Confirm
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.hPanel
 import io.kvision.state.observableListOf
-import io.kvision.table.TableType
 import io.kvision.tabulator.Align
 import io.kvision.tabulator.ColumnDefinition
 import io.kvision.tabulator.Editor
 import io.kvision.tabulator.Formatter
 import io.kvision.tabulator.Layout
 import io.kvision.tabulator.PaginationMode
+import io.kvision.tabulator.TableType
 import io.kvision.tabulator.TabulatorOptions
 import io.kvision.tabulator.tabulator
 import io.kvision.types.toDateF
@@ -30,18 +32,20 @@ import io.kvision.types.toStringF
 import io.kvision.utils.auto
 import io.kvision.utils.obj
 import io.kvision.utils.px
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseContextualSerialization
+import kotlinx.serialization.serializer
 import kotlin.js.Date
 
-@OptIn(ExperimentalJsExport::class)
-@JsExport
+@Serializable
 data class Employee(
-    var name: String?,
-    var position: String?,
-    var office: String?,
-    var active: Boolean = false,
-    var startDate: Date?,
-    var salary: Int?,
-    var id: Int = counter++
+    val name: String?,
+    val position: String?,
+    val office: String?,
+    val active: Boolean = false,
+    val startDate: Date?,
+    val salary: Int?,
+    val id: Int = counter++
 ) {
     companion object {
         internal var counter = 0
@@ -136,8 +140,9 @@ class TabulatorTab : SimplePanel() {
                             checkBoxInput(value = data.active).apply {
                                 size = InputSize.SMALL
                                 margin = auto
-                                marginTop = 14.px
-                                height = 13.px
+                                padding = 0.px
+                                marginTop = 10.px
+                                minHeight = 13.px
                                 onEvent {
                                     click = {
                                         success(self.value)
@@ -157,7 +162,7 @@ class TabulatorTab : SimplePanel() {
                                 showClear = false
                                 onEvent {
                                     change = {
-                                        success(self.value)
+                                        success(self.value?.toStringF())
                                     }
                                 }
                             }
@@ -195,7 +200,7 @@ class TabulatorTab : SimplePanel() {
                             }
                         })
                 ), pagination = PaginationMode.LOCAL, paginationSize = 10
-            ), types = setOf(TableType.BORDERED, TableType.STRIPED, TableType.HOVER)
+            ), types = setOf(TableType.BORDERED, TableType.HOVER, TableType.STRIPED), serializer = serializer()
         ) {
             height = 430.px
         }

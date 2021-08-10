@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: src/main/kotlin/com/example/BasicTab.kt:49
-msgid "(hover to view a tooltip and click to view a popover)"
+msgid "(click to view a popover)"
 msgstr ""
 
 #: src/main/kotlin/com/example/BasicTab.kt:67

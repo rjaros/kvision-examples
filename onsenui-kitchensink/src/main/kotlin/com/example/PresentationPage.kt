@@ -17,7 +17,7 @@ fun Navigator.presentationPage() {
         }
         p("Use the OnsBackButton", align = Align.CENTER)
         onEvent {
-            onsInit = {
+            init = {
                 @Suppress("UnsafeCastFromDynamic")
                 toolbar.centerPanel.content = this@presentationPage.topPage.data.title
             }

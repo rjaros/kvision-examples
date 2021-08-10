@@ -1,26 +1,26 @@
 package com.example
 
-import io.kvision.dropdown.contextMenu
 import io.kvision.dropdown.DD
 import io.kvision.dropdown.Direction
 import io.kvision.dropdown.cmLink
+import io.kvision.dropdown.contextMenu
 import io.kvision.dropdown.ddLink
 import io.kvision.dropdown.dropDown
 import io.kvision.dropdown.header
 import io.kvision.dropdown.separator
 import io.kvision.form.check.checkBox
 import io.kvision.form.text.text
-import io.kvision.html.button
 import io.kvision.html.ButtonStyle
+import io.kvision.html.button
 import io.kvision.html.image
 import io.kvision.html.span
 import io.kvision.i18n.I18n.tr
 import io.kvision.navbar.nav
-import io.kvision.navbar.navLink
 import io.kvision.navbar.navForm
+import io.kvision.navbar.navLink
 import io.kvision.navbar.navbar
-import io.kvision.panel.hPanel
 import io.kvision.panel.SimplePanel
+import io.kvision.panel.hPanel
 import io.kvision.panel.vPanel
 import io.kvision.require
 import io.kvision.utils.px
@@ -30,7 +30,7 @@ class DropDownTab : SimplePanel() {
         this.marginTop = 10.px
         this.minHeight = 600.px
         vPanel(spacing = 30) {
-            navbar("NavBar") {
+            navbar("NavBar", collapseOnClick = true) {
                 nav {
                     navLink(tr("File"), icon = "fas fa-file")
                     navLink(tr("Edit"), icon = "fas fa-bars")

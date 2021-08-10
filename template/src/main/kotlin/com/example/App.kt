@@ -1,6 +1,9 @@
 package com.example
 
 import io.kvision.Application
+import io.kvision.BootstrapCssModule
+import io.kvision.BootstrapModule
+import io.kvision.CoreModule
 import io.kvision.html.div
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
@@ -31,5 +34,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+    startApplication(::App, module.hot, BootstrapModule, BootstrapCssModule, CoreModule)
 }

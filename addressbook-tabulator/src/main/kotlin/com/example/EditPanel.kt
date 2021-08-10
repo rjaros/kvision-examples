@@ -12,11 +12,12 @@ import io.kvision.html.button
 import io.kvision.i18n.I18n.tr
 import io.kvision.panel.hPanel
 import io.kvision.panel.simplePanel
+import io.kvision.state.bind
 import io.kvision.utils.ENTER_KEY
 import io.kvision.utils.px
 
 fun Container.editPanel() {
-    simplePanel(Model.addressBook) { state ->
+    simplePanel().bind(Model.addressBook) { state ->
         padding = 10.px
         if (state.editMode != null) {
             val formPanel = formPanel<Address> {

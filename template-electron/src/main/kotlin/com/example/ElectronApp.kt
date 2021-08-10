@@ -1,7 +1,10 @@
 package com.example
 
-import kotlinx.browser.window
 import io.kvision.Application
+import io.kvision.BootstrapCssModule
+import io.kvision.BootstrapModule
+import io.kvision.CoreModule
+import io.kvision.FontAwesomeModule
 import io.kvision.core.AlignItems
 import io.kvision.electron.electron.BrowserWindow
 import io.kvision.electron.electron.BrowserWindowConstructorOptions
@@ -20,6 +23,7 @@ import io.kvision.startApplication
 import io.kvision.utils.createInstance
 import io.kvision.utils.perc
 import io.kvision.utils.px
+import kotlinx.browser.window
 
 class ElectronApp : Application() {
 
@@ -77,5 +81,5 @@ class ElectronApp : Application() {
 }
 
 fun main() {
-    startApplication(::ElectronApp, module.hot)
+    startApplication(::ElectronApp, module.hot, BootstrapModule, BootstrapCssModule, FontAwesomeModule, CoreModule)
 }

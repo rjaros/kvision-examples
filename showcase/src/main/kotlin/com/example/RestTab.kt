@@ -1,21 +1,22 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.asDeferred
-import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
 import io.kvision.form.text.textInput
-import io.kvision.html.button
 import io.kvision.html.Div
+import io.kvision.html.button
 import io.kvision.html.div
 import io.kvision.html.setData
 import io.kvision.i18n.I18n.tr
-import io.kvision.panel.hPanel
 import io.kvision.panel.SimplePanel
+import io.kvision.panel.hPanel
 import io.kvision.panel.vPanel
 import io.kvision.require
 import io.kvision.rest.RestClient
+import io.kvision.rest.call
+import io.kvision.utils.perc
 import io.kvision.utils.px
+import kotlinx.coroutines.asDeferred
+import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class Query(val q: String?)
@@ -35,7 +36,9 @@ class RestTab : SimplePanel() {
 
         vPanel(spacing = 20) {
             hPanel(spacing = 5) {
-                val input = textInput()
+                val input = textInput {
+                    width = 50.perc
+                }
                 button(tr("Search GitHub")).onClick {
                     AppScope.launch {
                         input.value?.let {

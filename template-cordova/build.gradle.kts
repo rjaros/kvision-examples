@@ -6,6 +6,8 @@ plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("plugin.serialization") version kotlinVersion
     kotlin("js") version kotlinVersion
+    val kvisionVersion: String by System.getProperties()
+    id("io.kvision") version kvisionVersion
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -56,6 +58,7 @@ kotlin {
         implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
         implementation("io.kvision:kvision-i18n:$kvisionVersion")
         implementation("io.kvision:kvision-redux:$kvisionVersion")
+        implementation("io.kvision:kvision-state:$kvisionVersion")
         implementation("io.kvision:kvision-cordova:$kvisionVersion")
     }
     sourceSets["test"].dependencies {
@@ -110,7 +113,7 @@ afterEvaluate {
             group = "package"
             destinationDirectory.set(file("$buildDir/libs"))
             val distribution =
-                project.tasks.getByName("browserProductionWebpack", KotlinWebpack::class).destinationDirectory!!
+                project.tasks.getByName("browserProductionWebpack", KotlinWebpack::class).destinationDirectory
             from(distribution) {
                 include("*.*")
             }

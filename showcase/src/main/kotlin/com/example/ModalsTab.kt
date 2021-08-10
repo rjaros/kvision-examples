@@ -1,5 +1,6 @@
 package com.example
 
+import io.kvision.core.getElementJQuery
 import io.kvision.core.onEvent
 import io.kvision.form.check.checkBox
 import io.kvision.form.text.TextInput
@@ -29,7 +30,7 @@ class ModalsTab : SimplePanel() {
     init {
         this.marginTop = 10.px
         this.minHeight = 400.px
-        vPanel(spacing = 30) {
+        vPanel(spacing = 30, useWrappers = true) {
             button(tr("Alert dialog"), style = ButtonStyle.DANGER).onClick {
                 Alert.show(
                     tr("Alert dialog"),
@@ -124,6 +125,20 @@ class ShowcaseWindow(caption: String?, init: (ShowcaseWindow.() -> Unit)? = null
             }
             checkBox(true, label = tr("Close button")).onClick {
                 this@ShowcaseWindow.closeButton = this.value
+            }
+        }
+        onEvent {
+            dragStartWindow = {
+                self.getElementJQuery()?.css(
+                    "opacity",
+                    "0.5"
+                )
+            }
+            dragEndWindow = {
+                self.getElementJQuery()?.css(
+                    "opacity",
+                    "1.0"
+                )
             }
         }
     }

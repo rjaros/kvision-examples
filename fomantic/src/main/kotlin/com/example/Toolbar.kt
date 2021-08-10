@@ -3,6 +3,7 @@ package com.example
 import io.kvision.core.Container
 import io.kvision.core.FlexWrap
 import io.kvision.core.JustifyContent
+import io.kvision.core.getElementJQueryD
 import io.kvision.core.onClickLaunch
 import io.kvision.form.check.checkBoxInput
 import io.kvision.form.form
@@ -22,7 +23,7 @@ import kotlin.math.min
 
 fun Container.toolbar(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
     form(className = "ui form") {
-        hPanel(justify = JustifyContent.SPACEBETWEEN, wrap = FlexWrap.WRAP, noWrappers = true) {
+        hPanel(justify = JustifyContent.SPACEBETWEEN, wrap = FlexWrap.WRAP) {
             div(className = "fields") {
                 div(className = "field") {
                     bulkSelect(stateFlow, actionFlow)

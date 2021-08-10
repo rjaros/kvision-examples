@@ -20,10 +20,8 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2;\n"
 
 #: src/main/kotlin/com/example/BasicTab.kt:49
-msgid "(hover to view a tooltip and click to view a popover)"
-msgstr ""
-"(najedź myszką aby zobaczyć podpowiedź lub kliknij aby zobaczyć wyskakujący "
-"opis)"
+msgid "(click to view a popover)"
+msgstr "(kliknij aby zobaczyć wyskakujący opis)"
 
 #: src/main/kotlin/com/example/BasicTab.kt:67
 msgid "A fieldset"

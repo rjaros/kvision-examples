@@ -6,6 +6,8 @@ plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("plugin.serialization") version kotlinVersion
     kotlin("js") version kotlinVersion
+    val kvisionVersion: String by System.getProperties()
+    id("io.kvision") version kvisionVersion
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -57,21 +59,8 @@ kotlin {
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
-        implementation("io.kvision:kvision-bootstrap-datetime:$kvisionVersion")
-        implementation("io.kvision:kvision-bootstrap-select:$kvisionVersion")
-        implementation("io.kvision:kvision-bootstrap-spinner:$kvisionVersion")
-        implementation("io.kvision:kvision-bootstrap-upload:$kvisionVersion")
-        implementation("io.kvision:kvision-bootstrap-dialog:$kvisionVersion")
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
         implementation("io.kvision:kvision-i18n:$kvisionVersion")
-        implementation("io.kvision:kvision-richtext:$kvisionVersion")
-        implementation("io.kvision:kvision-handlebars:$kvisionVersion")
-        implementation("io.kvision:kvision-datacontainer:$kvisionVersion")
-        implementation("io.kvision:kvision-redux:$kvisionVersion")
-        implementation("io.kvision:kvision-chart:$kvisionVersion")
-        implementation("io.kvision:kvision-tabulator:$kvisionVersion")
-        implementation("io.kvision:kvision-pace:$kvisionVersion")
-        implementation("io.kvision:kvision-moment:$kvisionVersion")
         implementation("io.kvision:kvision-electron:$kvisionVersion")
     }
     sourceSets["test"].dependencies {

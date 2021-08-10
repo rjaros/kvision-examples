@@ -46,7 +46,7 @@ class PokeBox(pokemon: Pokemon) : DockPanel() {
         down {
             div(
                 pokemon.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() },
-                classes = setOf("caption")
+                className = "caption"
             )
         }
     }

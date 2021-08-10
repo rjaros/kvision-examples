@@ -3,6 +3,7 @@ package com.example
 import io.kvision.core.AlignItems
 import io.kvision.core.Container
 import io.kvision.core.JustifyItems
+import io.kvision.core.getElementJQueryD
 import io.kvision.core.onClickLaunch
 import io.kvision.form.check.checkBoxInput
 import io.kvision.html.article
@@ -24,7 +25,6 @@ fun Container.cardView(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlo
     gridPanel(
         templateColumns = "repeat(auto-fill, minmax(250px, 1fr))",
         justifyItems = JustifyItems.CENTER,
-        noWrappers = true,
         columnGap = 20,
         className = "ui cards"
     ).bindEach(stateFlow.subFlow { it.usersVisible() }) { user ->
@@ -65,7 +65,7 @@ fun Container.card(stateFlow: StateFlow<State>, user: User, actionFlow: MutableS
                     }
                 }
             }
-            hPanel(className = "description", spacing = 10, alignItems = AlignItems.CENTER, noWrappers = true) {
+            hPanel(className = "description", spacing = 10, alignItems = AlignItems.CENTER) {
                 marginTop = 1.em
                 photo(user)
                 address(user)

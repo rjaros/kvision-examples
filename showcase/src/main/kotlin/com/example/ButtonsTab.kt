@@ -1,6 +1,5 @@
 package com.example
 
-import kotlinx.browser.window
 import io.kvision.core.FlexWrap
 import io.kvision.form.check.CheckBoxStyle
 import io.kvision.form.check.RadioStyle
@@ -19,7 +18,8 @@ import io.kvision.require
 import io.kvision.toolbar.buttonGroup
 import io.kvision.toolbar.toolbar
 import io.kvision.utils.px
-import react.RClass
+import kotlinx.browser.window
+import react.ComponentClass
 import react.RProps
 
 external interface ReactButtonProps : RProps {
@@ -29,7 +29,7 @@ external interface ReactButtonProps : RProps {
 }
 
 @Suppress("UnsafeCastFromDynamic")
-val ReactButton: RClass<ReactButtonProps> = require("react-awesome-button").AwesomeButtonProgress
+val ReactButton: ComponentClass<ReactButtonProps> = require("react-awesome-button").AwesomeButtonProgress
 
 class ButtonsTab : SimplePanel() {
     init {

@@ -16,6 +16,7 @@ import io.kvision.i18n.I18n.tr
 import io.kvision.modal.Confirm
 import io.kvision.panel.hPanel
 import io.kvision.panel.simplePanel
+import io.kvision.state.bind
 import io.kvision.table.TableType
 import io.kvision.table.cell
 import io.kvision.table.headerCell
@@ -27,7 +28,7 @@ fun Container.listPanel() {
     simplePanel {
         padding = 5.px
 
-        hPanel(FlexWrap.WRAP, alignItems = AlignItems.CENTER, spacing = 20) {
+        hPanel(alignItems = AlignItems.CENTER, spacing = 20) {
             text(TextInputType.SEARCH) {
                 placeholder = tr("Search ...")
                 onEvent {
@@ -47,7 +48,7 @@ fun Container.listPanel() {
             }
         }
 
-        div(Model.addressBook) { state ->
+        div().bind(Model.addressBook) { state ->
             table(types = setOf(TableType.STRIPED, TableType.HOVER)) {
                 headerCell(tr("First name")).onClick {
                     Model.setSort(Sort.FN)

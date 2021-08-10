@@ -1,6 +1,6 @@
 package com.example
 
-import io.kvision.Application
+import io.kvision.*
 import io.kvision.core.Border
 import io.kvision.core.BorderStyle
 import io.kvision.core.Col
@@ -11,15 +11,12 @@ import io.kvision.form.select.select
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
-import io.kvision.module
 import io.kvision.pace.Pace
 import io.kvision.panel.root
 import io.kvision.panel.tab
 import io.kvision.panel.tabPanel
 import io.kvision.panel.vPanel
-import io.kvision.require
 import io.kvision.routing.Routing
-import io.kvision.startApplication
 import io.kvision.utils.auto
 import io.kvision.utils.perc
 import io.kvision.utils.px
@@ -31,12 +28,14 @@ val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 
 class Showcase : Application() {
     init {
+        Routing.init()
+        Pace.init()
         require("css/showcase.css")
         require("react-awesome-button/dist/themes/theme-blue.css")
+        require("moment/locale/pl")
     }
 
     override fun start() {
-
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
@@ -44,8 +43,6 @@ class Showcase : Application() {
                     "en" to require("i18n/messages-en.json")
                 )
             )
-        Routing.init()
-        Pace.init()
         root("showcase") {
             vPanel {
                 width = 100.perc
@@ -110,5 +107,20 @@ class Showcase : Application() {
 }
 
 fun main() {
-    startApplication(::Showcase, module.hot)
+    startApplication(
+        ::Showcase,
+        module.hot,
+        BootstrapModule,
+        BootstrapCssModule,
+        FontAwesomeModule,
+        BootstrapSelectModule,
+        BootstrapDatetimeModule,
+        BootstrapSpinnerModule,
+        BootstrapTypeaheadModule,
+        BootstrapUploadModule,
+        RichTextModule,
+        ChartModule,
+        TabulatorModule,
+        CoreModule
+    )
 }

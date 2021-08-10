@@ -91,7 +91,7 @@ class FormTab : SimplePanel() {
                 Form::typeahead,
                 Typeahead(
                     listOf("Alabama", "Alaska", "Arizona", "Arkansas", "California"),
-                    label = tr("Typeahead")
+                    label = tr("Typeahead"), floating = true
                 ).apply {
                     autoSelect = false
                 }
@@ -148,7 +148,7 @@ class FormTab : SimplePanel() {
                 Form::radiogroup, RadioGroup(
                     listOf("option1" to tr("First option"), "option2" to tr("Second option")),
                     inline = true, label = tr("Radio button group")
-                ), required = true
+                ), required = true, requiredMessage = tr("Value is required")
             )
             add(Form::upload, Upload("/", multiple = true, label = tr("Upload files (images only)")).apply {
                 showUpload = false
@@ -179,7 +179,8 @@ class FormTab : SimplePanel() {
                 console.log(formPanel.getDataJson())
                 Alert.show(tr("Form data in plain JSON"), JSON.stringify(formPanel.getDataJson(), space = 1))
                 AppScope.launch {
-                    console.log(formPanel.getDataWithFileContent())
+                    val content = formPanel.getDataWithFileContent()
+                    console.log(content)
                 }
             }
             button(tr("Clear data"), "fas fa-times", ButtonStyle.DANGER).onClick {

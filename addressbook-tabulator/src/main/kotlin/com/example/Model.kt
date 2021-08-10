@@ -1,5 +1,6 @@
 package com.example
 
+import io.kvision.state.ObservableValue
 import kotlinx.browser.localStorage
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
@@ -7,17 +8,14 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.w3c.dom.get
 import org.w3c.dom.set
-import io.kvision.state.ObservableValue
 
-@OptIn(ExperimentalJsExport::class)
 @Serializable
-@JsExport
 data class Address(
-    var id: Int? = null,
-    var firstName: String? = null,
-    var lastName: String? = null,
-    var email: String? = null,
-    var favourite: Boolean? = false
+    val id: Int? = null,
+    val firstName: String? = null,
+    val lastName: String? = null,
+    val email: String? = null,
+    val favourite: Boolean? = false
 )
 
 fun Address.match(search: String?): Boolean {

@@ -105,10 +105,10 @@ fun Navigator.progressPage() {
             }
         }
         onEvent {
-            onsShow = {
+            show = {
                 ProgressModel.runCounter()
             }
-            onsHide = {
+            hide = {
                 ProgressModel.progress.value = 0
             }
         }

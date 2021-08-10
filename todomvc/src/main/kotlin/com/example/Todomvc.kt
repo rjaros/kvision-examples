@@ -1,12 +1,6 @@
 package com.example
 
 import com.example.MODE.*
-import kotlinx.browser.localStorage
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.Json
-import org.w3c.dom.get
-import org.w3c.dom.set
 import io.kvision.Application
 import io.kvision.core.onEvent
 import io.kvision.form.check.checkBoxInput
@@ -19,11 +13,19 @@ import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.redux.RAction
 import io.kvision.redux.createReduxStore
-import io.kvision.routing.routing
 import io.kvision.routing.Routing
+import io.kvision.routing.routing
 import io.kvision.startApplication
+import io.kvision.state.bind
 import io.kvision.utils.ENTER_KEY
 import io.kvision.utils.ESC_KEY
+import kotlinx.browser.localStorage
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.json.Json
+import org.w3c.dom.Element
+import org.w3c.dom.get
+import org.w3c.dom.set
 
 enum class MODE {
     ALL,
@@ -81,12 +83,16 @@ fun todoReducer(state: State, action: TodoAction): State = when (action) {
 
 class Todomvc : Application() {
 
+    private val json = Json {
+        prettyPrint = true
+    }
+
     val todoStore = createReduxStore(::todoReducer, State(mutableListOf(), ALL))
 
     override fun start() {
         Routing.init()
         root("todomvc") {
-            section(todoStore, className = "todoapp") { state ->
+            section(className = "todoapp").bind(todoStore) { state ->
                 header(className = "header") {
                     h1("todos")
                     textInput(className = "new-todo") {
@@ -117,7 +123,7 @@ class Todomvc : Application() {
                             ACTIVE -> state.activeListIndexed()
                             COMPLETED -> state.completedListIndexed()
                         }.forEach { (index, todo) ->
-                            li(classes = if (todo.completed) setOf("completed") else setOf()) li@{
+                            li(className = if (todo.completed) "completed" else null) li@{
                                 lateinit var edit: TextInput
                                 div(className = "view") {
                                     checkBoxInput(todo.completed, className = "toggle").onClick {
@@ -126,9 +132,9 @@ class Todomvc : Application() {
                                     label(todo.title) {
                                         onEvent {
                                             dblclick = {
-                                                this@li.getElementJQuery()?.addClass("editing")
+                                                this@li.getElement()?.unsafeCast<Element>()?.classList?.add("editing")
                                                 edit.value = todo.title
-                                                edit.getElementJQuery()?.focus()
+                                                edit.focus()
                                             }
                                         }
                                     }
@@ -139,18 +145,23 @@ class Todomvc : Application() {
                                 edit = textInput(className = "edit") {
                                     onEvent {
                                         blur = {
-                                            if (this@li.getElementJQuery()?.hasClass("editing") == true) {
-                                                this@li.getElementJQuery()?.removeClass("editing")
+                                            if (this@li.getElement()
+                                                    ?.unsafeCast<Element>()?.classList?.contains("editing") == true
+                                            ) {
+                                                this@li.getElement()
+                                                    ?.unsafeCast<Element>()?.classList?.remove("editing")
                                                 editTodo(index, self.value)
                                             }
                                         }
                                         keydown = { e ->
                                             if (e.keyCode == ENTER_KEY) {
                                                 editTodo(index, self.value)
-                                                this@li.getElementJQuery()?.removeClass("editing")
+                                                this@li.getElement()
+                                                    ?.unsafeCast<Element>()?.classList?.remove("editing")
                                             }
                                             if (e.keyCode == ESC_KEY) {
-                                                this@li.getElementJQuery()?.removeClass("editing")
+                                                this@li.getElement()
+                                                    ?.unsafeCast<Element>()?.classList?.remove("editing")
                                             }
                                         }
                                     }
@@ -165,15 +176,15 @@ class Todomvc : Application() {
                     span(itemsLeftString, className = "todo-count") {
                         tag(STRONG, "${state.activeList().size}")
                     }
-                    listTag(ListType.UL, classes = setOf("filters")) {
-                        link("All", "#/", classes = if (state.mode == ALL) setOf("selected") else setOf())
+                    listTag(ListType.UL, className = "filters") {
+                        link("All", "#/", className = if (state.mode == ALL) "selected" else null)
                         link(
                             "Active", "#/active",
-                            classes = if (state.mode == ACTIVE) setOf("selected") else setOf()
+                            className = if (state.mode == ACTIVE) "selected" else null
                         )
                         link(
                             "Completed", "#/completed",
-                            classes = if (state.mode == COMPLETED) setOf("selected") else setOf()
+                            className = if (state.mode == COMPLETED) "selected" else null
                         )
                     }
                     if (state.completedList().isNotEmpty()) {
@@ -201,9 +212,7 @@ class Todomvc : Application() {
     }
 
     private fun saveModel() {
-        val jsonString = Json {
-            prettyPrint = true
-        }.encodeToString(ListSerializer(Todo.serializer()), todoStore.getState().todos)
+        val jsonString = json.encodeToString(ListSerializer(Todo.serializer()), todoStore.getState().todos)
         localStorage["todos-kvision"] = jsonString
     }
 

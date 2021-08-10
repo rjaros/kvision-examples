@@ -1,6 +1,11 @@
 package com.example
 
 import io.kvision.Application
+import io.kvision.BootstrapCssModule
+import io.kvision.BootstrapModule
+import io.kvision.BootstrapSelectModule
+import io.kvision.CoreModule
+import io.kvision.FontAwesomeModule
 import io.kvision.core.Border
 import io.kvision.core.BorderStyle
 import io.kvision.core.Col
@@ -41,9 +46,9 @@ class App : Application() {
                 )
             )
         root("kvapp") {
-            vPanel(spacing = 10) {
+            vPanel(spacing = 10, useWrappers = true) {
                 width = 100.perc
-                margin = 30.px
+                padding = 30.px
                 val input = textAreaInput {
                     placeholder = tr("Enter some text")
                     height = 300.px
@@ -77,5 +82,13 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+    startApplication(
+        ::App,
+        module.hot,
+        BootstrapModule,
+        BootstrapCssModule,
+        FontAwesomeModule,
+        BootstrapSelectModule,
+        CoreModule
+    )
 }

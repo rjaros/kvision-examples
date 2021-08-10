@@ -46,7 +46,7 @@ fun Navigator.carouselPage() {
                 }
             }
             onEvent {
-                onsPostchange = {
+                postchange = {
                     CarouselModel.currentIndex.value = self.getActiveIndex().toInt()
                 }
             }
@@ -59,7 +59,7 @@ fun Navigator.carouselPage() {
             }
         }
         onEvent {
-            onsHide = {
+            hide = {
                 CarouselModel.currentIndex.value = 0
             }
         }

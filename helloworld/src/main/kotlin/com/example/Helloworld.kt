@@ -37,7 +37,7 @@ class Helloworld : Application() {
 
         root("helloworld") {
             flexPanel(FlexDirection.ROW, justify = JustifyContent.CENTER) {
-                div(tr("Hello world!"), classes = setOf("helloworld")) {
+                div(tr("Hello world!"), className = "helloworld") {
                     marginTop = 50.px
                     fontSize = 50.px
                 }

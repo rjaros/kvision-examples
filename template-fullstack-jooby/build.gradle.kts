@@ -9,7 +9,7 @@ plugins {
     val joobyVersion: String by System.getProperties()
     id("io.jooby.run") version joobyVersion
     val kvisionVersion: String by System.getProperties()
-    id("kvision") version kvisionVersion
+    id("io.kvision") version kvisionVersion
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -107,21 +107,7 @@ kotlin {
                 implementation("io.kvision:kvision:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
-                implementation("io.kvision:kvision-bootstrap-select:$kvisionVersion")
-                implementation("io.kvision:kvision-bootstrap-datetime:$kvisionVersion")
-                implementation("io.kvision:kvision-bootstrap-spinner:$kvisionVersion")
-                implementation("io.kvision:kvision-bootstrap-upload:$kvisionVersion")
-                implementation("io.kvision:kvision-bootstrap-dialog:$kvisionVersion")
-                implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
                 implementation("io.kvision:kvision-i18n:$kvisionVersion")
-                implementation("io.kvision:kvision-richtext:$kvisionVersion")
-                implementation("io.kvision:kvision-handlebars:$kvisionVersion")
-                implementation("io.kvision:kvision-datacontainer:$kvisionVersion")
-                implementation("io.kvision:kvision-redux:$kvisionVersion")
-                implementation("io.kvision:kvision-chart:$kvisionVersion")
-                implementation("io.kvision:kvision-tabulator:$kvisionVersion")
-                implementation("io.kvision:kvision-pace:$kvisionVersion")
-                implementation("io.kvision:kvision-moment:$kvisionVersion")
             }
             kotlin.srcDir("build/generated-src/frontend")
         }
@@ -134,15 +120,6 @@ kotlin {
     }
 }
 
-fun getNodeJsBinaryExecutable(): String {
-    val nodeDir = NodeJsRootPlugin.apply(rootProject).nodeJsSetupTaskProvider.get().destination
-    val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
-    val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
-    val command = NodeJsRootPlugin.apply(rootProject).nodeCommand
-    val finalCommand = if (isWindows && command == "node") "node.exe" else command
-    return nodeBinDir.resolve(finalCommand).absolutePath
-}
-
 tasks {
     joobyRun {
         mainClassName = mainClassNameVal
@@ -150,36 +127,9 @@ tasks {
         compileExtensions = listOf("java", "kt")
         port = 8080
     }
-    create("generatePotFile", Exec::class) {
-        dependsOn("compileKotlinFrontend")
-        executable = getNodeJsBinaryExecutable()
-        args("${rootProject.buildDir}/js/node_modules/gettext-extract/bin/gettext-extract")
-        inputs.files(kotlin.sourceSets["frontendMain"].kotlin.files)
-        outputs.file("$projectDir/src/frontendMain/resources/i18n/messages.pot")
-    }
 }
 afterEvaluate {
     tasks {
-        getByName("frontendProcessResources", Copy::class) {
-            dependsOn("compileKotlinFrontend")
-            exclude("**/*.pot")
-            doLast("Convert PO to JSON") {
-                destinationDir.walkTopDown().filter {
-                    it.isFile && it.extension == "po"
-                }.forEach {
-                    exec {
-                        executable = getNodeJsBinaryExecutable()
-                        args(
-                            "${rootProject.buildDir}/js/node_modules/gettext.js/bin/po2json",
-                            it.absolutePath,
-                            "${it.parent}/${it.nameWithoutExtension}.json"
-                        )
-                        println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
-                    }
-                    it.delete()
-                }
-            }
-        }
         create("frontendArchive", Jar::class).apply {
             dependsOn("frontendBrowserProductionWebpack")
             group = "package"
@@ -240,12 +190,6 @@ afterEvaluate {
         create("backendRun") {
             dependsOn("joobyRun")
             group = "run"
-        }
-        getByName("compileKotlinBackend") {
-            dependsOn("compileKotlinMetadata")
-        }
-        getByName("compileKotlinFrontend") {
-            dependsOn("compileKotlinMetadata")
         }
     }
 }

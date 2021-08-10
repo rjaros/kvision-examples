@@ -1,15 +1,8 @@
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         mavenCentral()
-        maven { url = uri("https://plugins.gradle.org/m2/") }
         mavenLocal()
-    }
-    resolutionStrategy {
-        eachPlugin {
-            when {
-                requested.id.id == "kvision" -> useModule("io.kvision:kvision-gradle-plugin:${requested.version}")
-            }
-        }
     }
 }
 rootProject.name = "encoder-fullstack-ktor"

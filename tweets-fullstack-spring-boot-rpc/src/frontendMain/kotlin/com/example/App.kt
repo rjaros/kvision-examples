@@ -1,6 +1,10 @@
 package com.example
 
 import io.kvision.Application
+import io.kvision.BootstrapCssModule
+import io.kvision.BootstrapModule
+import io.kvision.CoreModule
+import io.kvision.FontAwesomeModule
 import io.kvision.core.AlignItems
 import io.kvision.core.JustifyContent
 import io.kvision.core.onEvent
@@ -103,5 +107,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+    startApplication(::App, module.hot, BootstrapModule, BootstrapCssModule, FontAwesomeModule, CoreModule)
 }

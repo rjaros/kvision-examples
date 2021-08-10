@@ -139,7 +139,7 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                         }
                         this@Paint.fillColorButtons.add(b)
                     }
-                    val b = button("", classes = setOf("stripes")) {
+                    val b = button("", className = "stripes") {
                         title = "Empty fill"
                         width = 32.px
                         height = 22.px
@@ -155,8 +155,8 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
             add(colors, Side.DOWN)
             this@Paint.setEventListener<Paint> {
                 resizeWindow = { e ->
-                    canvas.canvasWidth = e.detail.width - 90
-                    canvas.canvasHeight = e.detail.height - 131
+                    canvas.canvasWidth = e.detail.asDynamic().width - 90
+                    canvas.canvasHeight = e.detail.asDynamic().height - 131
                     canvas.redraw()
                 }
             }

@@ -6,11 +6,9 @@ import io.vertx.core.Handler
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.AuthProvider
 import io.vertx.ext.auth.User
-import io.vertx.ext.auth.authentication.Credentials
 import io.vertx.ext.auth.authorization.Authorization
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.handler.AuthenticationHandler
-import io.vertx.ext.web.handler.impl.HttpStatusException
 
 
 class MyUser(val profile: Profile) : User {
@@ -55,11 +53,5 @@ class MyAuthHandler : AuthenticationHandler {
             return
         }
         rctx.fail(401)
-    }
-
-    override fun parseCredentials(context: RoutingContext, handler: Handler<AsyncResult<Credentials>>) {
-        handler.handle(
-            Future.failedFuture(HttpStatusException(401))
-        )
     }
 }

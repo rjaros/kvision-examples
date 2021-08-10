@@ -8,7 +8,7 @@ plugins {
     kotlin("plugin.serialization") version kotlinVersion
     kotlin("multiplatform") version kotlinVersion
     val kvisionVersion: String by System.getProperties()
-    id("kvision") version kvisionVersion
+    id("io.kvision") version kvisionVersion
     val vertxPluginVersion: String by System.getProperties()
     id("io.vertx.vertx-plugin") version vertxPluginVersion
 }
@@ -116,7 +116,6 @@ kotlin {
             dependencies {
                 implementation("io.kvision:kvision:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
-                implementation("io.kvision:kvision-bootstrap-select:$kvisionVersion")
                 implementation("io.kvision:kvision-datacontainer:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap-dialog:$kvisionVersion")
                 implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
@@ -133,52 +132,12 @@ kotlin {
     }
 }
 
-fun getNodeJsBinaryExecutable(): String {
-    val nodeDir = NodeJsRootPlugin.apply(rootProject).nodeJsSetupTaskProvider.get().destination
-    val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
-    val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
-    val command = NodeJsRootPlugin.apply(rootProject).nodeCommand
-    val finalCommand = if (isWindows && command == "node") "node.exe" else command
-    return nodeBinDir.resolve(finalCommand).absolutePath
-}
-
 vertx {
     mainVerticle = "com.example.MainVerticle"
     jvmArgs = listOf("-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory")
 }
-
-tasks {
-    create("generatePotFile", Exec::class) {
-        dependsOn("compileKotlinFrontend")
-        executable = getNodeJsBinaryExecutable()
-        args("${rootProject.buildDir}/js/node_modules/gettext-extract/bin/gettext-extract")
-        inputs.files(kotlin.sourceSets["frontendMain"].kotlin.files)
-        outputs.file("$projectDir/src/frontendMain/resources/i18n/messages.pot")
-    }
-}
-
 afterEvaluate {
     tasks {
-        getByName("frontendProcessResources", Copy::class) {
-            dependsOn("compileKotlinFrontend")
-            exclude("**/*.pot")
-            doLast("Convert PO to JSON") {
-                destinationDir.walkTopDown().filter {
-                    it.isFile && it.extension == "po"
-                }.forEach {
-                    exec {
-                        executable = getNodeJsBinaryExecutable()
-                        args(
-                            "${rootProject.buildDir}/js/node_modules/gettext.js/bin/po2json",
-                            it.absolutePath,
-                            "${it.parent}/${it.nameWithoutExtension}.json"
-                        )
-                        println("Converted ${it.name} to ${it.nameWithoutExtension}.json")
-                    }
-                    it.delete()
-                }
-            }
-        }
         create("frontendArchive", Jar::class).apply {
             dependsOn("frontendBrowserProductionWebpack")
             group = "package"
@@ -226,12 +185,6 @@ afterEvaluate {
             }
             exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
             duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        }
-        getByName("compileKotlinBackend") {
-            dependsOn("compileKotlinMetadata")
-        }
-        getByName("compileKotlinFrontend") {
-            dependsOn("compileKotlinMetadata")
         }
     }
 }

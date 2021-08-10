@@ -1,7 +1,10 @@
 package com.example
 
-import kotlinx.browser.document
 import io.kvision.Application
+import io.kvision.BootstrapCssModule
+import io.kvision.BootstrapModule
+import io.kvision.CoreModule
+import io.kvision.FontAwesomeModule
 import io.kvision.core.Border
 import io.kvision.core.BorderStyle
 import io.kvision.core.Component
@@ -13,17 +16,18 @@ import io.kvision.dropdown.dropDown
 import io.kvision.dropdown.separator
 import io.kvision.html.Link
 import io.kvision.modal.Alert
+import io.kvision.module
 import io.kvision.navbar.Nav
 import io.kvision.navbar.NavbarType
 import io.kvision.navbar.nav
 import io.kvision.navbar.navbar
 import io.kvision.panel.flexPanel
-import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.px
 import io.kvision.utils.vh
+import kotlinx.browser.document
 
 class App : Application() {
     init {
@@ -100,7 +104,7 @@ class App : Application() {
 
         fun addTask(window: DesktopWindow): Component {
             val task =
-                Link(window.caption ?: "Window", icon = window.icon, classes = setOf("nav-item", "nav-link")).apply {
+                Link(window.caption ?: "Window", icon = window.icon, className = "nav-item nav-link").apply {
                     border = Border(1.px, BorderStyle.SOLID)
                     marginLeft = 5.px
                 }.onClick {
@@ -120,5 +124,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+    startApplication(::App, module.hot, BootstrapModule, BootstrapCssModule, FontAwesomeModule, CoreModule)
 }

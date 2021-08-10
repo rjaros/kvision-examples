@@ -6,6 +6,7 @@ import io.kvision.panel.root
 import io.kvision.panel.simplePanel
 import io.kvision.require
 import io.kvision.startApplication
+import io.kvision.state.bind
 import io.kvision.utils.px
 
 class App : Application() {
@@ -19,7 +20,7 @@ class App : Application() {
     override fun start() {
         root("kvapp") {
             padding = 10.px
-            simplePanel(Model.store) { state ->
+            simplePanel().bind(Model.store) { state ->
                 toolbar(state)
                 when (state.view) {
                     ViewType.CARD -> {

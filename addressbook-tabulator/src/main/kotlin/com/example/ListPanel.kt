@@ -21,6 +21,7 @@ import io.kvision.tabulator.TabulatorOptions
 import io.kvision.tabulator.tabulator
 import io.kvision.utils.obj
 import io.kvision.utils.px
+import kotlinx.serialization.serializer
 
 fun Container.listPanel() {
     simplePanel {
@@ -77,11 +78,11 @@ fun Container.listPanel() {
                         }
                     )
                 ), persistenceMode = false
-            )
+            ), serializer = serializer()
         ) {
             marginBottom = 0.px
             setEventListener<Tabulator<Address>> {
-                tabulatorRowClick = { e ->
+                rowClickTabulator = { e ->
                     @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
                     Model.edit((e.detail as io.kvision.tabulator.js.Tabulator.RowComponent).getIndex() as Int)
                 }

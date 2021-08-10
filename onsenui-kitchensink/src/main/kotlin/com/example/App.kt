@@ -1,11 +1,13 @@
 package com.example
 
-import io.kvision.jquery.jQuery
-import io.kvision.jquery.invoke
 import io.kvision.Application
+import io.kvision.CoreModule
+import io.kvision.FontAwesomeModule
+import io.kvision.OnsenUIModule
 import io.kvision.core.Background
 import io.kvision.core.Color
 import io.kvision.core.onEvent
+import io.kvision.module
 import io.kvision.onsenui.OnsenUi
 import io.kvision.onsenui.core.Navigator
 import io.kvision.onsenui.core.navigator
@@ -24,12 +26,11 @@ import io.kvision.onsenui.tabbar.tab
 import io.kvision.onsenui.tabbar.tabbar
 import io.kvision.onsenui.toolbar.toolbar
 import io.kvision.onsenui.toolbar.toolbarButton
-import io.kvision.panel.ContainerType
-import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.px
+import kotlinx.browser.document
 
 class App : Application() {
     init {
@@ -47,9 +48,9 @@ class App : Application() {
     var showingTip = false
 
     override fun start() {
-        root("kvapp", ContainerType.NONE, false) {
+        root("kvapp") {
             if (!OnsenUi.isAndroid(true) && !OnsenUi.isIOS(true)) {
-                jQuery("body").addClass("mobile-emulate")
+                document.body?.classList?.add("mobile-emulate")
                 OnsenUi.mockStatusBar()
             }
             navigator = navigator(forceSwipeable = true) {
@@ -102,12 +103,12 @@ class App : Application() {
                                         }
                                     }
                                     onEvent {
-                                        onsPostchange = {
+                                        postchange = {
                                             showTip("Tip: Try swiping pages!")
                                         }
-                                        onsPrechange = {
+                                        prechange = {
                                             @Suppress("UnsafeCastFromDynamic")
-                                            val index: Int = it.detail.asDynamic().detail.index
+                                            val index: Int = it.asDynamic().detail.index
                                             if (!isMD) {
                                                 toolbar.centerPanel.content = getTab(index)?.label
                                             } else {
@@ -135,7 +136,7 @@ class App : Application() {
                 progressPage()
                 presentationPage()
                 onEvent {
-                    onsPostpush = {
+                    postpush = {
                         showTip("Try swipe-to-pop from left side!")
                     }
                 }
@@ -162,5 +163,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+    startApplication(::App, module.hot, OnsenUIModule, FontAwesomeModule, CoreModule)
 }

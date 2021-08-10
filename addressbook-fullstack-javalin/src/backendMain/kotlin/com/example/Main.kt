@@ -1,7 +1,7 @@
 package com.example
 
 import io.javalin.Javalin
-import io.javalin.core.security.Role
+import io.javalin.core.security.RouteRole
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse
 
 const val SESSION_PROFILE_KEY = "com.example.profile"
 
-enum class ApiRole : Role { AUTHORIZED, ANYONE }
+enum class ApiRole : RouteRole { AUTHORIZED, ANYONE }
 
 fun main() {
     Javalin.create { config ->
@@ -43,10 +43,10 @@ fun main() {
                     ctx.status(HttpServletResponse.SC_OK)
                 } ?: ctx.status(HttpServletResponse.SC_UNAUTHORIZED)
             }
-        }, setOf(ApiRole.ANYONE))
+        }, ApiRole.ANYONE)
         get("/logout", { ctx ->
             ctx.req.session.invalidate()
             ctx.redirect("/", HttpServletResponse.SC_FOUND)
-        }, setOf(ApiRole.AUTHORIZED))
+        }, ApiRole.AUTHORIZED)
     }
 }

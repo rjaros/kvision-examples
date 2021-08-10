@@ -19,6 +19,7 @@ import io.kvision.panel.HPanel
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.vPanel
 import io.kvision.state.ObservableValue
+import io.kvision.state.bind
 import io.kvision.state.observableListOf
 import io.kvision.utils.px
 
@@ -41,20 +42,20 @@ class DataTab : SimplePanel() {
                 }
             }
             div {
-                text(store, label = tr("Input")) {
+                text(label = tr("Input")).bind(store) {
                     placeholder = tr("Add some input")
                     value = it
                 }.subscribe { store.update(it ?: "") }
-                text(store, label = tr("Value")) {
+                text(label = tr("Value")).bind(store) {
                     readonly = true
                     value = it
                 }
-                div(className = "form-group") {
+                div(className = "form-group mb-3") {
                     button(tr("Add a dot")).onClick { store.addDot() }
                 }
             }
 
-            val panel = vPanel(spacing = 5)
+            val panel = vPanel(spacing = 5, useWrappers = true)
 
             class DataModel(checked: Boolean, text: String) : BaseDataComponent() {
                 var checked: Boolean by obs(checked)
@@ -97,6 +98,7 @@ class DataTab : SimplePanel() {
 
             panel.add(HPanel(spacing = 10, wrap = FlexWrap.WRAP) {
                 textInput(type = TextInputType.SEARCH) {
+                    width = 200.px
                     placeholder = tr("Search ...")
                     onEvent {
                         input = {

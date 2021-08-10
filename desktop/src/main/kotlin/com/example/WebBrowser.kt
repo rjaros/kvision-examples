@@ -51,10 +51,10 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
                 paddingLeft = 0.px
                 buttonGroup {
                     button("", icon = "fas fa-arrow-left").onClick {
-                        this@WebBrowser.iframe.getIframeWindow().history.back()
+                        this@WebBrowser.iframe.getIframeWindow()?.history?.back()
                     }
                     button("", icon = "fas fa-arrow-right").onClick {
-                        this@WebBrowser.iframe.getIframeWindow().history.forward()
+                        this@WebBrowser.iframe.getIframeWindow()?.history?.forward()
                     }
                 }
                 add(this@WebBrowser.urlInput)

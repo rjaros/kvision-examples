@@ -1,8 +1,9 @@
 package com.example
 
-import kotlinx.browser.document
-import kotlinx.serialization.builtins.ListSerializer
 import io.kvision.Application
+import io.kvision.BootstrapCssModule
+import io.kvision.BootstrapModule
+import io.kvision.CoreModule
 import io.kvision.core.AlignItems
 import io.kvision.core.Container
 import io.kvision.core.JustifyContent
@@ -25,12 +26,16 @@ import io.kvision.redux.ActionCreator
 import io.kvision.redux.createReduxStore
 import io.kvision.require
 import io.kvision.rest.RestClient
+import io.kvision.rest.call
 import io.kvision.startApplication
+import io.kvision.state.bind
 import io.kvision.toolbar.buttonGroup
 import io.kvision.utils.auto
 import io.kvision.utils.obj
 import io.kvision.utils.perc
 import io.kvision.utils.px
+import kotlinx.browser.document
+import kotlinx.serialization.builtins.ListSerializer
 
 class App : Application() {
 
@@ -48,11 +53,11 @@ class App : Application() {
             )
 
         root("kvapp") {
-            vPanel(alignItems = AlignItems.STRETCH) {
+            vPanel(alignItems = AlignItems.STRETCH, useWrappers = true) {
                 marginTop = 10.px
                 width = 100.perc
                 searchField()
-                vPanel(store, alignItems = AlignItems.STRETCH) { state ->
+                vPanel(alignItems = AlignItems.STRETCH, useWrappers = true).bind(store) { state ->
                     maxWidth = 1200.px
                     textAlign = TextAlign.CENTER
                     marginLeft = auto
@@ -134,11 +139,10 @@ class App : Application() {
         return { dispatch, _ ->
             val restClient = RestClient()
             dispatch(PokeAction.StartDownload)
-            restClient.remoteCall(
-                "https://pokeapi.co/api/v2/pokemon/", obj { limit = 800 },
+            restClient.call<List<Pokemon>>("https://pokeapi.co/api/v2/pokemon/") {
+                data = obj { limit = 800 }
+                resultTransform = { it.results }
                 deserializer = ListSerializer(Pokemon.serializer())
-            ) {
-                it.results
             }.then { list ->
                 dispatch(PokeAction.DownloadOk)
                 dispatch(PokeAction.SetPokemonList(list))
@@ -156,5 +160,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+    startApplication(::App, module.hot, BootstrapModule, BootstrapCssModule, CoreModule)
 }
