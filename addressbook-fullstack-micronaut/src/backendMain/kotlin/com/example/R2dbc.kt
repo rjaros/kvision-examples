@@ -6,13 +6,12 @@ import io.micronaut.context.event.StartupEvent
 import io.micronaut.runtime.event.annotation.EventListener
 import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactory
+import jakarta.inject.Singleton
 import org.springframework.core.io.ClassPathResource
 import org.springframework.data.r2dbc.connectionfactory.init.ConnectionFactoryInitializer
 import org.springframework.data.r2dbc.connectionfactory.init.ResourceDatabasePopulator
 import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.r2dbc.mapping.SettableValue
-import javax.inject.Singleton
-
 
 @Factory
 class R2dbc {

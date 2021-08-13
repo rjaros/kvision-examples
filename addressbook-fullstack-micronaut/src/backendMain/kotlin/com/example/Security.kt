@@ -1,17 +1,15 @@
 package com.example
 
+import io.kvision.remote.matches
 import io.micronaut.context.annotation.Factory
 import io.micronaut.context.annotation.Replaces
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MutableHttpResponse
-import io.micronaut.security.authentication.AuthenticationException
-import io.micronaut.security.authentication.AuthenticationFailed
+import io.micronaut.security.authentication.Authentication
 import io.micronaut.security.authentication.AuthenticationProvider
 import io.micronaut.security.authentication.AuthenticationRequest
 import io.micronaut.security.authentication.AuthenticationResponse
-import io.micronaut.security.authentication.AuthenticationUserDetailsAdapter
-import io.micronaut.security.authentication.UserDetails
 import io.micronaut.security.filters.SecurityFilter
 import io.micronaut.security.handlers.LoginHandler
 import io.micronaut.security.rules.AbstractSecurityRule
@@ -23,16 +21,13 @@ import io.micronaut.session.Session
 import io.micronaut.session.SessionStore
 import io.micronaut.session.http.SessionForRequest
 import io.micronaut.web.router.RouteMatch
+import jakarta.inject.Singleton
 import org.reactivestreams.Publisher
 import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.relational.core.query.Criteria
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
-import io.kvision.remote.matches
 import reactor.core.publisher.Mono
-import reactor.kotlin.adapter.rxjava.toFlowable
-import java.util.*
-import javax.inject.Singleton
 
 @Factory
 open class PasswordEncoderFactory {
@@ -47,12 +42,12 @@ open class AppSecurityRule(rolesFinder: RolesFinder) : AbstractSecurityRule(role
     override fun check(
         request: HttpRequest<*>,
         routeMatch: RouteMatch<*>?,
-        claims: MutableMap<String, Any>?
-    ): SecurityRuleResult {
+        authentication: Authentication?
+    ): Publisher<SecurityRuleResult> {
         return if (request.matches(AddressServiceManager, ProfileServiceManager)) {
-            compareRoles(listOf(SecurityRule.IS_AUTHENTICATED), getRoles(claims))
+            compareRoles(listOf(SecurityRule.IS_AUTHENTICATED), getRoles(authentication))
         } else {
-            SecurityRuleResult.ALLOWED
+            Mono.just(SecurityRuleResult.ALLOWED)
         }
     }
 }
@@ -60,14 +55,14 @@ open class AppSecurityRule(rolesFinder: RolesFinder) : AbstractSecurityRule(role
 @Replaces(SessionLoginHandler::class)
 @Singleton
 open class AppLoginHandler(private val sessionStore: SessionStore<Session>) : LoginHandler {
-    override fun loginSuccess(userDetails: UserDetails?, request: HttpRequest<*>?): MutableHttpResponse<*> {
+    override fun loginSuccess(authentication: Authentication?, request: HttpRequest<*>?): MutableHttpResponse<*> {
         val session = SessionForRequest.findOrCreate(request, sessionStore)
-        session.put(SecurityFilter.AUTHENTICATION, AuthenticationUserDetailsAdapter(userDetails, "roles", "username"))
+        session.put(SecurityFilter.AUTHENTICATION, authentication)
         return HttpResponse.ok<String>()
     }
 
     override fun loginRefresh(
-        userDetails: UserDetails?,
+        authentication: Authentication?,
         refreshToken: String?,
         request: HttpRequest<*>?
     ): MutableHttpResponse<*> {
@@ -98,14 +93,11 @@ class AppAuthenticationProvider(
             ).fetch().first().flatMap {
                 if (passwordEncoder.matches(authenticationRequest.secret.toString(), it.password)) {
                     Mono.just(
-                        UserDetails(
-                            authenticationRequest.identity as String,
-                            ArrayList()
-                        ) as AuthenticationResponse
+                        AuthenticationResponse.success(authenticationRequest.identity as String)
                     )
                 } else {
                     Mono.empty()
                 }
-            }.switchIfEmpty(Mono.error(AuthenticationException(AuthenticationFailed()))).toFlowable()
+            }.switchIfEmpty(Mono.error(AuthenticationResponse.exception()))
     }
 }

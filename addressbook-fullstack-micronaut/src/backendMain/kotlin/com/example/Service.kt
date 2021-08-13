@@ -1,10 +1,10 @@
 package com.example
 
 import com.github.andrewoma.kwery.core.builder.query
+import io.kvision.types.OffsetDateTime
 import io.micronaut.context.annotation.Prototype
 import io.micronaut.http.HttpRequest
 import io.micronaut.security.authentication.Authentication
-import io.micronaut.security.authentication.AuthenticationUserDetailsAdapter
 import io.micronaut.security.filters.SecurityFilter
 import io.micronaut.session.http.SessionForRequest
 import kotlinx.coroutines.flow.toList
@@ -16,7 +16,6 @@ import org.springframework.data.r2dbc.core.awaitOneOrNull
 import org.springframework.data.r2dbc.core.flow
 import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.security.crypto.password.PasswordEncoder
-import io.kvision.types.OffsetDateTime
 
 interface WithProfile {
     val httpRequest: HttpRequest<*>
@@ -25,7 +24,7 @@ interface WithProfile {
     suspend fun getUser(): User {
         return SessionForRequest.find(httpRequest).orElse(null)?.let { session ->
             session.get(SecurityFilter.AUTHENTICATION, Authentication::class.java).orElse(null)?.let { authentication ->
-                (authentication as? AuthenticationUserDetailsAdapter)?.name?.let { username ->
+                (authentication).name?.let { username ->
                     databaseClient.select().from(User::class.java)
                         .matching(
                             where("username").`is`(username)
