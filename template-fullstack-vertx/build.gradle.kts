@@ -29,6 +29,10 @@ val logbackVersion: String by project
 
 val webDir = file("src/frontendMain/web")
 
+rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin::class.java) {
+  rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().versions.webpackDevServer.version = "4.0.0-rc.0"
+}
+
 kotlin {
     jvm("backend") {
         withJava()

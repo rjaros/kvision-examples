@@ -27,6 +27,10 @@ val kvisionVersion: String by System.getProperties()
 val webDir = file("src/main/web")
 val electronDir = file("src/main/electron")
 
+rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin::class.java) {
+  rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().versions.webpackDevServer.version = "4.0.0-rc.0"
+}
+
 kotlin {
     js {
         browser {

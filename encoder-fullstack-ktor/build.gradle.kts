@@ -35,6 +35,10 @@ val jdbcNamedParametersVersion: String by project
 val webDir = file("src/frontendMain/web")
 val mainClassName = "io.ktor.server.netty.EngineMain"
 
+rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin::class.java) {
+  rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().versions.webpackDevServer.version = "4.0.0-rc.0"
+}
+
 kotlin {
     jvm("backend") {
         compilations.all {
