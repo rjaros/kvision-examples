@@ -31,7 +31,7 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
         minWidth = 400.px
         minHeight = 150.px
         padding = 2.px
-        iframe = Iframe("https://rjaros.github.io/kvision/kvision/index.html").apply {
+        iframe = Iframe("https://rjaros.github.io/kvision/index.html").apply {
             width = 100.perc
             height = 340.px
         }
