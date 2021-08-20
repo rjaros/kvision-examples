@@ -28,7 +28,7 @@ A simple application presenting all main features of KVision framework.
 ## Address book
 
 An address book application presenting a classic [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) project 
-with Material-like CSS template from [Bootswatch](https://bootswatch.com/3/paper/).
+with Material-like CSS template from [Bootswatch](https://bootswatch.com/materia/).
 
 [See live demo](https://rjaros.github.io/kvision-examples/addressbook/)
 
