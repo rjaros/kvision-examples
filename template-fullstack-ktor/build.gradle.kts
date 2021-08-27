@@ -37,6 +37,9 @@ val mainClassName = "io.ktor.server.netty.EngineMain"
 kotlin {
     jvm("backend") {
         compilations.all {
+            java {
+                targetCompatibility = JavaVersion.VERSION_1_8
+            }
             kotlinOptions {
                 jvmTarget = "1.8"
                 freeCompilerArgs = listOf("-Xjsr305=strict")

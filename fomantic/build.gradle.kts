@@ -58,7 +58,7 @@ kotlin {
         implementation("io.kvision:kvision-toast:$kvisionVersion")
         implementation("io.kvision:kvision-jquery:$kvisionVersion")
         implementation("io.kvision:kvision-rest:$kvisionVersion")
-        implementation(npm("fomantic-ui-css", "2.8.7"))
+        implementation(npm("fomantic-ui-css", "2.8.8"))
     }
     sourceSets["test"].dependencies {
         implementation(kotlin("test-js"))

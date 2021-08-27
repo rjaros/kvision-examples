@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 class App : Application(), CoroutineScope by CoroutineScope(Dispatchers.Default) {
 
     init {
-        require("fomantic-ui-css/semantic.min.css")
         require("fomantic-ui-css/semantic.min.js")
         require("css/kvapp.css")
     }
