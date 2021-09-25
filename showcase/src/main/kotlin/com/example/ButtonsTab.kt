@@ -20,9 +20,9 @@ import io.kvision.toolbar.toolbar
 import io.kvision.utils.px
 import kotlinx.browser.window
 import react.ComponentClass
-import react.RProps
+import react.PropsWithChildren
 
-external interface ReactButtonProps : RProps {
+external interface ReactButtonProps : PropsWithChildren {
     var type: String
     var size: String
     var action: (dynamic, () -> Unit) -> Unit

@@ -5,7 +5,7 @@ object-assign
 */
 
 /*!
-  * Bootstrap v5.1.0 (https://getbootstrap.com/)
+  * Bootstrap v5.1.1 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -474,7 +474,7 @@ object-assign
  */
 
 /*!
- * bootstrap-fileinput v5.2.3
+ * bootstrap-fileinput v5.2.6
  * http://plugins.krajee.com/file-input
  *
  * Author: Kartik Visweswaran
@@ -485,7 +485,7 @@ object-assign
  */
 
 /*!
- * bootstrap-fileinput v5.2.3
+ * bootstrap-fileinput v5.2.6
  * http://plugins.krajee.com/file-input
  *
  * Bootstrap 5.x icon theme configuration for bootstrap-fileinput. Requires bootstrap 5.x icons CSS to be loaded.
@@ -499,7 +499,7 @@ object-assign
  */
 
 /*!
- * bootstrap-fileinput v5.2.3
+ * bootstrap-fileinput v5.2.6
  * http://plugins.krajee.com/file-input
  *
  * Krajee Explorer Font Awesome theme configuration for bootstrap-fileinput.
