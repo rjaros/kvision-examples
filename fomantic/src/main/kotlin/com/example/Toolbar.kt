@@ -15,7 +15,6 @@ import io.kvision.html.label
 import io.kvision.html.link
 import io.kvision.panel.hPanel
 import io.kvision.state.bind
-import io.kvision.state.subFlow
 import io.kvision.utils.px
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -43,7 +42,7 @@ fun Container.toolbar(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow
 }
 
 fun Container.bulkSelect(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
-    div(className = "ui buttons").bind(stateFlow.subFlow { it.selectionState }) { selectionState ->
+    div(className = "ui buttons").bind(stateFlow, { it.selectionState }) { selectionState ->
         div(className = "ui button") {
             checkBoxInput {
                 id = "toolbar-selection-state"
@@ -94,7 +93,7 @@ fun Container.bulkSelect(stateFlow: StateFlow<State>, actionFlow: MutableSharedF
 
 fun Container.searchBox(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
     div(className = "ui icon input") {
-        val input = textInput().bind(stateFlow.subFlow { it.search }) { value = it }
+        val input = textInput().bind(stateFlow, { it.search }) { value = it }
         i(className = "search link icon") {
             setAttribute("aria-hidden", "true")
         }.onClickLaunch {
@@ -106,7 +105,7 @@ fun Container.searchBox(stateFlow: StateFlow<State>, actionFlow: MutableSharedFl
 fun Container.sortSelect(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlow<Action>) {
     div(className = "ui floating dropdown icon button") {
         i(className = "sort amount down icon")
-        div(className = "menu").bind(stateFlow.subFlow { it.sortItem to it.sortType }) {
+        div(className = "menu").bind(stateFlow, { it.sortItem to it.sortType }) {
             width = 150.px
             menuItem("Last name", it.first == SortItem.LAST_NAME) {
                 actionFlow.emit(Action.Sort(SortItem.LAST_NAME, it.second))

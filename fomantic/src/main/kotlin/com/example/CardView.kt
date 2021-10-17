@@ -14,7 +14,6 @@ import io.kvision.panel.gridPanel
 import io.kvision.panel.hPanel
 import io.kvision.state.bind
 import io.kvision.state.bindEach
-import io.kvision.state.subFlow
 import io.kvision.toast.Toast
 import io.kvision.utils.em
 import io.kvision.utils.px
@@ -27,7 +26,7 @@ fun Container.cardView(stateFlow: StateFlow<State>, actionFlow: MutableSharedFlo
         justifyItems = JustifyItems.CENTER,
         columnGap = 20,
         className = "ui cards"
-    ).bindEach(stateFlow.subFlow { it.usersVisible() }) { user ->
+    ).bindEach(stateFlow, { it.usersVisible() }) { user ->
         card(stateFlow, user, actionFlow)
     }
 }
@@ -55,7 +54,7 @@ fun Container.card(stateFlow: StateFlow<State>, user: User, actionFlow: MutableS
                         getElementJQueryD().dropdown()
                     }
                 }
-                checkBoxInput().bind(stateFlow.subFlow { it.selected.contains(user.login.uuid) }) {
+                checkBoxInput().bind(stateFlow, { it.selected.contains(user.login.uuid) }) {
                     value = it
                 }.onClickLaunch {
                     if (this.value) {
