@@ -26,7 +26,7 @@ fun Container.menuItem(
 
 fun Container.natImage(user: User) {
     image(
-        "https://lipis.github.io/flag-icon-css/flags/4x3/${user.nat.lowercase()}.svg",
+        "https://flagicons.lipis.dev/flags/4x3/${user.nat.lowercase()}.svg",
         className = "sc-user-nat"
     ) {
         title = user.nat

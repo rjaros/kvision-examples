@@ -19,6 +19,10 @@ class MyUser(val profile: Profile) : User {
     override fun setAuthProvider(authProvider: AuthProvider) {
     }
 
+    override fun merge(other: User?): User {
+        return this
+    }
+
     override fun attributes(): JsonObject {
         return JsonObject()
     }
