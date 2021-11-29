@@ -199,7 +199,7 @@ class TabulatorTab : SimplePanel() {
                                 }
                             }
                         })
-                ), pagination = PaginationMode.LOCAL, paginationSize = 10
+                ), pagination = true, paginationSize = 10
             ), types = setOf(TableType.BORDERED, TableType.HOVER, TableType.STRIPED), serializer = serializer()
         ) {
             height = 430.px

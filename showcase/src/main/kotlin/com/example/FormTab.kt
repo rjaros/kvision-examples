@@ -73,7 +73,7 @@ class FormTab : SimplePanel() {
                 required = true,
                 requiredMessage = tr("Value is required"),
                 validatorMessage = { tr("Only numbers are allowed") }) {
-                it.getValue()?.matches("^[0-9]+$")
+                it.getValue()?.let { "^[0-9]+$".toRegex().matches(it) }
             }
             add(Form::password, Password(label = tr("Password field with minimum length validator")),
                 validatorMessage = { tr("Password too short") }) {

@@ -16,17 +16,21 @@ import io.kvision.tabulator.Align
 import io.kvision.tabulator.ColumnDefinition
 import io.kvision.tabulator.Formatter
 import io.kvision.tabulator.Layout
+import io.kvision.tabulator.RenderType
 import io.kvision.tabulator.Tabulator
 import io.kvision.tabulator.TabulatorOptions
 import io.kvision.tabulator.tabulator
 import io.kvision.utils.obj
+import io.kvision.utils.perc
 import io.kvision.utils.px
 import kotlinx.serialization.serializer
+import org.w3c.dom.events.Event
 
 fun Container.listPanel() {
     simplePanel {
         lateinit var tabulator: Tabulator<Address>
-        hPanel(justify = JustifyContent.SPACEAROUND, wrap = FlexWrap.WRAP, alignItems = AlignItems.CENTER) {
+        hPanel(justify = JustifyContent.SPACEAROUND, alignItems = AlignItems.CENTER) {
+            width = 410.px
             text(TextInputType.SEARCH) {
                 placeholder = tr("Search ...")
                 onEvent {
@@ -49,7 +53,8 @@ fun Container.listPanel() {
         }
         tabulator = tabulator(
             Model.addressBook, { it.addresses }, options = TabulatorOptions(
-                height = "calc(100vh - 75px)", layout = Layout.FITCOLUMNS, columns = listOf(
+                renderVertical = RenderType.VIRTUAL,
+                height = "calc(100vh - 90px)", layout = Layout.FITCOLUMNS, columns = listOf(
                     ColumnDefinition(tr("First name"), "firstName"),
                     ColumnDefinition(tr("Last name"), "lastName"),
                     ColumnDefinition(tr("E-mail"), "email", formatterFunction = { cell, _, _ ->
@@ -70,8 +75,8 @@ fun Container.listPanel() {
                         width = "40",
                         formatter = Formatter.BUTTONCROSS,
                         headerSort = false,
-                        cellClick = { evt, cell ->
-                            evt.stopPropagation()
+                        cellClick = { evt: Event, cell ->
+                            evt.preventDefault()
                             Confirm.show(tr("Are you sure?"), tr("Do you want to delete this address?")) {
                                 Model.delete(cell.getRow().getIndex() as Int)
                             }

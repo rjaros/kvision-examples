@@ -1,18 +1,19 @@
 package com.example
 
-import io.kvision.chart.chart
+import io.kvision.chart.ChartOptions
 import io.kvision.chart.ChartScales
 import io.kvision.chart.ChartType
 import io.kvision.chart.Configuration
 import io.kvision.chart.DataSets
 import io.kvision.chart.LegendOptions
-import io.kvision.chart.ChartOptions
+import io.kvision.chart.PluginsOptions
 import io.kvision.chart.TitleOptions
+import io.kvision.chart.chart
 import io.kvision.core.Col
 import io.kvision.core.Color
 import io.kvision.i18n.I18n.tr
-import io.kvision.panel.gridPanel
 import io.kvision.panel.SimplePanel
+import io.kvision.panel.gridPanel
 import io.kvision.utils.obj
 import io.kvision.utils.px
 import kotlin.math.sin
@@ -38,7 +39,10 @@ class ChartTab : SimplePanel() {
                             }
                         )
                     ),
-                    options = ChartOptions(legend = LegendOptions(display = false), showLines = true)
+                    options = ChartOptions(
+                        plugins = PluginsOptions(legend = LegendOptions(display = false)),
+                        showLine = true
+                    )
                 )
             )
             chart(
@@ -63,12 +67,13 @@ class ChartTab : SimplePanel() {
                         tr("Latin America"),
                         tr("North America")
                     ),
-                    ChartOptions(legend = LegendOptions(display = false), scales = ChartScales(yAxes = listOf(obj {
-                        ticks = obj {
-                            suggestedMin = 0
-                            suggestedMax = 20
-                        }
-                    })), title = TitleOptions(display = false))
+                    ChartOptions(
+                        plugins = PluginsOptions(
+                            legend = LegendOptions(display = false),
+                            title = TitleOptions(display = false)
+                        ),
+                        scales = mapOf("y" to ChartScales(suggestedMin = 0, suggestedMax = 20))
+                    )
                 )
             )
             chart(
