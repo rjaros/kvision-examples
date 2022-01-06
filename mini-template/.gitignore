@@ -6,3 +6,4 @@ out/
 *.ipr
 *.iws
 *.idea
+kotlin-js-store/

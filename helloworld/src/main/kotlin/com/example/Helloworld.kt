@@ -7,8 +7,8 @@ import io.kvision.html.div
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
-import io.kvision.panel.flexPanel
 import io.kvision.module
+import io.kvision.panel.flexPanel
 import io.kvision.panel.root
 import io.kvision.require
 import io.kvision.startApplication

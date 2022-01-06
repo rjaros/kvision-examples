@@ -19,7 +19,9 @@ import io.kvision.toolbar.buttonGroup
 import io.kvision.toolbar.toolbar
 import io.kvision.utils.px
 import kotlinx.browser.window
+import react.ChildrenBuilder
 import react.ComponentClass
+import react.Props
 import react.PropsWithChildren
 
 external interface ReactButtonProps : PropsWithChildren {
@@ -84,9 +86,9 @@ class ButtonsTab : SimplePanel() {
             }
             react {
                 ReactButton {
-                    attrs.type = "primary"
-                    attrs.size = "large"
-                    attrs.action = { _, next ->
+                    type = "primary"
+                    size = "large"
+                    action = { _, next ->
                         window.setTimeout({
                             next()
                         }, 3000)
