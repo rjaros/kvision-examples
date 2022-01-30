@@ -1,7 +1,9 @@
 package com.example
 
 import io.kvision.annotations.KVService
+import kotlinx.serialization.Serializable
 
+@Serializable
 enum class Sort {
     FN, LN, E, F
 }
