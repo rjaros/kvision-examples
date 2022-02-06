@@ -54,7 +54,7 @@ kotlin {
         binaries.executable()
     }
     sourceSets["main"].dependencies {
-        implementation(npm("electron-builder", "^22.7.0"))
+        implementation(npm("electron-builder", "^22.14.5"))
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
