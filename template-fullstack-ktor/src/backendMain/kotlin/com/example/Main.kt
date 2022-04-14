@@ -1,8 +1,8 @@
 package com.example
 
-import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.plugins.compression.*
+import io.ktor.server.routing.*
 import io.kvision.remote.applyRoutes
 import io.kvision.remote.kvisionInit
 

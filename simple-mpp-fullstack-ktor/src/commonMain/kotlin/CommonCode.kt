@@ -1,5 +1,6 @@
 package io.ktor.samples.fullstack.mpp
 
+import io.kvision.remote.HttpMethod
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,8 +14,6 @@ expect class PingService : IPingService
 
 object PingServiceManager : KVServiceManager<PingService>(PingService::class) {
     init {
-        GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
-            bind(PingService::ping)
-        }
+        bind(PingService::ping, HttpMethod.POST, null)
     }
 }

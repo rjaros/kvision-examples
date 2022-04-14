@@ -3,7 +3,7 @@ package com.example
 import com.axiomalaska.jdbc.NamedParameterPreparedStatement
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.ktor.config.ApplicationConfig
+import io.ktor.server.config.ApplicationConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Database

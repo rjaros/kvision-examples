@@ -1,10 +1,8 @@
 buildscript {
     repositories {
-        mavenLocal()
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
-        maven { url 'https://plugins.gradle.org/m2/' }
-        maven { url 'https://kotlin.bintray.com/kotlinx' }
+        mavenCentral()
         jcenter()
+        mavenLocal()
     }
 
     dependencies {
@@ -37,23 +35,18 @@ kotlin {
 }
 
 repositories {
-    jcenter()
-    maven { url = 'https://kotlin.bintray.com/ktor' }
-    maven { url = 'https://kotlin.bintray.com/kotlin/kotlinx' }
-    maven { url = 'https://kotlin.bintray.com/kotlinx' }
-    maven { url = 'https://dl.bintray.com/gbaldeck/kotlin' }
-    maven { url = 'https://dl.bintray.com/rjaros/kotlin' }
+    mavenCentral()
     mavenLocal()
 }
 
 dependencies {
     commonMainImplementation "org.jetbrains.kotlin:kotlin-stdlib-common"
-    commonMainApi "pl.treksoft:kvision-server-ktor:${kvisionVersion}"
+    commonMainApi "io.kvision:kvision-server-ktor:${kvisionVersion}"
     commonTestImplementation "org.jetbrains.kotlin:kotlin-test-annotations-common"
     commonTestImplementation "org.jetbrains.kotlin:kotlin-test-common"
 
     backendMainImplementation "io.ktor:ktor-server-netty:$ktorVersion"
-    backendMainImplementation "io.ktor:ktor-html-builder:$ktorVersion"
+    backendMainImplementation "io.ktor:ktor-server-html-builder:$ktorVersion"
     backendMainImplementation "ch.qos.logback:logback-classic:$logbackVersion"
 
     frontendMainImplementation "org.jetbrains.kotlin:kotlin-stdlib-js"
@@ -79,6 +72,7 @@ task populateWebFolder(dependsOn: [frontendMainClasses]) {
                     from zipTree(it.absolutePath).matching { include '*.js' }
                 }
             }
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
             into webFolder
         }
     }

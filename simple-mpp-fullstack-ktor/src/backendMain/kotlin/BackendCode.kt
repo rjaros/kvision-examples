@@ -1,12 +1,12 @@
 package io.ktor.samples.fullstack.mpp
 
-import io.ktor.application.Application
-import io.ktor.application.call
-import io.ktor.html.respondHtml
-import io.ktor.http.content.files
-import io.ktor.http.content.static
-import io.ktor.routing.get
-import io.ktor.routing.routing
+import io.ktor.server.application.Application
+import io.ktor.server.application.call
+import io.ktor.server.html.respondHtml
+import io.ktor.server.http.content.files
+import io.ktor.server.http.content.static
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import kotlinx.html.body

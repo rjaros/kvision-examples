@@ -1,35 +1,20 @@
 package com.example
 
 import com.example.Db.dbQuery
-import io.ktor.application.Application
-import io.ktor.application.call
-import io.ktor.application.install
-import io.ktor.auth.Authentication
-import io.ktor.auth.UserIdPrincipal
-import io.ktor.auth.authenticate
-import io.ktor.auth.form
-import io.ktor.auth.principal
-import io.ktor.features.CallLogging
-import io.ktor.features.Compression
-import io.ktor.features.DefaultHeaders
-import io.ktor.http.HttpStatusCode
-import io.ktor.response.respond
-import io.ktor.response.respondRedirect
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.routing
-import io.ktor.sessions.SessionStorageMemory
-import io.ktor.sessions.Sessions
-import io.ktor.sessions.clear
-import io.ktor.sessions.cookie
-import io.ktor.sessions.get
-import io.ktor.sessions.sessions
-import io.ktor.sessions.set
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.plugins.callloging.*
+import io.ktor.server.plugins.compression.*
+import io.ktor.server.plugins.defaultheaders.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import io.ktor.server.sessions.*
+import io.kvision.remote.applyRoutes
+import io.kvision.remote.kvisionInit
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
-import io.kvision.remote.applyRoutes
-import io.kvision.remote.kvisionInit
 import kotlin.collections.set
 
 fun Application.main() {

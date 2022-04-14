@@ -4,9 +4,9 @@ import com.example.Db.dbQuery
 import com.example.Db.queryList
 import com.github.andrewoma.kwery.core.builder.query
 import com.google.inject.Inject
-import io.ktor.application.ApplicationCall
-import io.ktor.sessions.get
-import io.ktor.sessions.sessions
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.sessions.get
+import io.ktor.server.sessions.sessions
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
