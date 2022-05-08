@@ -21,6 +21,8 @@ import io.kvision.panel.dockPanel
 import io.kvision.panel.hPanel
 import io.kvision.utils.perc
 import io.kvision.utils.px
+import org.w3c.dom.TouchEvent
+import org.w3c.dom.get
 import kotlin.math.PI
 import kotlin.math.abs
 
@@ -209,10 +211,27 @@ class PaintCanvas(width: Int, height: Int) : Canvas(width, height) {
             mousedown = { e ->
                 if (currentFig == null) handleMouseDown(e.offsetX.toInt(), e.offsetY.toInt())
             }
+            touchstart = { e ->
+                if (currentFig == null) {
+                    val rect = e.target.getBoundingClientRect()
+                    val x = e.targetTouches[0].pageX - rect.left
+                    val y = e.targetTouches[0].pageY - rect.top
+                    handleMouseDown(x, y)
+                }
+            }
             mousemove = { e ->
                 currentFig?.let { handleMouseMove(e.offsetX.toInt(), e.offsetY.toInt(), it) }
             }
+            touchmove = { e ->
+                val rect = e.target.getBoundingClientRect()
+                val x = e.targetTouches[0].pageX - rect.left
+                val y = e.targetTouches[0].pageY - rect.top
+                currentFig?.let { handleMouseMove(x, y, it) }
+            }
             mouseup = { _ ->
+                currentFig?.let { handleMouseUp(it) }
+            }
+            touchend = { _ ->
                 currentFig?.let { handleMouseUp(it) }
             }
         }

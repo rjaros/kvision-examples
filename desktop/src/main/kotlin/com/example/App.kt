@@ -71,11 +71,17 @@ class App : Application() {
                         dblclick = {
                             Calculator.run(this@root)
                         }
+                        touchstart = {
+                            Calculator.run(this@root)
+                        }
                     }
                 })
                 add(DesktopIcon("fas fa-edit", "Text Editor").apply {
                     onEvent {
                         dblclick = {
+                            TextEditor.run(this@root)
+                        }
+                        touchstart = {
                             TextEditor.run(this@root)
                         }
                     }
@@ -85,11 +91,17 @@ class App : Application() {
                         dblclick = {
                             Paint.run(this@root)
                         }
+                        touchstart = {
+                            Paint.run(this@root)
+                        }
                     }
                 })
                 add(DesktopIcon("fab fa-firefox", "Web Browser").apply {
                     onEvent {
                         dblclick = {
+                            WebBrowser.run(this@root)
+                        }
+                        touchstart = {
                             WebBrowser.run(this@root)
                         }
                     }
