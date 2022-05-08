@@ -124,6 +124,7 @@ fun main() {
         RichTextModule,
         ChartModule,
         TabulatorModule,
+        ImaskModule,
         CoreModule
     )
 }

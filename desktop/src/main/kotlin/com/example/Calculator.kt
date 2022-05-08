@@ -19,7 +19,7 @@ enum class Operator {
     MULTIPLY
 }
 
-class Calculator : DesktopWindow("Calculator", "fas fa-calculator", 280, 270) {
+class Calculator : DesktopWindow("Calculator", "fas fa-calculator", 280, 290) {
 
     val inputDiv: Div
     var input: String = "0"

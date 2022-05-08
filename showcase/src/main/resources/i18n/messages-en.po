@@ -552,11 +552,11 @@ msgid "Remove checked"
 msgstr ""
 
 #: src/main/kotlin/com/example/FormTab.kt:111
-msgid "Required checkbox"
+msgid "Required tri-state checkbox"
 msgstr ""
 
 #: src/main/kotlin/com/example/FormTab.kt:70
-msgid "Required text field with regexp [0-9] validator"
+msgid "Required text field with a mask and a regexp [0-9] validator"
 msgstr ""
 
 #: src/main/kotlin/com/example/ModalsTab.kt:122

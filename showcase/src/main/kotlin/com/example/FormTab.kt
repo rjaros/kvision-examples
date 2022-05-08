@@ -7,13 +7,16 @@ import io.kvision.core.FlexWrap
 import io.kvision.form.check.CheckBox
 import io.kvision.form.check.Radio
 import io.kvision.form.check.RadioGroup
+import io.kvision.form.check.TriStateCheckBox
 import io.kvision.form.formPanel
 import io.kvision.form.range.Range
 import io.kvision.form.select.AjaxOptions
 import io.kvision.form.select.Select
 import io.kvision.form.select.SimpleSelect
 import io.kvision.form.spinner.Spinner
+import io.kvision.form.text.ImaskOptions
 import io.kvision.form.text.Password
+import io.kvision.form.text.PatternMask
 import io.kvision.form.text.RichText
 import io.kvision.form.text.Text
 import io.kvision.form.text.TextArea
@@ -49,7 +52,7 @@ data class Form(
     val typeahead: String? = null,
     val date: Date? = null,
     val time: Date? = null,
-    val checkbox: Boolean = false,
+    val checkbox: Boolean? = null,
     val radio: Boolean = false,
     val simpleSelect: String? = null,
     val select: String? = null,
@@ -67,13 +70,14 @@ class FormTab : SimplePanel() {
         val formPanel = formPanel<Form> {
             add(
                 Form::text,
-                Text(label = tr("Required text field with regexp [0-9] validator")).apply {
+                Text(label = tr("Required text field with a mask and a regexp [0-9] validator")).apply {
                     placeholder = tr("Enter your age")
+                    maskOptions = ImaskOptions(pattern = PatternMask("000", lazy = false, eager = true))
                 },
                 required = true,
                 requiredMessage = tr("Value is required"),
                 validatorMessage = { tr("Only numbers are allowed") }) {
-                it.getValue()?.let { "^[0-9]+$".toRegex().matches(it) }
+                it.getValue()?.let { "^\\d+$".toRegex().matches(it) }
             }
             add(Form::password, Password(label = tr("Password field with minimum length validator")),
                 validatorMessage = { tr("Password too short") }) {
@@ -108,8 +112,9 @@ class FormTab : SimplePanel() {
             )
             add(
                 Form::checkbox,
-                CheckBox(label = tr("Required checkbox")),
+                TriStateCheckBox(label = tr("Required tri-state checkbox")),
                 required = true,
+                requiredMessage = tr("Value is required"),
                 validatorMessage = { tr("Value is required") }
             ) { it.getValue() }
             add(Form::radio, Radio(label = tr("Radio button")))

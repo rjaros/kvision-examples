@@ -553,12 +553,12 @@ msgid "Remove checked"
 msgstr "Usuń zaznaczone"
 
 #: src/main/kotlin/com/example/FormTab.kt:111
-msgid "Required checkbox"
-msgstr "Wymagany checkbox"
+msgid "Required tri-state checkbox"
+msgstr "Wymagany checkbox trójstanowy"
 
 #: src/main/kotlin/com/example/FormTab.kt:70
-msgid "Required text field with regexp [0-9] validator"
-msgstr "Wymagane pole tekstowe walidowane wyrażeniem regularnym [0-9]"
+msgid "Required text field with a mask and a regexp [0-9] validator"
+msgstr "Wymagane pole tekstowe z maską, walidowane wyrażeniem regularnym [0-9]"
 
 #: src/main/kotlin/com/example/ModalsTab.kt:122
 msgid "Resizable"
@@ -809,7 +809,7 @@ msgstr "Nacisnąłeś przycisk Nie."
 msgid "You pressed YES button."
 msgstr "Nacisnąłeś przycisk Tak."
 
-msgid "Add December"
+msgid "Add december"
 msgstr "Dodaj grudzień"
 
 msgid "Only numbers are allowed"

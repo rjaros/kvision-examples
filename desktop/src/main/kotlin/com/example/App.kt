@@ -39,23 +39,23 @@ class App : Application() {
             navbar(type = NavbarType.FIXEDTOP) {
                 nav {
                     dropDown("Menu", icon = "fab fa-windows", forNavbar = true) {
-                        ddLink("Calculator", icon = "fas fa-calculator").onClick {
+                        ddLink("Calculator", "#", icon = "fas fa-calculator").onClick {
                             Calculator.run(this@root)
                         }
-                        ddLink("Text Editor", icon = "fas fa-edit").onClick {
+                        ddLink("Text Editor", "#", icon = "fas fa-edit").onClick {
                             TextEditor.run(this@root)
                         }
-                        ddLink("Paint", icon = "fas fa-paint-brush").onClick {
+                        ddLink("Paint", "#", icon = "fas fa-paint-brush").onClick {
                             Paint.run(this@root)
                         }
-                        ddLink("Web Browser", icon = "fab fa-firefox").onClick {
+                        ddLink("Web Browser", "#", icon = "fab fa-firefox").onClick {
                             WebBrowser.run(this@root)
                         }
                         separator()
-                        ddLink("About", icon = "fas fa-info-circle").onClick {
+                        ddLink("About", "#", icon = "fas fa-info-circle").onClick {
                             Alert.show("KVision Desktop", "KVision example application.")
                         }
-                        ddLink("Shutdown", icon = "fas fa-power-off").onClick {
+                        ddLink("Shutdown", "#", icon = "fas fa-power-off").onClick {
                             document.location?.reload()
                         }
                     }
