@@ -14,7 +14,7 @@ import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.px
 
-class Helloworld : Application() {
+class Helloworld(private val rootid: String = "helloworld") : Application() {
     init {
         require("css/helloworld.css")
     }
@@ -35,7 +35,7 @@ class Helloworld : Application() {
                 )
             )
 
-        root("helloworld") {
+        root(rootid) {
             flexPanel(FlexDirection.ROW, justify = JustifyContent.CENTER) {
                 div(tr("Hello world!"), className = "helloworld") {
                     marginTop = 50.px
