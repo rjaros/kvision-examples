@@ -36,7 +36,6 @@ class App : Application() {
         root("kvapp") {
             vPanel(JustifyContent.CENTER, AlignItems.CENTER, spacing = 5) {
                 margin = 10.px
-                width = 100.perc
                 val nickname = text(value = "Guest", label = "Nickname") {
                     width = 500.px
                 }
