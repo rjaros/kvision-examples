@@ -6,7 +6,7 @@ import io.kvision.core.onEvent
 import io.kvision.data.BaseDataComponent
 import io.kvision.data.DataContainer
 import io.kvision.form.check.CheckBox
-import io.kvision.form.check.CheckBoxStyle
+import io.kvision.form.check.CheckStyle
 import io.kvision.form.text.TextInputType
 import io.kvision.form.text.text
 import io.kvision.form.text.textInput
@@ -84,7 +84,7 @@ class DataTab : SimplePanel() {
                     label = model.text
                 ).apply {
                     flabel.fontWeight = if (model.checked) FontWeight.BOLD else null
-                    style = CheckBoxStyle.PRIMARY
+                    style = CheckStyle.PRIMARY
                     onClick {
                         model.checked = this.value
                     }

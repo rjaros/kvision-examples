@@ -1,27 +1,32 @@
 package com.example
 
+import io.kvision.core.BsColor
 import io.kvision.core.getElementJQuery
 import io.kvision.core.onEvent
 import io.kvision.form.check.checkBox
 import io.kvision.form.text.TextInput
-import io.kvision.form.text.textInput
 import io.kvision.form.text.TextInputType
+import io.kvision.form.text.textInput
 import io.kvision.html.Align
 import io.kvision.html.Button
-import io.kvision.html.button
 import io.kvision.html.ButtonStyle
 import io.kvision.html.H4
 import io.kvision.html.Image
+import io.kvision.html.button
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
 import io.kvision.i18n.gettext
 import io.kvision.modal.Alert
 import io.kvision.modal.Confirm
 import io.kvision.modal.Modal
+import io.kvision.offcanvas.OffPlacement
+import io.kvision.offcanvas.offcanvas
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.vPanel
 import io.kvision.require
 import io.kvision.toast.Toast
+import io.kvision.toast.ToastContainer
+import io.kvision.toast.ToastContainerPosition
 import io.kvision.utils.px
 import io.kvision.window.Window
 import kotlin.random.Random
@@ -30,6 +35,9 @@ class ModalsTab : SimplePanel() {
     init {
         this.marginTop = 10.px
         this.minHeight = 400.px
+        val offcanvas = offcanvas("Lorem ipsum", OffPlacement.END, dark = true) {
+            +"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor."
+        }
         vPanel(spacing = 30, useWrappers = true) {
             button(tr("Alert dialog"), style = ButtonStyle.DANGER).onClick {
                 Alert.show(
@@ -96,6 +104,13 @@ class ModalsTab : SimplePanel() {
             }
             button(tr("Show toast message"), style = ButtonStyle.PRIMARY, icon = "fas fa-info-circle").onClick {
                 Toast.info(gettext("This is a toast message"))
+            }
+            val toastContainer = ToastContainer(ToastContainerPosition.BOTTOMRIGHT)
+            button(tr("Show Bootstrap toast message"), style = ButtonStyle.PRIMARY, icon = "fas fa-comment").onClick {
+                toastContainer.showToast(gettext("This is a toast message"), color = BsColor.SUCCESSBG)
+            }
+            button(tr("Show offcanvas"), style = ButtonStyle.DARK, icon = "fas fa-angles-left").onClick {
+                offcanvas.show()
             }
         }
     }

@@ -86,7 +86,7 @@ class BasicTab : SimplePanel() {
             table(
                 listOf(tr("Column 1"), tr("Column 2"), tr("Column 3")),
                 setOf(TableType.BORDERED, TableType.SMALL, TableType.STRIPED, TableType.HOVER),
-                responsiveType = ResponsiveType.RESPONSIVE
+                responsiveType = ResponsiveType.RESPONSIVE, tbodyDivider = true
             ) {
                 row {
                     cell {
