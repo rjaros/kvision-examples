@@ -1,9 +1,12 @@
 package com.example
 
+import io.kvision.remote.getServiceManager
+import io.kvision.remote.serviceMatchers
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.data.relational.core.query.Query.query
@@ -24,8 +27,6 @@ import org.springframework.security.web.server.authentication.logout.RedirectSer
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers
 import org.springframework.stereotype.Service
 import pl.treksoft.e4k.core.DbClient
-import io.kvision.remote.serviceMatchers
-import org.springframework.data.annotation.Id
 import reactor.core.publisher.Mono
 import java.net.URI
 
@@ -36,7 +37,7 @@ class SecurityConfiguration {
     @Bean
     fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         return http.authorizeExchange()
-            .serviceMatchers(AddressServiceManager, ProfileServiceManager).authenticated()
+            .serviceMatchers(getServiceManager<IAddressService>(), getServiceManager<IProfileService>()).authenticated()
             .pathMatchers("/**").permitAll().and().csrf().disable()
             .exceptionHandling().authenticationEntryPoint { exchange, _ ->
                 val response = exchange.response
@@ -130,13 +131,13 @@ class MyReactiveUserDetailsService(private val client: DbClient) : ReactiveUserD
     override fun findByUsername(username: String): Mono<UserDetails> {
         return client.r2dbcEntityTemplate.select(User::class.java).matching(query(where("username").`is`(username)))
             .first().map {
-            @Suppress("USELESS_CAST")
-            Profile(it.id.toString(), it.name).apply {
-                this.username = it.username
-                this.password = it.password
-            } as UserDetails
-        }.switchIfEmpty(
-            Mono.error(UsernameNotFoundException("User not found"))
-        )
+                @Suppress("USELESS_CAST")
+                Profile(it.id.toString(), it.name).apply {
+                    this.username = it.username
+                    this.password = it.password
+                } as UserDetails
+            }.switchIfEmpty(
+                Mono.error(UsernameNotFoundException("User not found"))
+            )
     }
 }

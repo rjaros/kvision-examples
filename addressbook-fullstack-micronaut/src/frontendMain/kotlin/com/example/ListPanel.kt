@@ -9,6 +9,7 @@ import io.kvision.form.check.radioGroup
 import io.kvision.form.text.TextInput
 import io.kvision.form.text.TextInputType
 import io.kvision.form.text.text
+import io.kvision.html.InputType
 import io.kvision.html.icon
 import io.kvision.html.link
 import io.kvision.i18n.I18n.tr
@@ -36,7 +37,7 @@ object ListPanel : SimplePanel() {
         }
 
         hPanel(alignItems = AlignItems.CENTER, spacing = 20) {
-            text(TextInputType.SEARCH) {
+            text(InputType.SEARCH) {
                 placeholder = "${tr("Search")} ..."
                 setEventListener<TextInput> {
                     input = {

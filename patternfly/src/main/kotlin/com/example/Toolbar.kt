@@ -2,9 +2,20 @@ package com.example
 
 import io.kvision.core.Container
 import io.kvision.form.check.checkBoxInput
-import io.kvision.form.text.TextInputType
 import io.kvision.form.text.textInput
-import io.kvision.html.*
+import io.kvision.html.Div
+import io.kvision.html.InputType
+import io.kvision.html.Ul
+import io.kvision.html.b
+import io.kvision.html.button
+import io.kvision.html.div
+import io.kvision.html.i
+import io.kvision.html.label
+import io.kvision.html.li
+import io.kvision.html.nav
+import io.kvision.html.section
+import io.kvision.html.span
+import io.kvision.html.ul
 import kotlin.math.min
 
 fun Container.toolbar(state: State) {
@@ -57,9 +68,11 @@ fun Container.bulkSelect(state: State) {
                         TriState.CHECKED -> {
                             value = true
                         }
+
                         TriState.UNCHECKED -> {
                             value = false
                         }
+
                         else -> {
                             addAfterInsertHook {
                                 it.elm.asDynamic().indeterminate = true
@@ -121,7 +134,7 @@ fun Container.bulkSelect(state: State) {
 
 fun Container.searchBox(state: State) {
     div(className = "pf-c-input-group") {
-        val input = textInput(TextInputType.SEARCH, state.search, className = "pf-c-form-control") {
+        val input = textInput(InputType.SEARCH, state.search, className = "pf-c-form-control") {
             setAttribute("aria-invalid", "false")
         }
         button("", "fas fa-search", className = "pf-c-button pf-m-control").onClick {

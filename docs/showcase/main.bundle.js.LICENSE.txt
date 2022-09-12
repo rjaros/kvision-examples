@@ -1,7 +1,13 @@
 /*!
-  * Bootstrap v5.2.0 (https://getbootstrap.com/)
+  * Bootstrap v5.2.1 (https://getbootstrap.com/)
   * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+/*!
+  * Tempus Dominus v6.0.1 (https://getdatepicker.com/)
+  * Copyright 2013-2022 Jonathan Peterson
+  * Licensed under MIT (https://github.com/Eonasdan/tempus-dominus/blob/master/LICENSE)
   */
 
 /*!
@@ -536,17 +542,6 @@
  * bootstrap-fileinput v5.5.0
  * http://plugins.krajee.com/file-input
  *
- * Author: Kartik Visweswaran
- * Copyright: 2014 - 2022, Kartik Visweswaran, Krajee.com
- *
- * Licensed under the BSD-3-Clause
- * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
- */
-
-/*!
- * bootstrap-fileinput v5.5.0
- * http://plugins.krajee.com/file-input
- *
  * Font Awesome 6.x icon theme configuration for bootstrap-fileinput. Requires font awesome 6 assets to be loaded.
  *
  * Author: Kartik Visweswaran
@@ -572,6 +567,17 @@
  */
 
 /*!
+ * bootstrap-fileinput v5.5.1
+ * http://plugins.krajee.com/file-input
+ *
+ * Author: Kartik Visweswaran
+ * Copyright: 2014 - 2022, Kartik Visweswaran, Krajee.com
+ *
+ * Licensed under the BSD-3-Clause
+ * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
+ */
+
+/*!
  * jQuery JavaScript Library v3.6.0
  * https://jquery.com/
  *
@@ -583,14 +589,6 @@
  * https://jquery.org/license
  *
  * Date: 2021-03-02T17:08Z
- */
-
-/*! version : 4.17.47
- =========================================================
- bootstrap-datetimejs
- https://github.com/Eonasdan/bootstrap-datetimepicker
- Copyright (c) 2015 Jonathan Peterson
- =========================================================
  */
 
 /**
@@ -622,7 +620,3 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-//! moment.js
-
-//! moment.js locale configuration

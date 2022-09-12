@@ -25,6 +25,7 @@ suspend fun <RESP> ApplicationCall.withProfile(block: suspend (Profile) -> RESP)
     } ?: throw IllegalStateException("Profile not set!")
 }
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class AddressService : IAddressService {
 
     @Inject
@@ -144,6 +145,7 @@ actual class AddressService : IAddressService {
         )
 }
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class ProfileService : IProfileService {
 
     @Inject
@@ -153,6 +155,7 @@ actual class ProfileService : IProfileService {
 
 }
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class RegisterProfileService : IRegisterProfileService {
 
     override suspend fun registerProfile(profile: Profile, password: String): Boolean {

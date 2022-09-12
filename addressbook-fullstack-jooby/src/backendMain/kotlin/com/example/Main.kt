@@ -8,17 +8,18 @@ import io.jooby.pac4j.Pac4jModule
 import io.jooby.pac4j.Pac4jOptions
 import io.jooby.require
 import io.jooby.runApp
+import io.kvision.remote.applyRoutes
+import io.kvision.remote.getServiceManager
+import io.kvision.remote.kvisionInit
 import org.pac4j.core.credentials.UsernamePasswordCredentials
 import org.pac4j.http.client.indirect.FormClient
-import io.kvision.remote.applyRoutes
-import io.kvision.remote.kvisionInit
 import javax.sql.DataSource
 
 fun main(args: Array<String>) {
     runApp(args) {
         kvisionInit()
         install(HikariModule("db"))
-        applyRoutes(RegisterProfileServiceManager)
+        applyRoutes(getServiceManager<IRegisterProfileService>())
         val config = org.pac4j.core.config.Config()
         config.addAuthorizer("Authorizer") { _, _ -> true }
         install(Pac4jModule(Pac4jOptions().apply {
@@ -28,8 +29,8 @@ fun main(args: Array<String>) {
                 require(MyDbProfileService::class).validate(credentials as UsernamePasswordCredentials, context)
             }
         })
-        applyRoutes(AddressServiceManager)
-        applyRoutes(ProfileServiceManager)
+        applyRoutes(getServiceManager<IAddressService>())
+        applyRoutes(getServiceManager<IProfileService>())
         onStarted {
             val db = require(DataSource::class, "db")
             val session = ThreadLocalSession(db, getDbDialect(require(Config::class)), LoggingInterceptor())

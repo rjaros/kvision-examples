@@ -1,5 +1,6 @@
 package com.example
 
+import io.kvision.remote.getService
 import io.kvision.state.ObservableList
 import io.kvision.state.observableListOf
 import io.kvision.utils.syncWithList
@@ -7,9 +8,9 @@ import kotlinx.coroutines.launch
 
 object Model {
 
-    private val addressService = AddressService()
-    private val profileService = ProfileService()
-    private val registerProfileService = RegisterProfileService()
+    private val addressService = getService<IAddressService>()
+    private val profileService = getService<IProfileService>()
+    private val registerProfileService = getService<IRegisterProfileService>()
 
     val addresses: ObservableList<Address> = observableListOf()
     val profile: ObservableList<Profile> = observableListOf(Profile())

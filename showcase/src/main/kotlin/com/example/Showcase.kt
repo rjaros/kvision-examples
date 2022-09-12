@@ -32,7 +32,6 @@ class Showcase : Application() {
         Pace.init()
         require("css/showcase.css")
         require("react-awesome-button/dist/themes/theme-blue.css")
-        require("moment/locale/pl")
         if (!(I18n.language in listOf("en", "pl"))) {
             I18n.language = "en"
         }
@@ -117,7 +116,7 @@ fun main() {
         BootstrapCssModule,
         FontAwesomeModule,
         BootstrapSelectModule,
-        BootstrapDatetimeModule,
+        DatetimeModule,
         BootstrapSpinnerModule,
         BootstrapTypeaheadModule,
         BootstrapUploadModule,

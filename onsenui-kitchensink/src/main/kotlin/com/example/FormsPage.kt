@@ -1,8 +1,8 @@
 package com.example
 
 import io.kvision.core.onEvent
-import io.kvision.form.text.TextInputType
 import io.kvision.html.Align
+import io.kvision.html.InputType
 import io.kvision.html.TAG
 import io.kvision.html.label
 import io.kvision.html.span
@@ -67,7 +67,7 @@ fun Tab.formsPage(app: App) {
                     icon("fa-question-circle", className = "far list-item__icon")
                 }
                 center {
-                    onsTextInput(TextInputType.SEARCH, placeholder = "Search") {
+                    onsTextInput(InputType.SEARCH, placeholder = "Search") {
                         maxlength = 20
                         bind(FormsModel.textValue) {
                             value = it

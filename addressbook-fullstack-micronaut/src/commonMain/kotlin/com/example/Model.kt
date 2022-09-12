@@ -12,7 +12,7 @@ expect annotation class Id()
 
 @OptIn(ExperimentalMultiplatform::class)
 @OptionalExpectation
-expect annotation class Table(val value: String)
+expect annotation class Table(val value: String, val name: String, val schema: String)
 
 @Serializable
 data class Profile(
@@ -22,7 +22,7 @@ data class Profile(
     val password2: String? = null
 )
 
-@Table("users")
+@Table("users", "users", "")
 data class User(val id: Int? = null, val username: String, val password: String, val name: String)
 
 @Serializable

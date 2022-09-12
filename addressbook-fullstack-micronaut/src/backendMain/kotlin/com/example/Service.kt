@@ -36,6 +36,7 @@ interface WithProfile {
 }
 
 @Prototype
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class AddressService(override val httpRequest: HttpRequest<*>, override val databaseClient: DatabaseClient) :
     IAddressService, WithProfile {
 
@@ -102,6 +103,7 @@ actual class AddressService(override val httpRequest: HttpRequest<*>, override v
 }
 
 @Prototype
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class ProfileService(override val httpRequest: HttpRequest<*>, override val databaseClient: DatabaseClient) :
     IProfileService, WithProfile {
     override suspend fun getProfile(): Profile {
@@ -111,6 +113,7 @@ actual class ProfileService(override val httpRequest: HttpRequest<*>, override v
 }
 
 @Prototype
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class RegisterProfileService(
     private val databaseClient: DatabaseClient,
     private val passwordEncoder: PasswordEncoder

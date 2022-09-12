@@ -20,4 +20,5 @@ data class Tweet(
 @KVService
 interface ITweetService {
     suspend fun socketConnection(input: ReceiveChannel<Tweet>, output: SendChannel<Tweet>) {}
+    suspend fun socketConnection(handler: suspend (SendChannel<Tweet>, ReceiveChannel<Tweet>) -> Unit) {}
 }

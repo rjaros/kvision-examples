@@ -1,5 +1,6 @@
 package com.example
 
+import io.kvision.types.OffsetDateTime
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.beans.factory.config.ConfigurableBeanFactory
@@ -22,7 +23,6 @@ import pl.treksoft.e4k.core.update
 import pl.treksoft.e4k.core.using
 import pl.treksoft.e4k.query.parameterNullable
 import pl.treksoft.e4k.query.query
-import io.kvision.types.OffsetDateTime
 
 interface WithProfile {
     val serverRequest: ServerRequest
@@ -36,6 +36,7 @@ interface WithProfile {
 
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class AddressService(override val serverRequest: ServerRequest, private val dbClient: DbClient) :
     IAddressService, WithProfile {
 
@@ -103,6 +104,7 @@ actual class AddressService(override val serverRequest: ServerRequest, private v
 
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class ProfileService(override val serverRequest: ServerRequest) : IProfileService, WithProfile {
     override suspend fun getProfile(): Profile {
         return super.getProfile()
@@ -111,6 +113,7 @@ actual class ProfileService(override val serverRequest: ServerRequest) : IProfil
 
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class RegisterProfileService(
     private val dbClient: DbClient,
     private val passwordEncoder: PasswordEncoder

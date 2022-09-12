@@ -5,13 +5,13 @@ import io.kvision.core.getElementJQuery
 import io.kvision.core.onEvent
 import io.kvision.form.check.checkBox
 import io.kvision.form.text.TextInput
-import io.kvision.form.text.TextInputType
 import io.kvision.form.text.textInput
 import io.kvision.html.Align
 import io.kvision.html.Button
 import io.kvision.html.ButtonStyle
 import io.kvision.html.H4
 import io.kvision.html.Image
+import io.kvision.html.InputType
 import io.kvision.html.button
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
@@ -125,7 +125,7 @@ class ShowcaseWindow(caption: String?, init: (ShowcaseWindow.() -> Unit)? = null
         init?.invoke(this)
         vPanel {
             margin = 10.px
-            this@ShowcaseWindow.captionInput = textInput(TextInputType.TEXT, caption) {
+            this@ShowcaseWindow.captionInput = textInput(InputType.TEXT, caption) {
                 onEvent {
                     change = {
                         this@ShowcaseWindow.caption = self.value

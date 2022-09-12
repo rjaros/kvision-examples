@@ -10,6 +10,7 @@ import java.time.LocalDateTime
 import javax.inject.Named
 import javax.sql.DataSource
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class AddressService @Inject constructor(override val ctx: Context) : IAddressService, WithContext {
 
     @Inject
@@ -46,12 +47,14 @@ actual class AddressService @Inject constructor(override val ctx: Context) : IAd
 
 }
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class ProfileService @Inject constructor(override val ctx: Context) : IProfileService, WithContext {
 
     override suspend fun getProfile() = withProfile { it }
 
 }
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class RegisterProfileService : IRegisterProfileService {
 
     @Inject

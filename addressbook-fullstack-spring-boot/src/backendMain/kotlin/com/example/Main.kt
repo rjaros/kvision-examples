@@ -1,5 +1,6 @@
 package com.example
 
+import io.kvision.remote.getAllServiceManagers
 import io.r2dbc.spi.ConnectionFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -26,7 +27,7 @@ class KVApplication {
     }
 
     @Bean
-    fun getManagers() = listOf(RegisterProfileServiceManager, ProfileServiceManager, AddressServiceManager)
+    fun getManagers() = getAllServiceManagers()
 }
 
 fun main(args: Array<String>) {

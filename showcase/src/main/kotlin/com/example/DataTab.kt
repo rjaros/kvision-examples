@@ -7,10 +7,10 @@ import io.kvision.data.BaseDataComponent
 import io.kvision.data.DataContainer
 import io.kvision.form.check.CheckBox
 import io.kvision.form.check.CheckStyle
-import io.kvision.form.text.TextInputType
 import io.kvision.form.text.text
 import io.kvision.form.text.textInput
 import io.kvision.html.ButtonStyle
+import io.kvision.html.InputType
 import io.kvision.html.button
 import io.kvision.html.div
 import io.kvision.i18n.I18n.tr
@@ -97,7 +97,7 @@ class DataTab : SimplePanel() {
             panel.add(dataContainer)
 
             panel.add(HPanel(spacing = 10, wrap = FlexWrap.WRAP) {
-                textInput(type = TextInputType.SEARCH) {
+                textInput(type = InputType.SEARCH) {
                     width = 200.px
                     placeholder = tr("Search ...")
                     onEvent {

@@ -2,12 +2,11 @@ package com.example
 
 import io.kvision.core.AlignItems
 import io.kvision.core.Container
-import io.kvision.core.FlexWrap
 import io.kvision.core.JustifyContent
 import io.kvision.core.onEvent
 import io.kvision.form.check.radioGroup
-import io.kvision.form.text.TextInputType
 import io.kvision.form.text.text
+import io.kvision.html.InputType
 import io.kvision.i18n.I18n.tr
 import io.kvision.modal.Confirm
 import io.kvision.panel.hPanel
@@ -21,7 +20,6 @@ import io.kvision.tabulator.Tabulator
 import io.kvision.tabulator.TabulatorOptions
 import io.kvision.tabulator.tabulator
 import io.kvision.utils.obj
-import io.kvision.utils.perc
 import io.kvision.utils.px
 import kotlinx.serialization.serializer
 import org.w3c.dom.events.Event
@@ -31,7 +29,7 @@ fun Container.listPanel() {
         lateinit var tabulator: Tabulator<Address>
         hPanel(justify = JustifyContent.SPACEAROUND, alignItems = AlignItems.CENTER) {
             width = 410.px
-            text(TextInputType.SEARCH) {
+            text(InputType.SEARCH) {
                 placeholder = tr("Search ...")
                 onEvent {
                     input = {

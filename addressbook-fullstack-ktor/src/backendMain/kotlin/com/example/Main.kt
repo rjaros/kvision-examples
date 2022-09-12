@@ -11,6 +11,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import io.kvision.remote.applyRoutes
+import io.kvision.remote.getServiceManager
 import io.kvision.remote.kvisionInit
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.and
@@ -49,7 +50,7 @@ fun Application.main() {
     }
 
     routing {
-        applyRoutes(RegisterProfileServiceManager)
+        applyRoutes(getServiceManager<IRegisterProfileService>())
         authenticate {
             post("login") {
                 val principal = call.principal<UserIdPrincipal>()
@@ -71,8 +72,8 @@ fun Application.main() {
                 call.sessions.clear<Profile>()
                 call.respondRedirect("/")
             }
-            applyRoutes(AddressServiceManager)
-            applyRoutes(ProfileServiceManager)
+            applyRoutes(getServiceManager<IAddressService>())
+            applyRoutes(getServiceManager<IProfileService>())
         }
     }
     kvisionInit()

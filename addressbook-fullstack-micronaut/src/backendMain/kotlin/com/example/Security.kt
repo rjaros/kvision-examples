@@ -1,5 +1,6 @@
 package com.example
 
+import io.kvision.remote.getServiceManager
 import io.kvision.remote.matches
 import io.micronaut.context.annotation.Factory
 import io.micronaut.context.annotation.Replaces
@@ -44,7 +45,7 @@ open class AppSecurityRule(rolesFinder: RolesFinder) : AbstractSecurityRule(role
         routeMatch: RouteMatch<*>?,
         authentication: Authentication?
     ): Publisher<SecurityRuleResult> {
-        return if (request.matches(AddressServiceManager, ProfileServiceManager)) {
+        return if (request.matches(getServiceManager<IAddressService>(), getServiceManager<IProfileService>())) {
             compareRoles(listOf(SecurityRule.IS_AUTHENTICATED), getRoles(authentication))
         } else {
             Mono.just(SecurityRuleResult.ALLOWED)

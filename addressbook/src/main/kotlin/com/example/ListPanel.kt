@@ -2,13 +2,12 @@ package com.example
 
 import io.kvision.core.AlignItems
 import io.kvision.core.Container
-import io.kvision.core.FlexWrap
 import io.kvision.core.FontStyle
 import io.kvision.core.onClick
 import io.kvision.core.onEvent
 import io.kvision.form.check.radioGroup
-import io.kvision.form.text.TextInputType
 import io.kvision.form.text.text
+import io.kvision.html.InputType
 import io.kvision.html.div
 import io.kvision.html.icon
 import io.kvision.html.link
@@ -29,7 +28,7 @@ fun Container.listPanel() {
         padding = 5.px
 
         hPanel(alignItems = AlignItems.CENTER, spacing = 20) {
-            text(TextInputType.SEARCH) {
+            text(InputType.SEARCH) {
                 placeholder = tr("Search ...")
                 onEvent {
                     input = {
