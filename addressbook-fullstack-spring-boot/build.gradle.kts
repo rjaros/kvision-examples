@@ -32,6 +32,9 @@ val r2dbcPostgresqlVersion: String by project
 val r2dbcH2Version: String by project
 val e4kVersion: String by project
 
+extra["kotlin.version"] = kotlinVersion
+extra["kotlin-coroutines.version"] = coroutinesVersion
+
 val webDir = file("src/frontendMain/web")
 val mainClassName = "com.example.MainKt"
 
@@ -80,7 +83,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api("io.kvision:kvision-server-spring-boot:$kvisionVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
             }
             kotlin.srcDir("build/generated-src/common")
         }
