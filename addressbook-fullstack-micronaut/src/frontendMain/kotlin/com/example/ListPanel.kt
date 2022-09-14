@@ -7,7 +7,6 @@ import io.kvision.data.dataContainer
 import io.kvision.form.check.RadioGroup
 import io.kvision.form.check.radioGroup
 import io.kvision.form.text.TextInput
-import io.kvision.form.text.TextInputType
 import io.kvision.form.text.text
 import io.kvision.html.InputType
 import io.kvision.html.icon

@@ -22,6 +22,7 @@ import io.kvision.i18n.I18n.tr
 import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.panel.vPanel
+import io.kvision.remote.getService
 import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.perc
@@ -35,7 +36,7 @@ val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 
 class App : Application() {
 
-    private val service = EncodingService()
+    private val service = getService<IEncodingService>()
 
     override fun start() {
         I18n.manager =

@@ -1,5 +1,6 @@
 package com.example
 
+import io.kvision.remote.getAllServiceManagers
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Bean
 )
 class KVApplication {
     @Bean
-    fun getManagers() = listOf(PingServiceManager)
+    fun getManagers() = getAllServiceManagers()
 }
 
 fun main(args: Array<String>) {

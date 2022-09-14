@@ -4,6 +4,7 @@ import java.net.URLEncoder
 import java.util.*
 import javax.xml.bind.DatatypeConverter
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class EncodingService : IEncodingService {
     override suspend fun encode(input: String, encodingType: EncodingType): String {
         return when (encodingType) {

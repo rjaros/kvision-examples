@@ -5,7 +5,6 @@ import io.kvision.form.FormPanel
 import io.kvision.form.check.CheckBox
 import io.kvision.form.formPanel
 import io.kvision.form.text.Text
-import io.kvision.form.text.TextInputType
 import io.kvision.html.ButtonStyle
 import io.kvision.html.InputType
 import io.kvision.html.button
