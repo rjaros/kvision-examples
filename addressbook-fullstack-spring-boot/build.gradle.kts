@@ -102,7 +102,7 @@ kotlin {
                 implementation("org.springframework.boot:spring-boot-starter-webflux")
                 implementation("org.springframework.boot:spring-boot-starter-security")
                 implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-                implementation("io.r2dbc:r2dbc-postgresql:$r2dbcPostgresqlVersion")
+                implementation("org.postgresql:r2dbc-postgresql:$r2dbcPostgresqlVersion")
                 implementation("io.r2dbc:r2dbc-h2:$r2dbcH2Version")
                 implementation("pl.treksoft:r2dbc-e4k:$e4kVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:$coroutinesVersion")
