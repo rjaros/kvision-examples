@@ -13,7 +13,6 @@ group = "com.example"
 
 repositories {
     mavenCentral()
-    jcenter()
     mavenLocal()
 }
 
@@ -52,7 +51,7 @@ kotlin {
         binaries.executable()
     }
     sourceSets["main"].dependencies {
-        implementation(npm("react-awesome-button", "*"))
+        implementation(npm("react-awesome-button", "6.5.1"))
         implementation(npm("prop-types", "*"))
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap:$kvisionVersion")

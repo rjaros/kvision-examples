@@ -20,7 +20,6 @@ group = "com.example"
 
 repositories {
     mavenCentral()
-    jcenter()
     mavenLocal()
 }
 

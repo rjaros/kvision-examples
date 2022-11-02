@@ -14,7 +14,7 @@ group = "com.example"
 
 repositories {
     mavenCentral()
-    jcenter()
+//    jcenter()
     mavenLocal()
 }
 
@@ -54,8 +54,8 @@ kotlin {
     sourceSets["main"].dependencies {
 
         implementation(npm("hammerjs", "2.0.8"))
-        implementation(npm("workbox-webpack-plugin", "6.2.2"))
-        implementation(npm("ur-workbox-utils", "0.1.1"))
+        implementation(npm("workbox-webpack-plugin", "6.5.4"))
+        implementation(npm("ur-workbox-utils", "0.1.5"))
 
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap:$kvisionVersion")

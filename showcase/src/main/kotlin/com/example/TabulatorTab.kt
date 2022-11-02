@@ -6,7 +6,7 @@ import io.kvision.core.onEvent
 import io.kvision.form.InputSize
 import io.kvision.form.check.checkBoxInput
 import io.kvision.form.select.SimpleSelectInput
-import io.kvision.form.spinner.SpinnerInput
+import io.kvision.form.spinner.SimpleSpinnerInput
 import io.kvision.form.text.TextInput
 import io.kvision.form.time.DateTimeInput
 import io.kvision.html.Icon
@@ -23,7 +23,6 @@ import io.kvision.tabulator.ColumnDefinition
 import io.kvision.tabulator.Editor
 import io.kvision.tabulator.Formatter
 import io.kvision.tabulator.Layout
-import io.kvision.tabulator.PaginationMode
 import io.kvision.tabulator.TableType
 import io.kvision.tabulator.TabulatorOptions
 import io.kvision.tabulator.tabulator
@@ -173,7 +172,7 @@ class TabulatorTab : SimplePanel() {
                         symbol = "$ "
                         precision = false
                     }, editorComponentFunction = { _, _, success, _, data ->
-                        SpinnerInput(data.salary).apply {
+                        SimpleSpinnerInput(data.salary).apply {
                             size = InputSize.SMALL
                             onEvent {
                                 blur = {
