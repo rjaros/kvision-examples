@@ -1,19 +1,19 @@
 package com.example
 
-import io.kvision.remote.getService
 import io.kvision.state.ObservableList
+import io.kvision.state.ObservableValue
 import io.kvision.state.observableListOf
 import io.kvision.utils.syncWithList
 import kotlinx.coroutines.launch
 
 object Model {
 
-    private val addressService = getService<IAddressService>()
-    private val profileService = getService<IProfileService>()
-    private val registerProfileService = getService<IRegisterProfileService>()
+    private val addressService = AddressService()
+    private val profileService = ProfileService()
+    private val registerProfileService = RegisterProfileService()
 
     val addresses: ObservableList<Address> = observableListOf()
-    val profile: ObservableList<Profile> = observableListOf(Profile())
+    val profile = ObservableValue(Profile())
 
     var search: String? = null
         set(value) {
@@ -68,7 +68,7 @@ object Model {
 
     suspend fun readProfile() {
         Security.withAuth {
-            profile[0] = profileService.getProfile()
+            profile.value = profileService.getProfile()
         }
     }
 

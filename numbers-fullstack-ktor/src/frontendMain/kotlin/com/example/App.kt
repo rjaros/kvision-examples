@@ -3,11 +3,11 @@ package com.example
 import io.kvision.Application
 import io.kvision.BootstrapCssModule
 import io.kvision.BootstrapModule
-import io.kvision.BootstrapSelectModule
 import io.kvision.CoreModule
+import io.kvision.TomSelectModule
 import io.kvision.core.AlignItems
 import io.kvision.core.JustifyContent
-import io.kvision.form.select.selectInput
+import io.kvision.form.select.tomSelectInput
 import io.kvision.form.text.textInput
 import io.kvision.html.ButtonStyle
 import io.kvision.html.Div
@@ -51,7 +51,7 @@ class App : Application() {
                         "${Language.POLISH}" to Language.POLISH.lang,
                         "${Language.CZECH}" to Language.CZECH.lang
                     )
-                    val languageSelect = selectInput(languages, "${Language.ENGLISH}")
+                    val languageSelect = tomSelectInput(languages, "${Language.ENGLISH}")
                     button("Convert", style = ButtonStyle.PRIMARY).onClick {
                         AppScope.launch {
                             val result = text.value?.toIntOrNull()?.let { number ->
@@ -72,5 +72,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot, BootstrapModule, BootstrapCssModule, BootstrapSelectModule, CoreModule)
+    startApplication(::App, module.hot, BootstrapModule, BootstrapCssModule, TomSelectModule, CoreModule)
 }

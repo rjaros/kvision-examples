@@ -53,7 +53,7 @@ kotlin {
     sourceSets["main"].dependencies {
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-redux-kotlin:$kvisionVersion")
-        implementation("io.kvision:kvision-toast:$kvisionVersion")
+        implementation("io.kvision:kvision-toastify:$kvisionVersion")
         implementation("io.kvision:kvision-state:$kvisionVersion")
         implementation("io.kvision:kvision-rest:$kvisionVersion")
         implementation(npm("@patternfly/patternfly", "4.80.3"))

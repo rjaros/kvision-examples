@@ -7,7 +7,7 @@ import io.kvision.core.Col
 import io.kvision.core.Color
 import io.kvision.core.Overflow
 import io.kvision.core.onEvent
-import io.kvision.form.select.select
+import io.kvision.form.select.tomSelect
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
@@ -93,10 +93,11 @@ class Showcase : Application() {
                         add(RestTab())
                     }
                 }
-                select(listOf("en" to tr("English"), "pl" to tr("Polish")), I18n.language) {
+                tomSelect(listOf("en" to tr("English"), "pl" to tr("Polish")), I18n.language) {
                     width = 300.px
                     marginLeft = auto
                     marginRight = auto
+                    marginBottom = 100.px
                     onEvent {
                         change = {
                             I18n.language = self.value ?: "en"
@@ -115,15 +116,14 @@ fun main() {
         BootstrapModule,
         BootstrapCssModule,
         FontAwesomeModule,
-        BootstrapSelectModule,
         DatetimeModule,
-        BootstrapSpinnerModule,
-        BootstrapTypeaheadModule,
+        TomSelectModule,
         BootstrapUploadModule,
         RichTextModule,
         ChartModule,
         TabulatorModule,
         ImaskModule,
+        ToastifyModule,
         CoreModule
     )
 }

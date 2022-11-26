@@ -78,10 +78,10 @@ fun Container.listRow(state: State, user: User) {
             }
             div(className = "pf-c-data-list__item-action") {
                 button("Edit", className = "pf-c-button pf-m-secondary").onClick {
-                    Toast.error("Edit ${user.name} not yet implemented")
+                    Toast.danger("Edit ${user.name} not yet implemented")
                 }
                 button("Remove", className = "pf-c-button pf-m-secondary").onClick {
-                    Toast.error("Remove ${user.name} not yet implemented")
+                    Toast.danger("Remove ${user.name} not yet implemented")
                 }
             }
         }

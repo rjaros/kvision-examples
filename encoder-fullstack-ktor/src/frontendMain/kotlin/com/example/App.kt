@@ -3,16 +3,16 @@ package com.example
 import io.kvision.Application
 import io.kvision.BootstrapCssModule
 import io.kvision.BootstrapModule
-import io.kvision.BootstrapSelectModule
 import io.kvision.CoreModule
 import io.kvision.FontAwesomeModule
+import io.kvision.TomSelectModule
 import io.kvision.core.Border
 import io.kvision.core.BorderStyle
 import io.kvision.core.Col
 import io.kvision.core.Color
 import io.kvision.core.Overflow
 import io.kvision.core.OverflowWrap
-import io.kvision.form.select.selectInput
+import io.kvision.form.select.tomSelectInput
 import io.kvision.form.text.textAreaInput
 import io.kvision.html.button
 import io.kvision.html.div
@@ -55,7 +55,7 @@ class App : Application() {
                     height = 300.px
                     autofocus = true
                 }
-                val select = selectInput(
+                val select = tomSelectInput(
                     value = EncodingType.BASE64.name, options = listOf(
                         EncodingType.BASE64.name to tr("Base64"),
                         EncodingType.URLENCODE.name to tr("URL Encode"),
@@ -89,7 +89,7 @@ fun main() {
         BootstrapModule,
         BootstrapCssModule,
         FontAwesomeModule,
-        BootstrapSelectModule,
+        TomSelectModule,
         CoreModule
     )
 }

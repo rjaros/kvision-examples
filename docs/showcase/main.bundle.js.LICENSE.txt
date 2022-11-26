@@ -1,11 +1,11 @@
 /*!
-  * Bootstrap v5.2.2 (https://getbootstrap.com/)
+  * Bootstrap v5.2.3 (https://getbootstrap.com/)
   * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
 /*!
-  * Tempus Dominus v6.2.6 (https://getdatepicker.com/)
+  * Tempus Dominus v6.2.7 (https://getdatepicker.com/)
   * Copyright 2013-2022 Jonathan Peterson
   * Licensed under MIT (https://github.com/Eonasdan/tempus-dominus/blob/master/LICENSE)
   */
@@ -18,56 +18,10 @@
  */
 
 /*!
- * Ajax Bootstrap Select
- *
- * Extends existing [Bootstrap Select] implementations by adding the ability to search via AJAX requests as you type. Originally for CROSCON.
- *
- * @version 1.4.5
- * @author Adam Heim - https://github.com/truckingsim
- * @link https://github.com/truckingsim/Ajax-Bootstrap-Select
- * @copyright 2019 Adam Heim
- * @license Released under the MIT license.
- *
- * Contributors:
- *   Mark Carver - https://github.com/markcarver
- *
- * Last build: 2019-04-23 12:18:55 PM EDT
- */
-
-/*!
- * Ajax Bootstrap Select
- *
- * Extends existing [Bootstrap Select] implementations by adding the ability to search via AJAX requests as you type. Originally for CROSCON.
- *
- * @version 1.4.5
- * @author Adam Heim - https://github.com/truckingsim
- * @link https://github.com/truckingsim/Ajax-Bootstrap-Select
- * @copyright 2019 Adam Heim
- * @license Released under the MIT license.
- *
- * Contributors:
- *   Mark Carver - https://github.com/markcarver
- *
- * Last build: 2019-09-24 9:36:53 AM CDT
- */
-
-/*!
- * Bootstrap-select v1.14.0-beta3 (https://developer.snapappointments.com/bootstrap-select)
- *
- * Copyright 2012-2022 SnapAppointments, LLC
- * Licensed under MIT (https://github.com/snapappointments/bootstrap-select/blob/master/LICENSE)
- */
-
-/*!
  * Chart.js v3.9.1
  * https://www.chartjs.org
  * (c) 2022 Chart.js Contributors
  * Released under the MIT License
- */
-
-/*!
- * English translation for the "en-US" and "en" language codes.
- * Mark Carver <mark.carver@me.com>
  */
 
 /*!
@@ -556,6 +510,14 @@
  */
 
 /*!
+ * Toastify js 1.12.0
+ * https://github.com/apvarun/toastify-js
+ * @license MIT licensed
+ *
+ * Copyright (C) 2018 Varun A P
+ */
+
+/*!
  * bootstrap-fileinput v5.5.0
  * http://plugins.krajee.com/file-input
  *
@@ -607,6 +569,10 @@
  *
  * Date: 2022-08-26T17:52Z
  */
+
+/*! @orchidjs/unicode-variants | https://github.com/orchidjs/unicode-variants | Apache License (v2) */
+
+/*! sifter.js | https://github.com/orchidjs/sifter.js | Apache License (v2) */
 
 /**
  * @license React

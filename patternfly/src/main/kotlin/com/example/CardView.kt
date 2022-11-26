@@ -49,13 +49,13 @@ fun Container.card(state: State, user: User) {
                         setAttribute("aria-labelledby", "card-actions-button-${user.login.uuid}")
                         setAttribute("hidden", "hidden")
                         menuItem("Edit", false, "pf-c-dropdown__menu-item") {
-                            Toast.error("Edit ${user.name} not yet implemented")
+                            Toast.danger("Edit ${user.name} not yet implemented")
                             menuButton.setAttribute("aria-expanded", "false")
                             this@dropdown.removeCssClass("pf-m-expanded")
                             menu.setAttribute("hidden", "hidden")
                         }
                         menuItem("Remove", false, "pf-c-dropdown__menu-item") {
-                            Toast.error("Remove ${user.name} not yet implemented")
+                            Toast.danger("Remove ${user.name} not yet implemented")
                             menuButton.setAttribute("aria-expanded", "false")
                             this@dropdown.removeCssClass("pf-m-expanded")
                             menu.setAttribute("hidden", "hidden")

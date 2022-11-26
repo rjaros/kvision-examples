@@ -4,23 +4,23 @@ package com.example
 
 import io.kvision.core.AlignItems
 import io.kvision.core.FlexWrap
-import io.kvision.form.check.CheckBox
 import io.kvision.form.check.Radio
 import io.kvision.form.check.RadioGroup
 import io.kvision.form.check.TriStateCheckBox
 import io.kvision.form.formPanel
 import io.kvision.form.range.Range
-import io.kvision.form.select.AjaxOptions
-import io.kvision.form.select.Select
 import io.kvision.form.select.SimpleSelect
-import io.kvision.form.spinner.Spinner
+import io.kvision.form.select.TomSelect
+import io.kvision.form.select.TomSelectCallbacks
+import io.kvision.form.select.TomSelectRenders
+import io.kvision.form.spinner.SimpleSpinner
 import io.kvision.form.text.ImaskOptions
 import io.kvision.form.text.Password
 import io.kvision.form.text.PatternMask
 import io.kvision.form.text.RichText
 import io.kvision.form.text.Text
 import io.kvision.form.text.TextArea
-import io.kvision.form.text.Typeahead
+import io.kvision.form.text.TomTypeahead
 import io.kvision.form.time.DateTime
 import io.kvision.form.upload.Upload
 import io.kvision.html.ButtonStyle
@@ -32,11 +32,12 @@ import io.kvision.panel.HPanel
 import io.kvision.panel.SimplePanel
 import io.kvision.progress.Progress
 import io.kvision.progress.progressNumeric
+import io.kvision.rest.RestClient
+import io.kvision.rest.callDynamic
 import io.kvision.types.KFile
 import io.kvision.utils.getDataWithFileContent
 import io.kvision.utils.obj
 import io.kvision.utils.px
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseContextualSerialization
@@ -65,12 +66,12 @@ data class Form(
 
 class FormTab : SimplePanel() {
     init {
-
+        val restClient = RestClient()
         this.marginTop = 10.px
         val formPanel = formPanel<Form> {
             add(
                 Form::text,
-                Text(label = tr("Required text field with a mask and a regexp [0-9] validator")).apply {
+                Text(label = tr("Required text field with a mask and a regexp [0-9] validator")) {
                     placeholder = tr("Enter your age")
                     maskOptions = ImaskOptions(pattern = PatternMask("000", lazy = false, eager = true))
                 },
@@ -79,26 +80,27 @@ class FormTab : SimplePanel() {
                 validatorMessage = { tr("Only numbers are allowed") }) {
                 it.getValue()?.let { "^\\d+$".toRegex().matches(it) }
             }
-            add(Form::password, Password(label = tr("Password field with minimum length validator")),
+            add(Form::password, Password(label = tr("Password field with minimum length validator"), floating = true),
                 validatorMessage = { tr("Password too short") }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
-            add(Form::password2, Password(label = tr("Password confirmation")),
+            add(Form::password2, Password(label = tr("Password confirmation"), floating = true),
                 validatorMessage = { tr("Password too short") }) {
                 (it.getValue()?.length ?: 0) >= 8
             }
             add(Form::textarea, TextArea(label = tr("Text area field")))
             add(
                 Form::richtext,
-                RichText(label = tr("Rich text field with a placeholder")).apply { placeholder = tr("Add some info") })
+                RichText(label = tr("Rich text field with a placeholder")) {
+                    inputHeight = 200.px
+                    placeholder = tr("Add some info")
+                })
             add(
                 Form::typeahead,
-                Typeahead(
+                TomTypeahead(
                     listOf("Alabama", "Alaska", "Arizona", "Arkansas", "California"),
-                    label = tr("Typeahead"), floating = true
-                ).apply {
-                    autoSelect = false
-                }
+                    label = tr("Typeahead")
+                ), required = true, requiredMessage = tr("Value is required")
             )
             add(
                 Form::date,
@@ -126,28 +128,41 @@ class FormTab : SimplePanel() {
                 ), required = true, requiredMessage = tr("Value is required")
             )
             add(
-                Form::select, Select(
+                Form::select, TomSelect(
                     options = listOf("first" to tr("First option"), "second" to tr("Second option")),
                     label = tr("Advanced select")
-                )
+                ), required = true, requiredMessage = tr("Value is required")
             )
-            add(Form::ajaxselect, Select(label = tr("Select with remote data source")).apply {
+            add(Form::ajaxselect, TomSelect(label = tr("Select with remote data source")).apply {
                 emptyOption = true
-                ajaxOptions = AjaxOptions("https://api.github.com/search/repositories", preprocessData = {
-                    it.items.map { item ->
-                        obj {
-                            this.value = item.id
-                            this.text = item.name
-                            this.data = obj {
-                                this.subtext = item.owner.login
-                            }
+                tsCallbacks = TomSelectCallbacks(
+                    load = { query, callback ->
+                        restClient.callDynamic("https://api.github.com/search/repositories") {
+                            data = obj { q = query }
+                            resultTransform = { it.items }
+                        }.then { items: dynamic ->
+                            @Suppress("UnsafeCastFromDynamic")
+                            callback(items.map { item ->
+                                obj {
+                                    this.value = item.id
+                                    this.text = item.name
+                                    this.subtext = item.owner.login
+                                }
+                            })
                         }
-                    }
-                }, data = obj {
-                    q = "{{{q}}}"
-                }, minLength = 3, requestDelay = 1000)
-            })
-            add(Form::spinner, Spinner(label = tr("Spinner field 10 - 20"), min = 10, max = 20))
+                    },
+                    shouldLoad = { it.length >= 3 }
+                )
+                tsRenders = TomSelectRenders(option = { item, escape ->
+                    """
+                        <div>
+                            <span class="title">${escape(item.text)}</span>
+                            <small>(${escape(item.subtext)})</small>
+                        </div>
+                    """.trimIndent()
+                })
+            }, required = true, requiredMessage = tr("Value is required"))
+            add(Form::spinner, SimpleSpinner(label = tr("Spinner field 10 - 20"), min = 10, max = 20))
             add(Form::range, Range(label = tr("Range field 10 - 20"), min = 10, max = 20))
             add(
                 Form::radiogroup, RadioGroup(
@@ -202,11 +217,8 @@ class FormTab : SimplePanel() {
                 }
             }
             button(tr("Validate"), "fas fa-check", ButtonStyle.INFO).onClick {
-                AppScope.launch {
-                    p.getFirstProgressBar()?.value = 100
-                    delay(500)
-                    formPanel.validate()
-                }
+                p.getFirstProgressBar()?.value = 100
+                formPanel.validate()
             }
             add(p)
         })

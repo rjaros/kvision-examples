@@ -1,28 +1,25 @@
 package com.example
 
-import kotlinx.browser.document
 import io.kvision.core.JustifyContent
-import io.kvision.data.dataContainer
-import io.kvision.html.Button
 import io.kvision.html.ButtonStyle
-import io.kvision.html.Span
 import io.kvision.html.button
+import io.kvision.html.div
 import io.kvision.i18n.I18n.tr
 import io.kvision.panel.HPanel
+import io.kvision.state.bind
+import kotlinx.browser.document
 
 object MainPanel : HPanel(justify = JustifyContent.SPACEBETWEEN) {
     init {
         button(tr("Add new address"), "fas fa-plus", style = ButtonStyle.PRIMARY).onClick {
             EditPanel.add()
         }
-        dataContainer(Model.profile, { profile, _, _ ->
-            if (profile.id != null) {
-                Button("Logout: ${profile.displayName}", "fas fa-sign-out-alt", style = ButtonStyle.WARNING).onClick {
+        div().bind(Model.profile) { profile ->
+            if (profile.displayName != null) {
+                button("Logout: ${profile.displayName}", "fas fa-sign-out-alt", style = ButtonStyle.WARNING).onClick {
                     document.location?.href = "/logout"
                 }
-            } else {
-                Span("")
             }
-        })
+        }
     }
 }

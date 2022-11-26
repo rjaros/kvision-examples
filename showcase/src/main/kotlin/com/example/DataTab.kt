@@ -3,10 +3,8 @@ package com.example
 import io.kvision.core.FlexWrap
 import io.kvision.core.FontWeight
 import io.kvision.core.onEvent
-import io.kvision.data.BaseDataComponent
-import io.kvision.data.DataContainer
-import io.kvision.form.check.CheckBox
 import io.kvision.form.check.CheckStyle
+import io.kvision.form.check.checkBox
 import io.kvision.form.text.text
 import io.kvision.form.text.textInput
 import io.kvision.html.ButtonStyle
@@ -20,7 +18,6 @@ import io.kvision.panel.SimplePanel
 import io.kvision.panel.vPanel
 import io.kvision.state.ObservableValue
 import io.kvision.state.bind
-import io.kvision.state.observableListOf
 import io.kvision.utils.px
 
 class DataTab : SimplePanel() {
@@ -57,43 +54,48 @@ class DataTab : SimplePanel() {
 
             val panel = vPanel(spacing = 5, useWrappers = true)
 
-            class DataModel(checked: Boolean, text: String) : BaseDataComponent() {
-                var checked: Boolean by obs(checked)
-                var text: String by obs(text)
-            }
+            data class DataModel(val checked: Boolean, val text: String)
+            data class DataState(val list: List<DataModel>, var searchFilter: String?)
 
-            val list = observableListOf(
-                DataModel(false, tr("January")),
-                DataModel(false, tr("February")),
-                DataModel(false, tr("March")),
-                DataModel(false, tr("April")),
-                DataModel(false, tr("May")),
-                DataModel(false, tr("June")),
-                DataModel(false, tr("July")),
-                DataModel(false, tr("August")),
-                DataModel(false, tr("September")),
-                DataModel(false, tr("October")),
-                DataModel(false, tr("November"))
+            val dataState = ObservableValue(
+                DataState(
+                    listOf(
+                        DataModel(false, tr("January")),
+                        DataModel(false, tr("February")),
+                        DataModel(false, tr("March")),
+                        DataModel(false, tr("April")),
+                        DataModel(false, tr("May")),
+                        DataModel(false, tr("June")),
+                        DataModel(false, tr("July")),
+                        DataModel(false, tr("August")),
+                        DataModel(false, tr("September")),
+                        DataModel(false, tr("October")),
+                        DataModel(false, tr("November"))
+                    ), null
+                )
             )
 
-            var searchFilter: String? = null
-
-            val dataContainer = DataContainer(list, { model, _, _ ->
-                CheckBox(
-                    value = model.checked,
-                    label = model.text
-                ).apply {
-                    flabel.fontWeight = if (model.checked) FontWeight.BOLD else null
-                    style = CheckStyle.PRIMARY
-                    onClick {
-                        model.checked = this.value
+            val dataContainer = HPanel(spacing = 10, wrap = FlexWrap.WRAP).bind(dataState) { state ->
+                state.list.filter { model ->
+                    state.searchFilter?.let {
+                        trans(model.text).contains(it, ignoreCase = true)
+                    } ?: true
+                }.forEach { model ->
+                    checkBox(
+                        value = model.checked,
+                        label = model.text
+                    ) {
+                        flabel.fontWeight = if (model.checked) FontWeight.BOLD else null
+                        style = CheckStyle.PRIMARY
+                        onClick {
+                            val idx = state.list.indexOf(model)
+                            dataState.value = dataState.value.copy(
+                                list = state.list.mapIndexed { index, dataModel -> if (index == idx) dataModel.copy(checked = this.value) else dataModel }
+                            )
+                        }
                     }
                 }
-            }, filter = { model ->
-                searchFilter?.let {
-                    trans(model.text).contains(it, ignoreCase = true)
-                } ?: true
-            }, container = HPanel(spacing = 10, wrap = FlexWrap.WRAP))
+            }
             panel.add(dataContainer)
 
             panel.add(HPanel(spacing = 10, wrap = FlexWrap.WRAP) {
@@ -102,25 +104,24 @@ class DataTab : SimplePanel() {
                     placeholder = tr("Search ...")
                     onEvent {
                         input = {
-                            searchFilter = self.value
-                            dataContainer.update()
+                            dataState.value = dataState.value.copy(searchFilter = self.value)
                         }
                     }
                 }
                 button(tr("Add december"), style = ButtonStyle.SUCCESS).onClick {
-                    list.add(DataModel(true, tr("December")))
+                    dataState.value = dataState.value.copy(list = dataState.value.list + DataModel(true, tr("December")))
                 }
                 button(tr("Check all"), style = ButtonStyle.INFO).onClick {
-                    list.forEach { it.checked = true }
+                    dataState.value = dataState.value.copy(list = dataState.value.list.map { it.copy(checked = true) })
                 }
                 button(tr("Uncheck all"), style = ButtonStyle.INFO).onClick {
-                    list.forEach { it.checked = false }
+                    dataState.value = dataState.value.copy(list = dataState.value.list.map { it.copy(checked = false) })
                 }
                 button(tr("Reverse list"), style = ButtonStyle.DANGER).onClick {
-                    list.reverse()
+                    dataState.value = dataState.value.copy(list = dataState.value.list.reversed())
                 }
                 button(tr("Remove checked"), style = ButtonStyle.DANGER).onClick {
-                    list.filter { it.checked }.forEach { list.remove(it) }
+                    dataState.value = dataState.value.copy(list = dataState.value.list.filter { !it.checked })
                 }
             })
         }

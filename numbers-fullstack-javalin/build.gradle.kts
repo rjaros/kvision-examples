@@ -97,7 +97,7 @@ kotlin {
                 implementation("io.kvision:kvision:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
-                implementation("io.kvision:kvision-bootstrap-select:$kvisionVersion")
+                implementation("io.kvision:kvision-tom-select:$kvisionVersion")
             }
             kotlin.srcDir("build/generated-src/frontend")
         }

@@ -43,10 +43,10 @@ fun Container.card(stateFlow: StateFlow<State>, user: User, actionFlow: MutableS
                     div(className = "menu") {
                         width = 150.px
                         menuItem("Edit", false) {
-                            Toast.error("Edit ${user.name} not yet implemented")
+                            Toast.danger("Edit ${user.name} not yet implemented")
                         }
                         menuItem("Remove", false) {
-                            Toast.error("Remove ${user.name} not yet implemented")
+                            Toast.danger("Remove ${user.name} not yet implemented")
                         }
                     }
                     addAfterInsertHook {

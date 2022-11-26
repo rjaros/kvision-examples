@@ -8,13 +8,13 @@ import io.kvision.core.FlexWrap
 import io.kvision.core.FontWeight
 import io.kvision.core.JustifyContent
 import io.kvision.core.Overflow
-import io.kvision.data.DataContainer
-import io.kvision.data.SorterType
 import io.kvision.html.link
 import io.kvision.html.span
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.VPanel
 import io.kvision.panel.hPanel
+import io.kvision.panel.vPanel
+import io.kvision.state.bind
 import io.kvision.types.toStringF
 import io.kvision.utils.perc
 import io.kvision.utils.px
@@ -25,17 +25,14 @@ class TweetPanel : SimplePanel() {
         width = 500.px
         height = 402.px
 
-        val dataContainer = DataContainer(Model.tweets, { tweet, _, _ ->
-            Post(tweet)
-        }, sorter = {
-            it.id
-        }, sorterType = {
-            SorterType.DESC
-        }, container = VPanel(spacing = 1).apply {
+        vPanel(spacing = 1) {
             height = 400.px
             overflow = Overflow.AUTO
-        })
-        add(dataContainer)
+        }.bind(Model.tweets) { tweets ->
+            tweets.sortedByDescending { it.date?.getTime() }.forEach {
+                add(Post(it))
+            }
+        }
     }
 }
 
@@ -49,7 +46,7 @@ class Post(tweet: Tweet) : VPanel(spacing = 2) {
             span(tweet.nickname) {
                 fontWeight = FontWeight.BOLD
             }
-            span(tweet.date.toStringF()) {
+            span(tweet.date?.toStringF()) {
                 fontSize = 90.perc
             }
         }

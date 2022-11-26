@@ -1,7 +1,7 @@
 package com.example
 
+import dom.html.HTMLElement
 import io.kvision.core.BsColor
-import io.kvision.core.getElementJQuery
 import io.kvision.core.onEvent
 import io.kvision.form.check.checkBox
 import io.kvision.form.text.TextInput
@@ -103,7 +103,7 @@ class ModalsTab : SimplePanel() {
                 sw.focus()
             }
             button(tr("Show toast message"), style = ButtonStyle.PRIMARY, icon = "fas fa-info-circle").onClick {
-                Toast.info(gettext("This is a toast message"))
+                Toast.success(gettext("This is a toast message"))
             }
             val toastContainer = ToastContainer(ToastContainerPosition.BOTTOMRIGHT)
             button(tr("Show Bootstrap toast message"), style = ButtonStyle.PRIMARY, icon = "fas fa-comment").onClick {
@@ -144,16 +144,10 @@ class ShowcaseWindow(caption: String?, init: (ShowcaseWindow.() -> Unit)? = null
         }
         onEvent {
             dragStartWindow = {
-                self.getElementJQuery()?.css(
-                    "opacity",
-                    "0.5"
-                )
+                self.getElement()?.unsafeCast<HTMLElement>()?.style?.opacity = "0.5"
             }
             dragEndWindow = {
-                self.getElementJQuery()?.css(
-                    "opacity",
-                    "1.0"
-                )
+                self.getElement()?.unsafeCast<HTMLElement>()?.style?.opacity = "1.0"
             }
         }
     }
