@@ -98,7 +98,7 @@ actual class AddressService(override val serverRequest: ServerRequest, private v
 
     override suspend fun deleteAddress(id: Int): Boolean {
         return dbClient.delete().from(Address::class.java)
-            .matching(query(where("id").`is`(id))).allAndAwait() == 1
+            .matching(query(where("id").`is`(id))).allAndAwait() == 1L
     }
 }
 

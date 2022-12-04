@@ -45,11 +45,10 @@ open class DesktopWindow(caption: String, icon: String, width: Int, height: Int)
         task = addTask(this)
     }
 
-    override fun hide(): Widget {
+    override fun hide() {
         super.hide()
         removeTask(task)
         this.dispose()
-        return this
     }
 
     override fun toggleMaximize() {

@@ -1,4 +1,5 @@
 config.resolve.modules.push("../../processedResources/frontend/main");
+config.resolve.conditionNames = ['import', 'require', 'default'];
 
 if (config.devServer) {
     config.devServer.hot = true;

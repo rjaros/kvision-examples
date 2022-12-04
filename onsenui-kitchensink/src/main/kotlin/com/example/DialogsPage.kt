@@ -36,8 +36,10 @@ fun Navigator.dialogsPage(app: App) {
                 infoButton = toolbarButton(
                     if (app.isMD) null else "More",
                     icon = if (app.isMD) "md-more-vert" else null
-                ).onClick {
-                    popover.showOnsPopover(this)
+                ) {
+                    onClick {
+                        popover.showOnsPopover(this)
+                    }
                 }
             }
         }

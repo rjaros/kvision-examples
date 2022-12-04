@@ -45,10 +45,10 @@ kotlin {
         withJava()
         compilations.all {
             java {
-                targetCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_17
             }
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "17"
                 freeCompilerArgs = listOf("-Xjsr305=strict")
                 javaParameters = true
             }
@@ -122,7 +122,6 @@ kotlin {
             dependencies {
                 implementation("io.kvision:kvision:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
-                implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
                 implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
                 implementation("io.kvision:kvision-state:$kvisionVersion")
             }

@@ -10,6 +10,8 @@ plugins {
     id("io.kvision") version kvisionVersion
     val vertxPluginVersion: String by System.getProperties()
     id("io.vertx.vertx-plugin") version vertxPluginVersion
+    val shadowVersion: String by System.getProperties()
+    id("com.github.johnrengelman.shadow") version shadowVersion
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -41,10 +43,10 @@ kotlin {
         withJava()
         compilations.all {
             java {
-                targetCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_17
             }
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "17"
                 freeCompilerArgs = listOf("-Xjsr305=strict")
             }
         }

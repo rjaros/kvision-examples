@@ -80,8 +80,10 @@ class ModalsTab : SimplePanel() {
                 )
             )
             modal.add(Image(require("img/dog.jpg")))
-            modal.addButton(Button(tr("Close")).onClick {
-                modal.hide()
+            modal.addButton(Button(tr("Close")) {
+                onClick {
+                    modal.hide()
+                }
             })
             button(tr("Custom modal dialog"), style = ButtonStyle.SUCCESS).onClick {
                 modal.show()

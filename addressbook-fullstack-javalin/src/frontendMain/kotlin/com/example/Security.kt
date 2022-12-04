@@ -60,17 +60,25 @@ class LoginWindow : Dialog<Credentials>(closeButton = false, escape = false, ani
             validatorMessage = { tr("Passwords are not the same") }
 
         }
-        cancelButton = Button(tr("Cancel"), "fas fa-times").onClick {
-            this@LoginWindow.hideRegisterForm()
+        cancelButton = Button(tr("Cancel"), "fas fa-times") {
+            onClick {
+                this@LoginWindow.hideRegisterForm()
+            }
         }
-        registerButton = Button(tr("Register"), "fas fa-check", ButtonStyle.PRIMARY).onClick {
-            this@LoginWindow.processRegister()
+        registerButton = Button(tr("Register"), "fas fa-check", ButtonStyle.PRIMARY) {
+            onClick {
+                this@LoginWindow.processRegister()
+            }
         }
-        loginButton = Button(tr("Login"), "fas fa-check", ButtonStyle.PRIMARY).onClick {
-            this@LoginWindow.processCredentials()
+        loginButton = Button(tr("Login"), "fas fa-check", ButtonStyle.PRIMARY) {
+            onClick {
+                this@LoginWindow.processCredentials()
+            }
         }
-        userButton = Button(tr("Register user"), "fas fa-user").onClick {
-            this@LoginWindow.showRegisterForm()
+        userButton = Button(tr("Register user"), "fas fa-user") {
+            onClick {
+                this@LoginWindow.showRegisterForm()
+            }
         }
         addButton(userButton)
         addButton(loginButton)

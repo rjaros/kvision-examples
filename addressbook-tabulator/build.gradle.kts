@@ -56,7 +56,6 @@ kotlin {
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
         implementation("io.kvision:kvision-i18n:$kvisionVersion")
         implementation("io.kvision:kvision-tabulator:$kvisionVersion")
-        implementation("io.kvision:kvision-moment:$kvisionVersion")
     }
     sourceSets["test"].dependencies {
         implementation(kotlin("test-js"))

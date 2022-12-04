@@ -116,13 +116,14 @@ class App : Application() {
 
         fun addTask(window: DesktopWindow): Component {
             val task =
-                Link(window.caption ?: "Window", icon = window.icon, className = "nav-item nav-link").apply {
+                Link(window.caption ?: "Window", icon = window.icon, className = "nav-item nav-link") {
                     border = Border(1.px, BorderStyle.SOLID)
                     marginLeft = 5.px
-                }.onClick {
-                    if (window.minimized) window.toggleMinimize()
-                    window.toFront()
-                    window.focus()
+                    onClick {
+                        if (window.minimized) window.toggleMinimize()
+                        window.toFront()
+                        window.focus()
+                    }
                 }
             taskBar.add(task)
             return task

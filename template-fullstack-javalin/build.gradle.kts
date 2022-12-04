@@ -30,10 +30,10 @@ kotlin {
         withJava()
         compilations.all {
             java {
-                targetCompatibility = JavaVersion.VERSION_11
+                targetCompatibility = JavaVersion.VERSION_17
             }
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
                 freeCompilerArgs = listOf("-Xjsr305=strict")
             }
         }
@@ -95,7 +95,6 @@ kotlin {
             dependencies {
                 implementation("io.kvision:kvision:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
-                implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
                 implementation("io.kvision:kvision-i18n:$kvisionVersion")
             }
             kotlin.srcDir("build/generated-src/frontend")

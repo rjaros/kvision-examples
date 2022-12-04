@@ -56,7 +56,6 @@ kotlin {
         implementation(npm("electron-builder", "^23.6.0"))
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
-        implementation("io.kvision:kvision-bootstrap-css:$kvisionVersion")
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
         implementation("io.kvision:kvision-i18n:$kvisionVersion")
         implementation("io.kvision:kvision-electron:$kvisionVersion")

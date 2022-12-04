@@ -122,6 +122,7 @@ fun main() {
         RichTextModule,
         ChartModule,
         TabulatorModule,
+        TabulatorCssBootstrapModule,
         ImaskModule,
         ToastifyModule,
         CoreModule
