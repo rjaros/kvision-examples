@@ -1,5 +1,6 @@
 package com.example
 
+import io.kvision.core.onClickLaunch
 import io.kvision.form.text.textInput
 import io.kvision.html.Div
 import io.kvision.html.button
@@ -39,15 +40,13 @@ class RestTab : SimplePanel() {
                 val input = textInput {
                     width = 50.perc
                 }
-                button(tr("Search GitHub")).onClick {
-                    AppScope.launch {
-                        input.value?.let {
-                            val searchResult = this@RestTab.restClient.call<SearchResult, Query>(
-                                "https://api.github.com/search/repositories",
-                                Query(it)
-                            ).asDeferred().await()
-                            div.setData(searchResult)
-                        }
+                button(tr("Search GitHub")).onClickLaunch {
+                    input.value?.let {
+                        val searchResult = this@RestTab.restClient.call<SearchResult, Query>(
+                            "https://api.github.com/search/repositories",
+                            Query(it)
+                        ).asDeferred().await()
+                        div.setData(searchResult)
                     }
                 }
             }

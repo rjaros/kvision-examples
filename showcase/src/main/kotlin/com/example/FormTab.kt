@@ -4,16 +4,18 @@ package com.example
 
 import io.kvision.core.AlignItems
 import io.kvision.core.FlexWrap
+import io.kvision.core.onClickLaunch
 import io.kvision.form.check.Radio
 import io.kvision.form.check.RadioGroup
 import io.kvision.form.check.TriStateCheckBox
 import io.kvision.form.formPanel
-import io.kvision.form.range.Range
-import io.kvision.form.select.SimpleSelect
+import io.kvision.form.getDataWithFileContent
+import io.kvision.form.number.Range
+import io.kvision.form.select.Select
 import io.kvision.form.select.TomSelect
 import io.kvision.form.select.TomSelectCallbacks
 import io.kvision.form.select.TomSelectRenders
-import io.kvision.form.spinner.SimpleSpinner
+import io.kvision.form.number.Spinner
 import io.kvision.form.text.ImaskOptions
 import io.kvision.form.text.Password
 import io.kvision.form.text.PatternMask
@@ -22,7 +24,7 @@ import io.kvision.form.text.Text
 import io.kvision.form.text.TextArea
 import io.kvision.form.text.TomTypeahead
 import io.kvision.form.time.DateTime
-import io.kvision.form.upload.Upload
+import io.kvision.form.upload.BootstrapUpload
 import io.kvision.html.ButtonStyle
 import io.kvision.html.button
 import io.kvision.i18n.I18n.tr
@@ -35,10 +37,8 @@ import io.kvision.progress.progressNumeric
 import io.kvision.rest.RestClient
 import io.kvision.rest.callDynamic
 import io.kvision.types.KFile
-import io.kvision.utils.getDataWithFileContent
 import io.kvision.utils.obj
 import io.kvision.utils.px
-import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseContextualSerialization
 import kotlin.js.Date
@@ -55,8 +55,8 @@ data class Form(
     val time: Date? = null,
     val checkbox: Boolean? = null,
     val radio: Boolean = false,
-    val simpleSelect: String? = null,
     val select: String? = null,
+    val tomSelect: String? = null,
     val ajaxselect: String? = null,
     val spinner: Double? = null,
     val range: Double? = null,
@@ -121,14 +121,14 @@ class FormTab : SimplePanel() {
             ) { it.getValue() }
             add(Form::radio, Radio(label = tr("Radio button")))
             add(
-                Form::simpleSelect, SimpleSelect(
+                Form::select, Select(
                     options = listOf("first" to tr("First option"), "second" to tr("Second option")),
                     emptyOption = true,
                     label = tr("Simple select")
                 ), required = true, requiredMessage = tr("Value is required")
             )
             add(
-                Form::select, TomSelect(
+                Form::tomSelect, TomSelect(
                     options = listOf("first" to tr("First option"), "second" to tr("Second option")),
                     label = tr("Advanced select")
                 ), required = true, requiredMessage = tr("Value is required")
@@ -162,7 +162,7 @@ class FormTab : SimplePanel() {
                     """.trimIndent()
                 })
             }, required = true, requiredMessage = tr("Value is required"))
-            add(Form::spinner, SimpleSpinner(label = tr("Spinner field 10 - 20"), min = 10, max = 20))
+            add(Form::spinner, Spinner(label = tr("Spinner field 10 - 20"), min = 10, max = 20))
             add(Form::range, Range(label = tr("Range field 10 - 20"), min = 10, max = 20))
             add(
                 Form::radiogroup, RadioGroup(
@@ -170,7 +170,7 @@ class FormTab : SimplePanel() {
                     inline = true, label = tr("Radio button group")
                 ), required = true, requiredMessage = tr("Value is required")
             )
-            add(Form::upload, Upload("/", multiple = true, label = tr("Upload files (images only)")).apply {
+            add(Form::upload, BootstrapUpload("/", multiple = true, label = tr("Upload files (images only)")).apply {
                 showUpload = false
                 showCancel = false
                 explorerTheme = true
@@ -195,13 +195,11 @@ class FormTab : SimplePanel() {
                     striped = true
                 }
             }
-            button(tr("Show data"), "fas fa-info", ButtonStyle.SUCCESS).onClick {
+            button(tr("Show data"), "fas fa-info", ButtonStyle.SUCCESS).onClickLaunch {
                 console.log(formPanel.getDataJson())
                 Alert.show(tr("Form data in plain JSON"), JSON.stringify(formPanel.getDataJson(), space = 1))
-                AppScope.launch {
-                    val content = formPanel.getDataWithFileContent()
-                    console.log(content)
-                }
+                val content = formPanel.getDataWithFileContent()
+                console.log(content)
             }
             button(tr("Clear data"), "fas fa-times", ButtonStyle.DANGER).onClick {
                 Confirm.show(

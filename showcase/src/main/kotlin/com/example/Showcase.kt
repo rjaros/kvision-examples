@@ -20,11 +20,6 @@ import io.kvision.routing.Routing
 import io.kvision.utils.auto
 import io.kvision.utils.perc
 import io.kvision.utils.px
-import kotlinx.browser.window
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.asCoroutineDispatcher
-
-val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 
 class Showcase : Application() {
     init {

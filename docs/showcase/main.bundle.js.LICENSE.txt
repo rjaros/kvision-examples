@@ -5,20 +5,20 @@
   */
 
 /*!
-  * Tempus Dominus v6.2.7 (https://getdatepicker.com/)
+  * Tempus Dominus v6.2.10 (https://getdatepicker.com/)
   * Copyright 2013-2022 Jonathan Peterson
   * Licensed under MIT (https://github.com/Eonasdan/tempus-dominus/blob/master/LICENSE)
   */
 
 /*!
- * @kurkle/color v0.2.1
+ * @kurkle/color v0.3.1
  * https://github.com/kurkle/color#readme
  * (c) 2022 Jukka Kurkela
  * Released under the MIT License
  */
 
 /*!
- * Chart.js v3.9.1
+ * Chart.js v4.1.1
  * https://www.chartjs.org
  * (c) 2022 Chart.js Contributors
  * Released under the MIT License
@@ -257,6 +257,7 @@
  *
  * @see http://github.com/kartik-v/bootstrap-fileinput
  * @author Bambang Riswanto <bamz3r@gmail.com>
+ * @author dheroefic <dheroefic@gmail.com>
  *
  * NOTE: this file must be saved in UTF-8 encoding.
  */
@@ -499,14 +500,14 @@
  */
 
 /*!
- * Sizzle CSS Selector Engine v2.3.6
+ * Sizzle CSS Selector Engine v2.3.9
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2021-02-16
+ * Date: 2022-12-19
  */
 
 /*!
@@ -557,7 +558,7 @@
  */
 
 /*!
- * jQuery JavaScript Library v3.6.1
+ * jQuery JavaScript Library v3.6.3
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -567,7 +568,7 @@
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2022-08-26T17:52Z
+ * Date: 2022-12-20T21:28Z
  */
 
 /*! @orchidjs/unicode-variants | https://github.com/orchidjs/unicode-variants | Apache License (v2) */

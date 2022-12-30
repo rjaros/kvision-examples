@@ -5,8 +5,9 @@ package com.example
 import io.kvision.core.onEvent
 import io.kvision.form.InputSize
 import io.kvision.form.check.checkBoxInput
-import io.kvision.form.select.SimpleSelectInput
-import io.kvision.form.spinner.SimpleSpinnerInput
+import io.kvision.form.number.imaskNumericInput
+import io.kvision.form.number.numericInput
+import io.kvision.form.select.SelectInput
 import io.kvision.form.text.TextInput
 import io.kvision.form.time.DateTimeInput
 import io.kvision.html.Icon
@@ -113,7 +114,7 @@ class TabulatorTab : SimplePanel() {
                             }
                         }),
                     ColumnDefinition(tr("Office"), "office", editorComponentFunction = { _, _, success, _, data ->
-                        SimpleSelectInput(
+                        SelectInput(
                             listOf(
                                 "London" to "London",
                                 "Edinburgh" to "Edinburgh",
@@ -172,7 +173,7 @@ class TabulatorTab : SimplePanel() {
                         symbol = "$ "
                         precision = false
                     }, editorComponentFunction = { _, _, success, _, data ->
-                        SimpleSpinnerInput(data.salary).apply {
+                        imaskNumericInput(data.salary, min = 0, decimals = 0).apply {
                             size = InputSize.SMALL
                             onEvent {
                                 blur = {

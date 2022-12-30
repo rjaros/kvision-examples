@@ -38,7 +38,7 @@ class App : Application() {
         root("kvapp") {
             navbar(type = NavbarType.FIXEDTOP) {
                 nav {
-                    dropDown("Menu", icon = "fab fa-windows", forNavbar = true) {
+                    dropDown("Menu", icon = "fab fa-windows", forNavbar = true, arrowVisible = false) {
                         ddLink("Calculator", "#", icon = "fas fa-calculator").onClick {
                             Calculator.run(this@root)
                         }
