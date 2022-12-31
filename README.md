@@ -56,6 +56,10 @@ A complete implementation of [TodoMVC](https://todomvc.com/) demo application.
 
 [See live demo](https://rjaros.github.io/kvision-examples/todomvc/)
 
+## TodoMVC-Ballast
+
+A complete implementation of [TodoMVC](https://todomvc.com/) demo application developed with [Ballast](https://github.com/copper-leaf/ballast) application state management framework.
+
 ## Onsen UI Kitchen Sink
 
 An example mobile application created with KVision's bindings for [Onsen UI](https://onsen.io/) library. 
