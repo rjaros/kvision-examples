@@ -1,6 +1,5 @@
 package com.example
 
-import dom.html.HTMLElement
 import io.kvision.core.BsColor
 import io.kvision.core.onEvent
 import io.kvision.form.check.checkBox
@@ -146,10 +145,10 @@ class ShowcaseWindow(caption: String?, init: (ShowcaseWindow.() -> Unit)? = null
         }
         onEvent {
             dragStartWindow = {
-                self.getElement()?.unsafeCast<HTMLElement>()?.style?.opacity = "0.5"
+                self.getElement()?.style?.opacity = "0.5"
             }
             dragEndWindow = {
-                self.getElement()?.unsafeCast<HTMLElement>()?.style?.opacity = "1.0"
+                self.getElement()?.style?.opacity = "1.0"
             }
         }
     }
