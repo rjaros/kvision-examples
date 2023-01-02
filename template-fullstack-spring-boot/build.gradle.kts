@@ -78,7 +78,6 @@ kotlin {
             dependencies {
                 api("io.kvision:kvision-server-spring-boot:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/common")
         }
         val commonTest by getting {
             dependencies {
@@ -88,7 +87,6 @@ kotlin {
         }
         val backendMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation("org.springframework.boot:spring-boot-starter")
                 implementation("org.springframework.boot:spring-boot-devtools")
@@ -110,7 +108,6 @@ kotlin {
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
                 implementation("io.kvision:kvision-i18n:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/frontend")
         }
         val frontendTest by getting {
             dependencies {
@@ -128,7 +125,7 @@ afterEvaluate {
             group = "package"
             archiveAppendix.set("frontend")
             val distribution =
-                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory!!
+                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory
             from(distribution) {
                 include("*.*")
             }

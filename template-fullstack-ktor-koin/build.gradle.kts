@@ -76,7 +76,6 @@ kotlin {
             dependencies {
                 api("io.kvision:kvision-server-ktor-koin:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/common")
         }
         val commonTest by getting {
             dependencies {
@@ -86,7 +85,6 @@ kotlin {
         }
         val backendMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
                 implementation("io.ktor:ktor-server-auth:$ktorVersion")
@@ -114,7 +112,6 @@ kotlin {
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
                 implementation("io.kvision:kvision-i18n:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/frontend")
         }
         val frontendTest by getting {
             dependencies {
@@ -132,7 +129,7 @@ afterEvaluate {
             group = "package"
             archiveAppendix.set("frontend")
             val distribution =
-                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory!!
+                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory
             from(distribution) {
                 include("*.*")
             }
@@ -184,7 +181,7 @@ afterEvaluate {
         create("backendRun", JavaExec::class) {
             dependsOn("compileKotlinBackend")
             group = "run"
-            main = mainClassName
+            mainClass.set(mainClassName)
             classpath =
                 configurations["backendRuntimeClasspath"] + project.tasks["compileKotlinBackend"].outputs.files +
                         project.tasks["backendProcessResources"].outputs.files

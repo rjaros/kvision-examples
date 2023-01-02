@@ -75,7 +75,6 @@ kotlin {
             dependencies {
                 api("io.kvision:kvision-server-jooby:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/common")
         }
         val commonTest by getting {
             dependencies {
@@ -85,7 +84,6 @@ kotlin {
         }
         val backendMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation("io.jooby:jooby-netty:$joobyVersion")
                 implementation("io.jooby:jooby-hikari:$joobyVersion")
@@ -109,7 +107,6 @@ kotlin {
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
                 implementation("io.kvision:kvision-i18n:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/frontend")
         }
         val frontendTest by getting {
             dependencies {
@@ -122,7 +119,7 @@ kotlin {
 
 tasks {
     joobyRun {
-        mainClassName = mainClassNameVal
+        mainClass = mainClassNameVal
         restartExtensions = listOf("conf", "properties", "class")
         compileExtensions = listOf("java", "kt")
         port = 8080
@@ -135,7 +132,7 @@ afterEvaluate {
             group = "package"
             archiveAppendix.set("frontend")
             val distribution =
-                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory!!
+                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory
             from(distribution) {
                 include("*.*")
             }

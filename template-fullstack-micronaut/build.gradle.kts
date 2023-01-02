@@ -33,7 +33,7 @@ val webDir = file("src/frontendMain/web")
 val mainClassNameVal = "com.example.MainKt"
 
 application {
-    mainClassName = mainClassNameVal
+    mainClass.set(mainClassNameVal)
 }
 
 allOpen {
@@ -85,7 +85,6 @@ kotlin {
             dependencies {
                 api("io.kvision:kvision-server-micronaut:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/common")
         }
         val commonTest by getting {
             dependencies {
@@ -95,7 +94,6 @@ kotlin {
         }
         val backendMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation(project.dependencies.platform("io.micronaut:micronaut-bom:$micronautVersion"))
                 implementation("io.micronaut:micronaut-inject")
@@ -126,7 +124,6 @@ kotlin {
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
                 implementation("io.kvision:kvision-i18n:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/frontend")
         }
         val frontendTest by getting {
             dependencies {
@@ -159,7 +156,7 @@ afterEvaluate {
             group = "package"
             archiveAppendix.set("frontend")
             val distribution =
-                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory!!
+                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory
             from(distribution) {
                 include("*.*")
             }

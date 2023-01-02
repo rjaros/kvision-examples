@@ -82,7 +82,6 @@ kotlin {
         }
         val backendMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation("io.jooby:jooby-netty:$joobyVersion")
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")

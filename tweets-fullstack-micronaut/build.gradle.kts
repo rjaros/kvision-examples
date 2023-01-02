@@ -95,7 +95,6 @@ kotlin {
         }
         val backendMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation(project.dependencies.platform("io.micronaut:micronaut-bom:$micronautVersion"))
                 implementation("io.micronaut:micronaut-inject")

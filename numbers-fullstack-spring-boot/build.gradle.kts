@@ -88,7 +88,6 @@ kotlin {
         }
         val backendMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("reflect"))
                 implementation("org.springframework.boot:spring-boot-starter")
                 implementation("org.springframework.boot:spring-boot-devtools")
