@@ -7,12 +7,25 @@ import io.kvision.form.check.checkBoxInput
 import io.kvision.form.fieldLabel
 import io.kvision.form.text.TextInput
 import io.kvision.form.text.textInput
-import io.kvision.html.*
+import io.kvision.html.ListType
 import io.kvision.html.TAG.STRONG
+import io.kvision.html.button
+import io.kvision.html.div
+import io.kvision.html.footer
+import io.kvision.html.h1
+import io.kvision.html.header
+import io.kvision.html.label
+import io.kvision.html.li
+import io.kvision.html.link
+import io.kvision.html.listTag
+import io.kvision.html.section
+import io.kvision.html.span
+import io.kvision.html.tag
+import io.kvision.html.ul
 import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.redux.RAction
-import io.kvision.redux.createReduxStore
+import io.kvision.redux.createTypedReduxStore
 import io.kvision.routing.Routing
 import io.kvision.startApplication
 import io.kvision.state.bind
@@ -86,7 +99,7 @@ class Todomvc : Application() {
         prettyPrint = true
     }
 
-    val todoStore = createReduxStore(::todoReducer, State(mutableListOf(), ALL))
+    val todoStore = createTypedReduxStore(::todoReducer, State(mutableListOf(), ALL))
 
     override fun start() {
         val routing = Routing.init()

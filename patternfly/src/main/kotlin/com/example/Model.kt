@@ -1,9 +1,9 @@
 package com.example
 
-import io.kvision.redux.createReduxStore
+import io.kvision.redux.createTypedReduxStore
 
 object Model {
-    val store = createReduxStore(::reducer, State())
+    val store = createTypedReduxStore(::reducer, State())
 
     fun setUsers(users: List<User>) {
         store.dispatch(Action.SetUsers(users))
