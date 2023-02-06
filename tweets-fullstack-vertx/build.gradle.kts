@@ -6,12 +6,12 @@ plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("plugin.serialization") version kotlinVersion
     kotlin("multiplatform") version kotlinVersion
-    val kvisionVersion: String by System.getProperties()
-    id("io.kvision") version kvisionVersion
     val vertxPluginVersion: String by System.getProperties()
     id("io.vertx.vertx-plugin") version vertxPluginVersion
     val shadowVersion: String by System.getProperties()
     id("com.github.johnrengelman.shadow") version shadowVersion
+    val kvisionVersion: String by System.getProperties()
+    id("io.kvision") version kvisionVersion
 }
 
 version = "1.0.0-SNAPSHOT"
