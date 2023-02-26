@@ -33,7 +33,7 @@ val webDir = file("src/frontendMain/web")
 val mainClassNameVal = "com.example.MainKt"
 
 application {
-    mainClassName = mainClassNameVal
+    mainClass.set(mainClassNameVal)
 }
 
 allOpen {

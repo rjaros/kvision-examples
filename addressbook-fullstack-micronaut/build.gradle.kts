@@ -49,7 +49,7 @@ configurations.all {
 }
 
 application {
-    mainClassName = mainClassNameVal
+    mainClass.set(mainClassNameVal)
 }
 
 allOpen {

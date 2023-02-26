@@ -176,7 +176,7 @@ afterEvaluate {
         create("backendRun", JavaExec::class) {
             dependsOn("compileKotlinBackend")
             group = "run"
-            main = mainClassName
+            mainClass.set(mainClassName)
             classpath =
                 configurations["backendRuntimeClasspath"] + project.tasks["compileKotlinBackend"].outputs.files +
                         project.tasks["backendProcessResources"].outputs.files
