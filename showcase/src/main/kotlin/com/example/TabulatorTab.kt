@@ -6,7 +6,6 @@ import io.kvision.core.onEvent
 import io.kvision.form.InputSize
 import io.kvision.form.check.checkBoxInput
 import io.kvision.form.number.imaskNumericInput
-import io.kvision.form.number.numericInput
 import io.kvision.form.select.SelectInput
 import io.kvision.form.text.TextInput
 import io.kvision.form.time.DateTimeInput
