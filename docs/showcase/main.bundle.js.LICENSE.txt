@@ -5,7 +5,7 @@
   */
 
 /*!
-  * Tempus Dominus v6.4.4 (https://getdatepicker.com/)
+  * Tempus Dominus v6.7.7 (https://getdatepicker.com/)
   * Copyright 2013-2023 Jonathan Peterson
   * Licensed under MIT (https://github.com/Eonasdan/tempus-dominus/blob/master/LICENSE)
   */
@@ -18,7 +18,7 @@
  */
 
 /*!
- * Chart.js v4.2.1
+ * Chart.js v4.3.0
  * https://www.chartjs.org
  * (c) 2023 Chart.js Contributors
  * Released under the MIT License
