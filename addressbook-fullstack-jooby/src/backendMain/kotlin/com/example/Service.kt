@@ -7,7 +7,7 @@ import com.typesafe.config.Config
 import io.jooby.Context
 import org.pac4j.sql.profile.DbProfile
 import java.time.LocalDateTime
-import javax.inject.Named
+import jakarta.inject.Named
 import javax.sql.DataSource
 
 @Suppress("ACTUAL_WITHOUT_EXPECT")

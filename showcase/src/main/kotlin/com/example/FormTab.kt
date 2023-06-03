@@ -154,10 +154,11 @@ class FormTab : SimplePanel() {
                     shouldLoad = { it.length >= 3 }
                 )
                 tsRenders = TomSelectRenders(option = { item, escape ->
+                    val subtext: String? = item.subtext
                     """
                         <div>
                             <span class="title">${escape(item.text)}</span>
-                            <small>(${escape(item.subtext)})</small>
+                            <small>${subtext?.let { "(" + escape(it) + ")" } ?: ""}</small>
                         </div>
                     """.trimIndent()
                 })

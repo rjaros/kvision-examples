@@ -7,8 +7,8 @@ import com.typesafe.config.Config
 import org.pac4j.core.credentials.password.SpringSecurityPasswordEncoder
 import org.pac4j.sql.profile.service.DbProfileService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import javax.inject.Inject
-import javax.inject.Named
+import jakarta.inject.Inject
+import jakarta.inject.Named
 import javax.sql.DataSource
 
 class MyDbProfileService @Inject constructor(@Named("db") ds: DataSource) :

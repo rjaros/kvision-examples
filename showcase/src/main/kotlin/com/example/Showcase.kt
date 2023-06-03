@@ -1,22 +1,27 @@
 package com.example
 
 import io.kvision.*
+import io.kvision.core.AlignItems
 import io.kvision.core.Border
 import io.kvision.core.BorderStyle
 import io.kvision.core.Col
 import io.kvision.core.Color
 import io.kvision.core.Overflow
 import io.kvision.core.onEvent
-import io.kvision.form.select.tomSelect
+import io.kvision.form.select.tomSelectInput
+import io.kvision.html.ButtonStyle
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
 import io.kvision.pace.Pace
+import io.kvision.panel.hPanel
 import io.kvision.panel.root
 import io.kvision.panel.tab
 import io.kvision.panel.tabPanel
 import io.kvision.panel.vPanel
 import io.kvision.routing.Routing
+import io.kvision.theme.ThemeManager
+import io.kvision.theme.themeSwitcher
 import io.kvision.utils.auto
 import io.kvision.utils.perc
 import io.kvision.utils.px
@@ -25,6 +30,7 @@ class Showcase : Application() {
     init {
         Routing.init()
         Pace.init()
+        ThemeManager.init()
         require("css/showcase.css")
         require("react-awesome-button/dist/themes/theme-blue.css")
         if (!(I18n.language in listOf("en", "pl"))) {
@@ -88,16 +94,19 @@ class Showcase : Application() {
                         add(RestTab())
                     }
                 }
-                tomSelect(listOf("en" to tr("English"), "pl" to tr("Polish")), I18n.language) {
-                    width = 300.px
+                hPanel(spacing = 20, useWrappers = true, alignItems = AlignItems.CENTER) {
                     marginLeft = auto
                     marginRight = auto
                     marginBottom = 100.px
-                    onEvent {
-                        change = {
-                            I18n.language = self.value ?: "en"
+                    tomSelectInput(listOf("en" to tr("English"), "pl" to tr("Polish")), I18n.language) {
+                        width = 320.px
+                        onEvent {
+                            change = {
+                                I18n.language = self.value ?: "en"
+                            }
                         }
                     }
+                    themeSwitcher(style = ButtonStyle.OUTLINESECONDARY, round = true)
                 }
             }
         }

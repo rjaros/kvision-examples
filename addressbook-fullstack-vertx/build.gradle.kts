@@ -34,7 +34,6 @@ val pgsqlVersion: String by project
 val kweryVersion: String by project
 val commonsCodecVersion: String by project
 val jdbcNamedParametersVersion: String by project
-val guiceConfVersion: String by project
 
 val webDir = file("src/frontendMain/web")
 
@@ -104,7 +103,6 @@ kotlin {
                 implementation("commons-codec:commons-codec:$commonsCodecVersion")
                 implementation("com.axiomalaska:jdbc-named-parameters:$jdbcNamedParametersVersion")
                 implementation("com.github.andrewoma.kwery:core:$kweryVersion")
-                implementation("net.jmob:guice.conf:$guiceConfVersion")
             }
         }
         val backendTest by getting {

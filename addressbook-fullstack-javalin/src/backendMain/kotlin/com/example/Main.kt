@@ -24,7 +24,7 @@ fun main() {
             }
         }
     }.start(8080).apply {
-        kvisionInit(ConfigModule(), DbModule())
+        kvisionInit(DbModule())
         applyRoutes(AddressServiceManager, setOf(ApiRole.AUTHORIZED))
         applyRoutes(ProfileServiceManager, setOf(ApiRole.AUTHORIZED))
         applyRoutes(RegisterProfileServiceManager, setOf(ApiRole.ANYONE))

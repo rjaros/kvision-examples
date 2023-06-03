@@ -3,29 +3,38 @@ package com.example
 import com.google.inject.AbstractModule
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import jakarta.inject.Singleton
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
-import javax.inject.Inject
-import javax.inject.Singleton
+import java.util.*
 
 @Singleton
-class DbConfig @Inject constructor(config: Config) {
+class DbConfig {
 
     init {
-        Database.connect(hikari(config))
+        val prop = Properties()
+        prop.load(this::class.java.getResourceAsStream("/application.properties"))
+        Database.connect(
+            hikari(
+                prop.getProperty("db.driver"),
+                prop.getProperty("db.jdbcUrl"),
+                prop.getProperty("db.username"),
+                prop.getProperty("db.password")
+            )
+        )
         transaction {
             SchemaUtils.create(UserDao)
             SchemaUtils.create(AddressDao)
         }
     }
 
-    private fun hikari(config: Config): HikariDataSource {
+    private fun hikari(dbDriver: String, dbJdbcUrl: String, dbUsername: String, dbPassword: String): HikariDataSource {
         val hikariConfig = HikariConfig()
-        hikariConfig.driverClassName = config.dbDriver
-        hikariConfig.jdbcUrl = config.dbJdbcUrl
-        hikariConfig.username = config.dbUsername
-        hikariConfig.password = config.dbPassword
+        hikariConfig.driverClassName = dbDriver
+        hikariConfig.jdbcUrl = dbJdbcUrl
+        hikariConfig.username = dbUsername
+        hikariConfig.password = dbPassword
         hikariConfig.maximumPoolSize = 3
         hikariConfig.isAutoCommit = false
         hikariConfig.transactionIsolation = "TRANSACTION_REPEATABLE_READ"

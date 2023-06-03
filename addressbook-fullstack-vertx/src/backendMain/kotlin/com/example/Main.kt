@@ -19,7 +19,7 @@ const val SESSION_PROFILE_KEY = "com.example.profile"
 class MainVerticle : AbstractVerticle() {
     override fun start() {
         val router = Router.router(vertx)
-        vertx.kvisionInit(router, ConfigModule(), DbModule())
+        vertx.kvisionInit(router, DbModule())
         router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
         val authHandler = MyAuthHandler()
         router.serviceRoute(AddressServiceManager, authHandler)
