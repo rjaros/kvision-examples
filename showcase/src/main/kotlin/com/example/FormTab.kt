@@ -11,11 +11,11 @@ import io.kvision.form.check.TriStateCheckBox
 import io.kvision.form.formPanel
 import io.kvision.form.getDataWithFileContent
 import io.kvision.form.number.Range
+import io.kvision.form.number.Spinner
 import io.kvision.form.select.Select
 import io.kvision.form.select.TomSelect
 import io.kvision.form.select.TomSelectCallbacks
 import io.kvision.form.select.TomSelectRenders
-import io.kvision.form.number.Spinner
 import io.kvision.form.text.ImaskOptions
 import io.kvision.form.text.Password
 import io.kvision.form.text.PatternMask
