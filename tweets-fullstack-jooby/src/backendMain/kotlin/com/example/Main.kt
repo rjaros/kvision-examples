@@ -1,6 +1,6 @@
 package com.example
 
-import io.jooby.runApp
+import io.jooby.kt.runApp
 import io.kvision.remote.applyRoutes
 import io.kvision.remote.kvisionInit
 

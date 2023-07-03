@@ -6,8 +6,8 @@ import com.typesafe.config.Config
 import io.jooby.hikari.HikariModule
 import io.jooby.pac4j.Pac4jModule
 import io.jooby.pac4j.Pac4jOptions
-import io.jooby.require
-import io.jooby.runApp
+import io.jooby.kt.require
+import io.jooby.kt.runApp
 import io.kvision.remote.applyRoutes
 import io.kvision.remote.getServiceManager
 import io.kvision.remote.kvisionInit
