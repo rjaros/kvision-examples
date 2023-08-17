@@ -103,25 +103,17 @@ endpoints). The example project utilizes:
 The architecture of the project is heavily based on Kotlin coroutines, wrapping asynchronous client-server calls into 
 easy-to-read synchronous-like code.
 
-[See live demo on Heroku](https://kvision-address-book.herokuapp.com/)
-
 ## Number converter - fullstack
 
 A simple application to convert integer numbers to words by using JVM [Tradukisto](https://github.com/allegro/tradukisto) library.
-
-[See live demo on Heroku](https://kvision-numbers.herokuapp.com/)
 
 ## Encoder - fullstack
 
 A simple application to encode the given text, based on the overview chapter from the [KVision guide](https://kvision.gitbook.io/kvision-guide/part-3-server-side-interface/overview).
 
-[See live demo on Heroku](https://kvision-encoder.herokuapp.com/)
-
 ## Tweets - fullstack
 
 A simple, multiplatform, message board application based on websocket communication. 
-
-[See live demo on Heroku](https://kvision-tweets.herokuapp.com/)
 
 ## Template - fullstack
 

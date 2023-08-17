@@ -1,1 +1,0 @@
-web: java -Dserver.port=$PORT -jar build/libs/tweets-fullstack-spring-boot-rpc-1.0.0-SNAPSHOT.jar

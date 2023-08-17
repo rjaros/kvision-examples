@@ -2,12 +2,12 @@
 
 package com.example
 
+import io.kvision.annotations.KVService
+import io.kvision.types.LocalDateTime
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseContextualSerialization
-import io.kvision.annotations.KVService
-import io.kvision.types.LocalDateTime
 
 @Serializable
 data class Tweet(

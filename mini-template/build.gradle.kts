@@ -1,6 +1,6 @@
 plugins {
     val kotlinVersion: String by System.getProperties()
-    kotlin("js") version kotlinVersion
+    kotlin("multiplatform") version kotlinVersion
 }
 
 repositories {
@@ -11,12 +11,12 @@ repositories {
 val kvisionVersion: String by System.getProperties()
 
 kotlin {
-    js {
+    js(IR) {
         browser {
         }
         binaries.executable()
     }
-    sourceSets["main"].dependencies {
+    sourceSets["jsMain"].dependencies {
         implementation("io.kvision:kvision:$kvisionVersion")
     }
 }

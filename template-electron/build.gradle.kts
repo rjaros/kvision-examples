@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("plugin.serialization") version kotlinVersion
-    kotlin("js") version kotlinVersion
+    kotlin("multiplatform") version kotlinVersion
     val kvisionVersion: String by System.getProperties()
     id("io.kvision") version kvisionVersion
 }
@@ -22,14 +22,14 @@ val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
 
 // Custom Properties
-val webDir = file("src/main/web")
-val electronDir = file("src/main/electron")
+val webDir = file("src/jsMain/web")
+val electronDir = file("src/jsMain/electron")
 
 kotlin {
-    js {
+    js(IR) {
         browser {
-            runTask {
-                outputFileName = "main.bundle.js"
+            runTask(Action {
+                mainOutputFileName = "main.bundle.js"
                 sourceMaps = false
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
@@ -40,19 +40,19 @@ kotlin {
                     ),
                     static = mutableListOf("$buildDir/processedResources/js/main")
                 )
-            }
-            webpackTask {
-                outputFileName = "main.bundle.js"
-            }
-            testTask {
+            })
+            webpackTask(Action {
+                mainOutputFileName = "main.bundle.js"
+            })
+            testTask(Action {
                 useKarma {
                     useChromeHeadless()
                 }
-            }
+            })
         }
         binaries.executable()
     }
-    sourceSets["main"].dependencies {
+    sourceSets["jsMain"].dependencies {
         implementation(npm("electron-builder", "^23.6.0"))
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
@@ -60,11 +60,10 @@ kotlin {
         implementation("io.kvision:kvision-i18n:$kvisionVersion")
         implementation("io.kvision:kvision-electron:$kvisionVersion")
     }
-    sourceSets["test"].dependencies {
+    sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))
         implementation("io.kvision:kvision-testutils:$kvisionVersion")
     }
-    sourceSets["main"].resources.srcDir(webDir)
 }
 
 fun getNodeJsBinaryExecutable(): String {
@@ -80,10 +79,10 @@ fun getNodeJsBinaryExecutable(): String {
 afterEvaluate {
     tasks {
         create("buildApp", Copy::class) {
-            dependsOn("browserProductionWebpack")
+            dependsOn("jsBrowserProductionWebpack")
             group = "build"
             val distribution =
-                project.tasks.getByName("browserProductionWebpack", KotlinWebpack::class).destinationDirectory
+                project.tasks.getByName("jsBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory
             duplicatesStrategy = DuplicatesStrategy.EXCLUDE
             from(distribution, webDir, electronDir)
             inputs.files(distribution, webDir, electronDir)

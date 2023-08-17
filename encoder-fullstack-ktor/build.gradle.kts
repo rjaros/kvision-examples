@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -30,25 +30,25 @@ val logbackVersion: String by project
 val commonsCodecVersion: String by project
 val jdbcNamedParametersVersion: String by project
 
-val webDir = file("src/frontendMain/web")
 val mainClassName = "io.ktor.server.netty.EngineMain"
 
 kotlin {
-    jvm("backend") {
+    jvmToolchain(17)
+    jvm {
         compilations.all {
-            java {
-                targetCompatibility = JavaVersion.VERSION_17
-            }
             kotlinOptions {
-                jvmTarget = "17"
                 freeCompilerArgs = listOf("-Xjsr305=strict")
             }
         }
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        mainRun {
+            mainClass.set(mainClassName)
+        }
     }
-    js("frontend") {
+    js(IR) {
         browser {
-            runTask {
-                outputFileName = "main.bundle.js"
+            runTask(Action {
+                mainOutputFileName = "main.bundle.js"
                 sourceMaps = false
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
@@ -57,17 +57,17 @@ kotlin {
                         "/kv/*" to "http://localhost:8080",
                         "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
                     ),
-                    static = mutableListOf("$buildDir/processedResources/frontend/main")
+                    static = mutableListOf("$buildDir/processedResources/js/main")
                 )
-            }
-            webpackTask {
-                outputFileName = "main.bundle.js"
-            }
-            testTask {
+            })
+            webpackTask(Action {
+                mainOutputFileName = "main.bundle.js"
+            })
+            testTask(Action {
                 useKarma {
                     useChromeHeadless()
                 }
-            }
+            })
         }
         binaries.executable()
     }
@@ -76,7 +76,6 @@ kotlin {
             dependencies {
                 api("io.kvision:kvision-server-ktor:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/common")
         }
         val commonTest by getting {
             dependencies {
@@ -84,7 +83,7 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        val backendMain by getting {
+        val jvmMain by getting {
             dependencies {
                 implementation(kotlin("reflect"))
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
@@ -93,14 +92,13 @@ kotlin {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:2.3.2")
             }
         }
-        val backendTest by getting {
+        val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
             }
         }
-        val frontendMain by getting {
-            resources.srcDir(webDir)
+        val jsMain by getting {
             dependencies {
                 implementation("io.kvision:kvision:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
@@ -108,81 +106,12 @@ kotlin {
                 implementation("io.kvision:kvision-i18n:$kvisionVersion")
                 implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
             }
-            kotlin.srcDir("build/generated-src/frontend")
         }
-        val frontendTest by getting {
+        val jsTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
                 implementation("io.kvision:kvision-testutils:$kvisionVersion")
             }
-        }
-    }
-}
-
-afterEvaluate {
-    tasks {
-        create("frontendArchive", Jar::class).apply {
-            dependsOn("frontendBrowserProductionWebpack")
-            group = "package"
-            archiveAppendix.set("frontend")
-            val distribution =
-                project.tasks.getByName("frontendBrowserProductionWebpack", KotlinWebpack::class).destinationDirectory!!
-            from(distribution) {
-                include("*.*")
-            }
-            from(webDir)
-            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-            into("/assets")
-            inputs.files(distribution, webDir)
-            outputs.file(archiveFile)
-            manifest {
-                attributes(
-                    mapOf(
-                        "Implementation-Title" to rootProject.name,
-                        "Implementation-Group" to rootProject.group,
-                        "Implementation-Version" to rootProject.version,
-                        "Timestamp" to System.currentTimeMillis()
-                    )
-                )
-            }
-        }
-        getByName("backendProcessResources", Copy::class) {
-            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        }
-        getByName("backendJar").group = "package"
-        create("jar", Jar::class).apply {
-            dependsOn("frontendArchive", "backendJar")
-            group = "package"
-            manifest {
-                attributes(
-                    mapOf(
-                        "Implementation-Title" to rootProject.name,
-                        "Implementation-Group" to rootProject.group,
-                        "Implementation-Version" to rootProject.version,
-                        "Timestamp" to System.currentTimeMillis(),
-                        "Main-Class" to mainClassName
-                    )
-                )
-            }
-            val dependencies = configurations["backendRuntimeClasspath"].filter { it.name.endsWith(".jar") } +
-                    project.tasks["backendJar"].outputs.files +
-                    project.tasks["frontendArchive"].outputs.files
-            dependencies.forEach {
-                if (it.isDirectory) from(it) else from(zipTree(it))
-            }
-            exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
-            inputs.files(dependencies)
-            outputs.file(archiveFile)
-            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        }
-        create("backendRun", JavaExec::class) {
-            dependsOn("compileKotlinBackend")
-            group = "run"
-            mainClass.set(mainClassName)
-            classpath =
-                configurations["backendRuntimeClasspath"] + project.tasks["compileKotlinBackend"].outputs.files +
-                        project.tasks["backendProcessResources"].outputs.files
-            workingDir = buildDir
         }
     }
 }

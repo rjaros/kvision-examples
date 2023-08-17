@@ -1,10 +1,9 @@
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("plugin.serialization") version kotlinVersion
-    kotlin("js") version kotlinVersion
+    kotlin("multiplatform") version kotlinVersion
     val kvisionVersion: String by System.getProperties()
     id("io.kvision") version kvisionVersion
 }
@@ -22,13 +21,11 @@ repositories {
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
 
-val webDir = file("src/main/web")
-
 kotlin {
-    js {
+    js(IR) {
         browser {
-            runTask {
-                outputFileName = "main.bundle.js"
+            runTask(Action {
+                mainOutputFileName = "main.bundle.js"
                 sourceMaps = false
                 devServer = KotlinWebpackConfig.DevServer(
                     open = false,
@@ -39,19 +36,19 @@ kotlin {
                     ),
                     static = mutableListOf("$buildDir/processedResources/js/main")
                 )
-            }
-            webpackTask {
-                outputFileName = "main.bundle.js"
-            }
-            testTask {
+            })
+            webpackTask(Action {
+                mainOutputFileName = "main.bundle.js"
+            })
+            testTask(Action {
                 useKarma {
                     useChromeHeadless()
                 }
-            }
+            })
         }
         binaries.executable()
     }
-    sourceSets["main"].dependencies {
+    sourceSets["jsMain"].dependencies {
 
         implementation(npm("hammerjs", "2.0.8"))
         implementation(npm("workbox-webpack-plugin", "6.5.4"))
@@ -64,9 +61,8 @@ kotlin {
         implementation("io.kvision:kvision-state:$kvisionVersion")
         implementation("io.kvision:kvision-rest:$kvisionVersion")
     }
-    sourceSets["test"].dependencies {
+    sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))
         implementation("io.kvision:kvision-testutils:$kvisionVersion")
     }
-    sourceSets["main"].resources.srcDir(webDir)
 }

@@ -1,0 +1,20 @@
+spring:
+  r2dbc:
+    url: r2dbc:h2:file:////tmp/example_micronaut?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+
+micronaut:
+  security:
+    authentication: session
+    redirect:
+      unauthorized:
+        enabled: false
+    endpoints:
+      logout:
+        get-allowed: true
+  router:
+    static-resources:
+      default:
+        enabled: true
+        mapping: "/**"
+        paths:
+          - classpath:public

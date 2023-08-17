@@ -1,4 +1,4 @@
-config.resolve.modules.push("../../processedResources/frontend/main");
+config.resolve.modules.push("../../processedResources/js/main");
 config.resolve.conditionNames = ['import', 'require', 'default'];
 
 if (config.devServer) {
