@@ -38,7 +38,7 @@ kotlin {
                         "/kv/*" to "http://localhost:8080",
                         "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
                     ),
-                    static = mutableListOf("$buildDir/processedResources/js/main")
+                    static = mutableListOf("${layout.buildDirectory.asFile.get()}/processedResources/js/main")
                 )
             })
             webpackTask(Action {
@@ -86,12 +86,12 @@ afterEvaluate {
             duplicatesStrategy = DuplicatesStrategy.EXCLUDE
             from(distribution, webDir, electronDir)
             inputs.files(distribution, webDir, electronDir)
-            into("$buildDir/dist")
+            into("${layout.buildDirectory.asFile.get()}/dist")
         }
         create("runApp", Exec::class) {
             dependsOn("buildApp")
             group = "run"
-            workingDir = file("$buildDir/dist")
+            workingDir = file("${layout.buildDirectory.asFile.get()}/dist")
             executable = getNodeJsBinaryExecutable()
             args("${rootProject.buildDir}/js/node_modules/electron/cli.js", ".")
         }
@@ -99,13 +99,13 @@ afterEvaluate {
             dependsOn("buildApp")
             group = "package"
             doFirst {
-                val targetDir = file("$buildDir/electron")
+                val targetDir = file("${layout.buildDirectory.asFile.get()}/electron")
                 if (targetDir.exists()) {
                     targetDir.deleteRecursively()
                 }
                 targetDir.mkdirs()
             }
-            workingDir = file("$buildDir/dist")
+            workingDir = file("${layout.buildDirectory.asFile.get()}/dist")
             executable = getNodeJsBinaryExecutable()
             args("${rootProject.buildDir}/js/node_modules/electron-builder/out/cli/cli.js", "--config")
         }
