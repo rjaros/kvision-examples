@@ -42,8 +42,8 @@ class ContainersTab : SimplePanel() {
         }
         dropDown(
             tr("Activate panel from the stack"), listOf(
-                tr("Blue panel") to "#!/containers/blue",
-                tr("Green panel") to "#!/containers/green"
+                tr("Blue panel") to "#/containers/blue",
+                tr("Green panel") to "#/containers/green"
             )
         )
     }

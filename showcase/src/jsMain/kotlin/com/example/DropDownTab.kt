@@ -36,7 +36,7 @@ class DropDownTab : SimplePanel() {
                     navLink(tr("Edit"), icon = "fas fa-bars")
                     dropDown(
                         tr("Favourites"),
-                        listOf(tr("HTML") to "#!/basic", tr("Forms") to "#!/forms"),
+                        listOf(tr("HTML") to "#/basic", tr("Forms") to "#/forms"),
                         icon = "fas fa-star",
                         forNavbar = true
                     )
@@ -53,11 +53,11 @@ class DropDownTab : SimplePanel() {
             }
             dropDown(
                 tr("Dropdown with navigation menu"), listOf(
-                    tr("HTML") to "#!/basic",
-                    tr("Forms") to "#!/forms",
-                    tr("Buttons") to "#!/buttons",
-                    tr("Dropdowns") to "#!/dropdowns",
-                    tr("Containers") to "#!/containers"
+                    tr("HTML") to "#/basic",
+                    tr("Forms") to "#/forms",
+                    tr("Buttons") to "#/buttons",
+                    tr("Dropdowns") to "#/dropdowns",
+                    tr("Containers") to "#/containers"
                 ), "fas fa-arrow-right", style = ButtonStyle.SUCCESS
             ).apply {
                 minWidth = 250.px
@@ -72,13 +72,13 @@ class DropDownTab : SimplePanel() {
                 val fdd = dropDown(
                     tr("Dropdown with special options"), listOf(
                         tr("Header") to DD.HEADER.option,
-                        tr("HTML") to "#!/basic",
-                        tr("Forms") to "#!/forms",
-                        tr("Buttons") to "#!/buttons",
+                        tr("HTML") to "#/basic",
+                        tr("Forms") to "#/forms",
+                        tr("Buttons") to "#/buttons",
                         tr("Separator") to DD.SEPARATOR.option,
                         tr("Dropdowns (disabled)") to DD.DISABLED.option,
                         tr("Separator") to DD.SEPARATOR.option,
-                        tr("Containers") to "#!/containers"
+                        tr("Containers") to "#/containers"
                     ), "fas fa-asterisk", style = ButtonStyle.PRIMARY
                 ) {
                     direction = Direction.DROPUP
@@ -92,14 +92,14 @@ class DropDownTab : SimplePanel() {
             span(tr("Open the context menu with right mouse click."))
             contextMenu {
                 header(tr("Menu header"))
-                cmLink(tr("HTML"), "#!/basic")
-                cmLink(tr("Forms"), "#!/forms")
-                cmLink(tr("Buttons"), "#!/buttons")
-                cmLink(tr("Dropdowns"), "#!/dropdowns")
+                cmLink(tr("HTML"), "#/basic")
+                cmLink(tr("Forms"), "#/forms")
+                cmLink(tr("Buttons"), "#/buttons")
+                cmLink(tr("Dropdowns"), "#/dropdowns")
                 separator()
                 dropDown(tr("Dropdown"), forDropDown = true) {
-                    ddLink(tr("Containers"), "#!/containers")
-                    ddLink(tr("Layout"), "#!/layout")
+                    ddLink(tr("Containers"), "#/containers")
+                    ddLink(tr("Layout"), "#/layout")
                 }
             }
         }
