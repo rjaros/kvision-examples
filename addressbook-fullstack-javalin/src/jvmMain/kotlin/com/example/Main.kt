@@ -15,15 +15,15 @@ const val SESSION_PROFILE_KEY = "com.example.profile"
 enum class ApiRole : RouteRole { AUTHORIZED, ANYONE }
 
 fun main() {
-    Javalin.create { config ->
-        config.accessManager { handler, ctx, permittedRoles ->
-            when {
-                permittedRoles.contains(ApiRole.ANYONE) -> handler.handle(ctx)
-                ctx.sessionAttribute<Profile>(SESSION_PROFILE_KEY) != null -> handler.handle(ctx)
-                else -> ctx.status(HttpStatus.UNAUTHORIZED).json("Unauthorized")
+    Javalin.create().start(8080).apply {
+        beforeMatched { ctx ->
+            if (!(ctx.routeRoles().isEmpty() || ctx.routeRoles()
+                    .contains(ApiRole.ANYONE) || ctx.sessionAttribute<Profile>(SESSION_PROFILE_KEY) != null)
+            ) {
+                ctx.status(HttpStatus.UNAUTHORIZED).json("Unauthorized")
+                ctx.skipRemainingHandlers()
             }
         }
-    }.start(8080).apply {
         kvisionInit(DbModule())
         applyRoutes(AddressServiceManager, setOf(ApiRole.AUTHORIZED))
         applyRoutes(ProfileServiceManager, setOf(ApiRole.AUTHORIZED))
