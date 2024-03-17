@@ -514,7 +514,7 @@
  * Font Awesome 6.x icon theme configuration for bootstrap-fileinput. Requires font awesome 6 assets to be loaded.
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2022, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2024, Kartik Visweswaran, Krajee.com
  *
  * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
@@ -529,18 +529,18 @@
  * font awesome assets and CSS are loaded on the page as well.
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2022, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2024, Kartik Visweswaran, Krajee.com
  *
  * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
  */
 
 /*!
- * bootstrap-fileinput v5.5.2
+ * bootstrap-fileinput v5.5.3
  * http://plugins.krajee.com/file-input
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2022, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2024, Kartik Visweswaran, Krajee.com
  *
  * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
