@@ -1,12 +1,13 @@
 package com.example
 
+import io.kvision.remote.getService
 import io.kvision.state.observableListOf
 import kotlinx.coroutines.launch
 
 
 object Model {
 
-    val tweetService = TweetService()
+    val tweetService = getService<ITweetService>()
 
     val tweets = observableListOf<Tweet>()
 

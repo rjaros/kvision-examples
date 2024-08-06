@@ -153,7 +153,7 @@ class FormTab : SimplePanel() {
                     },
                     shouldLoad = { it.length >= 3 }
                 )
-                tsRenders = TomSelectRenders(option = { item, escape ->
+                tsRenders = TomSelectRenders(option = { item: dynamic, escape ->
                     val subtext: String? = item.subtext
                     """
                         <div>

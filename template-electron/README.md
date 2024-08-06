@@ -6,6 +6,6 @@
 * run - Starts a webpack dev server on port 3000.
 * runApp - Build complete application and run with Electron.
 ### Packaging
-* jsBrowserWebpack - Bundles the compiled js files into `build/dist/js/productionExecutable`
+* jsBrowserDistribution - Bundles the compiled js files into `build/dist/js/productionExecutable`
 * zip - Packages a zip archive with all required files into `build/libs/*.zip`
 * bundleApp - Bundle Electron application into `build/electron`

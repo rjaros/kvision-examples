@@ -1,0 +1,103 @@
+/*
+ * Copied from patterfly-fritz2-showcase demo project by Harald Pehl (https://github.com/hpehl)
+ * published under the Apache-2.0 License
+ *
+ * https://github.com/patternfly-kotlin/patternfly-fritz2-showcase/blob/master/src/main/resources/showcase.css
+ */
+
+code {
+    font-family: var(--pf-global--FontFamily--monospace) !important;
+    font-size: 14px;
+}
+
+.sc-component__badges .sc-snippet__content .pf-c-badge {
+    margin-right: var(--pf-global--spacer--sm);
+}
+
+.sc-component__buttons .sc-snippet__content .pf-c-button {
+    margin-bottom: var(--pf-global--spacer--sm);
+    margin-right: var(--pf-global--spacer--sm);
+}
+
+.sc-component__chips .sc-snippet__content .pf-c-chip {
+    margin-bottom: var(--pf-global--spacer--md);
+}
+
+.sc-component__chip-groups .sc-snippet__content .pf-c-chip-group {
+    margin-bottom: var(--pf-global--spacer--sm);
+}
+
+.sc-snippet {
+    background-color: var(--pf-global--BackgroundColor--light-100);
+    margin-top: var(--pf-global--spacer--lg);
+}
+
+.sc-snippet:first-child {
+    margin-top: 0;
+}
+
+.sc-snippet .pf-c-content {
+    font-size: var(--pf-global--FontSize--md);
+}
+
+.sc-snippet .sc-snippet__title {
+    padding: var(--pf-global--spacer--md);
+    padding-bottom: 0;
+}
+
+.sc-snippet .sc-snippet__content {
+    padding: var(--pf-global--spacer--md);
+}
+
+.sc-snippet .sc-snippet__code {
+    background-color: var(--pf-global--BackgroundColor--100);
+    font-size: var(--pf-global--FontSize--sm);
+    max-height: 37.5rem;
+    overflow: auto !important;
+    padding: 10px;
+}
+
+.sc-snippet .sc-snippet__code code {
+    background-color: white;
+    font-size: 11pt;
+}
+
+.sc-snippet .sc-snippet__copied {
+    padding: 10px;
+    font-weight: 400
+}
+
+.sc-user-card {
+    min-height: 220px !important;
+}
+
+.sc-user-card__title {
+    max-width: 140px;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sc-user-card__address {
+    max-width: 160px !important;
+}
+
+.sc-user-nat {
+    min-width: 32px;
+    max-width: 32px;
+}
+
+.sc-user-photo-75 {
+    position: relative;
+    background: #fff;
+    padding: 3px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.sc-user-photo-75 img {
+    width: 75px;
+    border-radius: 50%;
+}

@@ -73,8 +73,8 @@ fun Container.listPanel() {
                         width = "40",
                         formatter = Formatter.BUTTONCROSS,
                         headerSort = false,
-                        cellClick = { evt: Event, cell ->
-                            evt.preventDefault()
+                        cellClick = { evt, cell ->
+                            evt.unsafeCast<Event>().preventDefault()
                             Confirm.show(tr("Are you sure?"), tr("Do you want to delete this address?")) {
                                 Model.delete(cell.getRow().getIndex() as Int)
                             }

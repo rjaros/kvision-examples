@@ -23,7 +23,7 @@ import io.kvision.panel.hPanel
 import io.kvision.panel.root
 import io.kvision.panel.vPanel
 import io.kvision.redux.ActionCreator
-import io.kvision.redux.createReduxStore
+import io.kvision.redux.createTypedReduxStore
 import io.kvision.require
 import io.kvision.rest.RestClient
 import io.kvision.rest.call
@@ -39,7 +39,7 @@ import kotlinx.serialization.builtins.ListSerializer
 
 class App : Application() {
 
-    private val store = createReduxStore(::pokedexReducer, Pokedex(false, null, listOf(), listOf(), null, 0, 1))
+    private val store = createTypedReduxStore(::pokedexReducer, Pokedex(false, null, listOf(), listOf(), null, 0, 1))
 
     private val hammerjs = require("hammerjs")
 

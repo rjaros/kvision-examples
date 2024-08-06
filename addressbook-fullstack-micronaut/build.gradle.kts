@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     val kotlinVersion: String by System.getProperties()
@@ -59,38 +59,23 @@ kotlin {
     jvmToolchain(17)
     jvm {
         withJava()
-        compilations.all {
-            kotlinOptions {
-                freeCompilerArgs = listOf("-Xjsr305=strict")
-                javaParameters = true
-            }
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            javaParameters = true
         }
     }
     js(IR) {
         browser {
-            runTask(Action {
-                mainOutputFileName = "main.bundle.js"
+            commonWebpackConfig {
+                outputFileName = "main.bundle.js"
                 sourceMaps = false
-                devServer = KotlinWebpackConfig.DevServer(
-                    open = false,
-                    port = 3000,
-                    proxy = mutableMapOf(
-                        "/kv/*" to "http://localhost:8080",
-                        "/login" to "http://localhost:8080",
-                        "/logout" to "http://localhost:8080",
-                        "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
-                    ),
-                    static = mutableListOf("${layout.buildDirectory.asFile.get()}/processedResources/js/main")
-                )
-            })
-            webpackTask(Action {
-                mainOutputFileName = "main.bundle.js"
-            })
-            testTask(Action {
+            }
+            testTask {
                 useKarma {
                     useChromeHeadless()
                 }
-            })
+            }
         }
         binaries.executable()
     }

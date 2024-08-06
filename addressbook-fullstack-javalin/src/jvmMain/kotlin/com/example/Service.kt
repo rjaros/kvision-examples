@@ -27,6 +27,7 @@ suspend fun <RESP> WithContext.withProfile(block: suspend (Profile) -> RESP): RE
     } ?: throw IllegalStateException("Profile not set!")
 }
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class AddressService @Inject constructor(override val ctx: Context) : IAddressService, WithContext {
 
     override suspend fun getAddressList(search: String?, types: String, sort: Sort) =
@@ -143,12 +144,14 @@ actual class AddressService @Inject constructor(override val ctx: Context) : IAd
         )
 }
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class ProfileService @Inject constructor(override val ctx: Context) : IProfileService, WithContext {
 
     override suspend fun getProfile() = withProfile { it }
 
 }
 
+@Suppress("ACTUAL_WITHOUT_EXPECT")
 actual class RegisterProfileService : IRegisterProfileService {
 
     override suspend fun registerProfile(profile: Profile, password: String): Boolean {

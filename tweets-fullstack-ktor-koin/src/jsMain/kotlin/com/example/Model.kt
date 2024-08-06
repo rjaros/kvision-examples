@@ -1,5 +1,6 @@
 package com.example
 
+import io.kvision.remote.getService
 import io.kvision.state.observableListOf
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
@@ -8,7 +9,7 @@ import kotlinx.coroutines.launch
 
 object Model {
 
-    val tweetService = TweetService()
+    val tweetService = getService<ITweetService>()
 
     val tweets = observableListOf<Tweet>()
 

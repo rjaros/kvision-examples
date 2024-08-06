@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     val kotlinVersion: String by System.getProperties()
@@ -26,27 +25,15 @@ val webDir = file("src/jsMain/web")
 kotlin {
     js(IR) {
         browser {
-            runTask(Action {
-                mainOutputFileName = "main.bundle.js"
+            commonWebpackConfig {
+                outputFileName = "main.bundle.js"
                 sourceMaps = false
-                devServer = KotlinWebpackConfig.DevServer(
-                    open = false,
-                    port = 3000,
-                    proxy = mutableMapOf(
-                        "/kv/*" to "http://localhost:8080",
-                        "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
-                    ),
-                    static = mutableListOf("${layout.buildDirectory.asFile.get()}/processedResources/js/main", "$projectDir/platforms/android/platform_www")
-                )
-            })
-            webpackTask(Action {
-                mainOutputFileName = "main.bundle.js"
-            })
-            testTask(Action {
+            }
+            testTask {
                 useKarma {
                     useChromeHeadless()
                 }
-            })
+            }
         }
         binaries.executable()
     }
