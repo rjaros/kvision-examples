@@ -7,7 +7,7 @@ plugins {
     kotlin("plugin.allopen") version kotlinVersion
     kotlin("kapt") version kotlinVersion
     val shadowVersion: String by System.getProperties()
-    id("com.github.johnrengelman.shadow") version shadowVersion
+    id("com.gradleup.shadow") version shadowVersion
     val kvisionVersion: String by System.getProperties()
     id("io.kvision") version kvisionVersion
     val micronautPluginsVersion: String by System.getProperties()

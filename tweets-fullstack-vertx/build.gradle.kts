@@ -7,7 +7,7 @@ plugins {
     val vertxPluginVersion: String by System.getProperties()
     id("io.vertx.vertx-plugin") version vertxPluginVersion
     val shadowVersion: String by System.getProperties()
-    id("com.github.johnrengelman.shadow") version shadowVersion
+    id("com.gradleup.shadow") version shadowVersion
     val kvisionVersion: String by System.getProperties()
     id("io.kvision") version kvisionVersion
 }
