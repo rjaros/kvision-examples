@@ -11,14 +11,14 @@
   */
 
 /*!
- * @kurkle/color v0.3.2
+ * @kurkle/color v0.3.4
  * https://github.com/kurkle/color#readme
- * (c) 2023 Jukka Kurkela
+ * (c) 2024 Jukka Kurkela
  * Released under the MIT License
  */
 
 /*!
- * Chart.js v4.4.5
+ * Chart.js v4.4.6
  * https://www.chartjs.org
  * (c) 2024 Chart.js Contributors
  * Released under the MIT License
@@ -556,10 +556,6 @@
  *
  * Date: 2023-08-28T13:37Z
  */
-
-/*! @orchidjs/unicode-variants | https://github.com/orchidjs/unicode-variants | Apache License (v2) */
-
-/*! sifter.js | https://github.com/orchidjs/sifter.js | Apache License (v2) */
 
 /**
  * @license React

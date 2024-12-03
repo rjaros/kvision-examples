@@ -4,7 +4,7 @@ import com.example.Db.dbQuery
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
-import io.ktor.server.plugins.callloging.*
+import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.response.*
@@ -16,7 +16,6 @@ import io.kvision.remote.kvisionInit
 import org.apache.commons.codec.digest.DigestUtils
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
-import kotlin.collections.set
 
 fun Application.main() {
     install(Compression)

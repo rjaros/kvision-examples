@@ -4,10 +4,10 @@ import com.github.andrewoma.kwery.core.ThreadLocalSession
 import com.github.andrewoma.kwery.core.interceptor.LoggingInterceptor
 import com.typesafe.config.Config
 import io.jooby.hikari.HikariModule
-import io.jooby.pac4j.Pac4jModule
-import io.jooby.pac4j.Pac4jOptions
 import io.jooby.kt.require
 import io.jooby.kt.runApp
+import io.jooby.pac4j.Pac4jModule
+import io.jooby.pac4j.Pac4jOptions
 import io.kvision.remote.applyRoutes
 import io.kvision.remote.getServiceManager
 import io.kvision.remote.kvisionInit
@@ -20,13 +20,13 @@ fun main(args: Array<String>) {
         kvisionInit()
         install(HikariModule("db"))
         applyRoutes(getServiceManager<IRegisterProfileService>())
-        val config = org.pac4j.core.config.Config()
-        config.addAuthorizer("Authorizer") { _, _, _ -> true }
+
         install(Pac4jModule(Pac4jOptions().apply {
+            addAuthorizer("Authorizer") { _, _, _ -> true }
             defaultUrl = "/"
-        }, config).client("*", "Authorizer") { _ ->
-            FormClient("/") { credentials, context, sessionStore ->
-                require(MyDbProfileService::class).validate(credentials as UsernamePasswordCredentials, context, sessionStore)
+        }).client("*", "Authorizer") { _ ->
+            FormClient("/") { context, credentials ->
+                require(MyDbProfileService::class).validate(context, credentials as UsernamePasswordCredentials)
             }
         })
         applyRoutes(getServiceManager<IAddressService>())
