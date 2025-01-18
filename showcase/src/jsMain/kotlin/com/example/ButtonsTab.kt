@@ -20,7 +20,7 @@ import io.kvision.toolbar.buttonGroup
 import io.kvision.toolbar.toolbar
 import io.kvision.utils.px
 import kotlinx.browser.window
-import react.ComponentClass
+import react.ComponentType
 import react.PropsWithChildren
 
 external interface ReactButtonProps : PropsWithChildren {
@@ -30,7 +30,7 @@ external interface ReactButtonProps : PropsWithChildren {
 }
 
 @Suppress("UnsafeCastFromDynamic")
-val ReactButton: ComponentClass<ReactButtonProps> = require("react-awesome-button").AwesomeButtonProgress
+val ReactButton: ComponentType<ReactButtonProps> = require("react-awesome-button").AwesomeButtonProgress
 
 class ButtonsTab : SimplePanel() {
     init {

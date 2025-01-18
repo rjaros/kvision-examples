@@ -151,7 +151,7 @@ tasks {
 
 kapt {
     arguments {
-        arg("micronaut.processing.incremental", true)
+        arg("micronaut.processing.incremental", "true")
         arg("micronaut.processing.annotations", "com.example.*")
         arg("micronaut.processing.group", "com.example")
         arg("micronaut.processing.module", "template-fullstack-micronaut")
