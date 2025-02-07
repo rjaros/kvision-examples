@@ -28,7 +28,7 @@ extra["kotlin.version"] = kotlinVersion
 extra["kotlin-coroutines.version"] = coroutinesVersion
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
     jvm {
         withJava()
         @OptIn(ExperimentalKotlinGradlePluginApi::class)

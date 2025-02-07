@@ -24,7 +24,7 @@ val slf4jVersion: String by project
 val mainClassName = "com.example.MainKt"
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
     jvm {
         withJava()
         @OptIn(ExperimentalKotlinGradlePluginApi::class)

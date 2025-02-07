@@ -27,7 +27,7 @@ val logbackVersion: String by project
 val mainClassNameVal = "com.example.MainKt"
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
     jvm {
         withJava()
         @OptIn(ExperimentalKotlinGradlePluginApi::class)

@@ -68,7 +68,7 @@ class App : Application() {
                     border = Border(1.px, BorderStyle.SOLID, Color.name(Col.BLACK))
                     height = 300.px
                     overflow = Overflow.AUTO
-                    overflowWrap = OverflowWrap.BREAKWORK
+                    overflowWrap = OverflowWrap.BREAKWORD
                 }
                 button.onClick {
                     AppScope.launch {

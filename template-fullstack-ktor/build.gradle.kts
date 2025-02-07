@@ -32,7 +32,7 @@ val jdbcNamedParametersVersion: String by project
 val mainClassName = "io.ktor.server.netty.EngineMain"
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
     jvm {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {

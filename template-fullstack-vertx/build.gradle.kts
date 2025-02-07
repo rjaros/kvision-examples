@@ -26,7 +26,7 @@ val kvisionVersion: String by System.getProperties()
 val logbackVersion: String by project
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
     jvm {
         withJava()
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
