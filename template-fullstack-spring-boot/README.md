@@ -8,6 +8,9 @@
 ### Running
 * jsRun - Starts a webpack dev server on port 3000
 * jvmRun - Starts a dev server on port 8080
+
+Note: For auto reload with Spring Boot JVM backend you need to run  `gradlew -t compileKotlinJvm` in a separate Gradle process.
+
 ### Packaging
 * jsBrowserDistribution - Bundles the compiled js files into `build/dist/js/productionExecutable`
 * jsJar - Packages a standalone "web" frontend jar with all required files into `build/libs/*.jar`
