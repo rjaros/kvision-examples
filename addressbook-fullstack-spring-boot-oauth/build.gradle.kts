@@ -72,6 +72,8 @@ kotlin {
                 implementation("org.springframework.boot:spring-boot-devtools")
                 implementation("org.springframework.boot:spring-boot-starter-webflux")
                 implementation("org.springframework.boot:spring-boot-starter-security")
+                implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+                implementation("org.springframework.security:spring-security-oauth2-client")
                 implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
                 implementation("org.postgresql:r2dbc-postgresql:$r2dbcPostgresqlVersion")
                 implementation("io.r2dbc:r2dbc-h2:$r2dbcH2Version")
