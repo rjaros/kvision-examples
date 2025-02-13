@@ -1,0 +1,9 @@
+spring:
+  r2dbc:
+    url: r2dbc:h2:file:////tmp/example_spring?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+
+server:
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024

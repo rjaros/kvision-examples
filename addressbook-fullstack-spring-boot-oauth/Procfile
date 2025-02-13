@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -Dspring.r2dbc.url=`echo $JDBC_DATABASE_URL | sed -e "s/jdbc:/r2dbc:/" | sed -e "s/?.*//"`?sslMode=REQUIRE -Dspring.r2dbc.username=$JDBC_DATABASE_USERNAME -Dspring.r2dbc.password=$JDBC_DATABASE_PASSWORD -jar build/libs/addressbook-fullstack-spring-boot-1.0.0-SNAPSHOT.jar
