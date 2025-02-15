@@ -1,5 +1,7 @@
 package com.example
 
+import io.kvision.remote.KVServiceManager
+import io.kvision.remote.getAllServiceManagers
 import io.kvision.remote.getServiceManager
 import io.kvision.remote.serviceMatchers
 import kotlinx.serialization.Serializable
@@ -12,6 +14,7 @@ import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.data.relational.core.query.Query.query
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
+import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.core.GrantedAuthority
@@ -34,44 +37,34 @@ import java.net.URI
 @Configuration
 class SecurityConfiguration {
 
+    //https://github.com/rjaros/kvision/issues/160
     @Bean
-    fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
-        return http.authorizeExchange {
-            it.serviceMatchers(getServiceManager<IAddressService>(), getServiceManager<IProfileService>())
-                .authenticated().pathMatchers("/**").permitAll()
-        }.csrf {
-            it.disable()
-        }.exceptionHandling {
-            it.authenticationEntryPoint { exchange, _ ->
-                val response = exchange.response
-                response.statusCode = HttpStatus.UNAUTHORIZED
-                exchange.mutate().response(response)
-                Mono.empty()
+    fun securityWebFilterChain(http: ServerHttpSecurity, serviceManagers : List<KVServiceManager<*>>): SecurityWebFilterChain {
+        return http
+            .authorizeExchange {
+                serviceManagers.forEach { sm -> it.serviceMatchers(sm).authenticated().pathMatchers("/**").permitAll()  }
+                //it.serviceMatchers(getServiceManager<IAddressService>(), getServiceManager<IProfileService>())
+
             }
-        }.formLogin {
-            it.loginPage("/login")
-                .authenticationSuccessHandler(RedirectServerAuthenticationSuccessHandler().apply {
-                    this.setRedirectStrategy { exchange, _ ->
-                        Mono.fromRunnable {
-                            val response = exchange.response
-                            response.statusCode = HttpStatus.OK
-                        }
-                    }
-                }).authenticationFailureHandler(RedirectServerAuthenticationFailureHandler("/login").apply {
-                    this.setRedirectStrategy { exchange, _ ->
-                        Mono.fromRunnable {
-                            val response = exchange.response
-                            response.statusCode = HttpStatus.UNAUTHORIZED
-                        }
-                    }
-                })
-        }.logout {
-            it.logoutUrl("/logout")
-                .requiresLogout(ServerWebExchangeMatchers.pathMatchers(HttpMethod.GET, "/logout"))
-                .logoutSuccessHandler(RedirectServerLogoutSuccessHandler().apply {
-                    setLogoutSuccessUrl(URI.create("/"))
-                })
-        }.build()
+            .csrf {
+                it.disable()
+            }
+            .exceptionHandling {
+                it.authenticationEntryPoint { exchange, _ ->
+                    val response = exchange.response
+                    response.statusCode = HttpStatus.UNAUTHORIZED
+                    exchange.mutate().response(response)
+                    Mono.empty()
+                }
+            }
+            .oauth2Login(Customizer.withDefaults())
+            .logout {
+                it.logoutUrl("/logout")
+                    .requiresLogout(ServerWebExchangeMatchers.pathMatchers(HttpMethod.GET, "/logout"))
+                    .logoutSuccessHandler(RedirectServerLogoutSuccessHandler().apply {
+                        setLogoutSuccessUrl(URI.create("/"))
+                    })
+            }.build()
     }
 
     @Bean

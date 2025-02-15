@@ -106,3 +106,7 @@ kotlin {
         }
     }
 }
+tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
+    jvmArgs = listOf("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005")
+    systemProperties = System.getProperties().toMap() as Map<String, Any>
+}
