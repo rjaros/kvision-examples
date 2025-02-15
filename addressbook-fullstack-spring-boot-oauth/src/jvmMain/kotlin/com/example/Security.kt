@@ -17,18 +17,25 @@ import org.springframework.http.HttpStatus
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.web.server.DefaultServerRedirectStrategy
 import org.springframework.security.web.server.SecurityWebFilterChain
+import org.springframework.security.web.server.ServerRedirectStrategy
+import org.springframework.security.web.server.WebFilterExchange
 import org.springframework.security.web.server.authentication.RedirectServerAuthenticationFailureHandler
 import org.springframework.security.web.server.authentication.RedirectServerAuthenticationSuccessHandler
+import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler
 import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
+import org.springframework.web.server.ServerWebExchange
 import pl.treksoft.e4k.core.DbClient
 import reactor.core.publisher.Mono
 import java.net.URI
@@ -39,7 +46,8 @@ class SecurityConfiguration {
 
     //https://github.com/rjaros/kvision/issues/160
     @Bean
-    fun securityWebFilterChain(http: ServerHttpSecurity, serviceManagers : List<KVServiceManager<*>>): SecurityWebFilterChain {
+    fun securityWebFilterChain(http: ServerHttpSecurity, serviceManagers : List<KVServiceManager<*>>,
+                               successHandler: OAuth2LoginSuccessHandler): SecurityWebFilterChain {
         return http
             .authorizeExchange {
                 serviceManagers.forEach { sm -> it.serviceMatchers(sm).authenticated().pathMatchers("/**").permitAll()  }
@@ -57,7 +65,9 @@ class SecurityConfiguration {
                     Mono.empty()
                 }
             }
-            .oauth2Login(Customizer.withDefaults())
+            .oauth2Login{oauth2 ->
+                oauth2.authenticationSuccessHandler(successHandler)
+            }
             .logout {
                 it.logoutUrl("/logout")
                     .requiresLogout(ServerWebExchangeMatchers.pathMatchers(HttpMethod.GET, "/logout"))
@@ -141,4 +151,18 @@ class MyReactiveUserDetailsService(private val client: DbClient) : ReactiveUserD
                 Mono.error(UsernameNotFoundException("User not found"))
             )
     }
+}
+
+@Component
+class OAuth2LoginSuccessHandler : ServerAuthenticationSuccessHandler {
+    private val redirectStrategy: ServerRedirectStrategy = DefaultServerRedirectStrategy()
+
+    override fun onAuthenticationSuccess(
+        webFilterExchange: WebFilterExchange,
+        authentication: Authentication?
+    ): Mono<Void> {
+        val redirectUri = URI.create("http://localhost:3000") // Change to your desired redirect URL
+        return redirectStrategy.sendRedirect(webFilterExchange.exchange, redirectUri)
+    }
+
 }
