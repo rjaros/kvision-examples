@@ -12,6 +12,8 @@ import org.springframework.data.relational.core.query.Query.query
 import org.springframework.r2dbc.core.flow
 import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser
+import org.springframework.security.oauth2.core.oidc.user.OidcUser
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerRequest
 import pl.treksoft.e4k.core.DbClient
@@ -29,7 +31,10 @@ interface WithProfile {
 
     suspend fun getProfile(): Profile {
         return serverRequest.principal().ofType(Authentication::class.java).map {
-            it.principal as Profile
+            val defaultOidcUser = it.principal as OidcUser
+            val any = defaultOidcUser.userInfo.claims["name"] as String
+            val idToken = defaultOidcUser.idToken
+            Profile(id = "7", any)
         }.awaitSingle()
     }
 }
