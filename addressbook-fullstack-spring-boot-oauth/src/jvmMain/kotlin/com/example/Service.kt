@@ -11,15 +11,14 @@ import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.data.relational.core.query.Query.query
 import org.springframework.r2dbc.core.flow
 import org.springframework.security.core.Authentication
-import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
 import org.springframework.security.oauth2.core.oidc.user.OidcUser
+import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerRequest
 import pl.treksoft.e4k.core.DbClient
 import pl.treksoft.e4k.core.delete
 import pl.treksoft.e4k.core.execute
-import pl.treksoft.e4k.core.insert
 import pl.treksoft.e4k.core.table
 import pl.treksoft.e4k.core.update
 import pl.treksoft.e4k.core.using
@@ -28,13 +27,20 @@ import pl.treksoft.e4k.query.query
 
 interface WithProfile {
     val serverRequest: ServerRequest
+    val dbClient: DbClient
 
     suspend fun getProfile(): Profile {
-        return serverRequest.principal().ofType(Authentication::class.java).map {
-            val defaultOidcUser = it.principal as OidcUser
-            val any = defaultOidcUser.userInfo.claims["name"] as String
-            val idToken = defaultOidcUser.idToken
-            Profile("1", any)
+        return serverRequest.principal()
+            .ofType(Authentication::class.java).flatMap {
+            val email = (it.principal as OidcUser).attributes["email"] as String
+            dbClient.r2dbcEntityTemplate.select(User::class.java)
+                .matching(query(where("username").`is`(email)))
+                .first()
+                .map { existingUser ->
+                    Profile(existingUser.id.toString(), existingUser.name).apply {
+                        username = existingUser.username
+                    }
+                }
         }.awaitSingle()
     }
 }
@@ -42,7 +48,7 @@ interface WithProfile {
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Suppress("ACTUAL_WITHOUT_EXPECT")
-actual class AddressService(override val serverRequest: ServerRequest, private val dbClient: DbClient) :
+actual class AddressService(override val serverRequest: ServerRequest, override val dbClient: DbClient) :
     IAddressService, WithProfile {
 
     override suspend fun getAddressList(search: String?, types: String, sort: Sort): List<Address> {
@@ -110,9 +116,8 @@ actual class AddressService(override val serverRequest: ServerRequest, private v
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Suppress("ACTUAL_WITHOUT_EXPECT")
-actual class ProfileService(override val serverRequest: ServerRequest) : IProfileService, WithProfile {
+actual class ProfileService(override val serverRequest: ServerRequest, override val dbClient: DbClient) : IProfileService, WithProfile {
     override suspend fun getProfile(): Profile {
         return super.getProfile()
     }
 }
-
