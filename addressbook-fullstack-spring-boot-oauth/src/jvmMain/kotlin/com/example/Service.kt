@@ -116,25 +116,3 @@ actual class ProfileService(override val serverRequest: ServerRequest) : IProfil
     }
 }
 
-@Service
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-@Suppress("ACTUAL_WITHOUT_EXPECT")
-actual class RegisterProfileService(
-    private val dbClient: DbClient,
-    private val passwordEncoder: PasswordEncoder
-) : IRegisterProfileService {
-
-    override suspend fun registerProfile(profile: Profile, password: String): Boolean {
-        try {
-            dbClient.insert().into(User::class.java).using(
-                User(
-                    username = profile.username!!,
-                    name = profile.name!!,
-                )
-            ).awaitSingle()
-        } catch (e: Exception) {
-            throw Exception("Register operation failed!")
-        }
-        return true
-    }
-}

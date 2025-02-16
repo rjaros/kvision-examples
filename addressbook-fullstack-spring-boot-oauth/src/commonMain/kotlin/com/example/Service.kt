@@ -20,8 +20,3 @@ interface IAddressService {
 interface IProfileService {
     suspend fun getProfile(): Profile
 }
-
-@KVService
-interface IRegisterProfileService {
-    suspend fun registerProfile(profile: Profile, password: String): Boolean
-}

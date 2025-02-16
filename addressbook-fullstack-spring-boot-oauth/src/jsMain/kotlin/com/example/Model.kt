@@ -10,7 +10,6 @@ object Model {
 
     private val addressService = AddressService()
     private val profileService = ProfileService()
-    private val registerProfileService = RegisterProfileService()
 
     val addresses: ObservableList<Address> = observableListOf()
     val profile = ObservableValue(Profile())
@@ -72,12 +71,4 @@ object Model {
         }
     }
 
-    suspend fun registerProfile(profile: Profile, password: String): Boolean {
-        return try {
-            registerProfileService.registerProfile(profile, password)
-        } catch (e: Exception) {
-            console.log(e)
-            false
-        }
-    }
 }
