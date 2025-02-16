@@ -5,7 +5,7 @@ if (config.devServer) {
             target: 'http://localhost:8080'
         },
         {
-            context: ["/login", "/logout"],
+            context: ["/login", "/logout", "/oauth2/authorization/google"],
             target: 'http://localhost:8080'
         },
         {
