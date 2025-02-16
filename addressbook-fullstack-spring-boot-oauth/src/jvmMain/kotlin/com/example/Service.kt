@@ -34,7 +34,7 @@ interface WithProfile {
             val defaultOidcUser = it.principal as OidcUser
             val any = defaultOidcUser.userInfo.claims["name"] as String
             val idToken = defaultOidcUser.idToken
-            Profile(id = "7", any)
+            Profile("1", any)
         }.awaitSingle()
     }
 }
@@ -130,7 +130,6 @@ actual class RegisterProfileService(
                 User(
                     username = profile.username!!,
                     name = profile.name!!,
-                    password = passwordEncoder.encode(password)
                 )
             ).awaitSingle()
         } catch (e: Exception) {
