@@ -73,10 +73,6 @@ class SecurityConfiguration {
             }.build()
     }
 
-    @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder()
-    }
 }
 
 @Serializable
