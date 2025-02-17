@@ -80,12 +80,6 @@ actual data class Profile(
     val name: String? = null
 ) : UserDetails {
 
-    @Transient
-    private var password: String? = null
-
-    @Transient
-    var password2: String? = null
-
     private var username: String? = null
 
     override fun getUsername(): String? {
@@ -96,13 +90,8 @@ actual data class Profile(
         this.username = username
     }
 
-    override fun getPassword(): String? {
-        return password
-    }
+    override fun getPassword(): String = throw UnsupportedOperationException()
 
-    fun setPassword(password: String?) {
-        this.password = password
-    }
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf()
