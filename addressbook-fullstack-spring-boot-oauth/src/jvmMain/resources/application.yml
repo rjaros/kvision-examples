@@ -1,11 +1,6 @@
 spring:
   r2dbc:
-    #H2
-    #url: r2dbc:h2:file:////tmp/example_spring?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    #Postgres
-    url: r2dbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: my-secret-pw
+    url: r2dbc:h2:file:////tmp/example_spring?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
   security:
     oauth2:
       client:
