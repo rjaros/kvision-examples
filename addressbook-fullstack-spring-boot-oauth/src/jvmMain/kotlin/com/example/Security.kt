@@ -47,7 +47,6 @@ class SecurityConfiguration {
         return http
             .authorizeExchange {
                 serviceManagers.forEach { sm -> it.serviceMatchers(sm).authenticated().pathMatchers("/**").permitAll()  }
-                //it.serviceMatchers(getServiceManager<IAddressService>(), getServiceManager<IProfileService>())
 
             }
             .csrf {
