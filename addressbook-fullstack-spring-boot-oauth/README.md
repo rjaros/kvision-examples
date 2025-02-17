@@ -8,6 +8,12 @@
 ### Running
 * jsRun - Starts a webpack dev server on port 3000
 * jvmRun - Starts a dev server on port 8080
+
+You need to pass your Google oauth application's Client ID and Client Secret in:
+```
+gradle jvmRun -Dclient.id=yourclientid -Dclient.secret=yourclientsecret
+```
+
 ### Packaging
 * jsBrowserDistribution - Bundles the compiled js files into `build/dist/js/productionExecutable`
 * jsJar - Packages a standalone "web" frontend jar with all required files into `build/libs/*.jar`
