@@ -99,7 +99,7 @@ class DropDownTab : SimplePanel() {
                 separator()
                 dropDown(tr("Dropdown"), forDropDown = true) {
                     ddLink(tr("Containers"), "#/containers")
-                    ddLink(tr("Layout"), "#/layout")
+                    ddLink(tr("Layouts"), "#/layouts")
                 }
             }
         }
