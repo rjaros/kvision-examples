@@ -1,0 +1,20 @@
+spring:
+  r2dbc:
+    url: r2dbc:h2:file:////tmp/example_spring?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            client-id: ${client.id}
+            client-secret: ${client.secret}
+            scopes:
+              - openid
+              - https://www.googleapis.com/auth/userinfo.email
+              - https://www.googleapis.com/auth/userinfo.profile
+server:
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
