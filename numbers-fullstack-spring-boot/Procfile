@@ -1,1 +1,0 @@
-web: java -Dserver.port=$PORT -jar build/libs/numbers-fullstack-spring-boot-1.0.0-SNAPSHOT.jar

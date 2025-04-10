@@ -1,1 +1,0 @@
-web: java -jar build/libs/tweets-fullstack-ktor-koin-1.0.0-SNAPSHOT.jar -port=$PORT

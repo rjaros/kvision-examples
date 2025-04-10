@@ -1,1 +1,0 @@
-config.target="electron-renderer";

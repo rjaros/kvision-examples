@@ -60,16 +60,6 @@ A complete implementation of [TodoMVC](https://todomvc.com/) demo application.
 
 A complete implementation of [TodoMVC](https://todomvc.com/) demo application developed with [Ballast](https://github.com/copper-leaf/ballast) application state management framework.
 
-## Onsen UI Kitchen Sink
-
-An example mobile application created with KVision's bindings for [Onsen UI](https://onsen.io/) library. 
-It's an almost 1 to 1 rewrite of an [official Vue Kitchen Sink example](https://github.com/OnsenUI/vue-onsenui-kitchensink). 
-It presents how to use all Onsen UI visual components with fully type-safe Kotlin API and DSL builders.
-
-[See live demo with iOS platform](https://rjaros.github.io/kvision-examples/onsenui-kitchensink/?platform=ios)
-
-[See live demo with Android platform](https://rjaros.github.io/kvision-examples/onsenui-kitchensink/?platform=android)
-
 ## Patternfly demo
 
 A demo application created with [Patternfly UI toolkit](https://www.patternfly.org/). It shows how to create
@@ -88,43 +78,9 @@ on Kotlin flows (using both StateFlow and SharedFlow).
 
 ## Address book - fullstack
 
-A complete, fullstack address book application. It presents an innovative way to build fullstack applications with KVision and 
-[Ktor](https://ktor.io), [Jooby](https://jooby.io), [Spring Boot](https://spring.io/projects/spring-boot), 
-[Javalin](https://javalin.io), [Vert.x](https://vertx.io) or [Micronaut](https://micronaut.io) frameworks. KVision closely integrates the client and the server side of the project with a 
-shared data model and fully type-safe connectivity between both sides (based on automatically generated routings and JSON-RPC 
-endpoints). The example project utilizes:
+A complete, fullstack address book application.
 
-- H2 SQL database (local) or PostgreSQL database (configured on Heroku)
-- [Exposed](https://github.com/JetBrains/Exposed) Kotlin SQL library for database connectivity (used in Ktor, Javalin and Vert.x versions)
-- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) with Kotlin Coroutines extensions (used in Spring Boot and Micronaut version)
-- [Kwery](https://github.com/andrewoma/kwery) ORM for database connectivity (used in Jooby version)
-- [Pac4J](https://github.com/pac4j/pac4j) security engine for authentication and profile management (used in Jooby version)
-
-The architecture of the project is heavily based on Kotlin coroutines, wrapping asynchronous client-server calls into 
-easy-to-read synchronous-like code.
-
-## Number converter - fullstack
-
-A simple application to convert integer numbers to words by using JVM [Tradukisto](https://github.com/allegro/tradukisto) library.
 
 ## Encoder - fullstack
 
 A simple application to encode the given text, based on the overview chapter from the [KVision guide](https://kvision.gitbook.io/kvision-guide/part-3-server-side-interface/overview).
-
-## Tweets - fullstack
-
-A simple, multiplatform, message board application based on websocket communication. 
-
-## Template - fullstack
-
-A fullstack application template (versions for all supported frameworks). A starting point for a new application.
-
-## Template - Electron
-
-An application template for [Electron](https://electronjs.org/) framework. It shows how to build cross-platform 
-(Windows, Linux, MacOS), desktop applications with KVision and Kotlin. 
-
-## Template - Apache Cordova
-
-An application template for [Apache Cordova](https://cordova.apache.org/) framework. It shows how to build mobile (Android, iOS),
-hybrid applications with KVision and Kotlin.
