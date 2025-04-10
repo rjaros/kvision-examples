@@ -10,3 +10,4 @@ build-fullstack.sh
 *.iws
 /.idea/
 copytodocs.sh
+/encoder-fullstack-ktor/logs/ktor.log
