@@ -1,7 +1,7 @@
 ## Gradle Tasks
 
 ### Resource Processing
-* generatePotFile - Generates a `src/jsMain/resources/i18n/messages.pot` translation template file.
+* generatePotFile - Generates a `src/jsMain/resources/modules/i18n/messages.pot` translation template file.
 ### Running
 * run - Starts a webpack dev server on port 3000.
 ### Packaging

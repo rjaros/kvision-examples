@@ -1,10 +1,12 @@
 package com.example
 
+import dev.kilua.rpc.getService
 import io.kvision.Application
 import io.kvision.BootstrapCssModule
 import io.kvision.BootstrapModule
 import io.kvision.CoreModule
 import io.kvision.FontAwesomeModule
+import io.kvision.Hot
 import io.kvision.TomSelectModule
 import io.kvision.core.Border
 import io.kvision.core.BorderStyle
@@ -19,11 +21,9 @@ import io.kvision.html.div
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
-import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.panel.vPanel
-import io.kvision.remote.getService
-import io.kvision.require
+import io.kvision.remote.registerRemoteTypes
 import io.kvision.startApplication
 import io.kvision.utils.perc
 import io.kvision.utils.px
@@ -34,6 +34,12 @@ import kotlinx.coroutines.launch
 
 val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 
+@JsModule("/kotlin/modules/i18n/messages-en.json")
+external val messagesEn: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-pl.json")
+external val messagesPl: dynamic
+
 class App : Application() {
 
     private val service = getService<IEncodingService>()
@@ -42,8 +48,8 @@ class App : Application() {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                    "en" to require("i18n/messages-en.json"),
-                    "pl" to require("i18n/messages-pl.json")
+                    "en" to messagesEn,
+                    "pl" to messagesPl
                 )
             )
         root("kvapp") {
@@ -83,9 +89,10 @@ class App : Application() {
 }
 
 fun main() {
+    registerRemoteTypes()
     startApplication(
         ::App,
-        module.hot,
+        js("import.meta.webpackHot").unsafeCast<Hot?>(),
         BootstrapModule,
         BootstrapCssModule,
         FontAwesomeModule,

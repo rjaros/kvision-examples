@@ -4,18 +4,18 @@ A set of examples for [KVision](https://github.com/rjaros/kvision) framework.
 
 ## Mini template
 
-A minimal KVision application with simplified build configuration. A perfect project for quick start.
+A minimal KVision application with simplified build configuration. A perfect project for a quick start.
 
 ## Template
 
-An application template. It does nothing, but includes all dependencies to develop KVision applications with all
+An application template. It includes all dependencies to develop KVision applications with all
 supported components (including unit tests). A perfect starting point for a new application.
 
 [See live demo](https://rjaros.github.io/kvision-examples/template/)
 
 ## Hello World
 
-A very simple application with almost no optional modules.
+A very simple application with internationalization.
 
 [See live demo](https://rjaros.github.io/kvision-examples/helloworld/)
 
@@ -60,6 +60,13 @@ A complete implementation of [TodoMVC](https://todomvc.com/) demo application.
 
 A complete implementation of [TodoMVC](https://todomvc.com/) demo application developed with [Ballast](https://github.com/copper-leaf/ballast) application state management framework.
 
+## TailwindCSS demo
+
+A demo application created with [TailwindCSS](https://tailwindcss.com/). It shows how to create
+KVision application with a modern design system alternative to Bootstrap. 
+
+[See live demo](https://rjaros.github.io/kvision-examples/tailwindcss/)
+
 ## Patternfly demo
 
 A demo application created with [Patternfly UI toolkit](https://www.patternfly.org/). It shows how to create
@@ -79,7 +86,6 @@ on Kotlin flows (using both StateFlow and SharedFlow).
 ## Address book - fullstack
 
 A complete, fullstack address book application.
-
 
 ## Encoder - fullstack
 

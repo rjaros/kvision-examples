@@ -6,7 +6,7 @@ config.plugins.push(new GenerateSW({
     maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
     manifestTransforms: [
             addTemplatedURLs({
-                "index.html": ["../../../../src/jsMain/web/index.html"]
+                "index.html": ["../../../../src/jsMain/resources/index.html"]
             })
         ]
 }));

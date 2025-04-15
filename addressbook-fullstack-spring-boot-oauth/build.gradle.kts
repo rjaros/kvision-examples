@@ -4,9 +4,11 @@ plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("plugin.serialization") version kotlinVersion
     kotlin("multiplatform") version kotlinVersion
-    id("io.spring.dependency-management") version System.getProperty("dependencyManagementPluginVersion")
-    id("org.springframework.boot") version System.getProperty("springBootVersion")
     kotlin("plugin.spring") version kotlinVersion
+    val kspVersion: String by System.getProperties()
+    id("com.google.devtools.ksp") version kspVersion
+    val kiluaRpcVersion: String by System.getProperties()
+    id("dev.kilua.rpc") version kiluaRpcVersion
     val kvisionVersion: String by System.getProperties()
     id("io.kvision") version kvisionVersion
 }
@@ -14,26 +16,19 @@ plugins {
 version = "1.0.0-SNAPSHOT"
 group = "com.example"
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
 // Versions
-val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
+val kiluaRpcVersion: String by System.getProperties()
 val coroutinesVersion: String by project
 val r2dbcPostgresqlVersion: String by project
 val r2dbcH2Version: String by project
 val e4kVersion: String by project
 
-extra["kotlin.version"] = kotlinVersion
-extra["kotlin-coroutines.version"] = coroutinesVersion
+extra["mainClassName"] = "com.example.MainKt"
 
 kotlin {
     jvmToolchain(21)
     jvm {
-        withJava()
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -41,6 +36,7 @@ kotlin {
     }
     js(IR) {
         browser {
+            useEsModules()
             commonWebpackConfig {
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
@@ -52,11 +48,15 @@ kotlin {
             }
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("io.kvision:kvision-server-spring-boot:$kvisionVersion")
+                implementation("dev.kilua:kilua-rpc-spring-boot:$kiluaRpcVersion")
+                implementation("io.kvision:kvision-common-remote:$kvisionVersion")
             }
         }
         val commonTest by getting {
@@ -68,8 +68,8 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(kotlin("reflect"))
+                implementation(project.dependencies.platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
                 implementation("org.springframework.boot:spring-boot-starter")
-                implementation("org.springframework.boot:spring-boot-devtools")
                 implementation("org.springframework.boot:spring-boot-starter-webflux")
                 implementation("org.springframework.boot:spring-boot-starter-security")
                 implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
@@ -96,6 +96,7 @@ kotlin {
                 implementation("io.kvision:kvision-state:$kvisionVersion")
                 implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
                 implementation("io.kvision:kvision-i18n:$kvisionVersion")
+                implementation("io.kvision:kvision-rest:$kvisionVersion")
             }
         }
         val jsTest by getting {
@@ -105,8 +106,4 @@ kotlin {
             }
         }
     }
-}
-tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
-    jvmArgs = listOf("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005")
-    systemProperties = System.getProperties().toMap() as Map<String, Any>
 }

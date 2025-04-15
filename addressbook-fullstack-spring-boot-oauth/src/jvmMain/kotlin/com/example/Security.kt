@@ -1,9 +1,8 @@
 package com.example
 
-import io.kvision.remote.KVServiceManager
-import io.kvision.remote.serviceMatchers
+import dev.kilua.rpc.RpcServiceManager
+import dev.kilua.rpc.serviceMatchers
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.annotation.Id
@@ -19,8 +18,6 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import org.springframework.security.crypto.factory.PasswordEncoderFactories
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.security.web.server.DefaultServerRedirectStrategy
@@ -42,7 +39,7 @@ class SecurityConfiguration {
 
     //https://github.com/rjaros/kvision/issues/160
     @Bean
-    fun securityWebFilterChain(http: ServerHttpSecurity, serviceManagers : List<KVServiceManager<*>>,
+    fun securityWebFilterChain(http: ServerHttpSecurity, serviceManagers : List<RpcServiceManager<*>>,
                                successHandler: OAuth2LoginSuccessHandler): SecurityWebFilterChain {
         return http
             .authorizeExchange {

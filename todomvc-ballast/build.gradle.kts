@@ -15,13 +15,13 @@ repositories {
 }
 
 // Versions
-val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
 val koinVersion: String by project
 
 kotlin {
     js(IR) {
         browser {
+            useEsModules()
             commonWebpackConfig {
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
@@ -33,11 +33,14 @@ kotlin {
             }
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
     sourceSets["jsMain"].dependencies {
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-ballast:$kvisionVersion")
-        implementation("io.kvision:kvision-routing-ballast:$kvisionVersion")
+        implementation("io.kvision:kvision-routing-navigo-ng:$kvisionVersion")
         implementation("io.insert-koin:koin-core:$koinVersion")
     }
     sourceSets["jsTest"].dependencies {

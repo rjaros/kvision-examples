@@ -13,8 +13,12 @@ val kvisionVersion: String by System.getProperties()
 kotlin {
     js(IR) {
         browser {
+            useEsModules()
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
     sourceSets["jsMain"].dependencies {
         implementation("io.kvision:kvision:$kvisionVersion")

@@ -15,12 +15,12 @@ repositories {
 }
 
 // Versions
-val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
 
 kotlin {
     js(IR) {
         browser {
+            useEsModules()
             commonWebpackConfig {
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
@@ -32,6 +32,9 @@ kotlin {
             }
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
     sourceSets["jsMain"].dependencies {
         implementation("io.kvision:kvision:$kvisionVersion")
@@ -40,7 +43,7 @@ kotlin {
         implementation("io.kvision:kvision-toastify:$kvisionVersion")
         implementation("io.kvision:kvision-jquery:$kvisionVersion")
         implementation("io.kvision:kvision-rest:$kvisionVersion")
-        implementation(npm("fomantic-ui-css", "2.8.8"))
+        implementation(npm("fomantic-ui-css", "2.9.4"))
     }
     sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))

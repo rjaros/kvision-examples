@@ -4,6 +4,10 @@ plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("plugin.serialization") version kotlinVersion
     kotlin("multiplatform") version kotlinVersion
+    val kspVersion: String by System.getProperties()
+    id("com.google.devtools.ksp") version kspVersion
+    val kiluaRpcVersion: String by System.getProperties()
+    id("dev.kilua.rpc") version kiluaRpcVersion
     val kvisionVersion: String by System.getProperties()
     id("io.kvision") version kvisionVersion
 }
@@ -17,17 +21,10 @@ repositories {
 }
 
 // Versions
-val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
+val kiluaRpcVersion: String by System.getProperties()
 val ktorVersion: String by project
-val exposedVersion: String by project
-val hikariVersion: String by project
-val h2Version: String by project
-val pgsqlVersion: String by project
-val kweryVersion: String by project
 val logbackVersion: String by project
-val commonsCodecVersion: String by project
-val jdbcNamedParametersVersion: String by project
 
 val mainClassName = "io.ktor.server.netty.EngineMain"
 
@@ -45,6 +42,7 @@ kotlin {
     }
     js(IR) {
         browser {
+            useEsModules()
             commonWebpackConfig {
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
@@ -56,11 +54,15 @@ kotlin {
             }
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("io.kvision:kvision-server-ktor:$kvisionVersion")
+                implementation("dev.kilua:kilua-rpc-ktor:$kiluaRpcVersion")
+                implementation("io.kvision:kvision-common-remote:$kvisionVersion")
             }
         }
         val commonTest by getting {

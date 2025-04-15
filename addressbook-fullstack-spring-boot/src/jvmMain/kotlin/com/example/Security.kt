@@ -1,7 +1,7 @@
 package com.example
 
-import io.kvision.remote.getServiceManager
-import io.kvision.remote.serviceMatchers
+import dev.kilua.rpc.getServiceManager
+import dev.kilua.rpc.serviceMatchers
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import org.springframework.context.annotation.Bean

@@ -1,6 +1,7 @@
 package com.example
 
-import io.kvision.remote.getAllServiceManagers
+import dev.kilua.rpc.getAllServiceManagers
+import io.kvision.remote.registerRemoteTypes
 import io.r2dbc.spi.ConnectionFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -31,5 +32,6 @@ class KVApplication {
 }
 
 fun main(args: Array<String>) {
+    registerRemoteTypes()
     runApplication<KVApplication>(*args)
 }

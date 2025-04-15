@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -5,4 +7,13 @@ pluginManagement {
         mavenLocal()
     }
 }
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
 rootProject.name = "addressbook-fullstack-spring-boot"
+include(":application")

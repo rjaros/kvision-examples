@@ -15,7 +15,6 @@ import io.kvision.i18n.tr
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.fieldsetPanel
 import io.kvision.panel.vPanel
-import io.kvision.require
 import io.kvision.table.ResponsiveType
 import io.kvision.table.TableType
 import io.kvision.table.cell
@@ -24,6 +23,18 @@ import io.kvision.table.table
 import io.kvision.utils.perc
 import io.kvision.utils.px
 import kotlinx.serialization.Serializable
+
+@JsModule("/kotlin/modules/hbs/template1.en.hbs")
+external val template1en: dynamic
+
+@JsModule("/kotlin/modules/hbs/template1.pl.hbs")
+external val template1pl: dynamic
+
+@JsModule("/kotlin/modules/img/dog.jpg")
+external val dogJpg: dynamic
+
+@JsModule("/kotlin/modules/img/cat.jpg")
+external val catJpg: dynamic
 
 @Serializable
 data class HbsKid(val name: String, val age: Int)
@@ -59,7 +70,7 @@ class BasicTab : SimplePanel() {
             span {
                 +tr("(click to view a popover)")
             }
-            image(require("img/dog.jpg"), shape = ImageShape.CIRCLE) {
+            image(dogJpg, shape = ImageShape.CIRCLE) {
                 maxWidth = 100.perc
                 enablePopover(
                     PopoverOptions(
@@ -119,8 +130,8 @@ class BasicTab : SimplePanel() {
 
             div {
                 templates = mapOf(
-                    "en" to require("hbs/template1.en.hbs"),
-                    "pl" to require("hbs/template1.pl.hbs")
+                    "en" to template1en,
+                    "pl" to template1pl
                 )
                 setData(data)
             }

@@ -1,20 +1,29 @@
 package com.example
 
 import io.kvision.Application
-import io.kvision.module
+import io.kvision.Hot
 import io.kvision.panel.root
 import io.kvision.panel.simplePanel
-import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.state.bind
 import io.kvision.utils.px
+import io.kvision.utils.useModule
+
+@JsModule("@patternfly/patternfly/patternfly.min.css")
+external val patternflyCss: dynamic
+
+@JsModule("@patternfly/patternfly/patternfly-addons.css")
+external val patternflyAddonsCss: dynamic
+
+@JsModule("/kotlin/modules/css/kvapp.css")
+external val kvappCss: dynamic
 
 class App : Application() {
 
     init {
-        require("@patternfly/patternfly/patternfly.min.css")
-        require("@patternfly/patternfly/patternfly-addons.css")
-        require("css/kvapp.css")
+        useModule(patternflyCss)
+        useModule(patternflyAddonsCss)
+        useModule(kvappCss)
     }
 
     override fun start() {
@@ -26,9 +35,11 @@ class App : Application() {
                     ViewType.CARD -> {
                         cardView(state)
                     }
+
                     ViewType.LIST -> {
                         listView(state)
                     }
+
                     ViewType.TABLE -> {
                         tableView(state)
                     }
@@ -42,5 +53,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>())
 }

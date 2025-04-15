@@ -22,7 +22,6 @@ import io.kvision.offcanvas.OffPlacement
 import io.kvision.offcanvas.offcanvas
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.vPanel
-import io.kvision.require
 import io.kvision.toast.Toast
 import io.kvision.toast.ToastContainer
 import io.kvision.toast.ToastContainerPosition
@@ -78,7 +77,7 @@ class ModalsTab : SimplePanel() {
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec fringilla turpis, vel molestie dolor. Vestibulum ut ex eget orci porta gravida eu sit amet tortor."
                 )
             )
-            modal.add(Image(require("img/dog.jpg")))
+            modal.add(Image(dogJpg))
             modal.addButton(Button(tr("Close")) {
                 onClick {
                     modal.hide()

@@ -5,6 +5,7 @@ import io.kvision.BootstrapCssModule
 import io.kvision.BootstrapModule
 import io.kvision.CoreModule
 import io.kvision.FontAwesomeModule
+import io.kvision.Hot
 import io.kvision.core.Border
 import io.kvision.core.BorderStyle
 import io.kvision.core.Component
@@ -16,22 +17,24 @@ import io.kvision.dropdown.dropDown
 import io.kvision.dropdown.separator
 import io.kvision.html.Link
 import io.kvision.modal.Alert
-import io.kvision.module
 import io.kvision.navbar.Nav
 import io.kvision.navbar.NavbarType
 import io.kvision.navbar.nav
 import io.kvision.navbar.navbar
 import io.kvision.panel.flexPanel
 import io.kvision.panel.root
-import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.px
+import io.kvision.utils.useModule
 import io.kvision.utils.vh
 import kotlinx.browser.document
 
+@JsModule("/kotlin/modules/css/kvapp.css")
+external val kvappCss: dynamic
+
 class App : Application() {
     init {
-        require("css/kvapp.css")
+        useModule(kvappCss)
     }
 
     override fun start() {
@@ -137,5 +140,12 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot, BootstrapModule, BootstrapCssModule, FontAwesomeModule, CoreModule)
+    startApplication(
+        ::App,
+        js("import.meta.webpackHot").unsafeCast<Hot?>(),
+        BootstrapModule,
+        BootstrapCssModule,
+        FontAwesomeModule,
+        CoreModule
+    )
 }

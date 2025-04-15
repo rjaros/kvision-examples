@@ -1,12 +1,12 @@
 package com.example
 
 import io.kvision.Application
+import io.kvision.Hot
 import io.kvision.html.div
-import io.kvision.module
 import io.kvision.panel.root
-import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.px
+import io.kvision.utils.useModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.await
@@ -14,11 +14,17 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
+@JsModule("fomantic-ui-css/semantic.min.js")
+external val semanticUi: dynamic
+
+@JsModule("/kotlin/modules/css/kvapp.css")
+external val kvappCss: dynamic
+
 class App : Application(), CoroutineScope by CoroutineScope(Dispatchers.Default) {
 
     init {
-        require("fomantic-ui-css/semantic.min.js")
-        require("css/kvapp.css")
+        useModule(semanticUi)
+        useModule(kvappCss)
     }
 
     override fun start() {
@@ -46,5 +52,5 @@ class App : Application(), CoroutineScope by CoroutineScope(Dispatchers.Default)
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>())
 }

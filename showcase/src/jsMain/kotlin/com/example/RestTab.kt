@@ -10,14 +10,18 @@ import io.kvision.i18n.I18n.tr
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.hPanel
 import io.kvision.panel.vPanel
-import io.kvision.require
 import io.kvision.rest.RestClient
 import io.kvision.rest.call
 import io.kvision.utils.perc
 import io.kvision.utils.px
 import kotlinx.coroutines.asDeferred
-import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
+
+@JsModule("/kotlin/modules/hbs/rest.en.hbs")
+external val restEn: dynamic
+
+@JsModule("/kotlin/modules/hbs/rest.pl.hbs")
+external val restPl: dynamic
 
 @Serializable
 data class Query(val q: String?)
@@ -53,8 +57,8 @@ class RestTab : SimplePanel() {
             div = div {
                 fontSize = 20.px
                 templates = mapOf(
-                    "en" to require("hbs/rest.en.hbs"),
-                    "pl" to require("hbs/rest.pl.hbs")
+                    "en" to restEn,
+                    "pl" to restPl
                 )
             }
         }

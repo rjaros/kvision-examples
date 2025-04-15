@@ -1,5 +1,6 @@
 package com.example
 
+import dev.kilua.rpc.getService
 import io.kvision.state.ObservableList
 import io.kvision.state.ObservableValue
 import io.kvision.state.observableListOf
@@ -8,9 +9,9 @@ import kotlinx.coroutines.launch
 
 object Model {
 
-    private val addressService = AddressService()
-    private val profileService = ProfileService()
-    private val registerProfileService = RegisterProfileService()
+    private val addressService = getService<IAddressService>()
+    private val profileService = getService<IProfileService>()
+    private val registerProfileService = getService<IRegisterProfileService>()
 
     val addresses: ObservableList<Address> = observableListOf()
     val profile = ObservableValue(Profile())

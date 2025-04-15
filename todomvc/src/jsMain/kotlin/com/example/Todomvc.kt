@@ -2,6 +2,7 @@ package com.example
 
 import com.example.MODE.*
 import io.kvision.Application
+import io.kvision.Hot
 import io.kvision.core.onEvent
 import io.kvision.form.check.checkBoxInput
 import io.kvision.form.fieldLabel
@@ -22,7 +23,6 @@ import io.kvision.html.section
 import io.kvision.html.span
 import io.kvision.html.tag
 import io.kvision.html.ul
-import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.redux.RAction
 import io.kvision.redux.createTypedReduxStore
@@ -245,5 +245,5 @@ class Todomvc : Application() {
 }
 
 fun main() {
-    startApplication(::Todomvc, module.hot)
+    startApplication(::Todomvc, js("import.meta.webpackHot").unsafeCast<Hot?>())
 }

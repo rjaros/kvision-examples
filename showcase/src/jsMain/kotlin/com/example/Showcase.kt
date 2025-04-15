@@ -13,6 +13,7 @@ import io.kvision.html.ButtonStyle
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
+import io.kvision.modal.Modal
 import io.kvision.pace.Pace
 import io.kvision.panel.hPanel
 import io.kvision.panel.root
@@ -25,14 +26,30 @@ import io.kvision.theme.themeSwitcher
 import io.kvision.utils.auto
 import io.kvision.utils.perc
 import io.kvision.utils.px
+import io.kvision.utils.useModule
+
+@JsModule("/kotlin/modules/i18n/messages-pl.json")
+external val messagesPl: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-en.json")
+external val messagesEn: dynamic
+
+@JsModule("/kotlin/modules/css/showcase.css")
+external val cssShowcase: dynamic
+
+@JsModule("react-awesome-button/dist/themes/theme-blue.css")
+external val cssThemeBlue: dynamic
+
+@JsModule("pace-progressbar/themes/blue/pace-theme-flash.css")
+external val paceThemeFlash: dynamic
 
 class Showcase : Application() {
     init {
         Routing.init()
-        Pace.init()
+        Pace.init(paceThemeFlash)
         ThemeManager.init()
-        require("css/showcase.css")
-        require("react-awesome-button/dist/themes/theme-blue.css")
+        useModule(cssShowcase)
+        useModule(cssThemeBlue)
         if (!(I18n.language in listOf("en", "pl"))) {
             I18n.language = "en"
         }
@@ -42,8 +59,8 @@ class Showcase : Application() {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                    "pl" to require("i18n/messages-pl.json"),
-                    "en" to require("i18n/messages-en.json")
+                    "pl" to messagesPl,
+                    "en" to messagesEn
                 )
             )
         root("showcase") {
@@ -93,6 +110,11 @@ class Showcase : Application() {
                     tab(tr("RESTful"), "fas fa-plug", route = "/restful") {
                         add(RestTab())
                     }
+                    onEvent {
+                        changeTab = {
+                            Modal.closeAllModals()
+                        }
+                    }
                 }
                 hPanel(spacing = 20, useWrappers = true, alignItems = AlignItems.CENTER) {
                     marginLeft = auto
@@ -116,7 +138,7 @@ class Showcase : Application() {
 fun main() {
     startApplication(
         ::Showcase,
-        module.hot,
+        js("import.meta.webpackHot").unsafeCast<Hot?>(),
         BootstrapModule,
         BootstrapCssModule,
         FontAwesomeModule,

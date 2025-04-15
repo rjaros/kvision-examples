@@ -3,7 +3,6 @@ package com.example
 import com.example.Db.dbQuery
 import com.example.Db.queryList
 import com.github.andrewoma.kwery.core.builder.query
-import com.google.inject.Inject
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.sessions.get
 import io.ktor.server.sessions.sessions
@@ -25,11 +24,7 @@ suspend fun <RESP> ApplicationCall.withProfile(block: suspend (Profile) -> RESP)
     } ?: throw IllegalStateException("Profile not set!")
 }
 
-@Suppress("ACTUAL_WITHOUT_EXPECT")
-actual class AddressService : IAddressService {
-
-    @Inject
-    lateinit var call: ApplicationCall
+class AddressService(private val call: ApplicationCall) : IAddressService {
 
     override suspend fun getAddressList(search: String?, types: String, sort: Sort) =
         call.withProfile { profile ->
@@ -145,18 +140,13 @@ actual class AddressService : IAddressService {
         )
 }
 
-@Suppress("ACTUAL_WITHOUT_EXPECT")
-actual class ProfileService : IProfileService {
-
-    @Inject
-    lateinit var call: ApplicationCall
+class ProfileService(private val call: ApplicationCall) : IProfileService {
 
     override suspend fun getProfile() = call.withProfile { it }
 
 }
 
-@Suppress("ACTUAL_WITHOUT_EXPECT")
-actual class RegisterProfileService : IRegisterProfileService {
+class RegisterProfileService : IRegisterProfileService {
 
     override suspend fun registerProfile(profile: Profile, password: String): Boolean {
         try {

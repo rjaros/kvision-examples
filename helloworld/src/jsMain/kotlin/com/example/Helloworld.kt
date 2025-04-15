@@ -1,22 +1,49 @@
 package com.example
 
 import io.kvision.Application
+import io.kvision.Hot
 import io.kvision.core.FlexDirection
 import io.kvision.core.JustifyContent
 import io.kvision.html.div
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
-import io.kvision.module
 import io.kvision.panel.flexPanel
 import io.kvision.panel.root
-import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.px
+import io.kvision.utils.useModule
+
+@JsModule("/kotlin/modules/css/helloworld.css")
+external val helloworldCss: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-en.json")
+external val messagesEn: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-pl.json")
+external val messagesPl: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-de.json")
+external val messagesDe: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-es.json")
+external val messagesEs: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-fr.json")
+external val messagesFr: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-ru.json")
+external val messagesRu: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-ja.json")
+external val messagesJa: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-ko.json")
+external val messagesKo: dynamic
 
 class Helloworld(private val rootid: String = "helloworld") : Application() {
     init {
-        require("css/helloworld.css")
+        useModule(helloworldCss)
     }
 
     override fun start() {
@@ -24,14 +51,14 @@ class Helloworld(private val rootid: String = "helloworld") : Application() {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                    "en" to require("i18n/messages-en.json"),
-                    "pl" to require("i18n/messages-pl.json"),
-                    "de" to require("i18n/messages-de.json"),
-                    "es" to require("i18n/messages-es.json"),
-                    "fr" to require("i18n/messages-fr.json"),
-                    "ru" to require("i18n/messages-ru.json"),
-                    "ja" to require("i18n/messages-ja.json"),
-                    "ko" to require("i18n/messages-ko.json")
+                    "en" to messagesEn,
+                    "pl" to messagesPl,
+                    "de" to messagesDe,
+                    "es" to messagesEs,
+                    "fr" to messagesFr,
+                    "ru" to messagesRu,
+                    "ja" to messagesJa,
+                    "ko" to messagesKo
                 )
             )
 
@@ -42,10 +69,14 @@ class Helloworld(private val rootid: String = "helloworld") : Application() {
                     fontSize = 50.px
                 }
             }
+
         }
     }
 }
 
 fun main() {
-    startApplication(::Helloworld, module.hot)
+    startApplication(
+        ::Helloworld,
+        js("import.meta.webpackHot").unsafeCast<Hot?>()
+    )
 }

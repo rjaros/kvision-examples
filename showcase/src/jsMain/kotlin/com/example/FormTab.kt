@@ -104,7 +104,7 @@ class FormTab : SimplePanel() {
             )
             add(
                 Form::date,
-                DateTime(format = "YYYY-MM-DD", label = tr("Date field with a placeholder")).apply {
+                DateTime(format = "YYYY-MM-DD", label = tr("Date field with a placeholder")) {
                     placeholder = tr("Enter date")
                 }, legend = tr("Date and time fieldset")
             )

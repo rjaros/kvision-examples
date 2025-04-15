@@ -1,8 +1,8 @@
 package com.example
 
 import io.kvision.Application
+import io.kvision.Hot
 import io.kvision.html.div
-import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.startApplication
 
@@ -16,5 +16,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>())
 }

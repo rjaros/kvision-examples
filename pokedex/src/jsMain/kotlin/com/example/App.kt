@@ -4,6 +4,7 @@ import io.kvision.Application
 import io.kvision.BootstrapCssModule
 import io.kvision.BootstrapModule
 import io.kvision.CoreModule
+import io.kvision.Hot
 import io.kvision.core.AlignItems
 import io.kvision.core.Container
 import io.kvision.core.JustifyContent
@@ -17,14 +18,12 @@ import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.gettext
 import io.kvision.i18n.I18n.tr
-import io.kvision.module
 import io.kvision.panel.gridPanel
 import io.kvision.panel.hPanel
 import io.kvision.panel.root
 import io.kvision.panel.vPanel
 import io.kvision.redux.ActionCreator
 import io.kvision.redux.createTypedReduxStore
-import io.kvision.require
 import io.kvision.rest.RestClient
 import io.kvision.rest.call
 import io.kvision.startApplication
@@ -37,18 +36,25 @@ import io.kvision.utils.px
 import kotlinx.browser.document
 import kotlinx.serialization.builtins.ListSerializer
 
+@JsModule("hammerjs")
+external val hammerjs: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-en.json")
+external val messagesEn: dynamic
+
+@JsModule("/kotlin/modules/i18n/messages-pl.json")
+external val messagesPl: dynamic
+
 class App : Application() {
 
     private val store = createTypedReduxStore(::pokedexReducer, Pokedex(false, null, listOf(), listOf(), null, 0, 1))
-
-    private val hammerjs = require("hammerjs")
 
     override fun start() {
         I18n.manager =
             DefaultI18nManager(
                 mapOf(
-                    "pl" to require("i18n/messages-pl.json"),
-                    "en" to require("i18n/messages-en.json")
+                    "en" to messagesEn,
+                    "pl" to messagesPl
                 )
             )
 
@@ -160,5 +166,11 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, module.hot, BootstrapModule, BootstrapCssModule, CoreModule)
+    startApplication(
+        ::App,
+        js("import.meta.webpackHot").unsafeCast<Hot?>(),
+        BootstrapModule,
+        BootstrapCssModule,
+        CoreModule
+    )
 }

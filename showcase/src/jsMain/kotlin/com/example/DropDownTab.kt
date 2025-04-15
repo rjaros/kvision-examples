@@ -22,7 +22,6 @@ import io.kvision.navbar.navbar
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.hPanel
 import io.kvision.panel.vPanel
-import io.kvision.require
 import io.kvision.utils.px
 
 class DropDownTab : SimplePanel() {
@@ -64,9 +63,9 @@ class DropDownTab : SimplePanel() {
             }
             dropDown(tr("Dropdown with custom list"), icon = "far fa-image", style = ButtonStyle.WARNING) {
                 minWidth = 250.px
-                image(require("img/cat.jpg")) { height = 170.px; margin = 10.px; title = "Cat" }
+                image(catJpg) { height = 170.px; margin = 10.px; title = "Cat" }
                 separator()
-                image(require("img/dog.jpg")) { height = 170.px; margin = 10.px; title = "Dog" }
+                image(dogJpg) { height = 170.px; margin = 10.px; title = "Dog" }
             }
             hPanel(spacing = 5) {
                 val fdd = dropDown(

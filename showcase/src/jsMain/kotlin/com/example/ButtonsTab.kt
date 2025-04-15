@@ -15,7 +15,6 @@ import io.kvision.panel.gridPanel
 import io.kvision.panel.hPanel
 import io.kvision.panel.vPanel
 import io.kvision.react.react
-import io.kvision.require
 import io.kvision.toolbar.buttonGroup
 import io.kvision.toolbar.toolbar
 import io.kvision.utils.px
@@ -29,8 +28,11 @@ external interface ReactButtonProps : PropsWithChildren {
     var action: (dynamic, () -> Unit) -> Unit
 }
 
+@JsModule("react-awesome-button")
+external val reactButtonModule: dynamic
+
 @Suppress("UnsafeCastFromDynamic")
-val ReactButton: ComponentType<ReactButtonProps> = require("react-awesome-button").AwesomeButtonProgress
+val ReactButton: ComponentType<ReactButtonProps> = reactButtonModule.AwesomeButtonProgress
 
 class ButtonsTab : SimplePanel() {
     init {
