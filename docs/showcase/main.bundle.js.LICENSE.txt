@@ -1,11 +1,11 @@
 /*!
-  * Bootstrap v5.3.5 (https://getbootstrap.com/)
+  * Bootstrap v5.3.6 (https://getbootstrap.com/)
   * Copyright 2011-2025 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
 /*!
-  * Tempus Dominus v6.10.2 (https://getdatepicker.com/)
+  * Tempus Dominus vv6.10.4 (https://getdatepicker.com/)
   * Copyright 2013-2025 Jonathan Peterson
   * Licensed under MIT (https://github.com/Eonasdan/tempus-dominus/blob/master/LICENSE)
   */
@@ -557,7 +557,7 @@
  * Date: 2023-08-28T13:37Z
  */
 
-/*! @license DOMPurify 3.2.3 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.2.3/LICENSE */
+/*! @license DOMPurify 3.2.5 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.2.5/LICENSE */
 
 /**
  * @license React
