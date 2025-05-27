@@ -1,5 +1,6 @@
 package com.example
 
+import dev.kilua.rpc.SecurityException
 import io.kvision.core.onEvent
 import io.kvision.form.FormPanel
 import io.kvision.form.formPanel
@@ -10,7 +11,6 @@ import io.kvision.html.ButtonStyle
 import io.kvision.i18n.I18n.tr
 import io.kvision.modal.Alert
 import io.kvision.modal.Dialog
-import io.kvision.remote.SecurityException
 import io.kvision.remote.SecurityMgr
 import io.kvision.rest.HttpMethod
 import io.kvision.rest.ResponseBodyType

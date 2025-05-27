@@ -1,10 +1,10 @@
 package com.example
 
+import dev.kilua.rpc.SecurityException
 import io.kvision.html.Button
 import io.kvision.html.ButtonStyle
 import io.kvision.i18n.I18n.tr
 import io.kvision.modal.Dialog
-import io.kvision.remote.SecurityException
 import io.kvision.remote.SecurityMgr
 import io.kvision.rest.HttpMethod
 import io.kvision.rest.ResponseBodyType
