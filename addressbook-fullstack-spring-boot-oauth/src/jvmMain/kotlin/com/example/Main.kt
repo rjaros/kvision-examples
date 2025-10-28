@@ -15,12 +15,11 @@ import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 
 @EnableR2dbcRepositories
-@SpringBootApplication
 @EnableWebFluxSecurity
-@EnableAutoConfiguration(
+@SpringBootApplication(
     exclude = [
-        org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration::class,
-        org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration::class
+        org.springframework.boot.security.autoconfigure.web.reactive.ReactiveWebSecurityAutoConfiguration::class,
+        org.springframework.boot.security.autoconfigure.ReactiveUserDetailsServiceAutoConfiguration::class,
     ]
 )
 class KVApplication {

@@ -5,8 +5,6 @@ import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.beans.factory.config.ConfigurableBeanFactory
 import org.springframework.context.annotation.Scope
-import org.springframework.data.r2dbc.core.allAndAwait
-import org.springframework.data.r2dbc.core.awaitOneOrNull
 import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.data.relational.core.query.Query.query
 import org.springframework.r2dbc.core.awaitOne
@@ -14,9 +12,7 @@ import org.springframework.r2dbc.core.awaitOneOrNull
 import org.springframework.r2dbc.core.awaitRowsUpdated
 import org.springframework.r2dbc.core.flow
 import org.springframework.security.core.Authentication
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
 import org.springframework.security.oauth2.core.oidc.user.OidcUser
-import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerRequest
 import pl.treksoft.e4k.core.DbClient
@@ -24,9 +20,7 @@ import pl.treksoft.e4k.core.delete
 import pl.treksoft.e4k.core.execute
 import pl.treksoft.e4k.core.insert
 import pl.treksoft.e4k.core.setNullable
-import pl.treksoft.e4k.core.table
 import pl.treksoft.e4k.core.update
-import pl.treksoft.e4k.core.using
 import pl.treksoft.e4k.core.valueNullable
 import pl.treksoft.e4k.query.parameterNullable
 import pl.treksoft.e4k.query.query

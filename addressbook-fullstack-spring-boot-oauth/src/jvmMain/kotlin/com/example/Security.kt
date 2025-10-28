@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.userdetails.ReactiveUserDetailsPasswordService
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -79,11 +80,11 @@ actual data class Profile(
 
     private var username: String? = null
 
-    override fun getUsername(): String? {
-        return username
+    override fun getUsername(): String {
+        return username!!
     }
 
-    fun setUsername(username: String?) {
+    fun setUsername(username: String) {
         this.username = username
     }
 
@@ -111,11 +112,11 @@ actual data class Profile(
     }
 }
 
-@Table("users")
+@Table("USERS")
 data class User(@Id val id: Int? = null, val username: String, val name: String)
 
 @Service
-class MyReactiveUserDetailsService(private val client: DbClient) : ReactiveUserDetailsService {
+class MyReactiveUserDetailsService(private val client: DbClient) : ReactiveUserDetailsService, ReactiveUserDetailsPasswordService {
     override fun findByUsername(username: String): Mono<UserDetails> {
         return client.r2dbcEntityTemplate.select(User::class.java).matching(query(where("username").`is`(username)))
             .first().map {
@@ -127,6 +128,13 @@ class MyReactiveUserDetailsService(private val client: DbClient) : ReactiveUserD
                 Mono.error(UsernameNotFoundException("User not found"))
             )
     }
+
+    override fun updatePassword(
+        user: UserDetails,
+        newPassword: String?
+    ): Mono<UserDetails> {
+        throw IllegalStateException("Not implemented")
+    }
 }
 
 @Component
@@ -135,7 +143,7 @@ class OAuth2LoginSuccessHandler(private val client: DbClient) : ServerAuthentica
 
     override fun onAuthenticationSuccess(
         webFilterExchange: WebFilterExchange,
-        authentication: Authentication?
+        authentication: Authentication
     ): Mono<Void> {
         return if (authentication is OAuth2AuthenticationToken) {
             val oauth2User = authentication.principal as OAuth2User

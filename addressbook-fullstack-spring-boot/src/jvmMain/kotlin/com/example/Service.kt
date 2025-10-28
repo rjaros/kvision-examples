@@ -128,9 +128,9 @@ class RegisterProfileService(
         try {
             dbClient.insert().into(User::class.java).using(
                 User(
-                    username = profile.username!!,
+                    username = profile.username,
                     name = profile.name!!,
-                    password = passwordEncoder.encode(password)
+                    password = passwordEncoder.encode(password)!!
                 )
             ).awaitSingle()
         } catch (e: Exception) {
