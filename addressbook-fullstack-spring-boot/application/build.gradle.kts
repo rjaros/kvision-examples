@@ -1,3 +1,7 @@
+import org.gradle.kotlin.dsl.withType
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+import org.springframework.boot.gradle.tasks.run.BootRun
+
 plugins {
     kotlin("jvm")
     id("org.springframework.boot")
@@ -11,4 +15,18 @@ dependencies {
 
 springBoot {
     mainClass.value(project.parent?.extra?.get("mainClassName")?.toString())
+}
+
+val jsArchiveTask = rootProject.tasks.getByName("jsArchive") as org.gradle.jvm.tasks.Jar
+
+tasks.withType<BootRun> {
+    dependsOn(jsArchiveTask)
+
+    classpath(jsArchiveTask.archiveFile.get().asFile)
+}
+
+tasks.withType<BootJar> {
+    dependsOn(jsArchiveTask)
+
+    classpath(jsArchiveTask.archiveFile.get().asFile)
 }
