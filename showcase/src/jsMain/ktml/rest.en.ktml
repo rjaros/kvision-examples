@@ -1,0 +1,4 @@
+import com.example.SearchResult
+<rest-en fragment searchResult="${SearchResult? = null}">
+    <p if="${searchResult != null}">Number of repositories: <b>${searchResult.total_count}</b></p>
+</rest-en>

@@ -14,31 +14,31 @@ import io.kvision.startApplication
 import io.kvision.utils.px
 import io.kvision.utils.useModule
 
-@JsModule("/kotlin/modules/css/helloworld.css")
-external val helloworldCss: dynamic
+@JsModule("./modules/css/helloworld.css")
+external object helloworldCss
 
-@JsModule("/kotlin/modules/i18n/messages-en.json")
+@JsModule("./modules/i18n/messages-en.json")
 external val messagesEn: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-pl.json")
+@JsModule("./modules/i18n/messages-pl.json")
 external val messagesPl: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-de.json")
+@JsModule("./modules/i18n/messages-de.json")
 external val messagesDe: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-es.json")
+@JsModule("./modules/i18n/messages-es.json")
 external val messagesEs: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-fr.json")
+@JsModule("./modules/i18n/messages-fr.json")
 external val messagesFr: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-ru.json")
+@JsModule("./modules/i18n/messages-ru.json")
 external val messagesRu: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-ja.json")
+@JsModule("./modules/i18n/messages-ja.json")
 external val messagesJa: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-ko.json")
+@JsModule("./modules/i18n/messages-ko.json")
 external val messagesKo: dynamic
 
 class Helloworld(private val rootid: String = "helloworld") : Application() {

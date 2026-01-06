@@ -1,5 +1,6 @@
 package com.example
 
+import dev.ktml.templates.KtmlRegistry
 import io.kvision.*
 import io.kvision.core.AlignItems
 import io.kvision.core.Border
@@ -13,6 +14,7 @@ import io.kvision.html.ButtonStyle
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.i18n.I18n.tr
+import io.kvision.ktml.Ktml
 import io.kvision.modal.Modal
 import io.kvision.pace.Pace
 import io.kvision.panel.hPanel
@@ -28,20 +30,20 @@ import io.kvision.utils.perc
 import io.kvision.utils.px
 import io.kvision.utils.useModule
 
-@JsModule("/kotlin/modules/i18n/messages-pl.json")
+@JsModule("./modules/i18n/messages-pl.json")
 external val messagesPl: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-en.json")
+@JsModule("./modules/i18n/messages-en.json")
 external val messagesEn: dynamic
 
-@JsModule("/kotlin/modules/css/showcase.css")
-external val cssShowcase: dynamic
+@JsModule("./modules/css/showcase.css")
+external object cssShowcase
 
 @JsModule("react-awesome-button/dist/themes/theme-blue.css")
-external val cssThemeBlue: dynamic
+external object cssThemeBlue
 
 @JsModule("pace-progressbar/themes/blue/pace-theme-flash.css")
-external val paceThemeFlash: dynamic
+external object paceThemeFlash
 
 class Showcase : Application() {
     init {
@@ -53,6 +55,7 @@ class Showcase : Application() {
         if (!(I18n.language in listOf("en", "pl"))) {
             I18n.language = "en"
         }
+        Ktml.init(KtmlRegistry)
     }
 
     override fun start() {
@@ -138,7 +141,7 @@ class Showcase : Application() {
 fun main() {
     startApplication(
         ::Showcase,
-        js("import.meta.webpackHot").unsafeCast<Hot?>(),
+        js("import.meta.webpackHot").unsafeCast<Hot?>() ?: js("import.meta.hot").unsafeCast<Hot?>(),
         BootstrapModule,
         BootstrapCssModule,
         FontAwesomeModule,

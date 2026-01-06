@@ -5,4 +5,4 @@ pluginManagement {
         mavenLocal()
     }
 }
-rootProject.name = "tailwindcss"
+rootProject.name = "template-tailwindcss"

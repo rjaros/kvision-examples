@@ -1,6 +1,15 @@
 package com.example
 
-import io.kvision.core.*
+import io.kvision.core.Col
+import io.kvision.core.Color
+import io.kvision.core.FontStyle
+import io.kvision.core.FontVariant
+import io.kvision.core.FontWeight
+import io.kvision.core.PopoverOptions
+import io.kvision.core.TextDecoration
+import io.kvision.core.TextDecorationLine
+import io.kvision.core.TextDecorationStyle
+import io.kvision.core.enablePopover
 import io.kvision.html.ImageShape
 import io.kvision.html.ListType
 import io.kvision.html.code
@@ -9,9 +18,9 @@ import io.kvision.html.iframe
 import io.kvision.html.image
 import io.kvision.html.link
 import io.kvision.html.listTag
-import io.kvision.html.setData
 import io.kvision.html.span
 import io.kvision.i18n.tr
+import io.kvision.ktml.ktmlTemplate
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.fieldsetPanel
 import io.kvision.panel.vPanel
@@ -24,16 +33,10 @@ import io.kvision.utils.perc
 import io.kvision.utils.px
 import kotlinx.serialization.Serializable
 
-@JsModule("/kotlin/modules/hbs/template1.en.hbs")
-external val template1en: dynamic
-
-@JsModule("/kotlin/modules/hbs/template1.pl.hbs")
-external val template1pl: dynamic
-
-@JsModule("/kotlin/modules/img/dog.jpg")
+@JsModule("./modules/img/dog.jpg")
 external val dogJpg: dynamic
 
-@JsModule("/kotlin/modules/img/cat.jpg")
+@JsModule("./modules/img/cat.jpg")
 external val catJpg: dynamic
 
 @Serializable
@@ -123,18 +126,11 @@ class BasicTab : SimplePanel() {
                 }
             }
             span {
-                +tr("A Handlebars.js template:")
+                +tr("A KTML template:")
             }
 
-            val data = HbsPerson("Alan", "Somewhere, TX", listOf(HbsKid("Jimmy", 12), HbsKid("Sally", 5)))
-
-            div {
-                templates = mapOf(
-                    "en" to template1en,
-                    "pl" to template1pl
-                )
-                setData(data)
-            }
+            val person = HbsPerson("Alan", "Somewhere, TX", listOf(HbsKid("Jimmy", 12), HbsKid("Sally", 5)))
+            ktmlTemplate(mapOf("en" to "template1-en", "pl" to "template1-pl"), mapOf("person" to person))
 
             span {
                 +tr("An iframe:")

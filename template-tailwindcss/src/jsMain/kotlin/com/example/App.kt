@@ -19,16 +19,16 @@ import io.kvision.utils.px
 import io.kvision.utils.vh
 import io.kvision.utils.vw
 
-@JsModule("/kotlin/modules/css/kvapp.css")
-external val kvappCss: dynamic
+@JsModule("./modules/css/kvapp.css")
+external object kvappCss
 
-@JsModule("/kotlin/modules/i18n/messages-en.json")
+@JsModule("./modules/i18n/messages-en.json")
 external val messagesEn: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-pl.json")
+@JsModule("./modules/i18n/messages-pl.json")
 external val messagesPl: dynamic
 
-@JsModule("/kotlin/modules/img/cat.jpg")
+@JsModule("./modules/img/cat.jpg")
 external val catJpg: dynamic
 
 class App : Application() {
@@ -83,5 +83,11 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>(), TailwindcssModule, FontAwesomeModule, CoreModule)
+    startApplication(
+        ::App,
+        js("import.meta.webpackHot").unsafeCast<Hot?>() ?: js("import.meta.hot").unsafeCast<Hot?>(),
+        TailwindcssModule,
+        FontAwesomeModule,
+        CoreModule
+    )
 }

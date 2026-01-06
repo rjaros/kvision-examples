@@ -2,11 +2,10 @@ package com.example
 
 import io.kvision.core.onClickLaunch
 import io.kvision.form.text.textInput
-import io.kvision.html.Div
 import io.kvision.html.button
-import io.kvision.html.div
-import io.kvision.html.setData
 import io.kvision.i18n.I18n.tr
+import io.kvision.ktml.KtmlTemplate
+import io.kvision.ktml.ktmlTemplate
 import io.kvision.panel.SimplePanel
 import io.kvision.panel.hPanel
 import io.kvision.panel.vPanel
@@ -16,12 +15,6 @@ import io.kvision.utils.perc
 import io.kvision.utils.px
 import kotlinx.coroutines.asDeferred
 import kotlinx.serialization.Serializable
-
-@JsModule("/kotlin/modules/hbs/rest.en.hbs")
-external val restEn: dynamic
-
-@JsModule("/kotlin/modules/hbs/rest.pl.hbs")
-external val restPl: dynamic
 
 @Serializable
 data class Query(val q: String?)
@@ -37,7 +30,7 @@ class RestTab : SimplePanel() {
         this.marginTop = 10.px
         this.minHeight = 400.px
 
-        lateinit var div: Div
+        lateinit var ktmlTemplate: KtmlTemplate
 
         vPanel(spacing = 20) {
             hPanel(spacing = 5) {
@@ -50,16 +43,12 @@ class RestTab : SimplePanel() {
                             "https://api.github.com/search/repositories",
                             Query(it)
                         ).asDeferred().await()
-                        div.setData(searchResult)
+                        ktmlTemplate.parameters = mapOf("searchResult" to searchResult)
                     }
                 }
             }
-            div = div {
+            ktmlTemplate = ktmlTemplate(mapOf("en" to "rest-en", "pl" to "rest-pl")) {
                 fontSize = 20.px
-                templates = mapOf(
-                    "en" to restEn,
-                    "pl" to restPl
-                )
             }
         }
     }

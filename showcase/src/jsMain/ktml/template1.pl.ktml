@@ -1,0 +1,8 @@
+import com.example.HbsPerson
+
+<template1-pl fragment person="$HbsPerson">
+    <p>Cześć, nazywam się ${person.name}. Mieszkam w ${person.hometown}. Mam ${person.kids.size} dzieci:</p>
+    <ul>
+    <li each="${kid in person.kids}">${kid.name} ma ${kid.age} lat</li>
+    </ul>
+</template1-pl>

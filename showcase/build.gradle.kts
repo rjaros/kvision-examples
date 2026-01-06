@@ -4,6 +4,10 @@ plugins {
     kotlin("multiplatform") version kotlinVersion
     val kvisionVersion: String by System.getProperties()
     id("io.kvision") version kvisionVersion
+    val viteKotlinVersion: String by System.getProperties()
+    id("dev.opensavvy.vite.kotlin") version viteKotlinVersion
+    val ktmlVersion: String by System.getProperties()
+    id("dev.ktml.gradle") version ktmlVersion
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -23,7 +27,6 @@ kotlin {
         browser {
             useEsModules()
             commonWebpackConfig {
-                outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
             testTask {
@@ -48,7 +51,6 @@ kotlin {
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
         implementation("io.kvision:kvision-i18n:$kvisionVersion")
         implementation("io.kvision:kvision-richtext:$kvisionVersion")
-        implementation("io.kvision:kvision-handlebars:$kvisionVersion")
         implementation("io.kvision:kvision-chart:$kvisionVersion")
         implementation("io.kvision:kvision-tabulator:$kvisionVersion")
         implementation("io.kvision:kvision-pace:$kvisionVersion")
@@ -58,9 +60,20 @@ kotlin {
         implementation("io.kvision:kvision-state:$kvisionVersion")
         implementation("io.kvision:kvision-rest:$kvisionVersion")
         implementation("io.kvision:kvision-imask:$kvisionVersion")
+        implementation("io.kvision:kvision-ktml:${kvisionVersion}")
     }
     sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))
         implementation("io.kvision:kvision-testutils:$kvisionVersion")
+    }
+}
+
+vite {
+    autoRewriteIndex.set(true)
+    build {
+        target = "es2020"
+    }
+    server {
+        port = 3000
     }
 }

@@ -1,4 +1,8 @@
+config.resolve.modules.push("kotlin");
 if (config.devServer) {
+    config.devServer.client = {
+        overlay: false
+    };
     config.devServer.hot = true;
     config.devServer.open = false;
     config.devServer.port = 3000;

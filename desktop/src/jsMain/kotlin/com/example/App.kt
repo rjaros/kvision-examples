@@ -29,8 +29,8 @@ import io.kvision.utils.useModule
 import io.kvision.utils.vh
 import kotlinx.browser.document
 
-@JsModule("/kotlin/modules/css/kvapp.css")
-external val kvappCss: dynamic
+@JsModule("./modules/css/kvapp.css")
+external object kvappCss
 
 class App : Application() {
     init {

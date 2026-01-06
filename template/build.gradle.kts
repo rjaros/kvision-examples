@@ -4,6 +4,8 @@ plugins {
     kotlin("multiplatform") version kotlinVersion
     val kvisionVersion: String by System.getProperties()
     id("io.kvision") version kvisionVersion
+    val viteKotlinVersion: String by System.getProperties()
+    id("dev.opensavvy.vite.kotlin") version viteKotlinVersion
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -22,7 +24,6 @@ kotlin {
         browser {
             useEsModules()
             commonWebpackConfig {
-                outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
             testTask {
@@ -44,5 +45,15 @@ kotlin {
     sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))
         implementation("io.kvision:kvision-testutils:$kvisionVersion")
+    }
+}
+
+vite {
+    autoRewriteIndex.set(true)
+    build {
+        target = "es2020"
+    }
+    server {
+        port = 3000
     }
 }

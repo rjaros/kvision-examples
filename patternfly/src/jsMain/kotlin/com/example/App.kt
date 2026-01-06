@@ -10,13 +10,13 @@ import io.kvision.utils.px
 import io.kvision.utils.useModule
 
 @JsModule("@patternfly/patternfly/patternfly.min.css")
-external val patternflyCss: dynamic
+external object patternflyCss
 
 @JsModule("@patternfly/patternfly/patternfly-addons.css")
-external val patternflyAddonsCss: dynamic
+external object patternflyAddonsCss
 
-@JsModule("/kotlin/modules/css/kvapp.css")
-external val kvappCss: dynamic
+@JsModule("./modules/css/kvapp.css")
+external object kvappCss
 
 class App : Application() {
 

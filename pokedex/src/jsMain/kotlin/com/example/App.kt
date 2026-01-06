@@ -39,10 +39,10 @@ import kotlinx.serialization.builtins.ListSerializer
 @JsModule("hammerjs")
 external val hammerjs: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-en.json")
+@JsModule("./modules/i18n/messages-en.json")
 external val messagesEn: dynamic
 
-@JsModule("/kotlin/modules/i18n/messages-pl.json")
+@JsModule("./modules/i18n/messages-pl.json")
 external val messagesPl: dynamic
 
 class App : Application() {

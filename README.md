@@ -65,7 +65,7 @@ A complete implementation of [TodoMVC](https://todomvc.com/) demo application de
 A demo application created with [TailwindCSS](https://tailwindcss.com/). It shows how to create
 KVision application with a modern design system alternative to Bootstrap. 
 
-[See live demo](https://rjaros.github.io/kvision-examples/tailwindcss/)
+[See live demo](https://rjaros.github.io/kvision-examples/template-tailwindcss/)
 
 ## Patternfly demo
 

@@ -4,6 +4,8 @@ plugins {
     kotlin("multiplatform") version kotlinVersion
     val kvisionVersion: String by System.getProperties()
     id("io.kvision") version kvisionVersion
+    val viteKotlinVersion: String by System.getProperties()
+    id("dev.opensavvy.vite.kotlin") version viteKotlinVersion
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -16,13 +18,13 @@ repositories {
 
 // Versions
 val kvisionVersion: String by System.getProperties()
+val tailwindcssVersion: String by project
 
 kotlin {
     js(IR) {
         browser {
             useEsModules()
             commonWebpackConfig {
-                outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
             testTask {
@@ -45,5 +47,16 @@ kotlin {
     sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))
         implementation("io.kvision:kvision-testutils:$kvisionVersion")
+    }
+}
+
+vite {
+    autoRewriteIndex.set(true)
+    plugin("@tailwindcss/vite", "tailwindcss", tailwindcssVersion)
+    build {
+        target = "es2020"
+    }
+    server {
+        port = 3000
     }
 }

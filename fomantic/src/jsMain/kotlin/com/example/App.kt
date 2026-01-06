@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 @JsModule("fomantic-ui-css/semantic.min.js")
 external val semanticUi: dynamic
 
-@JsModule("/kotlin/modules/css/kvapp.css")
-external val kvappCss: dynamic
+@JsModule("./modules/css/kvapp.css")
+external object kvappCss
 
 class App : Application(), CoroutineScope by CoroutineScope(Dispatchers.Default) {
 
