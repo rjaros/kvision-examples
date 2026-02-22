@@ -60,6 +60,10 @@ A complete implementation of [TodoMVC](https://todomvc.com/) demo application.
 
 A complete implementation of [TodoMVC](https://todomvc.com/) demo application developed with [Ballast](https://github.com/copper-leaf/ballast) application state management framework.
 
+## TodoMVC-Signal
+
+A complete implementation of [TodoMVC](https://todomvc.com/) demo application developed with [Signal](https://github.com/Fenrur/Signal) reactive state library.
+
 ## TailwindCSS demo
 
 A demo application created with [TailwindCSS](https://tailwindcss.com/). It shows how to create
