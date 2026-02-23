@@ -48,7 +48,7 @@ A very simple desktop with four mini applications - a calculator, a text editor,
 
 The list of Pokémon with live search, build with Redux module. It's also a fully compatible [PWA](https://developers.google.com/web/progressive-web-apps/).
 
-[See live demo](https://kvision-pokedex.netlify.com/)
+[See live demo](https://kvision-pokedex.netlify.app/)
 
 ## TodoMVC
 
