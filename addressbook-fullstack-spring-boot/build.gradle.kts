@@ -27,14 +27,14 @@ val e4kVersion: String by project
 extra["mainClassName"] = "com.example.MainKt"
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(25)
     jvm {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
         }
     }
-    js(IR) {
+    js {
         browser {
             useEsModules()
             commonWebpackConfig {

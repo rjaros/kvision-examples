@@ -29,7 +29,7 @@ val logbackVersion: String by project
 val mainClassName = "io.ktor.server.netty.EngineMain"
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(25)
     jvm {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -40,7 +40,7 @@ kotlin {
             mainClass.set(mainClassName)
         }
     }
-    js(IR) {
+    js {
         browser {
             useEsModules()
             commonWebpackConfig {

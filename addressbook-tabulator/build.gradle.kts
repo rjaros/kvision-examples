@@ -18,7 +18,7 @@ repositories {
 val kvisionVersion: String by System.getProperties()
 
 kotlin {
-    js(IR) {
+    js {
         browser {
             useEsModules()
             commonWebpackConfig {

@@ -19,7 +19,7 @@ val kvisionVersion: String by System.getProperties()
 val koinVersion: String by project
 
 kotlin {
-    js(IR) {
+    js {
         browser {
             useEsModules()
             commonWebpackConfig {

@@ -21,7 +21,7 @@ val kvisionVersion: String by System.getProperties()
 val tailwindcssVersion: String by project
 
 kotlin {
-    js(IR) {
+    js {
         browser {
             useEsModules()
             commonWebpackConfig {

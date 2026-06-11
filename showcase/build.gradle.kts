@@ -23,7 +23,7 @@ val kvisionVersion: String by System.getProperties()
 
 // Custom Properties
 kotlin {
-    js(IR) {
+    js {
         browser {
             useEsModules()
             commonWebpackConfig {
