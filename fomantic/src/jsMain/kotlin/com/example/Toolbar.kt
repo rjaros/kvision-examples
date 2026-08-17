@@ -3,7 +3,6 @@ package com.example
 import io.kvision.core.Container
 import io.kvision.core.FlexWrap
 import io.kvision.core.JustifyContent
-import io.kvision.core.getElementJQueryD
 import io.kvision.core.onClickLaunch
 import io.kvision.form.check.checkBoxInput
 import io.kvision.form.form
@@ -84,8 +83,7 @@ fun Container.bulkSelect(stateFlow: StateFlow<State>, actionFlow: MutableSharedF
                 }
             }
             addAfterInsertHook {
-                @Suppress("UnsafeCastFromDynamic")
-                getElementJQueryD().dropdown()
+                jQuery(getElement()).dropdown()
             }
         }
     }
@@ -131,8 +129,7 @@ fun Container.sortSelect(stateFlow: StateFlow<State>, actionFlow: MutableSharedF
             }
         }
         addAfterInsertHook {
-            @Suppress("UnsafeCastFromDynamic")
-            getElementJQueryD().dropdown()
+            jQuery(getElement()).dropdown()
         }
     }
 }
@@ -165,8 +162,7 @@ fun Container.pagination(stateFlow: StateFlow<State>, actionFlow: MutableSharedF
                 }
             }
             addAfterInsertHook {
-                @Suppress("UnsafeCastFromDynamic")
-                getElementJQueryD().dropdown()
+                jQuery(getElement()).dropdown()
             }
         }
         div(className = "ui icon buttons") {

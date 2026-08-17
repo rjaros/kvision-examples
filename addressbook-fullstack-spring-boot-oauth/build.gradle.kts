@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-
 plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("plugin.serialization") version kotlinVersion
@@ -19,17 +17,16 @@ group = "com.example"
 // Versions
 val kvisionVersion: String by System.getProperties()
 val kiluaRpcVersion: String by System.getProperties()
-val coroutinesVersion: String by project
-val r2dbcPostgresqlVersion: String by project
-val r2dbcH2Version: String by project
-val e4kVersion: String by project
+val coroutinesVersion = project.property("coroutinesVersion") as String
+val r2dbcPostgresqlVersion = project.property("r2dbcPostgresqlVersion") as String
+val r2dbcH2Version = project.property("r2dbcH2Version") as String
+val e4kVersion = project.property("e4kVersion") as String
 
 extra["mainClassName"] = "com.example.MainKt"
 
 kotlin {
     jvmToolchain(25)
     jvm {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
         }
@@ -53,19 +50,19 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 implementation("dev.kilua:kilua-rpc-spring-boot:$kiluaRpcVersion")
                 implementation("io.kvision:kvision-common-remote:$kvisionVersion")
             }
         }
-        val commonTest by getting {
+        getByName("commonTest") {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 implementation(kotlin("reflect"))
                 implementation(project.dependencies.platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
@@ -82,14 +79,14 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:$coroutinesVersion")
             }
         }
-        val jvmTest by getting {
+        getByName("jvmTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
                 implementation("org.springframework.boot:spring-boot-starter-test")
             }
         }
-        val jsMain by getting {
+        getByName("jsMain") {
             dependencies {
                 implementation("io.kvision:kvision:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
@@ -99,7 +96,7 @@ kotlin {
                 implementation("io.kvision:kvision-rest:$kvisionVersion")
             }
         }
-        val jsTest by getting {
+        getByName("jsTest") {
             dependencies {
                 implementation(kotlin("test-js"))
                 implementation("io.kvision:kvision-testutils:$kvisionVersion")

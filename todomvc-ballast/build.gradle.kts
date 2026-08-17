@@ -16,7 +16,7 @@ repositories {
 
 // Versions
 val kvisionVersion: String by System.getProperties()
-val koinVersion: String by project
+val koinVersion = project.property("koinVersion") as String
 
 kotlin {
     js {

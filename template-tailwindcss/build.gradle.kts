@@ -18,7 +18,7 @@ repositories {
 
 // Versions
 val kvisionVersion: String by System.getProperties()
-val tailwindcssVersion: String by project
+val tailwindcssVersion = project.property("tailwindcssVersion") as String
 
 kotlin {
     js {

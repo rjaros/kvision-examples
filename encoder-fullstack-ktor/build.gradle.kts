@@ -23,15 +23,14 @@ repositories {
 // Versions
 val kvisionVersion: String by System.getProperties()
 val kiluaRpcVersion: String by System.getProperties()
-val ktorVersion: String by project
-val logbackVersion: String by project
+val ktorVersion = project.property("ktorVersion") as String
+val logbackVersion = project.property("logbackVersion") as String
 
 val mainClassName = "io.ktor.server.netty.EngineMain"
 
 kotlin {
     jvmToolchain(25)
     jvm {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
         }
@@ -59,19 +58,19 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 implementation("dev.kilua:kilua-rpc-ktor:$kiluaRpcVersion")
                 implementation("io.kvision:kvision-common-remote:$kvisionVersion")
             }
         }
-        val commonTest by getting {
+        getByName("commonTest") {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 implementation(kotlin("reflect"))
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
@@ -80,13 +79,13 @@ kotlin {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:2.3.2")
             }
         }
-        val jvmTest by getting {
+        getByName("jvmTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
             }
         }
-        val jsMain by getting {
+        getByName("jsMain") {
             dependencies {
                 implementation("io.kvision:kvision:$kvisionVersion")
                 implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
@@ -95,7 +94,7 @@ kotlin {
                 implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
             }
         }
-        val jsTest by getting {
+        getByName("jsTest") {
             dependencies {
                 implementation(kotlin("test-js"))
                 implementation("io.kvision:kvision-testutils:$kvisionVersion")

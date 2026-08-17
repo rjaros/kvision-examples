@@ -7,22 +7,30 @@ import io.kvision.panel.root
 import io.kvision.startApplication
 import io.kvision.utils.px
 import io.kvision.utils.useModule
+import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.await
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import org.w3c.dom.Element
 
-@JsModule("fomantic-ui-css/semantic.min.js")
-external val semanticUi: dynamic
+@JsModule("fomantic-ui-css/semantic.css")
+external object semanticCss
+
+@JsModule("fomantic-ui-css/semantic.js")
+external object semanticUi
 
 @JsModule("./modules/css/kvapp.css")
 external object kvappCss
 
+external fun jQuery(element: dynamic): dynamic
+
 class App : Application(), CoroutineScope by CoroutineScope(Dispatchers.Default) {
 
     init {
+        useModule(semanticCss)
         useModule(semanticUi)
         useModule(kvappCss)
     }

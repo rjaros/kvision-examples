@@ -41,7 +41,6 @@ kotlin {
         implementation("io.kvision:kvision-i18n:$kvisionVersion")
         implementation("io.kvision:kvision-state-flow:$kvisionVersion")
         implementation("io.kvision:kvision-toastify:$kvisionVersion")
-        implementation("io.kvision:kvision-jquery:$kvisionVersion")
         implementation("io.kvision:kvision-rest:$kvisionVersion")
         implementation(npm("fomantic-ui-css", "2.9.4"))
     }

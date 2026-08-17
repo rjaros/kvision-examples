@@ -3,7 +3,6 @@ package com.example
 import io.kvision.core.AlignItems
 import io.kvision.core.Container
 import io.kvision.core.JustifyItems
-import io.kvision.core.getElementJQueryD
 import io.kvision.core.onClickLaunch
 import io.kvision.form.check.checkBoxInput
 import io.kvision.html.article
@@ -50,8 +49,7 @@ fun Container.card(stateFlow: StateFlow<State>, user: User, actionFlow: MutableS
                         }
                     }
                     addAfterInsertHook {
-                        @Suppress("UnsafeCastFromDynamic")
-                        getElementJQueryD().dropdown()
+                        jQuery(getElement()).dropdown()
                     }
                 }
                 checkBoxInput().bind(stateFlow, { it.selected.contains(user.login.uuid) }) {
